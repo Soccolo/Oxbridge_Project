@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sequences and Series</title>
+<meta name="description" content="Free theory and problems covering the entire TMUA syllabus, with STEP extensions — from the book Advanced Mathematics for High School: Preparing for Oxbridge.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers &amp; Proof</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra and Functions</a></li>
+    <li><a href="sequences.html" class="active"><span class="n">3</span> Sequences and Series</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Graphs, Exponentials &amp; Logs</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differentiation</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integration</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Logic and Proof (Paper 2)</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<div class="page">
+<p class="crumb"><b>Topic 3</b> · Sequences and Series</p>
+<h1>Sequences</h1>
+<p class="lede">A bridge between Algebra and Calculus: recurrences, arithmetic and geometric progressions, convergence and periodicity.</p>
+
+<h2><span class="sn">§4.1</span>Introduction</h2>
+<p>Before jumping into Analysis, we take a short chapter on one of the bridges between Algebra and Calculus: sequences. We study them separately because they use very varied ideas, and the material on them is vast — admission test syllabuses treat them as a topic of their own.</p>
+
+<h2><span class="sn">§4.2</span>Basic properties</h2>
+<div class="box def"><span class="bt">Definition — Sequence</span>
+<p>A sequence is a function \(f:\mathbb N\to X\), where \(X\) is a set. We focus on real sequences, written \(a_{n\ge0}\), although most results generalise to \(\mathbb C\). A link between terms is called a <strong>recurrence relation</strong>; the most basic is the <strong>first-order linear</strong> one, \(a_{n+1}=ka_n+b\) for constants \(k,b\in\mathbb R\).</p></div>
+<p>Before solving it, a lemma:</p>
+<div class="box thm"><span class="bt">Geometric sums</span>
+<p>Let \(k\in\mathbb R\setminus\{1\}\) and \(n\in\mathbb N\). Then \(\displaystyle\sum_{i=0}^{n}k^i=\frac{k^{n+1}-1}{k-1}.\)</p></div>
+<div class="proof"><span class="pt">Proof.</span> Let \(S=\sum_{i=0}^nk^i\). Then \(kS=\sum_{i=1}^{n+1}k^i\). Subtracting term by term, \((k-1)S=k^{n+1}-1\). <span class="qed">∎</span></div>
+<div class="box thm"><span class="bt">First-order recurrence</span>
+<p>Let \(a_{n\ge0}\) satisfy \(a_{n+1}=ka_n+b\), \(k\ne1\). Then \(\displaystyle a_{n+1}=k^{n+1}a_0+b\cdot\frac{k^{n+1}-1}{k-1}.\)</p></div>
+<div class="proof"><span class="pt">Idea of proof.</span> Subtracting \(a_{n+1}=ka_n+b\) and \(a_n=ka_{n-1}+b\) gives \(a_{n+1}-a_n=k(a_n-a_{n-1})\), and inductively \(a_{n+1}-a_n=k^n(a_1-a_0)\). Summing these telescoping differences and using the geometric-sum lemma yields the formula. You don't need to memorise it — Mathematics isn't done by memorising, especially not the Mathematics needed at top universities. Understand the proof and re-derive it in exams. <span class="qed">∎</span></div>
+<p>There are more exotic first-order recurrences, e.g. \(a_{n+1}=k_n\,a_n+b_n\) with varying coefficients. These require creativity rather than a general method — the problems below provide practice. Two first-order recurrences you <em>must</em> know:</p>
+<div class="box def"><span class="bt">Arithmetic sequence</span>
+<p>\(a_{n+1}=a_n+r\) for a fixed \(r\in\mathbb R\) (the <em>common difference</em>). General term: \(a_n=a_0+nr\). Sum of the first \(n\) terms: \(\frac n2\big(2a_0+(n-1)r\big)\).</p></div>
+<div class="box def"><span class="bt">Geometric sequence</span>
+<p>\(a_{n+1}=r\cdot a_n\) for a fixed \(r\) (the <em>common ratio</em>). General term: \(a_n=r^na_0\). Sums follow from the geometric-sum lemma above.</p></div>
+
+<h2><span class="sn">§4.3</span>Higher order linear recurrences</h2>
+<div class="box def"><span class="bt">Linear recurrence of order m</span>
+<p>A sequence \(a_{n\ge0}\) such that \(a_{n+m}=\sum_{i=0}^{m-1}u_i\,a_{n+i}\), for some \(u_i\in\mathbb R\). Its <strong>characteristic equation</strong> is \(r^m-\sum_{i=0}^{m-1}u_i r^i=0\).</p></div>
+<p>The characteristic equation has \(m\) roots, possibly repeated. If \(\lambda_1,\dots,\lambda_d\) are the distinct roots with multiplicities \(b_1,\dots,b_d\), the general solution is a sum of terms \(c_{j,i}\,n^i\lambda_j^n\) for \(0\le i&lt;b_j\), with the constants found from the first \(m\) terms of the sequence. You won't get high-order recurrences in admission tests; what matters is the second-order case:</p>
+<div class="box thm"><span class="bt">Second order linear recurrences</span>
+<p>Let \(a_{n+2}=u\,a_{n+1}+v\,a_n\), with characteristic equation \(\lambda^2-u\lambda-v=0\). The sequence is either of the form
+\[a_n=c_1\lambda_1^n+c_2\lambda_2^n\]
+(distinct roots \(\lambda_1,\lambda_2\)), or
+\[a_n=c_1\lambda^n+c_2\,n\,\lambda^n\]
+(a unique repeated root \(\lambda\)). The roots may be complex; in that case the constants obtained from the first terms might be complex too — be careful with the calculations.</p></div>
+<p><strong>Example (Fibonacci).</strong> Find the general formula of the sequence \(F_{n+2}=F_{n+1}+F_n\). The characteristic equation \(\lambda^2-\lambda-1=0\) has solutions \(\varphi=\frac{1+\sqrt5}2\) (the <em>golden ratio</em>) and \(\frac{1-\sqrt5}2=-\varphi^{-1}\). It is left as an exercise to verify that, with \(F_0=0,F_1=1\),
+\[F_n=\frac{\varphi^n-(-\varphi)^{-n}}{\sqrt5}.\]</p>
+
+<h2><span class="sn">§4.4</span>Convergence and periodicity</h2>
+<div class="box def"><span class="bt">Convergence of sequences</span>
+<p>The sequence \(a_n\) <strong>converges</strong> to a number \(l\) if, for any \(\epsilon&gt;0\), there exists \(N\) such that \(|a_m-l|&lt;\epsilon\) for any \(m&gt;N\).</p></div>
+<p>Will you use this definition? No — but talking about convergence without a proper definition isn't mathematically rigorous. Intuitively: a sequence converges to \(l\) if, as it goes on, it gets as close as we like to \(l\). The payoff is for geometric sums: what happens to \(\frac{k^{n+1}-1}{k-1}\) as \(n\to\infty\)? If \(|k|&gt;1\), the power blows up — no convergence. If \(|k|&lt;1\), \(k^n\to0\):</p>
+<div class="box thm"><span class="bt">Convergence of geometric sums</span>
+<p>If \(|k|&lt;1\), then \(\displaystyle\sum_{i=0}^{\infty}k^i=\frac1{1-k}.\)</p></div>
+<div class="box thm"><span class="bt">Property of limits</span>
+<p>Let \(a_n\to l\) and let \(b_n\) be obtained from \(a_n\) by elementary operations (addition, multiplication, powers, exponentials, logarithms, or combinations thereof) in the form of a function \(f\). Then \(b_n\to f(l)\) as \(n\to\infty\).</p></div>
+<p>Now look at \(a_n=2^n\ (\mathrm{mod}\ 3)\): the terms are \(2,1,2,1,\dots\) — no limit, but a repeating pattern. We have just discovered:</p>
+<div class="box def"><span class="bt">Periodic sequences</span>
+<p>A sequence \(a_n\) is <strong>periodic</strong> if \(a_n=a_{n+p}\) for all \(n\); \(p\) is the <em>period</em>.</p></div>
+<p>There isn't a smart way to determine periodicity, only intuition: sequences built from trigonometric functions or modular arithmetic are likely periodic. The only sure check is to compute a few terms.</p>
+
+<h2><span class="sn">§4.5</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill">STEP 1 1992</span></div>
+<p>Let \(a_1=3\), \(a_{n+1}=3^{a_n}\) for \(n\ge1\) (thus \(a_2=3^3\), \(a_3=3^{3^3}\) and so on).<br>
+(i) What digit appears in the units place of \(a_7\)?
+(ii) Show that \(a_7\ge10^{100}\).
+(iii) What is \(\frac{2a_7+1}{a_7}\) correct to two decimal places? Justify your answer.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill">STEP 3 2015</span></div>
+<p>If \(s_1,s_2,\dots\) and \(t_1,t_2,\dots\) are sequences of positive numbers, we write \((s_n)\le(t_n)\) to mean "there exists a positive integer \(m\) such that \(s_n\le t_n\) whenever \(n\ge m\)". Determine whether each of the following statements is true or false. For a true statement give a proof including an explicit determination of an appropriate \(m\); for a false statement give a counterexample.<br>
+(i) \((1000n)\le(n^2)\).
+(ii) If it is not the case that \((s_n)\le(t_n)\), then it is the case that \((t_n)\le(s_n)\).
+(iii) If \((s_n)\le(t_n)\) and \((t_n)\le(u_n)\), then \((s_n)\le(u_n)\).
+(iv) \((n^2)\le(2^n)\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill">STEP 1 2002</span></div>
+<p>I borrow \(C\) pounds at interest rate \(100\alpha\%\) per year. The interest is added at the end of each year; immediately after, I make a repayment. The amount I repay at the end of the \(k\)th year is \(R_k\) pounds and the amount I owe at the beginning of the \(k\)th year is \(C_k\) pounds (with \(C_1=C\)). Express \(C_{n+1}\) in terms of \(R_k\) \((k=1,\dots,n)\), \(\alpha\) and \(C\), and show that if I pay off the loan in \(N\) years with repayments \(R_k=(1+\alpha)^k r\) (\(r\) constant), then \(r=C/N\). If instead I pay off the loan in \(N\) equal repayments of \(R\) pounds, show that
+\[\frac RC=\frac{\alpha(1+\alpha)^N}{(1+\alpha)^N-1},\]
+and that \(R/C\approx27/103\) when \(\alpha=1/50\), \(N=4\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill">STEP 2 2013</span></div>
+<p><em>The following theorem may be used: if a sequence is bounded above and increasing, then it tends to a limit.</em> The sequence \(u_1,u_2,\dots\) is defined by \(u_1=1\) and
+\[u_{n+1}=1+\frac1{u_n}\quad(n\ge1).\quad(*)\]
+(i) Show that, for \(n\ge3\), \(\displaystyle u_{n+2}-u_n=\frac{u_n-u_{n-2}}{(1+u_n)(1+u_{n-2})}\).<br>
+(ii) Prove, by induction or otherwise, that \(1\le u_n\le2\) for all \(n\).<br>
+(iii) Show that the sequence \(u_1,u_3,u_5,\dots\) tends to a limit, and that \(u_2,u_4,u_6,\dots\) tends to a limit. Find these limits and deduce that \(u_1,u_2,u_3,\dots\) tends to a limit. Would this conclusion change if the sequence were defined by (*) and \(u_1=3\)?</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill tmua">TMUA 2022</span></div>
+<p>A selection \(S\) of \(n\) terms is taken from the arithmetic sequence \(1,4,7,10,\dots,70\). Consider the statement: (*) <em>There are two distinct terms in \(S\) whose sum is 74.</em> What is the smallest value of \(n\) for which (*) is necessarily true?</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill tmua">TMUA 2020</span></div>
+<p>The 1st, 2nd and 3rd terms of a geometric progression are also the 1st, 4th and 6th terms, respectively, of an arithmetic progression. The sum to infinity of the geometric progression is 12. Find the 1st term of the geometric progression.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill">MAT 2020</span></div>
+<p>The functions \(f(n)=2n+1\) and \(g(n)=4n\) are defined for positive integers. This question is about the set \(S\) of positive integers achievable by applying, in some order, a combination of \(f\)s and \(g\)s to the number 1. For example \(gfg(1)=g(f(4))=g(9)=36\) and \(ffgg(1)=67\), so 36 and 67 are in \(S\).<br>
+(i) Write out the binary expansion of 100.<br>
+(ii) Show that 100 is in \(S\) by describing explicitly a combination of \(f\)s and \(g\)s that achieves it.<br>
+(iii) Show that 200 is not in \(S\).<br>
+(iv) Show that if \(n\) is in \(S\), there is only one combination of \(f\)s and \(g\)s achieving \(n\).<br>
+(v) Let \(u_k\) be the number of elements of \(S\) in the range \(2^k\le n&lt;2^{k+1}\). Show that \(u_{k+2}=u_{k+1}+u_k\) for \(k\ge0\).<br>
+(vi) Let \(s_k\) be the number of elements of \(S\) in the range \(1\le n&lt;2^{k+1}\). Show that \(s_{k+2}=s_{k+1}+s_k+1\) for \(k\ge0\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill">MAT 2019</span></div>
+<p>For \(k\) a positive integer, define \(p_k(x)=(1+x)(1+x^2)(1+x^3)\cdots(1+x^k)=a_0+a_1x+\dots+a_Nx^N\).<br>
+(i) Write down the degree \(N\) of \(p_k(x)\) in terms of \(k\).<br>
+(ii) By setting \(x=1\), or otherwise, explain why \(a_{\max}\ge\dfrac{2^k}{N+1}\), where \(a_{\max}\) is the largest coefficient.<br>
+(iii) Fix \(i\ge0\). Explain why the value of \(a_i\) eventually becomes constant as \(k\) increases.<br>
+(iv) A student correctly computes \(p_6(x)\) and, on the basis of the calculation, guesses that \(a_i=a_{N-i}\) for \(0\le i\le N\). By substituting \(x^{-1}\) for \(x\), or otherwise, show the guess is correct for all positive integers \(k\).<br>
+(v) The student also guesses that all whole numbers in the range \(1,\dots,a_{\max}\) appear amongst the coefficients. Use part (ii) to show that this guess is wrong. Justify your answer.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill">BMO 1 1993 · Hard</span></div>
+<p>For each positive integer \(c\), the sequence \(u_n\) of integers is defined by
+\[u_1=1,\quad u_2=c,\quad u_n=(2n+1)u_{n-1}-(n^2-1)u_{n-2}\quad(n\ge3).\]
+For which values of \(c\) does this sequence have the property that \(u_i\) divides \(u_j\) whenever \(i\le j\)?</p></div>
+
+<div class="pn"><a href="algebra.html">← Topic 2: Algebra</a><a href="functions.html">Topic 4: Graphs &amp; Logs →</a></div>
+</div>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>

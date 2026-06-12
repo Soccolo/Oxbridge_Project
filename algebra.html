@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algebra and Functions</title>
+<meta name="description" content="Free theory and problems covering the entire TMUA syllabus, with STEP extensions — from the book Advanced Mathematics for High School: Preparing for Oxbridge.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers &amp; Proof</a></li>
+    <li><a href="algebra.html" class="active"><span class="n">2</span> Algebra and Functions</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences and Series</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Graphs, Exponentials &amp; Logs</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differentiation</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integration</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Logic and Proof (Paper 2)</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<div class="page">
+<p class="crumb"><b>Topic 2</b> · Algebra and Functions</p>
+<h1>Algebra</h1>
+<p class="lede">Quadratics and their discriminants, polynomials and their roots, systems of equations, and the inequalities that bind them.</p>
+
+<h2><span class="sn">§3.1</span>Introduction</h2>
+<p>This topic continues the methods of the previous one. Having worked with natural numbers, integers and, briefly, rational numbers, we now move to a larger set: the real numbers. To justify their existence, look at equations. \(ax+b=c\) has solutions in \(\mathbb Q\) for any rational \(a,b,c\) — but \(x^2=2\) does not: we proved by infinite descent that it has no rational solutions. Together, the rational and irrational numbers form the set of real numbers, \(\mathbb R\). And \(\pm\sqrt2\) are far from the only irrational numbers: Euler's constant \(e\) is irrational, as is any irrational number multiplied by, divided by, or added to a rational one.</p>
+
+<h2><span class="sn">§3.2</span>Equations. Quadratic equations</h2>
+<div class="box def"><span class="bt">Polynomials</span>
+<p>A function of the form \(f(x)=a_nx^n+a_{n-1}x^{n-1}+\dots+a_1x+a_0\), with \(a_n\ne0\), is a <strong>polynomial of degree \(n\)</strong>, written \(\deg(f)=n\). The coefficient \(a_n\) is the <strong>leading coefficient</strong>; if \(a_n=1\), the polynomial is <strong>monic</strong>. A <strong>grade \(n\) equation</strong> is an equation \(f(x)=y\) where \(f\) is a polynomial of degree \(n\).</p></div>
+<p>The general form of a quadratic (grade 2) equation is \(ax^2+bx+c=0\). To find its solutions, first try this:</p>
+<div class="box"><span class="bt">Exercise</span><p>Prove that \(ax^2+bx+c=0\) implies \(\left(x+\frac b{2a}\right)^2=\frac{b^2-4ac}{4a^2}\).</p></div>
+<p>Using the above, \(x+\frac b{2a}=\pm\sqrt{\frac{b^2-4ac}{4a^2}}\), and the solutions of the quadratic equation are
+\[x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}.\]
+The quantity \(b^2-4ac\) is the <strong>discriminant</strong>, often written \(\Delta\).</p>
+<div class="box tmpl"><span class="bt">Template — Quadratic equation</span>
+<ol>
+<li>Write the equation in the form \(ax^2+bx+c=0\). If simpler, divide by \(a\).</li>
+<li>Calculate the discriminant \(\Delta=b^2-4ac\).</li>
+<li>Obtain the solutions \(x=\dfrac{-b\pm\sqrt\Delta}{2a}\).</li>
+</ol></div>
+<p><strong>Example.</strong> Solve \(3x^2-18x+16=1\). Subtracting 1 gives \(3x^2-18x+15=0\); dividing by 3, \(x^2-6x+5=0\). Then \(\Delta=36-20=16\), so \(x=\frac{6\pm4}{2}\): the solutions are \(x=5\) and \(x=1\).</p>
+<p>What if \(\Delta&lt;0\)? The square root doesn't exist among the reals — the answer is given in the <a href="complex.html">Complex Numbers</a> topic. Until then, a quadratic has real solutions iff \(\Delta\ge0\). When \(\Delta=0\), \(x=-\frac b{2a}\) is the only solution, and the quadratic can be rewritten \(ax^2+bx+c=a\left(x+\frac b{2a}\right)^2\).</p>
+<p><strong>Graphs.</strong> The graph of a quadratic is a <strong>parabola</strong>. We plot the two cases below: when \(a&gt;0\) it opens upwards and has a minimum point; when \(a&lt;0\) it opens downwards and has a maximum.</p>
+<figure><img src="img/fig3-1.png" alt="Figure 3.1 — Two grade 2 equations, plotted on the same axes. The blue one has a &lt; 0, while the red one has a &gt; 0." style="max-width:420px"><figcaption>Figure 3.1 — Two grade 2 equations, plotted on the same axes. The blue one has a &lt; 0, while the red one has a &gt; 0.</figcaption></figure>
+<p> Since \(\left(x+\frac b{2a}\right)^2=\frac{b^2-4ac}{4a^2}\), the left side is smallest (zero) when \(x=-\frac b{2a}\) — that is where the turning point sits. The value of \(\Delta\) controls the crossings of the \(x\)-axis (for \(a&gt;0\)): \(\Delta&gt;0\) — two crossings; \(\Delta=0\) — the graph touches the axis once; \(\Delta&lt;0\) — the graph stays fully above the axis. For \(a&lt;0\) everything is inverted.</p>
+<figure><img src="img/fig3-2.png" alt="Figure 3.2 — Three grade 2 equations. The red one has Δ &gt; 0, the green one has Δ = 0, while the blue one has Δ &lt; 0." style="max-width:420px"><figcaption>Figure 3.2 — Three grade 2 equations. The red one has Δ &gt; 0, the green one has Δ = 0, while the blue one has Δ &lt; 0.</figcaption></figure>
+
+<h2><span class="sn">§3.3</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill">STEP 2 1992</span></div>
+<p>Let \(h(x)=ax^2+bx+c\) with \(a\ne0\). Give a condition which \(a,b,c\) must satisfy in order that \(h(x)\) can be written in the form \(a(x+k)^2\) (*), where \(k\) is a constant.<br>
+If \(f(x)=3x^2+4x\) and \(g(x)=x^2-2\), find the two constant values of \(\lambda\) such that \(f(x)+\lambda g(x)\) can be written in form (*). Hence, or otherwise, find constants \(A,B,C,D,m,n\) such that
+\[f(x)=A(x+m)^2+B(x+n)^2,\qquad g(x)=C(x+m)^2+D(x+n)^2.\]
+If \(f(x)=3x^2+4x\) and \(g(x)=x^2+\alpha\) and it is given that there is only one value of \(\lambda\) for which \(f(x)+\lambda g(x)\) can be written in form (*), find \(\alpha\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill">STEP 2 1999</span></div>
+<p>Consider the quadratic equation
+\[nx^2+2x\sqrt{pn^2+q}+rn+s=0,\quad(*)\]
+where \(p&gt;0\), \(p\ne r\) and \(n=1,2,3,\dots\)<br>
+(i) For the case \(p=3,\ q=50,\ r=2,\ s=15\), find the set of values of \(n\) for which (*) has no real roots.<br>
+(ii) Prove that if \(p&lt;r\) and \(4q(p-r)&gt;s^2\), then (*) has no real roots for any value of \(n\).<br>
+(iii) If \(n=1\), \(p-r=1\) and \(q=s^2/8\), show that (*) has real roots if and only if \(s\le4-2\sqrt2\) or \(s\ge4+2\sqrt2\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill">STEP 2 2002</span></div>
+<p>Prove that, if \(|\alpha|&lt;2\sqrt2\), then there is no value of \(x\) for which
+\[x^2-\alpha|x|+2&lt;0.\quad(*)\]
+Find the solution set of (*) for \(\alpha=3\). For \(\alpha&gt;2\sqrt2\), the sum of the lengths of the intervals in which \(x\) satisfies (*) is denoted by \(S\). Find \(S\) in terms of \(\alpha\) and deduce that \(S&lt;2\alpha\). Sketch the graph of \(S\) against \(\alpha\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill">adapted from MAT 2 1993</span></div>
+<p>Find the solutions of \(0=-3x^2+9ax-2a^2\), where \(a\) is real. If \(f(x)=-3x^2+9ax-2a^2\), sketch the function for the different cases of \(a\) that arise. For each value of \(a\), find the maximum value \(M(a)\) of the function.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill">MAT 2022</span></div>
+<p>How many real solutions are there to the equation \(x|x|+1=3|x|\), where \(|x|=x\) if \(x\ge0\) and \(-x\) otherwise?</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill">MAT 2022</span></div>
+<p>The real numbers \(m\) and \(c\) are such that the equation \(x^2+(mx+c)^2=1\) has a repeated root \(x\), and also the equation \((x-3)^2+(mx+c-1)^2=1\) has a repeated root \(x\) (not necessarily the same value). How many possibilities are there for the line \(y=mx+c\)?</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill tmua">TMUA 2022</span></div>
+<p>How many solutions are there to the equation \(2\cos^4\theta-5\cos^2\theta+3=0\) in the interval \(0\le\theta\le2\pi\)?</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill">MAT 1994</span></div>
+<p>(a) Find all solutions of the equation \(16x^4-8x^2=-1\).<br>
+(b) Show that \(\sin3\theta=4\cos^2\theta\sin\theta-\sin\theta\) and that \(\sin5\theta=16\cos^4\theta\sin\theta-12\cos^2\theta\sin\theta+\sin\theta\).<br>
+(c) Find the general solution of the equation \(\sin5\theta+\sin3\theta+\sin\theta=0\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span></div>
+<p>Let \(f:\mathbb R\to\mathbb R\) such that \(f(f(x))=ax^2+bx+c\), with \(a,b,c\in\mathbb R\) and \(a\ne0\). Prove that:<br>
+(i) if \((1-b)^2&lt;4ac\), then \(f\) doesn't have a fixed point (a point such that \(f(x)=x\));<br>
+(ii) if \((1-b)^2=4ac\), then \(f\) admits only one fixed point.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 10</span></div>
+<p>Consider the equation \(9x^2-6mx-(3m+2)=0\), with \(m\in\mathbb Z\). Find \(m\) such that the equation has solutions in \(\mathbb Q\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 11</span></div>
+<p>Find real solutions to the equation \(5[x^2]-2[x]+2=0\), where \([x]\) is the largest integer not exceeding \(x\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 12</span><span class="pill">Hard</span></div>
+<p>Let \(f:\mathbb R\to\mathbb R\) be an arbitrary function and \(g(x)=ax^2+bx+c\) a quadratic. We know that, for any two real numbers \(m,n\): \(f(x)=mx+n\) has solutions iff \(g(x)=mx+n\) has solutions.<br>
+(i) Let \(h(x)=mx+n\) be tangent to \(g(x)\). Find the equation that the tangent point must satisfy, and find the sign of \(g(x)-h(x)\).<br>
+(ii) Assume there is an \(x_0\) with \(f(x_0)&lt;g(x_0)\). By picking a line tangent to the graph at \((x_0,g(x_0))\), prove that \(f(x)\ge g(x)\) for all \(x\).<br>
+(iii) Conclude that \(f(x)=g(x)\).</p></div>
+
+<h2><span class="sn">§3.4</span>Polynomials</h2>
+<h3>Roots of polynomials. The Binomial Theorem</h3>
+<p>We move to the general case of grade \(n\) equations. A grade \(n\) equation \(x^n+a_{n-1}x^{n-1}+\dots+a_0=0\) has a <em>maximum</em> of \(n\) real roots. Suppose it has exactly \(n\): \(x_1,\dots,x_n\).</p>
+<div class="box thm"><span class="bt">Factor Theorem</span>
+<p>If the equation \(x^n+a_{n-1}x^{n-1}+\dots+a_0=0\) has roots \(x_1,x_2,\dots,x_n\), then
+\[x^n+a_{n-1}x^{n-1}+\dots+a_0=(x-x_1)(x-x_2)\cdots(x-x_n).\]</p></div>
+<p>Expanding this product gives strong equalities between coefficients and roots:
+\[(x-x_1)\cdots(x-x_n)=x^n-(x_1+\dots+x_n)x^{n-1}+\dots+(-1)^nx_1x_2\cdots x_n.\]
+Before concluding, one question: can we be sure that if two polynomials are equal at every value of \(x\), their coefficients are equal? Yes:</p>
+<div class="box thm"><span class="bt">Equality of polynomials</span>
+<p>If \(f(x)=a_nx^n+\dots+a_0\) and \(g(x)=b_nx^n+\dots+b_0\) satisfy \(f(x)=g(x)\) for all \(x\), then \(a_i=b_i\) for all \(i\).</p></div>
+<div class="box thm"><span class="bt">Vieta's relationships</span>
+<p>If \(x^n+a_{n-1}x^{n-1}+\dots+a_0=0\) has roots \(x_1,\dots,x_n\), then \(a_{n-1}=-(x_1+x_2+\dots+x_n)\) and \(a_0=(-1)^nx_1x_2\cdots x_n\). Further relationships are obtained from the Factor Theorem.</p></div>
+<p>Roots need not be distinct: \(f(x)=(x-3)^2\) only has 3 as a solution — a <strong>repeated root</strong>, visible in the factorisation as a term \((x-x_0)^m\). To expand such terms we need a new quantity:</p>
+<div class="box def"><span class="bt">Combinations</span>
+<p>\(\displaystyle\binom mk=\frac{m!}{k!(m-k)!}\), where \(m!=1\cdot2\cdots m\).</p></div>
+<div class="box thm"><span class="bt">Binomial Theorem</span>
+<p>\(\displaystyle(x-x_0)^m=\sum_{k=0}^{m}\binom mk(-1)^kx_0^k\,x^{m-k}\) — and more generally \(\displaystyle(a+x)^n=\sum_{r=0}^{n}\binom nr a^{n-r}x^r\).</p></div>
+
+<h3>Relations between polynomials</h3>
+<p>A polynomial of degree \(n\) need not attain \(n\) real roots — \(x^2+4x+5\) has none, since its discriminant is negative. A polynomial decomposes as a product of <em>linear</em> polynomials (like \(x-1\)) and <em>irreducible</em> ones (like \(x^2+4x+5\)) — much like a number decomposes into prime factors. And just as numbers have division, so do polynomials:</p>
+<div class="box thm"><span class="bt">Polynomial division</span>
+<p>Let \(f,g\) be polynomials with \(\deg(f)&gt;\deg(g)\). Then there exist polynomials \(c(x)\) and \(r(x)\) such that
+\[f(x)=g(x)\cdot c(x)+r(x),\]
+where \(\deg(g)+\deg(c)=\deg(f)\) and \(\deg(r)&lt;\deg(g)\). The parallel with numbers: the remainder polynomial has degree smaller than the divisor's, just as a remainder number is smaller than the number we divide by.</p></div>
+<div class="box tmpl"><span class="bt">Template — Polynomial division</span>
+<ol>
+<li>Find \(c(x)\) from \(f(x)=c(x)\cdot g(x)+r(x)\): expand \(c(x)=c_lx^l+c_{l-1}x^{l-1}+\dots\) and determine the \(c_i\) one by one, matching the highest remaining power each time.</li>
+<li>Once all \(c_i\) are found, \(r(x)\) is the difference between \(f(x)\) and \(c(x)\cdot g(x)\).</li>
+</ol></div>
+<p><strong>Example.</strong> Divide \(x^3-3x^2+2\) by \(x-2\). Seeking \(c(x)=c_2x^2+c_1x+c_0\): matching \(x^3\) gives \(c_2=1\); matching \(x^2\) needs \(c_1-2=-3\), so \(c_1=-1\); matching \(x\) needs \(c_0+2=0\), so \(c_0=-2\). The remainder is then \(r(x)=-2\), and
+\[x^3-3x^2+2=(x^2-x-2)(x-2)-2.\]</p>
+<p><strong>Observation.</strong> Polynomials share many properties with numbers. If a number is divisible by both 2 and 3, which are coprime, it is divisible by 6. Similarly, a polynomial divisible by two coprime polynomials \(g(x)\) and \(h(x)\) is divisible by \(g(x)\cdot h(x)\).</p>
+
+<h2><span class="sn">§3.5</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill">STEP 2 2009</span></div>
+<p>The polynomial \(p(x)\) is of degree 9 and \(p(x)-1\) is exactly divisible by \((x-1)^5\).<br>
+(i) Find the value of \(p(1)\). (ii) Show that \(p'(x)\) is exactly divisible by \((x-1)^4\). (iii) Given also that \(p(x)+1\) is exactly divisible by \((x+1)^5\), find \(p(x)\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill">STEP 2 2002</span></div>
+<p>Show that setting \(z-z^{-1}=w\) in the quartic equation \(z^4+5z^3+4z^2-5z+1=0\) results in the quadratic equation \(w^2+5w+6=0\). Hence solve the quartic. Solve similarly the equation
+\[2z^8-3z^7-12z^6+12z^5+22z^4-12z^3-12z^2+3z+2=0.\]</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill">STEP 1 1992</span></div>
+<p>Let \(p_0(x)=(1-x)(1-x^2)(1-x^4)\). Show that \((1-x)^3\) is a factor of \(p_0(x)\). If \(p_1(x)=xp_0'(x)\), show, by considering factors, that \(p_0'(1)=0\) and \(p_1'(1)=0\). By writing \(p_0(x)=c_0+c_1x+\dots+c_7x^7\), deduce that
+\[1+2+4+7=3+5+6,\qquad 1^2+2^2+4^2+7^2=3^2+5^2+6^2.\]
+Show that we can write the integers \(1,2,\dots,15\) in some order as \(a_1,\dots,a_{15}\) in such a way that
+\[a_1^r+a_2^r+\dots+a_8^r=a_9^r+\dots+a_{15}^r\quad\text{for }r=1,2,3.\]</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill">STEP 1 2002</span></div>
+<p>Let \(f(x)=x^n+a_1x^{n-1}+\dots+a_n\), and suppose \(f(x)=(x+k_1)(x+k_2)\cdots(x+k_n)\). By considering \(f(0)\), or otherwise, show that \(k_1k_2\cdots k_n=a_n\). Show also that
+\[(k_1+1)(k_2+1)\cdots(k_n+1)=1+a_1+a_2+\dots+a_n,\]
+and give a corresponding result for \((k_1-1)(k_2-1)\cdots(k_n-1)\). Find the roots of \(x^4+22x^3+172x^2+552x+576=0\), given that they are all integers.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill">MAT 1993</span></div>
+<p>Write down the expansion of \((1+x)^n\) as a polynomial in \(x\) with coefficients \(\binom nr\).<br>
+(a) (i) Show that \(\binom nr=\binom n{n-r}\); (ii) show that \(\sum_{r=0}^n\binom nr=2^n\).<br>
+(b) By considering \((1+x)^{n-1}(1+x)\), or otherwise, show that \(\binom nr=\binom{n-1}{r-1}+\binom{n-1}r\).<br>
+(c) By considering the derivative of \((1+x)^n\), or otherwise, show that \(\sum_{r=0}^n r\binom nr=n2^{n-1}\), and find \(\sum_{r=0}^n r^2\binom nr\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill">MAT 1994</span></div>
+<p>(a) Show that \(\binom nr+\binom n{r-1}=\binom{n+1}r\).<br>
+(b) Prove that, when \(n\) is a positive integer, \((a+x)^n=a^n+na^{n-1}x+\dots+\binom nr a^{n-r}x^r+\dots+x^n\).<br>
+(c) Determine all values of \(a\) and \(b\) such that, when \((x+a)^3(x-b)^6\) is expanded as a sum of powers of \(x\), the coefficient of \(x^8\) is zero and the coefficient of \(x^7\) is \(-9\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill">MAT 1996</span></div>
+<p>(a) Factorise \(x^2+x-6\).<br>
+(b) For which values of the real constant \(a\) does \(x^2+x-a=0\) have at least one real solution? Write down these solutions in terms of \(a\).<br>
+(c) Show that, for any value of the real constant \(b\), the equation \(x^3-(b+1)x+b=0\) has \(x=1\) as a solution. Find all values of \(b\) for which this equation has exactly two distinct solutions.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span></div>
+<p>(a) Divide \(x^5-3x^4+3x^3-2x^2+2x-1\) by \(x^3-2\).
+(b) Divide \(x^3-x^2+x-1\) by \(x^2-1\).
+(c) Divide \(x^7-2x^5+3x^3-x\) by \(x^4\).
+(d) Divide \(x^9-1\) by \(1+x+x^2+\dots+x^8\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill tmua">TMUA 2017</span></div>
+<p>When \(\left(3x^2+8x-3\right)\) is multiplied by \((px-1)\) and the resulting product is divided by \((x+1)\), the remainder is 24. What is the value of \(p\)?</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 10</span><span class="pill tmua">TMUA 2017</span></div>
+<p>In the expansion of \((a+bx)^5\) the coefficient of \(x^4\) is 8 times the coefficient of \(x^2\). Given that \(a\) and \(b\) are non-zero positive integers, what is the smallest possible value of \(a+b\)?</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 11</span></div>
+<p>Let \(P(x)=x^3-ax^2+bx-c\), with \(a,b,c\in\mathbb R\) and roots \(x_1,x_2,x_3\). Find the value of \(S=(x_1-x_2)(x_2-x_3)(x_3-x_1)\) squared without solving the equation.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 12</span><span class="pill">MAT 1 1993</span></div>
+<p>Let \(\alpha,\beta,\gamma\) be the roots of \(x^3+Ax^2+Bx+C=0\).<br>
+(a) Show that \(\alpha+\beta+\gamma=-A\), \(\alpha\beta+\beta\gamma+\gamma\alpha=B\), \(\alpha\beta\gamma=-C\).<br>
+(b) Find expressions for \(\alpha^2+\beta^2+\gamma^2\) and \(\alpha^3+\beta^3+\gamma^3\) in terms of \(A,B,C\).<br>
+(c) Find \(A\) when \(\alpha=-\beta\), \(B=-4\) and \(C=16\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 13</span></div>
+<p>(i) Consider the equation \(x^3-ax^2+bx-c=0\). If \(a\) is an integer and the equation has more than one integer root, prove that all its roots are integers.<br>
+(ii) Consider the equation \(x^3+(1-a^2b)x^2+cx+a^2b=0\), where \(a,b\) are distinct primes and \(c\in\mathbb R\). Prove that the equation has at most one integer root.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 14</span><span class="pill">Problem Solving Matters 2023</span></div>
+<p>Find the remainder when \(1+2x+4x^2+8x^3+\dots+(2x)^{50}\) is divided by \((x-2)\). Write your answer in the form \(\frac{2^a-b}{c}\) where \(a,b,c\) are positive integers.</p></div>
+
+<h2><span class="sn">§3.6</span>Systems of equations</h2>
+<p>We now go in the opposite direction and deal with the simplest type of equation, the linear one. With two unknowns, an equation \(ax+by=c\) has infinitely many solutions: for any \(x\), \(y=\frac{c-ax}b\). To pin down a unique solution we need a second equation:
+\[ax+by=c,\qquad dx+ey=f.\]</p>
+<div class="box tmpl"><span class="bt">Template — System of 2 equations</span>
+<ol>
+<li>Multiply the equations so that \(x\) (or \(y\)) has the same coefficient in both.</li>
+<li>Subtract to obtain an equation in one unknown.</li>
+<li>This either leads to \(0=0\) — infinitely many solutions (one equation was a multiple of the other) — or to a unique value, from which the other unknown follows.</li>
+</ol></div>
+<p>With more equations than unknowns, the system may be <strong>inconsistent</strong> (no solution): e.g. \(x+y=2\), \(x+2y=3\), \(x+4y=5\). For larger systems
+\[a_{11}x_1+\dots+a_{1n}x_n+b_1=0,\ \dots,\ a_{m1}x_1+\dots+a_{mn}x_n+b_m=0,\]
+the best course is to reduce to <strong>row echelon form</strong>: subtract equations to remove \(x_1\) from all but the first, then \(x_2\) from all but the first two, and so on, leaving a sequence of equations with strictly fewer unknowns each.</p>
+<div class="box tmpl"><span class="bt">Template — System of n equations</span>
+<ol>
+<li>By repeated subtractions, bring the system into row echelon form.</li>
+<li>If each successive equation has one fewer unknown, there is a unique solution — compute it. Otherwise there are infinitely many solutions, or none (likely when there are more equations than unknowns).</li>
+</ol></div>
+<p><strong>Geometric picture.</strong> Two linear equations in two unknowns are two lines; a unique solution is their single intersection point, and parallel-but-equal lines give infinitely many. With three unknowns the equations are planes: three planes can meet at one point, in a line, or not at all — a picture that will reappear constantly at university.</p>
+
+<h2><span class="sn">§3.7</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill">MAT 1 1992</span></div>
+<p>Consider the set of linear equations
+\[4x-y-z=21,\quad 2x+4y+z=69,\quad 8x+y-z=81,\quad -4x+7y+3z=57.\]
+(a) Find all real solutions \((x,y,z)\). (b) How many solutions are there if we also require \(x,y,z\) to be positive integers?</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill">MAT 1 1993</span></div>
+<p>Consider the equations \(x-y=2\), \(4x+3y-z=3\), \(8x+13y-3z=a\).<br>
+(a) Show that the equations have no solutions unless \(a=1\). When \(a=1\), find the general solution.<br>
+(b) Suppose the equation \(5x-3y=4\) is added to the set, with \(a=1\). Do the equations then have a solution? If so, find it.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill">MAT 1 1994</span></div>
+<p>Find all solutions of
+\[5x-4y+kz=6,\quad kx-3y+6z=7,\quad 4x+2y-2z=2\]
+(a) when \(k=0\), and (b) when \(k=7\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill">MAT 1 1995</span></div>
+<p>Find all solutions of
+\[x+(1-\lambda)z=3,\quad 2x+\lambda y+z=8,\quad -x+3\lambda y+(2+\lambda)z=3\]
+(a) when \(\lambda=0\), (b) when \(\lambda=1\) and (c) when \(\lambda=2\).</p></div>
+
+<h2><span class="sn">§3.8</span>Inequalities</h2>
+<p>First, notice that all inequalities can be turned into one involving 0: to compare \(M\) and \(N\), prove \(M-N&gt;0\) or \(M-N&lt;0\). So a good starting point is inequalities involving 0.</p>
+<div class="box thm"><span class="bt">Inequality 1</span><p>For any \(x\in\mathbb R\), \(x^2\ge0\).</p></div>
+<p>Simple as it seems, this leads to interesting results. From \((a-b)^2\ge0\) we get \(a^2+b^2\ge2ab\); with \(x=a^2,\ y=b^2\), this reads \(x+y\ge2\sqrt{xy}\) for \(x,y\ge0\). This generalises:</p>
+<div class="box thm"><span class="bt">Inequality 2 — AM–GM</span>
+<p>Let \(n\in\mathbb N\) and \(a_1,\dots,a_n\ge0\). Then
+\[\frac{a_1+a_2+\dots+a_n}{n}\ge(a_1a_2\cdots a_n)^{\frac1n},\]
+with equality only when \(a_1=a_2=\dots=a_n\).</p></div>
+<div class="box thm"><span class="bt">Inequality 3 — Cauchy–Schwarz</span>
+<p>Let \(n\ge2\) and \(a_1,\dots,a_n\), \(b_1,\dots,b_n\) be \(2n\) real numbers. Then
+\[\left(a_1^2+\dots+a_n^2\right)\left(b_1^2+\dots+b_n^2\right)\ge\left(a_1b_1+\dots+a_nb_n\right)^2.\]</p></div>
+<div class="box thm"><span class="bt">Inequality 4 — sign of a quadratic</span>
+<p>Let \(f(x)=ax^2+bx+c\) with \(\Delta&lt;0\). If \(a&gt;0\), then \(f(x)&gt;0\) for all \(x\); if \(a&lt;0\), then \(f(x)&lt;0\) for all \(x\).</p></div>
+<p><strong>Remark 1.</strong> Let \(a\in(0,1)\). Then \(a^n&lt;a\) for all integers \(n&gt;1\) — multiplying a fraction by itself only makes it smaller.</p>
+<div class="box warn"><span class="bt">Remark 2 — a common mistake</span>
+<p>If \(M&gt;N\), then \(f(M)&gt;f(N)\) for any <em>increasing</em> function \(f\). But applying a <em>decreasing</em> function — for instance, multiplication by \(-1\) — flips the sign of the inequality: from \(2&gt;1\) we get \(-2&lt;-1\), not \(-2&gt;-1\).</p></div>
+
+<h2><span class="sn">§3.9</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span></div>
+<p>Prove that, for any \(a&gt;0\), \(a+\frac1a\ge2\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span></div>
+<p>Let \(a_1,a_2,\dots,a_n&gt;0\) such that \(a_1a_2\cdots a_n=1\). Prove that \((a_1+a_2)(a_2+a_3)\cdots(a_n+a_1)\ge2^n\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span></div>
+<p>Prove that \(a^2+b^2+c^2\ge ab+ac+bc\) for any \(a,b,c\in\mathbb R\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span></div>
+<p>Look at Question 3 from the <a href="index.html#aptitude">Initial Aptitude Test</a>. Can you solve it using the AM–GM inequality?</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span></div>
+<p>(i) Prove that, for \(a,b&gt;0\), \(a^2x^2-abx+b^2\ge0\). When does equality happen?<br>
+(ii) Prove that, for \(a_1,a_2,b_1,b_2&gt;0\), \(\left(a_1^2+a_2^2\right)x^2-(a_1b_1+a_2b_2)x+\left(b_1^2+b_2^2\right)\ge0\). When does equality happen?<br>
+(iii) Using a similar method, or otherwise, prove the Cauchy–Schwarz inequality.</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill">STEP 2 1993</span></div>
+<p>Suppose \(a_i&gt;0\) for all \(i\). Show that \(a_1a_2\le\left(\frac{a_1+a_2}2\right)^2\). Prove by induction that for all positive integers \(m\)
+\[a_1\cdots a_{2^m}\le\left(\frac{a_1+\dots+a_{2^m}}{2^m}\right)^{2^m}.\quad(*)\]
+If \(n&lt;2^m\), put \(b_1=a_1,\ b_2=a_2,\dots,b_n=a_n\) and \(b_{n+1}=\dots=b_{2^m}=A\), where \(A=\frac{a_1+\dots+a_n}n\). By applying (*) to the \(b_i\), show that \(a_1\cdots a_n A^{(2^m-n)}\le A^{2^m}\) (notice that \(b_1+\dots+b_{2^m}=2^mA\)). Deduce the AM–GM inequality \((a_1\cdots a_n)^{1/n}\le\frac{a_1+\dots+a_n}n\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill">STEP 2 1990</span></div>
+<p>Let \(a,b,c,d,p,q\) be positive integers. Prove that:<br>
+(i) if \(b&gt;a\) and \(c&gt;1\), then \(bc\ge2c\ge2+c\);<br>
+(ii) if \(a&lt;b\) and \(d&lt;c\), then \(bc-ad\ge a+c\);<br>
+(iii) if \(\frac ab&lt;p&lt;\frac cd\), then \((bc-ad)p\ge a+c\);<br>
+(iv) if \(\frac ab&lt;\frac pq&lt;\frac cd\), then \(p\ge\frac{a+c}{bc-ad}\) and \(q\ge\frac{b+d}{bc-ad}\).<br>
+Hence find all fractions with denominators less than 20 which lie between \(8/9\) and \(9/10\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill">STEP 1 1999</span></div>
+<p>(i) Find the greatest and least values of \(bx+a\) for \(-10\le x\le10\), distinguishing carefully between the cases \(b&gt;0\), \(b=0\) and \(b&lt;0\).<br>
+(ii) Find the greatest and least values of \(cx^2+bx+a\), where \(c\ge0\), for \(-10\le x\le10\), distinguishing carefully between the cases that arise for different values of \(b\) and \(c\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill tmua">TMUA 2020</span></div>
+<p>The real numbers \(a,b,c,d\) satisfy both \(0&lt;a+b&lt;c+d\) and \(0&lt;a+c&lt;b+d\). Which of the following inequalities <em>must</em> be true?<br>
+I. \(a&lt;d\) &nbsp;&nbsp; II. \(b&lt;c\) &nbsp;&nbsp; III. \(a+b+c+d&gt;0\)</p></div>
+
+<div class="pn"><a href="numbers.html">← Topic 1: Numbers</a><a href="sequences.html">Topic 3: Sequences →</a></div>
+</div>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>

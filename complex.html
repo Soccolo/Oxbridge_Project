@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complex Numbers</title>
+<meta name="description" content="Free theory and problems covering the entire TMUA syllabus, with STEP extensions — from the book Advanced Mathematics for High School: Preparing for Oxbridge.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers &amp; Proof</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra and Functions</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences and Series</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Graphs, Exponentials &amp; Logs</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differentiation</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integration</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Logic and Proof (Paper 2)</a></li>
+    <li><a href="complex.html" class="active"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<div class="page">
+<p class="crumb"><b>Extension</b> · Beyond the TMUA — for STEP and interviews</p>
+<h1>Complex Numbers</h1>
+<p class="lede">When the discriminant goes negative: the algebra and geometry of \(i\), de Moivre's theorem, roots of unity, loci and rotations on the Argand diagram — and complex numbers as a machine for proving real identities.</p>
+
+<h2><span class="sn">§8.1</span>Introduction</h2>
+<p>In previous topics we learned to solve quadratic equations \(x^2+ax+b=0\), and that such an equation only has real solutions when its discriminant \(\Delta=a^2-4b\) is non-negative. However, we can still interpret the solution when \(\Delta\) is negative — it just isn't a real number, but a complex one. We take a look at the properties of complex numbers, beginning with the algebraic ones, then observe the similarity between complex numbers and analytical geometry, and start seeing complex numbers as geometric quantities rather than algebraic ones. <em>(Complex numbers are not on the TMUA syllabus — this topic serves STEP and interviews.)</em></p>
+
+<h2><span class="sn">§8.2</span>The set of complex numbers</h2>
+<p>The simplest equation with negative discriminant is \(x^2+1=0\). We introduce a new number, written \(i\), as a solution. We want complex numbers to behave like the numbers we are used to — addable, multipliable, subtractable, divisible (by non-zero) — so the set certainly needs all numbers of the type \(a+bi\) with \(a,b\) real. Hence we define
+\[\mathbb C=\{a+bi\mid a,b\in\mathbb R\}.\]
+You can think of \(i\) as "the square root of \(-1\)" in a sense — but keep in mind \((-i)^2=i^2=-1\), so the square root of \(-1\) has multiple candidates; as we will see, there is no good way to uniformly define a square root over all complex numbers.</p>
+<p><strong>Exercise.</strong> Using the usual rules of multiplication and addition (commutativity, distributivity, …), check that adding and multiplying complex numbers yields another complex number.</p>
+<div class="box def"><span class="bt">Real and imaginary parts</span>
+<p>For \(z=x+yi\) (\(x,y\) real), \(x\) is the <strong>real part</strong> and \(y\) the <strong>imaginary part</strong>: \(\operatorname{Re}(z)=x\), \(\operatorname{Im}(z)=y\).</p></div>
+<div class="box tmpl"><span class="bt">Template — Dividing complex numbers</span>
+<ol>
+<li>Let \(z=a+bi\) and \(w=c+di\ne0\); we want \(\frac{a+bi}{c+di}\) in real-and-imaginary form.</li>
+<li>Multiply top and bottom by \(c-di\): \(\dfrac{(a+bi)(c-di)}{(c+di)(c-di)}\).</li>
+<li>The denominator is \(c^2-(di)^2=c^2+d^2\) — a real number.</li>
+<li>Expand the numerator and group in terms of \(i\) (using \(i^2=-1\)).</li>
+<li>Result: \(\dfrac{ac+bd}{c^2+d^2}+\dfrac{bc-ad}{c^2+d^2}\,i\).</li>
+</ol></div>
+<p>The number \(c-di\) was a very useful tool — useful enough to deserve its own definition:</p>
+<div class="box def"><span class="bt">Conjugate</span>
+<p>For \(z=a+bi\), the number \(\bar z=a-bi\) is the <strong>conjugate</strong> of \(z\).</p></div>
+<div class="box thm"><span class="bt">Properties of the conjugate</span>
+<p>For complex \(z,w\): (1) \(\overline{z+w}=\bar z+\bar w\); (2) \(\overline{zw}=\bar z\cdot\bar w\); (3) \(\overline{-z}=-\bar z\); (4) if \(z\ne0\), \(\overline{1/z}=1/\bar z\). <em>All can be proved directly by expanding — left as exercises.</em></p></div>
+<p>Observe that \(z\bar z=x^2+y^2\) is always a non-negative real number. Its square root is the <strong>absolute value</strong> (or modulus) \(|z|\); for real \(z\), \(|z|=\sqrt{x^2}=|x|\), agreeing with the usual notion.</p>
+<div class="box thm"><span class="bt">Properties of the absolute value</span>
+<p>(1) \(|z+w|\le|z|+|w|\) (triangle inequality); (2) \(|zw|=|z||w|\); (3) \(|-z|=|z|\); (4) if \(z\ne0\), \(|1/z|=1/|z|\).</p></div>
+<div class="proof"><span class="pt">Proof of (1).</span> We want \(\sqrt{(a+c)^2+(b+d)^2}\le\sqrt{a^2+b^2}+\sqrt{c^2+d^2}\). Both sides positive — square:
+\[(a+c)^2+(b+d)^2\le a^2+b^2+c^2+d^2+2\sqrt{(a^2+b^2)(c^2+d^2)}.\]
+Expanding and cancelling: \(2ac+2bd\le2\sqrt{(a^2+b^2)(c^2+d^2)}\). Divide by 2 and square again (if the LHS is negative the inequality is clearly true):
+\[a^2c^2+b^2d^2+2abcd\le a^2c^2+a^2d^2+b^2c^2+b^2d^2,\]
+equivalent to \((ad-bc)^2\ge0\), clearly true. Parts (2)–(4) are exercises. <span class="qed">∎</span></div>
+
+<h2><span class="sn">§8.3</span>Polynomials and complex numbers</h2>
+<p>Have we included all numbers we "should"? The following theorem (whose proof is too advanced for our purposes) shows that \(\mathbb C\) is "complete":</p>
+<div class="box thm"><span class="bt">Fundamental Theorem of Algebra</span>
+<p>Any polynomial in one variable with complex coefficients has a complex number as a solution.</p></div>
+<p>Let \(f\) have degree \(n\); by the theorem, there is \(z\) with \(f(z)=0\). Then \(x-z\) divides \(f\): otherwise, by polynomial division, \(f(x)=q(x)(x-z)+a\), and plugging in \(z\) forces \(a=0\). Inductively, \(f\) has exactly \(n\) solutions (counting repeats).</p>
+<p>Now let \(f\) have <em>real</em> coefficients. Then \(f(\bar z)=\overline{f(z)}\) — so if \(z\) is a root, so is \(\bar z\): non-real roots come in conjugate pairs. Grouping each strictly complex root with its conjugate produces a factorisation of \(f\) into <em>real</em> irreducible pieces: with \(z_1=a+bi\),
+\[(x-z_1)(x-\bar z_1)=(x-a-bi)(x-a+bi)=(x-a)^2-(bi)^2=x^2-2ax+a^2+b^2,\]
+a polynomial in \(x\) with real coefficients.</p>
+
+<h2><span class="sn">§8.4</span>Exponentiation</h2>
+<p>For \(z=x+yi\) we define
+\[e^{x+yi}=e^x\big(\cos y+i\sin y\big).\]
+Why this definition? Recall the Maclaurin series from the <a href="differentiation.html">Differentiation</a> topic:
+\[e^x=\sum_{n\ge0}\frac{x^n}{n!},\qquad\sin x=\sum_{n\ge0}\frac{(-1)^n}{(2n+1)!}x^{2n+1},\qquad\cos x=\sum_{n\ge0}\frac{(-1)^n}{(2n)!}x^{2n}.\]
+Much of the convergence theory for real series carries over to complex numbers unchanged (we won't discuss the details); assuming the series for \(e^x\) works for imaginary \(x\) and separating even and odd powers of \(i\), we see exactly that \(e^{iy}=\cos y+i\sin y\). It is convenient that \(e^z\) keeps the same Maclaurin series for every complex number.</p>
+<p><strong>Exercise.</strong> Prove that this definition satisfies \(e^z\cdot e^w=e^{z+w}\).</p>
+<div class="box thm"><span class="bt">de Moivre's theorem</span>
+<p>For real \(\theta\) and positive integer \(n\):
+\[(\cos\theta+i\sin\theta)^n=\cos(n\theta)+i\sin(n\theta).\]</p></div>
+<div class="proof"><span class="pt">Proof.</span> Induction on \(n\); the case \(n=1\) is trivial. Assuming the formula for \(n\):
+\[(\cos\theta+i\sin\theta)^{n+1}=(\cos n\theta+i\sin n\theta)(\cos\theta+i\sin\theta)\]
+\[=(\cos n\theta\cos\theta-\sin n\theta\sin\theta)+i(\cos n\theta\sin\theta+\sin n\theta\cos\theta)=\cos\big((n{+}1)\theta\big)+i\sin\big((n{+}1)\theta\big),\]
+by the addition formulae. <span class="qed">∎</span></div>
+<p>Note that we have not defined exponentiation with a complex base other than \(e\): formulas such as \(a^zb^z=(ab)^z\) or \(e^{zw}=(e^z)^w\) cannot yet even be made sense of in general — de Moivre gives the latter for rational \(w\), but \(a^w\) is undefined for \(a\ne e\) and irrational \(w\).</p>
+
+<h2><span class="sn">§8.5</span>Geometric interpretation</h2>
+<figure><img src="img/argand.png" alt="Complex numbers plotted as vectors in the Complex Plane (an Argand diagram), with the four quadrants labelled." style="max-width:440px"><figcaption>Complex numbers plotted as vectors in the Complex Plane (an Argand diagram), with the four quadrants labelled.</figcaption></figure>
+<p>Beyond being a great tool for polynomials, complex numbers can be thought of geometrically: \(z=x+yi\) is the vector in the plane from \((0,0)\) to \((x,y)\). The real part is the first coordinate, the imaginary part the second, and \(|z|\) is the length of the vector. Interpreted this way, the plane is called the <strong>Complex Plane</strong>, with <em>Real</em> and <em>Imaginary axes</em>; such a plot is sometimes called an <strong>Argand diagram</strong>.</p>
+<p>To specify a complex number it suffices to give its modulus and its angle. An <strong>argument</strong> of \(z=x+yi\) is an angle \(\theta\) (in radians) such that following the half-line from the origin at angle \(\theta\) for length \(|z|\) lands on \(z\). Since the vector of modulus \(r\) and argument \(\theta\) is \((r\cos\theta,r\sin\theta)\), we can write
+\[z=re^{i\theta}.\]
+If \(\theta\) is an argument, so is \(\theta+2k\pi\) for any integer \(k\). The <strong>principal argument</strong> is the unique argument in \([0,2\pi)\) — note this convention is not universal in the literature (some books use \((-\pi,\pi]\)), but it is the one we adopt.</p>
+<p>To compute the principal argument, let \(\alpha=\arctan|y/x|\) be the acute angle the vector makes with the \(x\)-axis (for \(z\) off the axes), and adjust by quadrant: first quadrant \(\theta=\alpha\); second \(\theta=\pi-\alpha\); third \(\theta=\pi+\alpha\); fourth \(\theta=2\pi-\alpha\); and on the imaginary axis, \(\theta=\frac\pi2\) (\(y&gt;0\)) or \(\frac{3\pi}2\) (\(y&lt;0\)).</p>
+<p>Multiplication and division become beautifully simple in modulus–argument form: for \(z_k=r_ke^{i\theta_k}\),
+\[z_1z_2=(r_1r_2)e^{i(\theta_1+\theta_2)},\qquad\frac{z_1}{z_2}=\frac{r_1}{r_2}e^{i(\theta_1-\theta_2)}.\]
+These equations are certainly true — but it is <em>not</em> true that the principal argument of \(z_1z_2\) is \(\theta_1+\theta_2\); it is \(\theta_1+\theta_2\) or \(\theta_1+\theta_2-2\pi\), whichever lands in \([0,2\pi)\) (informally, \(\theta_1+\theta_2\) mod \(2\pi\)); similarly for the quotient.</p>
+
+<h2><span class="sn">§8.6</span>Roots of complex numbers</h2>
+<p>Consider \(f(z)=z^n-w\) for a complex number \(w\): by §8.3 it has \(n\) roots. Write \(w=re^{i\theta}\) and seek \(z=se^{i\alpha}\): we need \(s^ne^{in\alpha}=re^{i\theta}\), so \(s^n=r\) and \(n\alpha-\theta\) is a multiple of \(2\pi\). The values \(\alpha=\frac{\theta+2k\pi}n\) for integers \(0\le k&lt;n\) all land in \([0,2\pi)\) and give distinct roots:</p>
+<div class="box thm"><span class="bt">The n distinct nth roots</span>
+<p>The \(n\) distinct \(n\)th roots of \(w=re^{i\theta}\) are
+\[z_k=r^{\frac1n}\,e^{\,i\frac{\theta+2k\pi}n},\qquad k=0,1,\dots,n-1.\]</p></div>
+<p>Why do we care so much about this specific polynomial? It is one example of a high-degree polynomial we can fully solve — but its solutions also have a striking geometric property. Plot the solutions of \(z^6=1\):</p>
+<figure><img src="img/roots-z6.png" alt="The six solutions of z⁶ = 1 on the unit circle. Do you notice something interesting? Indeed, the solutions form a regular polygon!" style="max-width:380px"><figcaption>The six solutions of z⁶ = 1 on the unit circle. Do you notice something interesting? Indeed, the solutions form a regular polygon!</figcaption></figure>
+<p>This is true in general:</p>
+<div class="proof"><span class="pt">Proof (the roots form a regular polygon).</span> Look at the modulus of the difference of two consecutive roots and show it is independent of which pair we chose:
+\[\left|r^{\frac1n}e^{i\frac{\theta+2(k+1)\pi}n}-r^{\frac1n}e^{i\frac{\theta+2k\pi}n}\right|
+=r^{\frac1n}\left|e^{i\frac{\theta+2k\pi}n}\right|\cdot\left|e^{i\frac{2\pi}n}-1\right|
+=r^{\frac1n}\left|e^{i\frac{2\pi}n}-1\right|,\]
+clearly independent of \(k\) (and the case of the side from \(k=n-1\) back to \(k=0\) is covered by taking \(k=n\); the computation works for any \(k\), not only principal arguments). <span class="qed">∎</span></div>
+
+<h2><span class="sn">§8.7</span>Geometry of the complex plane</h2>
+<p>Having seen complex numbers as vectors, we can turn the whole machinery around: instead of using geometry to understand \(\mathbb C\), use \(\mathbb C\) to <em>do</em> geometry. The key is a dictionary between algebraic expressions and geometric quantities. The fundamental entry: \(|z-w|\) is the <strong>distance</strong> between the points \(z\) and \(w\) — because \(z-w\) is the vector from \(w\) to \(z\), and the modulus is its length.</p>
+<div class="box thm"><span class="bt">Loci on the Argand diagram</span>
+<ol>
+<li>\(|z-a|=r\): the <strong>circle</strong> with centre \(a\) and radius \(r\) — "the points at distance \(r\) from \(a\)". (\(|z-a|&lt;r\) is the inside, \(|z-a|&gt;r\) the outside.)</li>
+<li>\(|z-a|=|z-b|\): the <strong>perpendicular bisector</strong> of the segment joining \(a\) and \(b\) — "equidistant from \(a\) and \(b\)".</li>
+<li>\(\arg(z-a)=\theta\): the <strong>half-line</strong> starting at \(a\) (excluded) in the direction \(\theta\).</li>
+<li>\(|z-a|=k|z-b|\) with \(k\ne1\): a <strong>circle</strong> (the circle of Apollonius) — squaring both sides and expanding always lands on a circle's equation, as in the problems below.</li>
+</ol>
+<p>Translate, don't memorise: read each equation aloud as a sentence about distances, and the picture draws itself. Once the locus is identified, the coordinate geometry of <a href="geometry.html">Topic 5</a> takes over.</p></div>
+<div class="box thm"><span class="bt">Multiplication is rotation and scaling</span>
+<p>In modulus–argument form the rule \(z_1z_2=(r_1r_2)e^{i(\theta_1+\theta_2)}\) says: multiplying by \(w=\rho e^{i\varphi}\) <strong>scales by \(\rho\) and rotates by \(\varphi\)</strong> about the origin. In particular, multiplication by \(i\) is a quarter-turn anticlockwise, and multiplication by \(e^{i\theta}\) is a pure rotation. To rotate about an arbitrary point \(a\) instead of the origin: translate \(a\) to the origin, rotate, translate back —
+\[z\ \longmapsto\ a+(z-a)e^{i\theta}.\]
+This one line replaces the rotation matrices of further mathematics, and is the standard tool for "the triangle/square has vertices…" interview questions: e.g. three points \(z_1,z_2,z_3\) form an equilateral triangle precisely when rotating one side by \(\pm\frac\pi3\) about a shared vertex carries it onto the other.</p></div>
+<p><strong>Example.</strong> Describe the set \(|z-3-4i|=5\). Reading the sentence: points at distance 5 from \(3+4i\) — a circle of radius 5 centred at \((3,4)\). Since \(|3+4i|=5\), the circle passes through the origin. And the set \(|z-i|=|z+1|\)? Equidistant from \(i\) and \(-1\): the perpendicular bisector of the segment from \((0,1)\) to \((-1,0)\) — the line \(y=-x\), as a quick sketch (or expanding the moduli) confirms.</p>
+
+<h2><span class="sn">§8.8</span>Trigonometric sums via complex numbers</h2>
+<p>We close with the technique that best justifies the whole chapter: complex numbers as a machine for proving <em>real</em> identities. The idea, in one line: a sum of sines or cosines is the imaginary or real part of a <strong>geometric series</strong> of complex exponentials — and geometric series we mastered back in the <a href="sequences.html">Sequences</a> topic.</p>
+<div class="box tmpl"><span class="bt">Template — Summing sin(kx) or cos(kx)</span>
+<ol>
+<li>Let \(C=\sum\cos(kx)\) and \(S=\sum\sin(kx)\) be the paired sums (the pairing trick of §7.4.2, in complex clothing). Then
+\[C+iS=\sum e^{ikx},\]
+a geometric series with ratio \(e^{ix}\).</li>
+<li>Sum it with the geometric-sum formula (valid when \(e^{ix}\ne1\), i.e. \(x\) not a multiple of \(2\pi\)).</li>
+<li>Factor half-angles out of every bracket of the form \(e^{i\varphi}-1=e^{i\varphi/2}\left(e^{i\varphi/2}-e^{-i\varphi/2}\right)=e^{i\varphi/2}\cdot2i\sin\frac\varphi2\) — the identity of Question 9 below.</li>
+<li>The expression collapses to (real factor) × \(e^{i(\cdot)}\); take real and imaginary parts to read off \(C\) and \(S\) simultaneously.</li>
+</ol></div>
+<p><strong>Worked example.</strong> Find \(\displaystyle S=\sum_{k=1}^n\sin(kx)\), for \(x\) not a multiple of \(2\pi\).</p>
+<div class="proof"><span class="pt">Solution.</span> With \(C\) the matching cosine sum,
+\[C+iS=\sum_{k=1}^ne^{ikx}=e^{ix}\,\frac{e^{inx}-1}{e^{ix}-1}
+=e^{ix}\cdot\frac{e^{inx/2}\cdot2i\sin\frac{nx}2}{e^{ix/2}\cdot2i\sin\frac x2}
+=\frac{\sin\frac{nx}2}{\sin\frac x2}\;e^{i(n+1)x/2}.\]
+Taking imaginary and real parts:
+\[S=\frac{\sin\frac{nx}2\,\sin\frac{(n+1)x}2}{\sin\frac x2},\qquad
+C=\frac{\sin\frac{nx}2\,\cos\frac{(n+1)x}2}{\sin\frac x2}.\]
+One computation, two identities — try proving either by induction to appreciate the saving. <span class="qed">∎</span></div>
+<p>The cosine formula instantly settles Drill 4 of the <a href="logic.html">Logic</a> topic: with \(x=\frac\pi4\), the sum \(\sum_{k=1}^n\cos\frac{k\pi}4\) vanishes exactly when \(\sin\frac{n\pi}8=0\) or \(\cos\frac{(n+1)\pi}8=0\), i.e. \(n\equiv0\) or \(3\pmod 8\) — the answer we previously extracted by tabulating a full period.</p>
+
+<h2><span class="sn">§8.9</span>Problems</h2>
+<div class="q"><div class="qhead"><span class="qn">Question 1</span></div>
+<p>Express \(\dfrac{3+4i}{1-2i}\) in the form \(a+bi\), and find its modulus and principal argument (the latter in terms of \(\arctan\)).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Multiply by the conjugate: \(\dfrac{(3+4i)(1+2i)}{(1-2i)(1+2i)}=\dfrac{3+6i+4i-8}{1+4}=\dfrac{-5+10i}5=-1+2i\). Modulus: \(\sqrt{1+4}=\sqrt5\). The point \((-1,2)\) is in the second quadrant, so the principal argument is \(\pi-\arctan\!\left|\frac2{-1}\right|=\pi-\arctan2\).</p>
+</details></div>
+<div class="q"><div class="qhead"><span class="qn">Question 2</span></div>
+<p>Prove parts (2), (3) and (4) of the properties of the conjugate, and parts (2)–(4) of the properties of the absolute value.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>All are direct expansions; we show conjugate (2) as the model. With \(z=a+bi\), \(w=c+di\): \(zw=(ac-bd)+(ad+bc)i\), so \(\overline{zw}=(ac-bd)-(ad+bc)i\); and \(\bar z\bar w=(a-bi)(c-di)=(ac-bd)-(ad+bc)i\) — equal. For modulus (2): \(|zw|^2=zw\,\overline{zw}=z\bar z\,w\bar w=|z|^2|w|^2\), then take square roots. (3) is immediate, and (4) follows from (2) applied to \(z\cdot\frac1z=1\): \(|z|\left|\frac1z\right|=1\) and \(\bar z\,\overline{(1/z)}=1\).</p>
+</details></div>
+<div class="q"><div class="qhead"><span class="qn">Question 3</span></div>
+<p>The polynomial \(z^3-5z^2+kz-13=0\), with \(k\) real, has \(2+3i\) as a root. Find \(k\) and the remaining roots.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Real coefficients force the conjugate \(2-3i\) to be a root too (§8.3). The conjugate pair contributes the real quadratic factor \(z^2-(\text{sum})z+(\text{product})=z^2-4z+13\). Writing \(z^3-5z^2+kz-13=(z^2-4z+13)(z-r)\) and comparing constant terms: \(-13r=-13\), so \(r=1\) (and the \(z^2\) coefficient checks: \(-4-r=-5\) ✓). Expanding gives \(k=13+4=17\). Roots: \(2\pm3i\) and \(1\).</p>
+</details></div>
+<div class="q"><div class="qhead"><span class="qn">Question 4</span></div>
+<p>Using de Moivre's theorem with \(n=3\), express \(\cos3\theta\) in terms of \(\cos\theta\) and \(\sin3\theta\) in terms of \(\sin\theta\) — and compare with Question 8 of the <a href="algebra.html">Algebra</a> problems (MAT 1994).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>\((\cos\theta+i\sin\theta)^3=\cos3\theta+i\sin3\theta\). Expanding the left side binomially: \(\cos^3\theta+3i\cos^2\theta\sin\theta-3\cos\theta\sin^2\theta-i\sin^3\theta\). Matching real and imaginary parts, then using \(\sin^2+\cos^2=1\):
+\[\cos3\theta=4\cos^3\theta-3\cos\theta,\qquad \sin3\theta=3\sin\theta-4\sin^3\theta.\]
+The second is precisely the identity proved by repeated addition formulae in MAT 1994 (Algebra, Question 8) — one binomial expansion versus a page of trigonometry.</p>
+</details></div>
+<div class="q"><div class="qhead"><span class="qn">Question 5</span></div>
+<p>Find all solutions of \(z^4=-16\), and plot them on an Argand diagram. What shape do they form?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>\(-16=16e^{i\pi}\), so the fourth roots are \(2e^{i(\pi+2k\pi)/4}\) for \(k=0,1,2,3\): arguments \(\frac\pi4,\frac{3\pi}4,\frac{5\pi}4,\frac{7\pi}4\), i.e.
+\[z=\sqrt2(\pm1\pm i).\]
+On the Argand diagram they sit on the circle of radius 2 at the four "diagonal" positions — a <strong>square</strong>, as the general theory of §8.6 promises.</p>
+</details></div>
+<div class="q"><div class="qhead"><span class="qn">Question 6</span></div>
+<p>Let \(\omega=e^{2\pi i/n}\) with \(n\ge2\). Show that \(1+\omega+\omega^2+\dots+\omega^{n-1}=0\), (i) by the geometric-sum formula from the <a href="sequences.html">Sequences</a> topic, and (ii) by a symmetry argument on the Argand diagram.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>(i) Geometric sum with ratio \(\omega\ne1\): \(1+\omega+\dots+\omega^{n-1}=\dfrac{\omega^n-1}{\omega-1}=\dfrac{1-1}{\omega-1}=0\), since \(\omega^n=e^{2\pi i}=1\).<br>
+(ii) Let \(S\) be the sum. Multiplying by \(\omega\) rotates every root by \(\frac{2\pi}n\), which merely permutes the set \(\{1,\omega,\dots,\omega^{n-1}\}\) — so \(\omega S=S\), giving \(S(\omega-1)=0\), and since \(\omega\ne1\), \(S=0\). Geometrically: the centroid of a regular polygon centred at the origin is the origin.</p>
+</details></div>
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill">STEP-style</span></div>
+<p>Show that \(\left|e^{i\alpha}-e^{i\beta}\right|=2\left|\sin\frac{\alpha-\beta}2\right|\). Hence find the side length of the regular \(n\)-gon formed by the \(n\)th roots of unity, and the limit of \(n\) times this side length as \(n\to\infty\). Interpret the limit geometrically.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Factor out the half-angle: \(e^{i\alpha}-e^{i\beta}=e^{i(\alpha+\beta)/2}\left(e^{i(\alpha-\beta)/2}-e^{-i(\alpha-\beta)/2}\right)=e^{i(\alpha+\beta)/2}\cdot2i\sin\frac{\alpha-\beta}2\). Taking moduli, the unit factors drop out. Consecutive \(n\)th roots of unity have arguments differing by \(\frac{2\pi}n\), so the side length is \(2\sin\frac\pi n\). Then
+\[n\cdot2\sin\frac\pi n=2\pi\cdot\frac{\sin(\pi/n)}{\pi/n}\to2\pi\]
+as \(n\to\infty\) (the limit \(\frac{\sin x}x\to1\) from the <a href="differentiation.html">Differentiation</a> topic). Interpretation: the perimeter of the inscribed regular polygon tends to the circumference of the unit circle — Archimedes' own route to \(\pi\).</p>
+</details></div>
+
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill new">New · Loci</span></div>
+<p>Describe and sketch the set of complex numbers satisfying \(|z-2|=2|z+1|\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Square both sides and write \(z=x+yi\): \((x-2)^2+y^2=4\left[(x+1)^2+y^2\right]\). Expanding: \(x^2-4x+4+y^2=4x^2+8x+4+4y^2\), so \(3x^2+12x+3y^2=0\), i.e. \(x^2+4x+y^2=0\): completing the square, \((x+2)^2+y^2=4\) — the circle of Apollonius with centre \(-2\) and radius \(2\). Sanity check with easy points: \(z=0\) gives \(|{-2}|=2|1|\) ✓, and indeed \(0\) lies on the circle.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill new">New · Rotation</span></div>
+<p>The point \(P\) represents \(z=2+i\). Find the complex number represented by the image of \(P\) after a rotation of \(90^\circ\) anticlockwise about the point representing \(1\). Then find the third vertex \(w\) (there are two answers) making an equilateral triangle with \(1\) and \(z=2+i\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Rotation about \(a=1\): \(w=1+(z-1)i=1+(1+i)i=1+i-1=i\). For the equilateral triangle, rotate \(z\) about \(1\) by \(\pm60^\circ\): \(w=1+(1+i)e^{\pm i\pi/3}\). With \(e^{i\pi/3}=\frac12+\frac{\sqrt3}2i\): \(w=1+\left(\frac12-\frac{\sqrt3}2\right)+\left(\frac12+\frac{\sqrt3}2\right)i=\frac{3-\sqrt3}2+\frac{1+\sqrt3}2i\), and similarly with \(e^{-i\pi/3}\): \(w=\frac{3+\sqrt3}2+\frac{1-\sqrt3}2i\). One line of complex multiplication per vertex — no rotation matrices, no simultaneous equations.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 10</span><span class="pill new">New · Trigonometric sums</span></div>
+<p>Using the method of §8.8, find a closed form for \(\displaystyle\sum_{k=1}^{n}\cos(kx)\), and verify your formula at \(x=\frac{2\pi}{n}\) using Question 6.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>From the worked example, taking the real part: \(\displaystyle C=\frac{\sin\frac{nx}2\,\cos\frac{(n+1)x}2}{\sin\frac x2}\). At \(x=\frac{2\pi}n\): \(\sin\frac{nx}2=\sin\pi=0\), so \(C=0\) — consistent with Question 6, since \(\sum_{k=1}^n\cos\frac{2k\pi}n\) is the real part of \(\omega+\omega^2+\dots+\omega^n=0\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 11</span><span class="pill">STEP-style · Hard</span></div>
+<p>By considering \((1+e^{ix})^n\), show that
+\[\sum_{k=0}^{n}\binom nk\cos(kx)=2^n\cos^n\!\frac x2\,\cos\frac{nx}2,\]
+and write down the corresponding result for \(\sum\binom nk\sin(kx)\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>By the Binomial Theorem, \((1+e^{ix})^n=\sum_{k=0}^n\binom nke^{ikx}\), whose real and imaginary parts are the two sums. Factor the half-angle from the base: \(1+e^{ix}=e^{ix/2}\left(e^{-ix/2}+e^{ix/2}\right)=2\cos\frac x2\,e^{ix/2}\). Hence
+\[(1+e^{ix})^n=2^n\cos^n\!\frac x2\;e^{inx/2},\]
+and taking real and imaginary parts gives \(\sum\binom nk\cos(kx)=2^n\cos^n\frac x2\cos\frac{nx}2\) and \(\sum\binom nk\sin(kx)=2^n\cos^n\frac x2\sin\frac{nx}2\). Setting \(x=0\) in the first recovers \(\sum\binom nk=2^n\) from MAT 1993 (Algebra, Question 5) — the whole family of binomial identities lives inside one complex expansion.</p>
+</details></div>
+
+<div class="pn"><a href="logic.html">← Topic 9: Logic and Proof</a><a href="mechanics.html">Mechanics →</a></div>
+</div>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Functions, Graphs, Exponentials and Logarithms</title>
+<meta name="description" content="Free theory and problems covering the entire TMUA syllabus, with STEP extensions — from the book Advanced Mathematics for High School: Preparing for Oxbridge.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers &amp; Proof</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra and Functions</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences and Series</a></li>
+    <li><a href="functions.html" class="active"><span class="n">4</span> Graphs, Exponentials &amp; Logs</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differentiation</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integration</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Logic and Proof (Paper 2)</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<div class="page">
+<p class="crumb"><b>Topic 4</b> · Graphs of Functions · Exponentials and Logarithms</p>
+<h1>Functions</h1>
+<p class="lede">Limits, asymptotes and the art of curve sketching — plus logarithms, graph transformations and functional equations.</p>
+
+<h2><span class="sn">§5.1</span>Introduction</h2>
+<p>We are now ready to tackle one of the largest chapters of Mathematics: Calculus. Having defined numbers and sequences, we begin with the theory of functions, move on to limits, curve sketching and asymptotes, conclude the sketching discussion with geometric transformations, and finish with basic functional equations.</p>
+
+<h2><span class="sn">§5.2</span>Basic definitions</h2>
+<div class="box def"><span class="bt">Functions</span>
+<p>A function is a mapping of numbers from a set \(X\) to a set \(Y\) (here, subsets of \(\mathbb R\)), written \(f:X\to Y\).</p></div>
+<p>The <strong>elementary functions</strong> are:</p>
+<ol>
+<li>Constant functions: \(f(x)=a\).</li>
+<li>Rational powers of \(x\): \(f(x)=x^a\), \(a\in\mathbb Q\), e.g. \(x^{3/2}\).</li>
+<li>Exponential functions: \(f(x)=a^x\) with \(a&gt;0\), e.g. \(2^x\).</li>
+<li>Logarithms: \(f(x)=\log_a(x)\) — the inverse of exponentiation: if \(a^b=x\) then \(\log_a(x)=b\). We write \(\ln(x)=\log_e(x)\).</li>
+<li>Trigonometric functions: \(\sin x,\ \cos x,\ \tan x,\dots\)</li>
+<li>Inverse trigonometric functions: \(\arcsin x,\ \arccos x,\ \arctan x,\dots\)</li>
+<li>All functions obtained by adding, subtracting, multiplying and composing the above.</li>
+</ol>
+<p>Always think about \(X\) and \(Y\). Raising to an even power gives \(Y\subseteq\mathbb R_+\); a rational power with even denominator restricts \(X\) too. The quantity \(\log_a(b)\) needs \(a&gt;0\) and \(b&gt;0\). When solving an equation \(f(x)=a\) built from elementary functions, first set boundaries on the possible values of \(x\) (e.g. \(x&gt;0\) if it sits inside a logarithm), and check whether \(a\) is attainable at all. Finding constraints for \(X\) and \(Y\) roots out false solutions and makes graphing easier.</p>
+
+<h3>§5.2.1 Logarithms</h3>
+<p>The logarithm feels abstract to many students: \(y=e^x\) is easy to picture; \(x=\ln y\) is easy to understand on the spot but hard to internalise. In the exam or interview you are expected to evaluate \(\log_a(b)\) very quickly, so internalise these laws:</p>
+<div class="box thm"><span class="bt">Laws of logarithms</span>
+<ol>
+<li>\(\log_a(x)+\log_a(y)=\log_a(xy)\). To see it: \(a^{\log_a x}\cdot a^{\log_a y}=xy=a^{\log_a x+\log_a y}\); take \(\log_a\) of both sides.</li>
+<li>\(\log_a\!\left(x^k\right)=k\log_a(x)\), for any \(k\). (Replace \(y\) with \(x\) or \(x^{-1}\) repeatedly to get all integer \(k\); take for granted that it extends to non-integers.)</li>
+<li>\(\displaystyle\log_a(x)=\frac{\log_b(x)}{\log_b(a)}\) (change of base) — left as an exercise.</li>
+</ol></div>
+
+<h2><span class="sn">§5.3</span>Limits</h2>
+<div class="box def"><span class="bt">Limit of a function</span>
+<p>\(\lim_{x\to x_0}f(x)=c\) if, for any \(\epsilon&gt;0\), there exists \(\delta&gt;0\) such that \(|f(x)-c|&lt;\epsilon\) whenever \(|x-x_0|&lt;\delta\).</p></div>
+<p>Most of the time you won't have to deal with this definition: for the functions we use (you'll learn at university that these are <em>continuous</em> functions), \(\lim_{x\to x_0}f(x)=f(x_0)\) — what is \(\lim_{x\to1}x^2\)? It's \(1\). We write \(f(x)\to c\) for easily understandable limits. The interesting cases involve \(\infty\):</p>
+<div class="box thm"><span class="bt">Behaviour of quotients</span>
+<ol>
+<li>If \(f(x)\to\infty\) and \(g(x)\) is bounded or has a finite limit, then \(\frac{f(x)}{g(x)}\to\infty\).</li>
+<li>If \(f(x)\) has a finite non-zero limit (or is bounded below by a positive quantity) and \(g(x)\to0\), then \(\frac{f(x)}{g(x)}\to\pm\infty\), depending on signs.</li>
+<li>If \(f(x)\) is bounded or has a finite limit and \(g(x)\to\infty\), then \(\frac{f(x)}{g(x)}\to0\).</li>
+</ol></div>
+<p>What about \(\frac\infty\infty\)? Simplify until only one function goes to infinity. For \(\frac{x^2+2}{x^3+6}\) as \(x\to\infty\): factor out \(x^2\) to get \(\frac{1+2x^{-2}}{x+6x^{-2}}\) — numerator \(\to1\), denominator \(\to\infty\), so the fraction \(\to0\). A hierarchy of growth to remember:</p>
+<div class="box"><span class="bt">Growth hierarchy</span>
+<ol>
+<li>The exponential grows fastest: \(\frac{e^x}{f(x)}\to\infty\) for polynomial or logarithmic \(f\).</li>
+<li>If \(f(x)\to\infty\) then \(\frac1{f(x)}\to0\).</li>
+<li>If \(\deg f=\deg g+k\) with \(k\ge1\), then \(\frac{f(x)}{g(x)}\to\infty\).</li>
+<li>Logarithms grow slowest: \(\frac{\log x}{f(x)}\to0\) for polynomial or exponential \(f\).</li>
+</ol></div>
+<p>Further properties (without proof): limits respect sums and differences; \(\lim fg=\lim f\cdot\lim g\) when the limits are finite; and \(\lim\frac fg=\frac{\lim f}{\lim g}\) whenever the limits aren't \(0\) or \(\infty\) (if the denominator's is \(0\) and the numerator's is \(\pm\infty\), the quotient's is \(\pm\infty\)).</p>
+
+<h2><span class="sn">§5.4</span>Asymptotes</h2>
+<figure><img src="img/fig5-1.png" alt="Figure 5.1 — The graph of the function f(x) = 1/x. We can see the horizontal asymptote y = 0 and the vertical asymptote x = 0." style="max-width:430px"><figcaption>Figure 5.1 — The graph of the function f(x) = 1/x. We can see the horizontal asymptote y = 0 and the vertical asymptote x = 0.</figcaption></figure>
+<p>Look closely at \(f(x)=\frac1x\) on the positive axis: the function goes to 0 as \(x\to\infty\), and this convergence can be "approximated" by a line. The general idea: <em>an asymptote is a line that approximates a function as it approaches its limit.</em></p>
+<div class="box def"><span class="bt">The three types of asymptote</span>
+<ol>
+<li><strong>Horizontal:</strong> if \(\lim_{x\to\infty}f(x)=a\), the line \(y=a\) is a horizontal asymptote at \(+\infty\) (similarly at \(-\infty\)).</li>
+<li><strong>Vertical:</strong> if \(\lim_{x\to x_0}f(x)=\pm\infty\), the line \(x=x_0\) is a vertical asymptote.</li>
+<li><strong>Oblique:</strong> \(f(x)\) approaches the line \(y=mx+b\) as \(x\to\infty\), formalised as \(\lim_{x\to\infty}\big(f(x)-mx-b\big)=0\).</li>
+</ol></div>
+<p>Calculating asymptotes is especially easy for <strong>rational functions</strong> \(f(x)=\frac{p(x)}{q(x)}\) with \(\deg p=n\), \(\deg q=m\):</p>
+<div class="box tmpl"><span class="bt">Template — Asymptotes of a rational function</span>
+<ol>
+<li>If \(n\ge m+2\): no horizontal or oblique asymptotes; vertical asymptotes at all roots of \(q\) that aren't roots of \(p\).</li>
+<li>If \(n=m+1\): no horizontal asymptote; vertical asymptotes as above; an oblique asymptote whose slope is the ratio of leading coefficients \(\frac{a_{m+1}}{b_m}\).</li>
+<li>If \(n=m\): a horizontal asymptote \(y=\frac{a_m}{b_m}\) (ratio of leading coefficients), plus vertical asymptotes as above.</li>
+</ol></div>
+
+<h2><span class="sn">§5.5</span>Problems</h2>
+<div class="q"><div class="qhead"><span class="qn">Question 1</span></div><p>Calculate the asymptotes of the function \(\dfrac{2x(x^2+5)}{x^2+4}\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 2</span></div><p>Calculate the asymptotes of the function \(f(x)=x-4-\dfrac{16(2x+1)^2}{x^2(x-4)}\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 3</span></div><p>Does the function \(f(x)=x\sin x\) have any asymptotes? What about \(\dfrac{\sin x}{x}\)?</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 4</span></div><p>What are the asymptotes of the function \(\dfrac{e^x}{x}\)? What about \(\dfrac{e^x}{x^n}\)?</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 5</span></div><p>What are the asymptotes of the function \(f(x)=\dfrac{2^x}{2^x+1}\)?</p></div>
+
+<h2><span class="sn">§5.6</span>Derivatives and turning points</h2>
+<p>The end goal of this chapter is to be able to draw the graph of any function — and for that we need to see how the function increases and decreases. Comparing \(f(x)-f(y)\) for \(x&gt;y\) tells us it increases <em>somewhere</em> between the points; to capture the direction <em>at</em> a point, we'd want \(x\to y\), but then \(f(x)\to f(y)\) and the difference vanishes. The concept of the derivative was created to model these small changes at specific points — the definition must involve both the change in the function's values and the change on the \(x\)-axis:</p>
+<div class="box def"><span class="bt">Definition — Derivative</span>
+<p>For \(f:X\to Y\) and a point \(x\), if the limit
+\[f'(x)=\lim_{y\to x}\frac{f(y)-f(x)}{y-x}\]
+exists, it is called the <strong>derivative</strong> of \(f\) at \(x\). An equally useful equivalent form is
+\(f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}h\). (Convince yourself the two are equivalent.)</p></div>
+<p>Not every function is differentiable. Assume a continuous function is one you can graph without lifting your pen — Karl Weierstrass (1815–1897), the father of modern analysis, discovered a continuous function differentiable at <em>no</em> point:</p>
+<figure><img src="img/fig5-2.png" alt="Figure 5.2 — The Weierstrass Function. This is a continuous function, but it is, surprisingly, not differentiable at any point. Its equation is written as an infinite sum." style="max-width:460px"><figcaption>Figure 5.2 — The Weierstrass Function. This is a continuous function, but it is, surprisingly, not differentiable at any point. Its equation is written as an infinite sum.</figcaption></figure>
+<p> We needn't look that far: if \(\lim_{x\to x_0}f(x)\ne f(x_0)\), the function isn't differentiable at \(x_0\) — the numerator of \(\frac{f(x)-f(x_0)}{x-x_0}\) stays away from 0 while the denominator goes to 0.</p>
+<div class="box thm"><span class="bt">Sign of the derivative</span>
+<p>If \(f\) is differentiable and \(f'(x_0)&gt;0\), the function is increasing at \(x_0\); if \(f'(x_0)&lt;0\), it is decreasing.</p></div>
+<p>When \(f'(x_0)=0\), the derivative may change sign at \(x_0\) — giving a local maximum (positive→negative) or local minimum (negative→positive) — or keep its sign, giving a <em>saddle/stationary inflection</em> point. Since we can't check infinitely many nearby points, we use the second derivative:</p>
+<div class="box tmpl"><span class="bt">Template — Classifying a point x₀</span>
+<ol>
+<li>Compute \(f'(x_0)\): positive → increasing; negative → decreasing.</li>
+<li>If \(f'(x_0)=0\): compute \(f''(x_0)\). If \(f''(x_0)&gt;0\) — minimum; if \(f''(x_0)&lt;0\) — maximum; if \(f''(x_0)=0\) — differentiate further and check the signs of higher derivatives.</li>
+</ol></div>
+
+<h2><span class="sn">§5.7</span>Graphs of functions</h2>
+<p>One property can dramatically simplify a sketch: <strong>periodicity</strong>. A function is periodic if \(f(x)=f(x+t)\) for all \(x\) (period \(t\)); \(\sin x\) has period \(2\pi\). If a function is periodic, draw it on one period and copy.</p>
+<figure><img src="img/fig5-3.png" alt="Figure 5.3 — The sine function. We remark how the period is 2π: beyond the initial [0, 2π] interval the function looks the same, so we only have to draw a smaller part of the graph." style="max-width:460px"><figcaption>Figure 5.3 — The sine function. We remark how the period is 2π: beyond the initial [0, 2π] interval the function looks the same, so we only have to draw a smaller part of the graph.</figcaption></figure>
+<p> Periodic functions cannot converge at infinity, so they have no horizontal asymptotes. Periodicity can act in more arguments too: for the curve \(\sin x=\cos y\), if \((x,y)\) is on the graph then so are \((x+2\pi,y)\) and \((x,y+2\pi)\) — the picture is periodic in both directions. Such graphs typically appear in the TMUA's multiple-choice questions.</p>
+<figure><img src="img/fig5-4.png" alt="Figure 5.4 — The graph of the solutions of sin(x) = cos(y). The pattern extends infinitely, but instead of one single line (periodicity in x) we have a family of lines, showing the periodicity in both x and y." style="max-width:460px"><figcaption>Figure 5.4 — The graph of the solutions of sin(x) = cos(y). The pattern extends infinitely, but instead of one single line (periodicity in x) we have a family of lines, showing the periodicity in both x and y.</figcaption></figure>
+<div class="box tmpl"><span class="bt">Template — Drawing the graph of a function</span>
+<ol>
+<li>Decide the set on which the function is defined (e.g. \(\frac1x\) is not defined at 0 — don't draw it there).</li>
+<li>Search for periodicity; if periodic, work inside one period.</li>
+<li>Search for asymptotes and limits at infinity. Vertical asymptotes lurk at points where the function isn't defined — check those with care.</li>
+<li>Find where the function increases/decreases, the maxima, minima and turning points, using the derivative.</li>
+<li>Plot a few points to fix the shape of the curve.</li>
+</ol></div>
+<p><strong>Example.</strong> Graph \(\sin^2x\). The output lies in \([0,1]\). Since \(\sin(x+\pi)=-\sin x\), squaring gives period \(\pi\) (not \(2\pi\)) — so work on \([0,\pi]\). Defined everywhere and bounded: no asymptotes of any kind (periodicity also rules out horizontal ones). Differentiate: \((\sin^2x)'=2\sin x\cos x=\sin2x\), positive on \(\left(0,\frac\pi2\right)\), zero at \(\frac\pi2\), negative after — a maximum at \(x=\frac\pi2\). Plot a few points and copy the bump along the axis.</p>
+<figure><img src="img/fig5-5.png" alt="Figure 5.5 — The graph of the function sin²(x)." style="max-width:440px"><figcaption>Figure 5.5 — The graph of the function sin²(x).</figcaption></figure>
+
+<h2><span class="sn">§5.8</span>Problems</h2>
+<div class="q"><div class="qhead"><span class="qn">Question 1</span></div><p>Draw the graph of \(e^x\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 2</span></div><p>Draw the graph of \(\dfrac{2^x}{2^x+1}\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 3</span></div><p>Draw the graph of \(\tan x\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill tmua">inspired by TMUA 2019</span></div><p>Graph the function \(|x|(1-x)\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 5</span></div><p>Graph the function \(\dfrac{\sin x}{x}\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill">inspired by MAT 2011</span></div><p>Draw the graph of \(x^3-x^2-x-1\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill">adapted from STEP 3 1988</span></div><p>Sketch the graph of \(\dfrac{x^2e^{-x}}{1+x}\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill">STEP 2 1988</span></div>
+<p>Show that the following functions are positive when \(x\) is positive:<br>
+(i) \(x-\tanh x\); (ii) \(x\sinh x-2\cosh x+2\); (iii) \(2x\cosh2x-3\sinh2x+4x\).<br>
+The function \(\mathrm f\) is defined for \(x&gt;0\) by \(\mathrm f(x)=\dfrac{x(\cosh x)^{1/3}}{\sinh x}\). Show that \(\mathrm f(x)\) has no turning points when \(x&gt;0\), and sketch \(\mathrm f(x)\) for \(x&gt;0\).<br>
+<em>Note:</em> \(\sinh x=\frac{e^x-e^{-x}}2\) is the hyperbolic sine, \(\cosh x=\frac{e^x+e^{-x}}2\) the hyperbolic cosine, \(\tanh x\) the hyperbolic tangent defined as for the normal tangent; a useful property is \(\cosh^2x-\sinh^2x=1\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill">adapted from Hamilton Olympiad 2017</span></div><p>Solve the pair of equations \(x^2+3y=10\) and \(3+y=\frac{10}x\), and then sketch the graphs of the two equations.</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 10</span><span class="pill">adapted from an Oxford interview</span></div>
+<p>(i) Differentiate \(f(x)=x\) from the definition (also known as differentiation from first principles).<br>
+(ii) Differentiate \(f(x)=x^2\) from first principles.<br>
+(iii) Differentiate \(f(x)=x^n\) from first principles.</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 11</span></div><p>Let \(f(x)=(x+a)^n\). Plot \(f(x)\) and \(f'(x)\) on the same graph, and count how many points of intersection they have.</p></div>
+
+<h2><span class="sn">§5.9</span>Tangents and normals to graphs</h2>
+<figure><img src="img/fig5-6.png" alt="Figure 5.6 — Graph of an arbitrary function f(x)." style="max-width:400px"><figcaption>Figure 5.6 — Graph of an arbitrary function f(x).</figcaption></figure>
+<p>Take two points \(A(x_a,f(x_a))\) and \(B(x_b,f(x_b))\) on a graph and form the right triangle with the horizontal. The tangent of the angle at the base is \(\frac{f(x_b)-f(x_a)}{x_b-x_a}\) — very close to the definition of the derivative. As \(B\) slides toward \(A\), the limit of this ratio is \(f'(x_a)\): <em>the derivative is the slope of the tangent line to the graph at \(A\).</em></p>
+<figure><img src="img/fig5-7.png" alt="Figure 5.7 — Graph of an arbitrary function f(x), with the chord used to construct the tangent." style="max-width:400px"><figcaption>Figure 5.7 — Graph of an arbitrary function f(x), with the chord used to construct the tangent.</figcaption></figure>
+<p><strong>Equation of the tangent at \(A\).</strong> A line is \(y=mx+b\); the slope is \(m=f'(x_a)\), and since the line passes through \(A\): \(f(x_a)=f'(x_a)x_a+b\), so \(b=f(x_a)-f'(x_a)x_a\). Equivalently,
+\[y=f(x_a)+f'(x_a)(x-x_a).\]</p>
+<div class="box def"><span class="bt">Normal of a graph</span>
+<p>The normal of a graph at point \(A\) is the line perpendicular to the tangent at \(A\). If two lines with slopes \(m\) and \(m'\) are perpendicular, then \(m\cdot m'=-1\); so the slope of the normal is \(\dfrac{-1}{f'(x_a)}\), and we proceed as before using the fact that the normal passes through \(A\).</p></div>
+
+<h2><span class="sn">§5.10</span>Problems</h2>
+<div class="q"><div class="qhead"><span class="qn">Question 1</span></div><p>Find the equation of the tangent to the graph of \(x+e^x\) at the point \(x=2\). Then find the equation of the normal at the same point.</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 2</span></div><p>Find the equation of the tangent to the graph of \(\cos x+\sin^2x\) at the point \(x=\frac{3\pi}4\). Find the equation of the normal at the same point.</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill">STEP 2 2008</span></div>
+<p>A curve is given by \(x^2+y^2+2axy=1\), where \(0&lt;a&lt;1\). Show that the gradient of the curve at the point \(P=(x,y)\) is \(-\dfrac{x+ay}{ax+y}\), provided \(ax+y\ne0\). Show that \(\theta\), the acute angle between \(OP\) and the normal to the curve at \(P\), satisfies \(\tan\theta=a\left|y^2-x^2\right|\). Show further that, if \(\frac{\mathrm d\theta}{\mathrm dx}=0\) at \(P\), then:<br>
+(i) \(a(x^2+y^2)+2xy=0\); (ii) \((1+a)(x^2+y^2+2xy)=1\); (iii) \(\tan\theta=\dfrac a{\sqrt{1-a^2}}\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill">MAT 2009</span></div>
+<p>As shown in the diagram below: \(C\) is the parabola \(y=x^2\); \(P\) is the point \((0,1)\); \(Q\) is the point \((a,a^2)\) on \(C\); \(L\) is the normal to \(C\) which passes through \(Q\).</p>
+<figure><img src="img/mat2009.png" alt="The parabola C, the point P, and the normal L through Q, for MAT 2009 Question 4." style="max-width:330px"><figcaption>The parabola C, the point P, and the normal L through Q, for MAT 2009 Question 4.</figcaption></figure>
+<p>
+(i) Find the equation of \(L\).
+(ii) For what values of \(a\) does \(L\) pass through \(P\)?
+(iii) Determine \(|QP|^2\) as a function of \(a\).
+(iv) Find the values of \(a\) for which \(|QP|\) is smallest.
+(v) Find a point \(R\), in the \(xy\)-plane but not on \(C\), such that \(|RQ|\) is smallest for a unique value of \(a\). Briefly justify your answer.</p></div>
+
+<h2><span class="sn">§5.11</span>Geometric transformations</h2>
+<h3>§5.11.1 Translations</h3>
+<p>From the graph of \(f(x)\), what other graphs can we obtain? The simplest idea: move it around. Adding to the output translates vertically: the graph of \(f(x)+a\) is the graph of \(f\) moved up by \(a\) units. Horizontal translations hide a trap: to move the graph to the <em>right</em> by 1, the new graph is <strong>not</strong> \(f(x+1)\) but \(f(x-1)\) — adding inside the bracket moves the graph <em>left</em>, since \(f((x-1)+1)=f(x)\). Generally, \(f(x-a)\) is the graph shifted right by \(a\) (with negative \(a\) giving a shift left by \(|a|\)).</p>
+<figure><img src="img/fig5-8.png" alt="Figure 5.8 — Example of a vertical translation: the red line is the graph of f(x) = √x, while the blue one is the graph of √x + 1." style="max-width:440px"><figcaption>Figure 5.8 — Example of a vertical translation: the red line is the graph of f(x) = √x, while the blue one is the graph of √x + 1.</figcaption></figure>
+<figure><img src="img/fig5-9.png" alt="Figure 5.9 — Example of a horizontal translation: the red line is the graph of f(x) = √x, while the green one is the graph of √(x − 1)." style="max-width:440px"><figcaption>Figure 5.9 — Example of a horizontal translation: the red line is the graph of f(x) = √x, while the green one is the graph of √(x − 1).</figcaption></figure>
+<h3>§5.11.2 Dilation and contraction</h3>
+<p>What is \(f(ax)\)? Let \(g(x)=f(ax)\); then \(g\!\left(\frac xa\right)=f(x)\), so the point \(x\) becomes \(\frac xa\): we are contracting the graph horizontally by a factor \(a\). Multiplying <em>outside</em> the function, \(a\,f(x)\), dilates the graph vertically — for instance \(2\sin x\) doubles the amplitude of the wave, while \(\sin 2x\) squashes it to half the wavelength. Vertical changes (adding or multiplying outside) are the easy ones, as nothing changes on the \(x\)-axis; horizontal changes (inside the bracket) need more care.</p>
+<figure><img src="img/fig5-10.png" alt="Figure 5.10 — Example of a contraction: the blue line is the graph of sin(x), while the red one is the graph of sin(2x)." style="max-width:440px"><figcaption>Figure 5.10 — Example of a contraction: the blue line is the graph of sin(x), while the red one is the graph of sin(2x).</figcaption></figure>
+<figure><img src="img/fig5-11.png" alt="Figure 5.11 — Example of a dilation: the blue line is the graph of sin(x), while the red one is the graph of 2 sin(x)." style="max-width:440px"><figcaption>Figure 5.11 — Example of a dilation: the blue line is the graph of sin(x), while the red one is the graph of 2 sin(x).</figcaption></figure>
+<table>
+<tr><th>New function</th><th>Effect on the graph of \(f(x)\)</th></tr>
+<tr><td>\(f(x)+a\)</td><td>translate up by \(a\)</td></tr>
+<tr><td>\(f(x-a)\)</td><td>translate right by \(a\)</td></tr>
+<tr><td>\(a\,f(x)\)</td><td>vertical stretch by factor \(a\)</td></tr>
+<tr><td>\(f(ax)\)</td><td>horizontal squash by factor \(a\)</td></tr>
+<tr><td>\(-f(x)\)</td><td>reflect in the \(x\)-axis</td></tr>
+<tr><td>\(f(-x)\)</td><td>reflect in the \(y\)-axis</td></tr>
+</table>
+
+<h2><span class="sn">§5.12</span>Functional equations</h2>
+<p>We conclude with functional equations — a topic with little prerequisite theory beyond knowing how to calculate. A functional equation has the shape \(g(f(\mathbf x),\mathbf x)=C\), where \(\mathbf x\) may be a set of variables: \(f(x+y)-x=y\) is a proper functional equation in both \(x\) and \(y\). Two problem types arise.</p>
+<p><strong>Type 1: find a specific value.</strong> Asked for \(f(3)\)? Replace \(x\) with 3 and see what happens; you'll usually get an equation linking \(f(3)\) to other values of \(f\), and chasing those values closes the loop.</p>
+<p><strong>Example.</strong> \(f\) is defined on the naturals with \(f(1)=1\), \(f(2n)=f(n)\) and \(f(2n+1)=f(n)+1\). What is \(f(9)\)? We have \(f(9)=f(4)+1\), \(f(4)=f(2)\), \(f(2)=f(1)=1\). So \(f(9)=2\).</p>
+<p><strong>Type 2: find \(f\) everywhere.</strong> Give values to the unknowns — trying \(0\) and \(1\) usually leads in the correct direction.</p>
+<p><strong>Example (Cauchy equation).</strong> Let \(f\) satisfy \(f(x+y)=f(x)+f(y)\) on the reals. Find \(f\) on the rationals.</p>
+<div class="proof"><span class="pt">Solution.</span> \(x=y=1\) gives \(f(2)=2f(1)\); then \(f(3)=3f(1)\), and by induction \(f(n)=nf(1)\). With \(x=y=0\): \(f(0)=2f(0)\), so \(f(0)=0\); with \(x=1,y=-1\): \(f(-1)=-f(1)\), and similarly \(f(-n)=-nf(1)\), so \(f(z)=zf(1)\) on the integers. Prove by induction that \(f(x_1+\dots+x_n)=f(x_1)+\dots+f(x_n)\) (an easy exercise); then \(f(m)=nf\!\left(\frac mn\right)\), so \(f\!\left(\frac mn\right)=\frac mn f(1)\). Thus \(f(q)=qf(1)\) for every rational \(q\). At university you will learn that under mild extra conditions (continuity, monotonicity, …) the same holds for all reals. <span class="qed">∎</span></div>
+
+<h2><span class="sn">§5.13</span>Problems</h2>
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill">adapted from MAT 2008</span></div>
+<p>Below is the graph of a function \(f(x)\). With justification, give rough sketches for \(f(-x)\), \(f(x-1)\) and \(-f(x)\).</p>
+<figure><img src="img/fig5-12.png" alt="Figure 5.12 — Graph for Question 1." style="max-width:300px"><figcaption>Figure 5.12 — Graph for Question 1.</figcaption></figure></div>
+<div class="q"><div class="qhead"><span class="qn">Question 2</span></div><p>Sketch the graph of \(2^{\sin^2x}\). On the same axes, without doing more calculations, sketch \(2^{\cos^2x}\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 3</span></div><p>Sketch the graph of \(f(x)=\log(|\tan x|)\). Without doing any more calculations, sketch \(\log(|\cot x|)\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill">adapted from Problem Solving Matters</span></div><p>How many solutions does \(x\sin x=0\) have in the interval \([0,4\pi]\)?</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 5</span></div><p>Sketch the graph of \(\cos(x-y)=\frac12\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill">adapted from STEP 3 2006</span></div>
+<p>The function \(f\) satisfies \(f(x)+f(y)\equiv f(x+y)\) (*) for all \(x\) and \(y\). Show that \(2f(x)\equiv f(2x)\) and find the most general function satisfying these equations.<br>
+(i) By considering the function \(G\) defined by \(\ln g(x)=G(x)\), find the most general function that satisfies \(g(x)g(y)\equiv g(x+y)\) for all \(x,y\).<br>
+(ii) By considering the function \(H\) defined by \(h(e^u)=H(u)\), find the most general function that satisfies \(h(x)+h(y)\equiv h(xy)\) for all positive \(x,y\).<br>
+(iii) Find the most general function \(t\) that satisfies \(t(x)+t(y)\equiv t(z)\) for all \(x,y\), where \(z=\dfrac{x+y}{1-xy}\).<br>
+<em>Note: consider the most general functions to be differentiable; thus \(f, g, h\) and \(t\) are all differentiable.</em></p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill">STEP 2 1994</span></div>
+<p>The function \(\mathrm f\) satisfies \(\mathrm f(0)=1\) and
+\[\mathrm f(x-y)=\mathrm f(x)\mathrm f(y)-\mathrm f(a-x)\mathrm f(a+y)\]
+for some fixed number \(a\) and all \(x,y\). Without making any further assumptions about the nature of the function, show that \(\mathrm f(a)=0\). Show that, for all \(t\):
+(i) \(\mathrm f(t)=\mathrm f(-t)\); (ii) \(\mathrm f(2a)=-1\); (iii) \(\mathrm f(2a-t)=-\mathrm f(t)\); (iv) \(\mathrm f(4a+t)=\mathrm f(t)\).<br>
+Give an example of a non-constant function satisfying the conditions with \(a=\pi/2\), and one with \(a=-2\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill">Problem Solving Matters 2023</span></div>
+<p>The function \(f(x)\) is defined for \(x\in\mathbb R\) and satisfies the equation
+\[2f(x)-5f\!\left(\frac{4x+5}{2x-4}\right)=\frac{37-14x}2.\]
+Find \(f(3)\).</p></div>
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill">MAT 2012</span></div>
+<p>A particular robot has three commands: <b>F</b> — move forward a unit distance; <b>L</b> — turn left 90°; <b>R</b> — turn right 90°. A program is a sequence of commands. The basic program \(P_0=\) F, and \(P_{n+1}=P_n\,\mathrm L\,P_n\,\mathrm R\) for \(n\ge0\); so \(P_1=\) FLFR.<br>
+(i) Write down the program \(P_2\).<br>
+(ii) How far does the robot travel during the program \(P_n\)? In other words, how many F commands does it perform?<br>
+(iii) Let \(l_n\) be the total number of commands in \(P_n\); so \(l_0=1\), \(l_1=4\). Write down an equation relating \(l_{n+1}\) to \(l_n\). Hence write down a formula for \(l_n\) in terms of \(n\). No proof is required. (Hint: consider \(l_n+2\).)<br>
+(iv) The robot starts at the origin, facing along the positive \(x\)-axis. What direction is it facing after performing \(P_n\)?<br>
+(v) Sketch the path the robot takes when it performs \(P_4\).<br>
+(vi) Let \((x_n,y_n)\) be the robot's position after performing \(P_n\), so \((x_0,y_0)=(1,0)\) and \((x_1,y_1)=(1,1)\). Give an equation relating \((x_{n+1},y_{n+1})\) to \((x_n,y_n)\). What is \((x_8,y_8)\)? What is \((x_{8k},y_{8k})\)?</p></div>
+
+<div class="pn"><a href="sequences.html">← Topic 3: Sequences</a><a href="geometry.html">Topic 5: Geometry →</a></div>
+</div>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integrals</title>
+<meta name="description" content="Free theory and problems covering the entire TMUA syllabus, with STEP extensions — from the book Advanced Mathematics for High School: Preparing for Oxbridge.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers &amp; Proof</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra and Functions</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences and Series</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Graphs, Exponentials &amp; Logs</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differentiation</a></li>
+    <li><a href="integration.html" class="active"><span class="n">7</span> Integration</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Logic and Proof (Paper 2)</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<div class="page">
+<p class="crumb"><b>Topic 7</b> · Integration</p>
+<h1>Integrals</h1>
+<p class="lede">The opposite of differentiation: indefinite and definite integrals, the Fundamental Theorem, areas, the trapezium rule, and solids of revolution.</p>
+
+<h2><span class="sn">§7.1</span>Introduction</h2>
+<p>When we study derivatives, we go, in a sense, "downhill": we find a function, and then differentiate it further until infinity or until we can't differentiate anymore. However, just like addition has an opposite operation, subtraction, so does differentiation have an opposite. In this chapter, we shall look at integrals, the opposite of differentiation. We begin with the first type of integrals, analyse it fully, and then finish with the second type. We will look at applications of integrals, such as solids of revolution, and give the formulae for the integrals of the elementary functions. Further, we shall look at different rules of integration and different theorems.</p>
+
+<h2><span class="sn">§7.2</span>Indefinite integrals</h2>
+<p>Let's say we have a function \(f(x)\). We can calculate whether it is differentiable, and obtain the derivative \(f'(x)\). For \(f'(x)\), we know it comes as the derivative of \(f(x)\). However — what function, when differentiated, gives \(f(x)\)? This is the purpose of indefinite integrals.</p>
+<div class="box def"><span class="bt">Definition — Indefinite integral</span>
+<p>An indefinite integral of a function \(f:\mathbb R\to\mathbb R\) is a real function \(F(x)\) such that \(F'(x)=f(x)\) for all \(x\in\mathbb R\). In integral notation, \(F(x)=\int f(x)\,\mathrm dx\).</p></div>
+<p><strong>Observation.</strong> If \(F(x)\) is an integral of \(f(x)\), then so is \(F(x)+C\) for any constant \(C\): writing \(G(x)=F(x)+C\), differentiating gives \(G'(x)=F'(x)+C'=F'(x)=f(x)\). This observation matters — when calculating integrals, always write the constant of integration to give the general solution. In a sense, the integral isn't actually a single function: it is a <em>set</em>, the set of all functions that differentiate to a given one. Throughout this site we will abuse notation and write \(\int f(x)\,\mathrm dx=F(x)\) when \(F\) is one such function — but when solving problems, never forget the constant.</p>
+
+<h2><span class="sn">§7.3</span>Rules of integration</h2>
+<p>We have so many rules for derivatives — surely there are many for integrals too? Indeed there are several, and one important theorem: integration by parts.</p>
+<div class="box thm"><span class="bt">Sum of integrals</span>
+<p>\(\displaystyle\int f(x)\,\mathrm dx+\int g(x)\,\mathrm dx=\int\big(f(x)+g(x)\big)\,\mathrm dx.\)</p></div>
+<div class="proof"><span class="pt">Proof.</span> The main idea for proofs with indefinite integrals: to prove \(\int f(x)\,\mathrm dx=F(x)+C\), it may be easier to prove \(F'(x)=f(x)\) — the two are equivalent. Let \(F=\int f\), \(G=\int g\). Then \((F(x)+G(x))'=f(x)+g(x)\), so \(F+G\) is an integral of \(f+g\). <span class="qed">∎</span></div>
+<div class="box thm"><span class="bt">Multiplication by a constant</span>
+<p>\(\displaystyle\int a\cdot f(x)\,\mathrm dx=a\cdot\int f(x)\,\mathrm dx.\) <em>Proof: left as an exercise for the reader.</em></p></div>
+<div class="box thm"><span class="bt">Theorem — Integration by parts</span>
+<p>For differentiable \(f,g:\mathbb R\to\mathbb R\):
+\[\int f(x)g'(x)\,\mathrm dx=f(x)g(x)-\int f'(x)g(x)\,\mathrm dx.\]</p></div>
+<div class="proof"><span class="pt">Proof.</span> Move the right-hand integral to the left: we must show \(\int\big(f(x)g'(x)+f'(x)g(x)\big)\mathrm dx=f(x)g(x)\). But by the product rule, \((f(x)g(x))'=f'(x)g(x)+f(x)g'(x)\). <span class="qed">∎</span></div>
+<p>With integrals we also have a technique rarely used for derivatives: the <strong>method of substitution</strong>. Look at \(\int\cos(x)\,e^{\sin x}\,\mathrm dx\). One may guess the answer is \(e^{\sin x}+C\), but it isn't an obvious choice. Instead, guess that integrating <em>in \(\sin x\)</em> rather than in \(x\) may simplify things. Let \(y=\sin x\) be the new variable. The integral becomes \(\int\cos(x)\,e^y\,\mathrm dx\) — but we still have \(\cos x\) and the \(\mathrm dx\).</p>
+<p>Our attention turns to the \(\mathrm dx\). It will become clear in the sections on Riemann sums below what it means, but the main idea is that \(\mathrm dx\) is a very small part of \(x\). We want to turn the integral fully into something in \(y\), so we calculate \(\mathrm dy\), a very small part of \(y\): since \(y=\sin x\), \(\frac{\mathrm dy}{\mathrm dx}=\cos x\), so \(\mathrm dy=\cos x\,\mathrm dx\). Thus
+\[\int\cos(x)\,e^{\sin x}\,\mathrm dx=\int e^y\,\mathrm dy=e^y+C=e^{\sin x}+C.\]</p>
+<div class="box tmpl"><span class="bt">Template — Integration by substitution</span>
+<ol>
+<li>Begin with the original integral, \(\int f(x)\,\mathrm dx\).</li>
+<li>Find a good substitution \(y=g(x)\).</li>
+<li>Find \(\mathrm dy=g'(x)\,\mathrm dx\), so that \(\mathrm dx=\frac{\mathrm dy}{g'(x)}\).</li>
+<li>Express \(f(x)\) in terms of \(y\) (via \(g^{-1}\), if \(g\) is invertible).</li>
+<li>Calculate the new integral, then substitute back.</li>
+</ol></div>
+
+<h2><span class="sn">§7.4</span>Common integrals</h2>
+<p>Integration, at first glance, seems more difficult than differentiation — most of the time, finishing an integration problem requires knowing the derivative behind it. It is therefore a good idea to know some formulas by heart, so that in exams you don't spend time deducing them:</p>
+<table>
+<tr><th>Function</th><th>Integral</th></tr>
+<tr><td>\(x^n\ (n\ne-1)\)</td><td>\(\dfrac{x^{n+1}}{n+1}+C\)</td></tr>
+<tr><td>\(e^x\)</td><td>\(e^x+C\)</td></tr>
+<tr><td>\(\dfrac1x\)</td><td>\(\ln|x|+C\)</td></tr>
+<tr><td>\(\ln x\)</td><td>\(x\ln x-x+C\)</td></tr>
+<tr><td>\(\cos x\)</td><td>\(\sin x+C\)</td></tr>
+<tr><td>\(\sin x\)</td><td>\(-\cos x+C\)</td></tr>
+<tr><td>\(\tan x\)</td><td>\(\ln|\sec x|+C\)</td></tr>
+</table>
+<p>Keep in mind these formulae may be used consecutively. Simple integration involves maybe one substitution or one integration by parts; some problems require more advanced tricks. We introduce the most common ones below.</p>
+
+<h3>§7.4.1 Partial fractions</h3>
+<p>Say we want to integrate \(\frac1{(x+1)(x+2)}\). None of the formulas above works directly, so we apply a trick: the fraction can be written as \(\frac1{(x+1)(x+2)}=\frac1{x+1}-\frac1{x+2}\), and each piece integrates with a known formula. In general, a fraction \(\frac{ax+b}{(x+c)(x+d)}\) splits as \(\frac A{x+c}+\frac B{x+d}\) for some \(A,B\) to be found.</p>
+<p><strong>Exercise.</strong> Calculate the indefinite integral of \(\frac1{(x+1)(x+2)}\).</p>
+<div class="proof"><span class="pt">Solution.</span> Here the split can be seen by eye, but using the method properly: find \(A,B\) with \(\frac A{x+1}+\frac B{x+2}=\frac1{(x+1)(x+2)}\), i.e. \(A(x+2)+B(x+1)=1\) for all \(x\). Matching coefficients: \(A+B=0\) and \(2A+B=1\), so \(A=1\), \(B=-1\). Then \(\int\frac{\mathrm dx}{x+1}=\ln(x+1)+C_1\) (assuming \(x+1&gt;0\) so we may drop the absolute value) and \(\int\frac{\mathrm dx}{x+2}=\ln(x+2)+C_2\); subtracting and writing \(K=C_1-C_2\):
+\[\int\frac{\mathrm dx}{(x+1)(x+2)}=\ln(x+1)-\ln(x+2)+K.\ \]<span class="qed">∎</span></div>
+
+<h3>§7.4.2 Paired integrals</h3>
+<p>Say we want \(I=\int\frac{\cos x}{\cos x+\sin x}\,\mathrm dx\). No simple formula applies, nor is it a partial fraction. So we introduce a <em>partner</em>: \(J=\int\frac{\sin x}{\cos x+\sin x}\,\mathrm dx\), and notice two things:</p>
+<ol>
+<li>\(I+J=\int\frac{\cos x+\sin x}{\cos x+\sin x}\,\mathrm dx=\int1\,\mathrm dx=x+C_1\);</li>
+<li>\(I-J=\int\frac{\cos x-\sin x}{\cos x+\sin x}\,\mathrm dx=\ln(\cos x+\sin x)+C_2\) — look closely and make sure you understand where this comes from (the numerator is the derivative of the denominator).</li>
+</ol>
+<p>We now have formulas for \(I+J\) and \(I-J\), so we can find \(I\) and \(J\) separately, as if they were unknowns in a system of equations:
+\[I=\frac{x+\ln(\sin x+\cos x)}2+C.\]
+It is usually challenging to spot paired integrals independently, so they tend to be given in problems — or can be deduced from previous parts, since most paired-integral problems first establish properties of the underlying functions.</p>
+
+<h2><span class="sn">§7.5</span>Definite integrals and the Fundamental Theorem</h2>
+<p>It is finally time to repay our debt and explain what the mysterious \(\mathrm dx\) means. So far, the integral has answered the question "which function differentiates to \(f\)?" — the second type of integral answers a question that looks completely unrelated: <em>what is the area under the graph of \(f\)?</em> The miracle of this chapter is that the two questions have the same answer.</p>
+<p>Take a function \(f\) on an interval \([a,b]\), and suppose for now that \(f(x)\ge0\). To approximate the area between the graph and the \(x\)-axis, slice \([a,b]\) into \(n\) strips of equal width \(\Delta x=\frac{b-a}n\), and on each strip raise a rectangle whose height is the value of \(f\) at a point of the strip, say the left endpoint \(x_i=a+i\,\Delta x\). The total area of the rectangles is the <strong>Riemann sum</strong>
+\[S_n=\sum_{i=0}^{n-1}f(x_i)\,\Delta x.\]
+The thinner the strips, the better the staircase of rectangles hugs the curve. If \(S_n\) converges as \(n\to\infty\) (it does for every function in this book), the limit is called the <strong>definite integral</strong> of \(f\) from \(a\) to \(b\):</p>
+<div class="box def"><span class="bt">Definition — Definite integral</span>
+<p>\[\int_a^b f(x)\,\mathrm dx=\lim_{n\to\infty}\sum_{i=0}^{n-1}f(x_i)\,\Delta x.\]
+Unlike the indefinite integral, this is a <em>number</em>, not a family of functions. The notation now explains itself: the \(\int\) is an elongated S, for "sum"; \(f(x)\,\mathrm dx\) is the area of an infinitely thin rectangle of height \(f(x)\) and width \(\mathrm dx\) — the "very small part of \(x\)" we promised in §7.3.</p></div>
+<p>Why should this number have anything to do with antiderivatives? Here is the intuition. Let \(A(t)=\int_a^t f(x)\,\mathrm dx\) be the area accumulated up to the point \(t\). How fast does the area grow as \(t\) moves right? In a small step \(h\), the area gains a sliver of width \(h\) and height roughly \(f(t)\), so \(A(t+h)-A(t)\approx f(t)\cdot h\), and
+\[A'(t)=\lim_{h\to0}\frac{A(t+h)-A(t)}h=f(t).\]
+The area function is an antiderivative of \(f\)! This is the content of the most important theorem of the chapter:</p>
+<div class="box thm"><span class="bt">The Fundamental Theorem of Calculus</span>
+<p>Let \(f\) be continuous on \([a,b]\) and let \(F\) be any antiderivative of \(f\) (that is, \(F'=f\)). Then
+\[\int_a^b f(x)\,\mathrm dx=F(b)-F(a).\]
+We write \(F(b)-F(a)=\big[F(x)\big]_a^b\).</p></div>
+<div class="proof"><span class="pt">Proof.</span> By the argument above, \(A(t)=\int_a^tf(x)\,\mathrm dx\) satisfies \(A'=f=F'\), so \((A-F)'=0\) and \(A(t)=F(t)+C\) for some constant. Setting \(t=a\): \(0=A(a)=F(a)+C\), so \(C=-F(a)\). Setting \(t=b\) gives \(\int_a^bf(x)\,\mathrm dx=A(b)=F(b)-F(a)\). <span class="qed">∎</span></div>
+<p>Notice what happened to the constant of integration: it cancelled. Whichever antiderivative you pick, \(F(b)-F(a)\) is the same — which is why, for definite integrals only, you may safely forget \(+C\).</p>
+<p><strong>Example.</strong> \(\displaystyle\int_0^1x^2\,\mathrm dx=\left[\frac{x^3}3\right]_0^1=\frac13-0=\frac13.\) The area under the parabola on \([0,1]\) is exactly a third of the unit square — a result Archimedes obtained two millennia before calculus, by what was essentially a Riemann sum.</p>
+<div class="box thm"><span class="bt">Properties of the definite integral</span>
+<ol>
+<li><em>Linearity:</em> \(\int_a^b\big(\lambda f+\mu g\big)\,\mathrm dx=\lambda\int_a^bf\,\mathrm dx+\mu\int_a^bg\,\mathrm dx\).</li>
+<li><em>Additivity:</em> \(\int_a^bf\,\mathrm dx+\int_b^cf\,\mathrm dx=\int_a^cf\,\mathrm dx\).</li>
+<li><em>Orientation:</em> \(\int_b^af\,\mathrm dx=-\int_a^bf\,\mathrm dx\), and \(\int_a^af\,\mathrm dx=0\).</li>
+<li><em>Comparison:</em> if \(f(x)\le g(x)\) on \([a,b]\), then \(\int_a^bf\,\mathrm dx\le\int_a^bg\,\mathrm dx\). In particular, the integral of a non-negative function is non-negative.</li>
+<li><em>Symmetry:</em> if \(f\) is odd (\(f(-x)=-f(x)\)), then \(\int_{-a}^af\,\mathrm dx=0\); if \(f\) is even (\(f(-x)=f(x)\)), then \(\int_{-a}^af\,\mathrm dx=2\int_0^af\,\mathrm dx\).</li>
+</ol></div>
+<p>Property 5 is a TMUA favourite: spotting that an integrand is odd can replace a page of computation with a single line. Make sure you can justify it — substitute \(x\mapsto-x\) in half of the integral.</p>
+<div class="box warn"><span class="bt">Substitution in definite integrals — change the limits!</span>
+<p>When substituting \(y=g(x)\) in a definite integral, the limits transform too: as \(x\) runs from \(a\) to \(b\), \(y\) runs from \(g(a)\) to \(g(b)\):
+\[\int_a^bf(g(x))\,g'(x)\,\mathrm dx=\int_{g(a)}^{g(b)}f(y)\,\mathrm dy.\]
+Once the limits are changed, do <em>not</em> substitute back — the answer is already a number. Forgetting to change the limits is among the most common exam mistakes in this chapter.</p></div>
+<p>One elegant trick deserves its own box, as it unlocks many otherwise unapproachable definite integrals:</p>
+<div class="box thm"><span class="bt">The reflection trick</span>
+<p>\[\int_0^af(x)\,\mathrm dx=\int_0^af(a-x)\,\mathrm dx.\]
+<em>Proof:</em> substitute \(y=a-x\), so \(\mathrm dy=-\mathrm dx\); the limits \(0\to a\) become \(a\to0\), and the minus sign from \(\mathrm dy\) reverses them back. ∎</p></div>
+<p><strong>Example.</strong> Calculate \(\displaystyle I=\int_0^{\pi/2}\frac{\sin x}{\sin x+\cos x}\,\mathrm dx\). By the reflection trick with \(a=\frac\pi2\), and using \(\sin\!\left(\frac\pi2-x\right)=\cos x\), the same integral equals \(J=\int_0^{\pi/2}\frac{\cos x}{\sin x+\cos x}\,\mathrm dx\). But \(I+J=\int_0^{\pi/2}1\,\mathrm dx=\frac\pi2\), so \(I=\frac\pi4\) — the paired-integrals idea of §7.4.2, now with the pairing produced <em>by the trick itself</em>.</p>
+
+<h2><span class="sn">§7.6</span>Areas under and between curves</h2>
+<p>When \(f(x)\ge0\) on \([a,b]\), the definite integral <em>is</em> the area under the graph. When \(f\) dips below the axis, the rectangles in the Riemann sum acquire negative heights, so the integral counts area below the axis <em>negatively</em>. The integral computes the <em>signed</em> area.</p>
+<p><strong>Example.</strong> \(\int_0^{2\pi}\sin x\,\mathrm dx=\big[-\cos x\big]_0^{2\pi}=-1-(-1)=0\): the bump above the axis on \([0,\pi]\) exactly cancels the bump below on \([\pi,2\pi]\). If a question asks for the <em>total area</em> enclosed between the curve and the axis, split at the roots and add absolute values:
+\[\text{Area}=\left|\int_0^\pi\sin x\,\mathrm dx\right|+\left|\int_\pi^{2\pi}\sin x\,\mathrm dx\right|=2+2=4.\]</p>
+<div class="box tmpl"><span class="bt">Template — Area between two curves</span>
+<ol>
+<li>Find the intersection points of \(f\) and \(g\) by solving \(f(x)=g(x)\); these are the limits of integration.</li>
+<li>Decide which function is on top in each region (a sketch is almost always worth the time).</li>
+<li>Integrate the difference, top minus bottom: \(\text{Area}=\int_a^b\big(f(x)-g(x)\big)\,\mathrm dx\) where \(f\ge g\) on \([a,b]\).</li>
+<li>If the curves cross inside the interval, split the integral at each crossing so the difference stays non-negative.</li>
+</ol></div>
+<p><strong>Example.</strong> Find the area enclosed by \(y=x\) and \(y=x^2\). They intersect where \(x=x^2\), i.e. \(x=0\) and \(x=1\); between them, the line is on top (check \(x=\frac12\)). Hence
+\[\text{Area}=\int_0^1\left(x-x^2\right)\mathrm dx=\left[\frac{x^2}2-\frac{x^3}3\right]_0^1=\frac12-\frac13=\frac16.\]</p>
+
+<h2><span class="sn">§7.7</span>The trapezium rule</h2>
+<p>Just as Newton–Raphson approximates the roots of equations we can't solve, the <strong>trapezium rule</strong> approximates the integrals we can't evaluate — and even when we can, the TMUA likes to ask <em>how good</em> the approximation is. The idea: instead of rectangles, join the points on the curve by straight segments and sum the trapezia underneath.</p>
+<div class="box thm"><span class="bt">The trapezium rule</span>
+<p>Slice \([a,b]\) into \(n\) strips of width \(h=\frac{b-a}n\), with ordinates \(y_i=f(a+ih)\) for \(i=0,1,\dots,n\). Then
+\[\int_a^bf(x)\,\mathrm dx\ \approx\ \frac h2\Big(y_0+2y_1+2y_2+\dots+2y_{n-1}+y_n\Big).\]
+Each interior ordinate is counted twice because it is the right wall of one trapezium and the left wall of the next.</p></div>
+<p><strong>Over- or underestimate?</strong> This is the question the TMUA actually asks, and the answer is read off the <em>shape</em> of the curve. If the curve is <strong>convex</strong> (bending upwards, \(f''&gt;0\)), every chord lies <em>above</em> the curve, so the trapezia overshoot: the rule <strong>overestimates</strong>. If the curve is <strong>concave</strong> (\(f''&lt;0\)), every chord lies below the curve and the rule <strong>underestimates</strong>. A sketch settles it in seconds; if the curve changes concavity inside the interval, no conclusion can be drawn without splitting.</p>
+<p><strong>Example.</strong> Approximate \(\int_1^2\frac1x\,\mathrm dx\) with two strips. Here \(h=\frac12\), \(y_0=1\), \(y_1=\frac23\), \(y_2=\frac12\):
+\[\int_1^2\frac{\mathrm dx}x\approx\frac{1/2}2\left(1+2\cdot\frac23+\frac12\right)=\frac14\cdot\frac{17}6=\frac{17}{24}\approx0.708.\]
+The true value is \(\ln2\approx0.693\). Since \(\frac1x\) is convex on \([1,2]\), we knew in advance the estimate would be too large — and it is.</p>
+
+<h2><span class="sn">§7.8</span>Solids of revolution</h2>
+<p>We promised in the introduction an application of integrals, and here is the most spectacular one. Take the region under the graph of \(f\) on \([a,b]\) and spin it around the \(x\)-axis: a solid appears. What is its volume? The Riemann philosophy applies unchanged: slice the solid into thin discs perpendicular to the axis. The disc at position \(x\) has radius \(f(x)\), hence cross-sectional area \(\pi f(x)^2\), and thickness \(\mathrm dx\). Summing the discs:</p>
+<div class="box thm"><span class="bt">Volume of revolution</span>
+<p>Rotating the region under \(y=f(x)\), \(a\le x\le b\), about the \(x\)-axis produces volume
+\[V=\pi\int_a^b y^2\,\mathrm dx=\pi\int_a^b f(x)^2\,\mathrm dx.\]
+Rotating a region about the \(y\)-axis instead: express the curve as \(x=g(y)\) and use \(V=\pi\int_c^d x^2\,\mathrm dy\), with limits on the \(y\)-axis.</p></div>
+<p><strong>Example (the sphere).</strong> The circle \(x^2+y^2=r^2\) gives the half-disc \(y=\sqrt{r^2-x^2}\) on \([-r,r]\); rotating it about the \(x\)-axis produces a sphere of radius \(r\). Its volume is
+\[V=\pi\int_{-r}^{r}\left(r^2-x^2\right)\mathrm dx=\pi\left[r^2x-\frac{x^3}3\right]_{-r}^{r}=\pi\left(\frac{2r^3}3+\frac{2r^3}3\right)=\frac43\pi r^3,\]
+a formula you have known since school — now you know <em>why</em> it is true.</p>
+<p><strong>Example (the cone).</strong> Rotate the line \(y=\frac rh x\), \(0\le x\le h\), about the \(x\)-axis:
+\[V=\pi\int_0^h\frac{r^2}{h^2}x^2\,\mathrm dx=\pi\frac{r^2}{h^2}\cdot\frac{h^3}3=\frac13\pi r^2h.\]
+The mysterious \(\frac13\) in the cone formula is the \(\frac13\) of \(\int x^2\).</p>
+
+<h2><span class="sn">§7.9</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span></div>
+<p>Calculate the value of the integral \(\displaystyle\int\frac{a\cos x}{a\cos x+b\sin x}\,\mathrm dx\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span></div>
+<p>Calculate the value of \(\displaystyle\int\frac{x\sin^2x+x^2\cos x}{\sin x\,(x+\sin x)}\,\mathrm dx\), for \(x\) between \(0\) and \(\frac\pi2\). (Hint: try using the functions \(f(x)=x\sin x\) and \(g(x)=1+\cos x\) and turning this into a formula.)</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill tmua">TMUA 2017</span></div>
+<p>Find the value of \(\displaystyle\int\frac{3-2x}{x\sqrt x}\,\mathrm dx\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span></div>
+<p>Calculate the following paired integrals:</p>
+<ul>
+<li>\(I=\int e^x\sin x\,\mathrm dx,\quad J=\int e^x\cos x\,\mathrm dx\);</li>
+<li>\(I=\int\frac{x^2}{\sqrt{1-x^2}}\,\mathrm dx,\quad J=\int\sqrt{1-x^2}\,\mathrm dx\);</li>
+<li>\(I=\int\frac{x^2}{\sqrt{x^2-1}}\,\mathrm dx,\quad J=\int\sqrt{x^2-1}\,\mathrm dx\).</li>
+</ul></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill">STEP 2 1992</span></div>
+<p>Calculate the following integrals:<br>
+(i) \(\displaystyle\int\frac{x}{(x-1)(x^2-1)}\,\mathrm dx\);
+(ii) \(\displaystyle\int\frac{\mathrm dx}{3\cos x+4\sin x}\);
+(iii) \(\displaystyle\int\frac{\mathrm dx}{\sinh x}\).</p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill">STEP 3 2003</span></div>
+<p>Given that \(x+a&gt;0\) and \(x+b&gt;0\), and that \(b&gt;a\), show that
+\[\frac{\mathrm d}{\mathrm dx}\arcsin\!\left(\frac{x+a}{x+b}\right)=\frac{\sqrt{b-a}}{(x+b)\sqrt{a+b+2x}}\]
+and find \(\dfrac{\mathrm d}{\mathrm dx}\,\mathrm{arcosh}\!\left(\dfrac{x+b}{x+a}\right)\). Hence, or otherwise, integrate, for \(x&gt;-1\):<br>
+(i) \(\displaystyle\int\frac{\mathrm dx}{(x+1)\sqrt{x+3}}\);
+(ii) \(\displaystyle\int\frac{\mathrm dx}{(x+3)\sqrt{x+1}}\).<br>
+<em>You may use the results \(\frac{\mathrm d}{\mathrm dx}\arcsin x=\frac1{\sqrt{1-x^2}}\) and \(\frac{\mathrm d}{\mathrm dx}\mathrm{arcosh}\,x=\frac1{\sqrt{x^2-1}}\).</em></p></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill new">New</span></div>
+<p>Evaluate the following definite integrals:<br>
+(i) \(\displaystyle\int_0^1\left(3x^2-2x+1\right)\mathrm dx\);
+(ii) \(\displaystyle\int_1^e\frac{\ln x}{x}\,\mathrm dx\);
+(iii) \(\displaystyle\int_0^{\pi/4}\tan x\,\mathrm dx\);
+(iv) \(\displaystyle\int_{-2}^{2}x^3\cos\!\left(x^2\right)\mathrm dx\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>(i) \(\left[x^3-x^2+x\right]_0^1=1\). (ii) Substitute \(y=\ln x\), \(\mathrm dy=\frac{\mathrm dx}x\); limits become \(0\) to \(1\): \(\int_0^1y\,\mathrm dy=\frac12\). (iii) \(\left[\ln|\sec x|\right]_0^{\pi/4}=\ln\sqrt2=\frac12\ln2\). (iv) The integrand is odd and the interval is symmetric: the answer is \(0\) — no computation needed.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill new">New</span></div>
+<p>Find the total area enclosed between the curve \(y=x^3-x\) and the \(x\)-axis.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>The roots are \(x=-1,0,1\). By odd symmetry the two enclosed regions have equal area, so
+\[\text{Area}=2\left|\int_0^1\left(x^3-x\right)\mathrm dx\right|=2\left|\frac14-\frac12\right|=\frac12.\]
+Note that \(\int_{-1}^1(x^3-x)\,\mathrm dx=0\) — the signed area vanishes, the total area does not.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill new">New · TMUA-style</span></div>
+<p>The trapezium rule with \(n\) strips is used to estimate \(\displaystyle\int_0^1e^{x^2}\,\mathrm dx\). Which of the following is true for every \(n\)?<br>
+A. The estimate is exact. &nbsp; B. The estimate is an overestimate. &nbsp; C. The estimate is an underestimate. &nbsp; D. It cannot be determined.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>B. Differentiate twice: \(\left(e^{x^2}\right)''=\left(2xe^{x^2}\right)'=(2+4x^2)e^{x^2}&gt;0\), so the curve is convex on \([0,1]\); every chord lies above the curve, and the trapezium rule overestimates for any number of strips.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 10</span><span class="pill new">New · TMUA-style</span></div>
+<p>Given that \(\displaystyle\int_0^4f(x)\,\mathrm dx=10\) and \(\displaystyle\int_0^2f(x)\,\mathrm dx=3\), evaluate \(\displaystyle\int_2^4\big(2f(x)+3\big)\,\mathrm dx\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>By additivity, \(\int_2^4f=10-3=7\). By linearity, \(\int_2^4(2f+3)=2\cdot7+3\cdot(4-2)=14+6=20\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 11</span><span class="pill new">New</span></div>
+<p>Using the reflection trick of §7.5, evaluate \(\displaystyle\int_0^\pi\frac{x\sin x}{1+\cos^2x}\,\mathrm dx\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Let \(I\) be the integral. Substituting \(x\mapsto\pi-x\) gives \(I=\int_0^\pi\frac{(\pi-x)\sin x}{1+\cos^2x}\,\mathrm dx\). Adding the two expressions, the \(x\) cancels:
+\[2I=\pi\int_0^\pi\frac{\sin x}{1+\cos^2x}\,\mathrm dx.\]
+Substitute \(u=\cos x\), \(\mathrm du=-\sin x\,\mathrm dx\), limits \(1\to-1\):
+\[2I=\pi\int_{-1}^1\frac{\mathrm du}{1+u^2}=\pi\big[\arctan u\big]_{-1}^1=\pi\cdot\frac\pi2,\]
+so \(I=\frac{\pi^2}4\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 12</span><span class="pill new">New</span></div>
+<p>The region bounded by \(y=\sqrt x\), the \(x\)-axis and the line \(x=4\) is rotated through \(2\pi\) about the \(x\)-axis. Find the volume of the solid generated. Then find the volume generated when the <em>same</em> region is rotated about the \(y\)-axis.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>About the \(x\)-axis: \(V=\pi\int_0^4(\sqrt x)^2\,\mathrm dx=\pi\int_0^4x\,\mathrm dx=8\pi\).<br>
+About the \(y\)-axis: the region in \(y\)-terms is bounded by \(x=y^2\) and \(x=4\) for \(0\le y\le2\). The solid is a cylinder of radius 4 minus the solid generated by \(x=y^2\):
+\[V=\pi\int_0^2\left(4^2-\left(y^2\right)^2\right)\mathrm dy=\pi\left[16y-\frac{y^5}5\right]_0^2=\pi\left(32-\frac{32}5\right)=\frac{128\pi}5.\]</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 13</span><span class="pill new">New · MAT-style</span></div>
+<p>For which value of \(c&gt;0\) does the line \(y=c\) divide the region enclosed by \(y=x^2\) and \(y=1\) into two parts of equal area?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Work horizontally. The region between \(y=x^2\) and \(y=t\) (for \(0\le t\le1\)) has area \(\int_0^t2\sqrt y\,\mathrm dy=\frac43t^{3/2}\). The whole region has area \(\frac43\); we need \(\frac43c^{3/2}=\frac23\), so \(c^{3/2}=\frac12\) and \(c=2^{-2/3}=\frac1{\sqrt[3]4}\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 14</span><span class="pill">STEP-style · Hard</span></div>
+<p>Let \(I_n=\displaystyle\int_0^{\pi/2}\sin^nx\,\mathrm dx\) for integers \(n\ge0\).<br>
+(i) Show, using integration by parts, that \(nI_n=(n-1)I_{n-2}\) for \(n\ge2\).<br>
+(ii) Hence evaluate \(I_4\) and \(I_5\).<br>
+(iii) Show that \(I_{n+1}\le I_n\) and deduce that \(\dfrac{I_{n+1}}{I_n}\to1\) as \(n\to\infty\).</p>
+<details class="sol"><summary>Show hints</summary>
+<p>(i) Write \(\sin^nx=\sin^{n-1}x\cdot\sin x\) and integrate by parts with \(g'(x)=\sin x\); use \(\cos^2x=1-\sin^2x\) to bring \(I_n\) back to the left side. (ii) \(I_0=\frac\pi2\), \(I_1=1\); then \(I_4=\frac34\cdot\frac12\cdot\frac\pi2=\frac{3\pi}{16}\) and \(I_5=\frac45\cdot\frac23=\frac8{15}\). (iii) On \([0,\frac\pi2]\), \(0\le\sin x\le1\) gives \(\sin^{n+1}x\le\sin^nx\); use the comparison property, then squeeze \(\frac{I_{n+1}}{I_n}\) between \(\frac{I_{n+2}}{I_n}=\frac{n+1}{n+2}\) and \(1\).</p>
+</details></div>
+
+<div class="pn"><a href="differentiation.html">← Topic 6: Differentiation</a><a href="counting.html">Topic 8: Counting →</a></div>
+</div>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>

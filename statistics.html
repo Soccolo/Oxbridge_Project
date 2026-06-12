@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Statistics</title>
+<meta name="description" content="Free theory and problems covering the entire TMUA syllabus, with STEP extensions — from the book Advanced Mathematics for High School: Preparing for Oxbridge.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers &amp; Proof</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra and Functions</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences and Series</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Graphs, Exponentials &amp; Logs</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differentiation</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integration</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Logic and Proof (Paper 2)</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html" class="active"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<div class="page">
+<p class="crumb"><b>Extension · STEP</b> · Probability and Statistics <span class="pill new">New chapter</span></p>
+<h1>Statistics</h1>
+<p class="lede">Personally, as an actuary and Statistics enjoyer, I find the STEP statistics questions easier than the pure ones — by the end of this topic, you may agree.</p>
+
+<h2><span class="sn">§S.1</span>Introduction</h2>
+<p>The other two unpopular questions on every STEP paper are statistics, and the same leverage argument from the <a href="mechanics.html">Mechanics</a> topic applies. STEP statistics is really probability with calculus: the counting of the <a href="counting.html">Counting</a> topic, conditional reasoning, and then random variables — whose continuous version is an application of the <a href="integration.html">Integration</a> topic, full stop. There is very little to memorise and a great deal to set up carefully.</p>
+
+<h2><span class="sn">§S.2</span>Conditional probability</h2>
+<div class="box def"><span class="bt">Conditional probability</span>
+<p>The probability of \(A\) <em>given that</em> \(B\) has occurred:
+\[\mathbb P(A\mid B)=\frac{\mathbb P(A\text{ and }B)}{\mathbb P(B)}\qquad(\mathbb P(B)&gt;0).\]
+Rearranged, the <strong>multiplication law</strong>: \(\mathbb P(A\text{ and }B)=\mathbb P(B)\,\mathbb P(A\mid B)\) — the rule that tree diagrams implement branch by branch. Events are <strong>independent</strong> precisely when \(\mathbb P(A\mid B)=\mathbb P(A)\): knowing \(B\) tells you nothing about \(A\).</p></div>
+<div class="box thm"><span class="bt">Total probability and Bayes</span>
+<p>If \(B_1,\dots,B_n\) are mutually exclusive and cover everything, then
+\[\mathbb P(A)=\sum_i\mathbb P(B_i)\,\mathbb P(A\mid B_i)\]
+(<em>law of total probability</em> — sum over the branches of the tree), and the conditioning can be reversed:
+\[\mathbb P(B_k\mid A)=\frac{\mathbb P(B_k)\,\mathbb P(A\mid B_k)}{\sum_i\mathbb P(B_i)\,\mathbb P(A\mid B_i)}\]
+(<em>Bayes' theorem</em> — nothing more than the definition applied twice, but the engine of every "given the test is positive…" question).</p></div>
+<div class="box warn"><span class="bt">The two classic confusions</span>
+<ol>
+<li>\(\mathbb P(A\mid B)\ne\mathbb P(B\mid A)\). The probability of a positive test given the disease is not the probability of the disease given a positive test — the whole point of Bayes.</li>
+<li>"Mutually exclusive" and "independent" are near-opposites, not synonyms: exclusive events with positive probabilities <em>cannot</em> be independent, since one occurring forbids the other.</li>
+</ol></div>
+<p><strong>Example.</strong> A disease affects 1% of a population; a test detects it with probability 0.95, but also flags 5% of healthy people. Given a positive test, the probability of disease is
+\[\frac{0.01\times0.95}{0.01\times0.95+0.99\times0.05}=\frac{0.0095}{0.0590}\approx0.16,\]
+not 0.95 — the false positives from the huge healthy majority swamp the true ones. STEP loves this structure precisely because the answer offends intuition and rewards the mechanical tree.</p>
+
+<h2><span class="sn">§S.3</span>Discrete random variables</h2>
+<div class="box def"><span class="bt">Random variables, expectation, variance</span>
+<p>A <strong>discrete random variable</strong> \(X\) takes values \(x_i\) with probabilities \(p_i\) summing to 1. Its <strong>expectation</strong> (mean) and <strong>variance</strong> are
+\[\mathbb E(X)=\sum_ix_ip_i,\qquad\operatorname{Var}(X)=\mathbb E\!\left((X-\mu)^2\right)=\mathbb E(X^2)-\big(\mathbb E(X)\big)^2,\]
+with \(\mu=\mathbb E(X)\); the second form of the variance is the one you compute with. The standard deviation is \(\sqrt{\operatorname{Var}(X)}\).</p></div>
+<div class="box thm"><span class="bt">The algebra of expectation</span>
+<ol>
+<li>\(\mathbb E(aX+b)=a\,\mathbb E(X)+b\) and \(\operatorname{Var}(aX+b)=a^2\operatorname{Var}(X)\) — shifting doesn't change spread; scaling scales it quadratically.</li>
+<li>\(\mathbb E(X+Y)=\mathbb E(X)+\mathbb E(Y)\) <em>always</em> — linearity holds with no independence assumption, which is what makes it the most powerful cheap trick in the subject.</li>
+<li>\(\operatorname{Var}(X+Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)\) only for <em>independent</em> \(X,Y\).</li>
+</ol></div>
+<div class="box thm"><span class="bt">The standard distributions</span>
+<ol>
+<li><strong>Binomial</strong> \(B(n,p)\): the number of successes in \(n\) independent trials with success probability \(p\):
+\[\mathbb P(X=k)=\binom nk p^k(1-p)^{n-k},\qquad\mathbb E(X)=np,\quad\operatorname{Var}(X)=np(1-p).\]
+The probabilities are the terms of \((p+q)^n\) with \(q=1-p\) — the <a href="algebra.html">Binomial Theorem</a> earning its name.</li>
+<li><strong>Geometric:</strong> the trial number of the first success: \(\mathbb P(X=k)=q^{k-1}p\), with \(\mathbb E(X)=\frac1p\) — provable with the geometric series of the <a href="sequences.html">Sequences</a> topic, or by the elegant self-similarity argument: \(\mathbb E(X)=1+q\,\mathbb E(X)\) (one trial spent; with probability \(q\) you are back where you started).</li>
+</ol></div>
+<p><strong>Example.</strong> A die is rolled until the first six. Expected number of rolls: \(\frac1{1/6}=6\). And \(\mathbb P(\text{more than }k\text{ rolls})=\left(\frac56\right)^k\) — "more than \(k\)" means \(k\) initial failures, a complement worth internalising.</p>
+
+<h2><span class="sn">§S.4</span>Continuous random variables</h2>
+<p>When \(X\) can take any value in an interval, probabilities are no longer attached to points but spread as a density — and everything becomes the <a href="integration.html">Integration</a> topic:</p>
+<div class="box def"><span class="bt">Probability density and cumulative distribution</span>
+<p>A <strong>probability density function</strong> (pdf) \(f\) satisfies \(f(x)\ge0\) and \(\int_{-\infty}^{\infty}f(x)\,\mathrm dx=1\), and
+\[\mathbb P(a\le X\le b)=\int_a^bf(x)\,\mathrm dx\]
+— probability is <em>area under the density</em>. Note \(\mathbb P(X=a)=0\) for any single point: only intervals carry probability. The <strong>cumulative distribution function</strong> (cdf) is
+\[F(x)=\mathbb P(X\le x)=\int_{-\infty}^xf(t)\,\mathrm dt,\]
+so \(F'=f\): the cdf is the area-so-far function, and differentiating it recovers the density — the Fundamental Theorem of Calculus moonlighting as probability theory. The <strong>median</strong> \(m\) solves \(F(m)=\frac12\); quartiles solve \(F=\frac14,\frac34\).</p></div>
+<div class="box thm"><span class="bt">Moments by integration</span>
+<p>\[\mathbb E(X)=\int xf(x)\,\mathrm dx,\qquad\mathbb E(X^2)=\int x^2f(x)\,\mathrm dx,\qquad\operatorname{Var}(X)=\mathbb E(X^2)-\mathbb E(X)^2,\]
+all integrals over the range where \(f\) is non-zero. For a density symmetric about \(x=c\), \(\mathbb E(X)=c\) with no computation — the odd-function symmetry of §7.5.</p></div>
+<div class="box tmpl"><span class="bt">Template — A continuous random variable question</span>
+<ol>
+<li>If the density contains an unknown constant, fix it first: total area \(=1\).</li>
+<li>Compute whatever is asked — probabilities, mean, variance, median — as integrals; for piecewise densities, split the integrals at the joins.</li>
+<li>For the median and quartiles, find the cdf and solve \(F(m)=\frac12\); check which piece of a piecewise cdf the solution must land in <em>before</em> solving.</li>
+<li>For a transformed variable \(Y=g(X)\) (a STEP favourite), work through the cdf: \(F_Y(y)=\mathbb P(g(X)\le y)\), rewrite the event in terms of \(X\), then differentiate to get the new density.</li>
+</ol></div>
+<p><strong>Example.</strong> Let \(f(x)=kx(2-x)\) on \([0,2]\) (zero elsewhere). Then \(1=k\int_0^2(2x-x^2)\,\mathrm dx=k\left[x^2-\frac{x^3}3\right]_0^2=\frac43k\), so \(k=\frac34\). By symmetry about \(x=1\), \(\mathbb E(X)=1\) and the median is also 1. And
+\[\mathbb E(X^2)=\frac34\int_0^2\left(2x^3-x^4\right)\mathrm dx=\frac34\left(8-\frac{32}5\right)=\frac65,\qquad\operatorname{Var}(X)=\frac65-1=\frac15.\]</p>
+
+<h2><span class="sn">§S.5</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill new">New</span></div>
+<p>Two fair dice are rolled. Given that the total is at least 10, find the probability that at least one die shows a six. Are the events "total at least 10" and "at least one six" independent?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Totals \(\ge10\): the six ordered pairs \((4,6),(5,5),(5,6),(6,4),(6,5),(6,6)\). Of these, five involve a six. \(\mathbb P=\frac56\). Independence would need \(\frac56=\mathbb P(\text{at least one six})=\frac{11}{36}\) — false, so not independent (obviously: high totals need high faces).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill new">New · Bayes</span></div>
+<p>Urn I contains 3 red and 1 blue ball; urn II contains 1 red and 3 blue. A fair coin chooses an urn, and a ball drawn from it turns out red. Find the probability the coin chose urn I. A second ball is then drawn from the <em>same</em> urn (without replacement): find the probability it is also red.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Bayes: \(\mathbb P(\text{I}\mid R)=\frac{\frac12\cdot\frac34}{\frac12\cdot\frac34+\frac12\cdot\frac14}=\frac34\). Second draw, by total probability over the (updated) urn:
+\[\mathbb P(R_2\mid R_1)=\frac34\cdot\frac23+\frac14\cdot0=\frac12.\]
+Note the posterior \(\frac34\), not the prior \(\frac12\), feeds the second calculation — updating on evidence is the whole game.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill new">New</span></div>
+<p>The random variable \(X\) takes values \(1,2,3,4\) with probabilities proportional to \(\frac1k\). Find the distribution, \(\mathbb E(X)\) and \(\operatorname{Var}(X)\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Proportionality constant: \(c\left(1+\frac12+\frac13+\frac14\right)=1\) gives \(c=\frac{12}{25}\), so \(p_k=\frac{12}{25k}\). Then \(\mathbb E(X)=\sum k\cdot\frac{12}{25k}=\frac{48}{25}\), and \(\mathbb E(X^2)=\frac{12}{25}(1+2+3+4)=\frac{120}{25}=\frac{24}5\), so
+\(\operatorname{Var}(X)=\frac{24}5-\left(\frac{48}{25}\right)^2=\frac{3000-2304}{625}=\frac{696}{625}\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill new">New · STEP-style</span></div>
+<p>A coin with probability \(p\) of heads is tossed \(n\) times. Show that the probability of an <em>even</em> number of heads is \(\frac12\left(1+(1-2p)^n\right)\). (Hint: consider \((q+p)^n\) and \((q-p)^n\) — the paired-quantities trick of the <a href="integration.html">Integration</a> topic, transplanted.)</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Expand both: \((q+p)^n=\sum_k\binom nk p^kq^{n-k}=1\), and \((q-p)^n=\sum_k\binom nk(-p)^kq^{n-k}\), which carries \(+\) on even \(k\) and \(-\) on odd \(k\). Adding kills the odd terms and doubles the even ones:
+\[\mathbb P(\text{even})=\frac{(q+p)^n+(q-p)^n}2=\frac{1+(1-2p)^n}2.\]
+Sanity checks: \(p=\frac12\) gives \(\frac12\) for any \(n\); \(p=0\) gives 1 (zero heads is even).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill new">New</span></div>
+<p>The continuous random variable \(X\) has density \(f(x)=\frac3{x^4}\) for \(x\ge1\) (zero elsewhere). Verify it is a density; find \(\mathbb E(X)\), \(\operatorname{Var}(X)\) and the median. What goes wrong if the exponent 4 is replaced by 2?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>\(\int_1^\infty3x^{-4}\mathrm dx=\left[-x^{-3}\right]_1^\infty=1\) ✓. \(\mathbb E(X)=\int_1^\infty3x^{-3}\mathrm dx=\frac32\); \(\mathbb E(X^2)=\int_1^\infty3x^{-2}\mathrm dx=3\), so \(\operatorname{Var}(X)=3-\frac94=\frac34\). Median: \(F(x)=1-x^{-3}=\frac12\) gives \(m=2^{1/3}\). With exponent 2, the density \(\frac1{x^2}\) still integrates to 1, but \(\mathbb E(X)=\int_1^\infty\frac{\mathrm dx}{x}\) diverges — a legitimate random variable with <em>infinite mean</em>, a standard STEP sting in the tail.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill new">New · STEP-style</span></div>
+<p>\(X\) is uniformly distributed on \([0,1]\) (density 1 there, 0 elsewhere) and \(Y=X^2\). Find the cdf and pdf of \(Y\), and compute \(\mathbb E(Y)\) twice: once from the density of \(Y\), and once directly as \(\mathbb E(X^2)\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>For \(0\le y\le1\): \(F_Y(y)=\mathbb P(X^2\le y)=\mathbb P(X\le\sqrt y)=\sqrt y\). Differentiating, \(f_Y(y)=\frac1{2\sqrt y}\) on \((0,1]\) — a density that blows up at 0 yet integrates to 1. Then \(\mathbb E(Y)=\int_0^1\frac y{2\sqrt y}\,\mathrm dy=\int_0^1\frac{\sqrt y}2\,\mathrm dy=\frac13\), agreeing with \(\mathbb E(X^2)=\int_0^1x^2\,\mathrm dx=\frac13\). The cdf method of the template is the reliable route for any transformation.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill">STEP-style · Hard</span></div>
+<p>Aurelia and Berenice take turns rolling a fair die, Aurelia first; the first to roll a six wins.<br>
+(i) Show that Aurelia wins with probability \(\frac6{11}\).<br>
+(ii) Find the expected number of rolls in the game.<br>
+(iii) Generalise: with success probability \(p\) per roll, show the first player's winning probability is \(\frac1{2-p}\), and comment on the limits \(p\to0\) and \(p\to1\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>(i) Either sum the geometric series \(\frac16\left(1+\left(\frac56\right)^2+\left(\frac56\right)^4+\dots\right)=\frac{1/6}{1-25/36}=\frac6{11}\), or argue by self-similarity: if both miss, the game restarts, so \(a=\frac16+\left(\frac56\right)^2a\).<br>
+(ii) The number of rolls is geometric with \(p=\frac16\): expectation 6.<br>
+(iii) \(a=p+(1-p)^2a\) gives \(a=\frac p{1-(1-p)^2}=\frac1{2-p}\). As \(p\to1\), \(a\to1\) (the first roll settles it); as \(p\to0\), \(a\to\frac12\) — the first-mover advantage evaporates when success is rare, a one-line answer that would take pages by brute force.</p>
+</details></div>
+
+<div class="pn"><a href="mechanics.html">← Mechanics</a><a href="exam-papers.html">TMUA Exam Papers →</a></div>
+</div>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>
