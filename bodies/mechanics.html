@@ -1,0 +1,156 @@
+<div class="page">
+<p class="crumb"><b>Extension · STEP</b> · Mechanics <span class="pill new">New chapter</span></p>
+<h1>Mechanics</h1>
+<p class="lede">Two of the twelve questions on every STEP paper are mechanics — and they are the least popular questions on the paper, which is precisely why you should learn to love them.</p>
+
+<h2><span class="sn">§M.1</span>Introduction</h2>
+<p>As discussed on the <a href="index.html#about">home page</a>: STEP lets you choose 6 questions from 12, of which 2 are mechanics and 2 are statistics, and these four are the most unpopular questions on the paper. Knowing them well gives you more leverage than just knowing more pure mathematics — you gain four candidate questions your competitors have written off. Better still, STEP mechanics is not really a new subject: it is the <a href="differentiation.html">calculus</a> and <a href="geometry.html">trigonometry</a> you already have, applied to particles. The physics input is small; the problem-solving is the same.</p>
+
+<h2><span class="sn">§M.2</span>Kinematics</h2>
+<p>A particle moves along a line with displacement \(x(t)\). Velocity and acceleration are nothing but derivatives:
+\[v=\frac{\mathrm dx}{\mathrm dt}=\dot x,\qquad a=\frac{\mathrm dv}{\mathrm dt}=\ddot x,\]
+(the dot notation, from Newton himself, already appeared in the STEP problems of the <a href="differentiation.html">Differentiation</a> topic). Going backwards: displacement is the integral of velocity — the <em>area under the \(v\)–\(t\) graph</em> — and velocity is the integral of acceleration.</p>
+<p>When the acceleration is a <strong>constant</strong> \(a\), integrating twice produces the famous <em>suvat</em> equations. Don't memorise them as five arbitrary facts — derive them once and own them:</p>
+<div class="box thm"><span class="bt">The suvat equations (constant acceleration only)</span>
+<p>Integrating \(\dot v=a\) with \(v(0)=u\): \(v=u+at\). Integrating again with \(x(0)=0\):
+\[s=ut+\tfrac12at^2.\]
+Eliminating \(t\) between these gives \(v^2=u^2+2as\); averaging gives \(s=\frac{(u+v)t}2\). Here \(s\) = displacement, \(u\) = initial velocity, \(v\) = final velocity.</p></div>
+<div class="box warn"><span class="bt">The trap</span>
+<p>suvat is valid <em>only</em> for constant acceleration. The moment a force depends on position, velocity or time — springs, resistance proportional to \(v\), variable thrust — you must return to the differential equations of the <a href="differentiation.html">Differentiation</a> topic. A standard STEP move for position-dependent acceleration is the chain-rule identity
+\[a=\frac{\mathrm dv}{\mathrm dt}=\frac{\mathrm dv}{\mathrm dx}\cdot\frac{\mathrm dx}{\mathrm dt}=v\frac{\mathrm dv}{\mathrm dx}=\frac{\mathrm d}{\mathrm dx}\!\left(\tfrac12v^2\right),\]
+which converts time-equations into separable space-equations.</p></div>
+
+<h2><span class="sn">§M.3</span>Projectiles</h2>
+<p>Launch a particle with speed \(u\) at angle \(\theta\) above the horizontal, with gravity \(g\) acting downwards and no air resistance. The single governing idea: <strong>the two components don't talk to each other</strong>. Horizontally there is no force, so the velocity component \(u\cos\theta\) is constant; vertically the particle does one-dimensional suvat with acceleration \(-g\):
+\[x=ut\cos\theta,\qquad y=ut\sin\theta-\tfrac12gt^2.\]</p>
+<div class="box thm"><span class="bt">The standard results (derive, don't memorise)</span>
+<ol>
+<li><strong>Time of flight</strong> (returning to launch height): set \(y=0\): \(T=\dfrac{2u\sin\theta}{g}\).</li>
+<li><strong>Range:</strong> \(R=uT\cos\theta=\dfrac{u^2\sin2\theta}{g}\) — maximised at \(\theta=45^\circ\) by the double-angle formula from the <a href="geometry.html">Geometry</a> topic.</li>
+<li><strong>Greatest height:</strong> vertical velocity zero gives \(H=\dfrac{u^2\sin^2\theta}{2g}\).</li>
+<li><strong>Trajectory:</strong> eliminate \(t\):
+\[y=x\tan\theta-\frac{gx^2}{2u^2\cos^2\theta}=x\tan\theta-\frac{gx^2}{2u^2}\left(1+\tan^2\theta\right).\]
+The second form, using \(\sec^2\theta=1+\tan^2\theta\), is the STEP workhorse: for fixed target \((x,y)\) it is a <em>quadratic in \(\tan\theta\)</em>, so the discriminant decides which points are reachable — geometry of the parabola meeting the algebra of Topic 2.</li>
+</ol></div>
+
+<h2><span class="sn">§M.4</span>Forces and Newton's laws</h2>
+<div class="box thm"><span class="bt">Newton's laws, exam edition</span>
+<ol>
+<li>No resultant force \(\Rightarrow\) no acceleration (equilibrium: forces balance in every direction).</li>
+<li>\(\mathbf F=m\mathbf a\) — the resultant force equals mass times acceleration, applied <em>componentwise</em>.</li>
+<li>If \(A\) pushes \(B\), then \(B\) pushes \(A\) equally and oppositely — the law that makes connected-particle problems work.</li>
+</ol></div>
+<p>The standard cast of forces: <strong>weight</strong> \(mg\) downwards; the <strong>normal reaction</strong> \(R\) perpendicular to a surface; <strong>tension</strong> along a string (the same throughout a light string over a smooth pulley); and <strong>friction</strong>, which opposes relative motion and obeys
+\[F\le\mu R,\]
+with equality (<em>limiting friction</em>) when the object is on the point of slipping or already sliding. The inequality is the point: a static object's friction takes whatever value equilibrium demands, up to the ceiling \(\mu R\).</p>
+<div class="box tmpl"><span class="bt">Template — Forces on an inclined plane</span>
+<ol>
+<li>Draw the diagram and mark every force on the particle: weight, normal, friction, applied forces. (Unmarked forces are the leading cause of lost STEP marks.)</li>
+<li>Choose axes <em>along and perpendicular to the slope</em>. The weight resolves into \(mg\sin\alpha\) down the slope and \(mg\cos\alpha\) into it.</li>
+<li>Perpendicular to the slope, nothing accelerates: \(R=mg\cos\alpha\) (adjusted for any other forces with perpendicular components).</li>
+<li>Along the slope, apply \(F=ma\) (or equilibrium), with friction's direction set by the motion — or, in "on the point of moving" problems, by the threatened motion.</li>
+<li>Sliding begins when the slope is steep enough that \(mg\sin\alpha&gt;\mu mg\cos\alpha\), i.e. \(\tan\alpha&gt;\mu\) — the angle of friction.</li>
+</ol></div>
+<div class="box tmpl"><span class="bt">Template — Connected particles and pulleys</span>
+<ol>
+<li>Write \(F=ma\) for <em>each</em> particle separately, in its own direction of motion, with the same \(a\) (an inextensible string) and the same \(T\) (a light string, smooth pulley).</li>
+<li>Add the equations to eliminate \(T\) and find \(a\); substitute back for \(T\).</li>
+<li>Sanity-check limits: if one mass dominates, \(a\to g\); if the masses are equal (on a simple pulley), \(a=0\).</li>
+</ol></div>
+<p><strong>Example.</strong> Masses \(m_1&gt;m_2\) hang from a light string over a smooth pulley. For \(m_1\): \(m_1g-T=m_1a\); for \(m_2\): \(T-m_2g=m_2a\). Adding:
+\[a=\frac{(m_1-m_2)g}{m_1+m_2},\qquad T=\frac{2m_1m_2g}{m_1+m_2}.\]
+Check the limits as in step 3 — they pass.</p>
+
+<h2><span class="sn">§M.5</span>Work, energy and power</h2>
+<div class="box def"><span class="bt">The energy dictionary</span>
+<p><strong>Work</strong> done by a constant force: \(W=Fd\cos\theta\) (force times distance, counted along the force); for a variable force along a line, \(W=\int F\,\mathrm dx\). <strong>Kinetic energy:</strong> \(\frac12mv^2\). <strong>Gravitational potential energy:</strong> \(mgh\). <strong>Power</strong> is the rate of working: \(P=\frac{\mathrm dW}{\mathrm dt}=Fv\) — the formula behind every "car driving up a hill at constant speed" question.</p></div>
+<div class="box thm"><span class="bt">The work–energy principle</span>
+<p>The total work done on a particle equals its change in kinetic energy:
+\[\int F\,\mathrm dx=\tfrac12mv^2-\tfrac12mu^2\]
+— which is exactly the identity \(F=ma=m\frac{\mathrm d}{\mathrm dx}\left(\frac12v^2\right)\) of §M.2, integrated. When the only forces are gravity and reactions perpendicular to motion, this becomes <strong>conservation of energy</strong>: \(\frac12mv^2+mgh\) is constant. Friction and resistance drain the account: energy lost \(=\) work done against them.</p></div>
+<p>Energy is the great shortcut: it relates speeds to positions <em>without</em> solving for the motion in time. If a STEP question asks "how fast at the bottom?" and not "when?", reach for energy before kinematics.</p>
+
+<h2><span class="sn">§M.6</span>Momentum, impulse and collisions</h2>
+<div class="box def"><span class="bt">Momentum and impulse</span>
+<p><strong>Momentum:</strong> \(mv\) (a vector). <strong>Impulse</strong> of a force: \(\int F\,\mathrm dt\), equal to the change in momentum — Newton's second law integrated in time, the partner of the work–energy principle (which integrates it in space).</p></div>
+<div class="box thm"><span class="bt">Collisions</span>
+<ol>
+<li><strong>Conservation of momentum:</strong> with no external impulse, total momentum is unchanged:
+\(m_1u_1+m_2u_2=m_1v_1+m_2v_2\). (Take a positive direction and stick to it — sign errors are the genre's signature mistake.)</li>
+<li><strong>Newton's law of restitution:</strong> the speed of separation is \(e\) times the speed of approach,
+\[v_2-v_1=e\,(u_1-u_2),\qquad 0\le e\le1,\]
+with \(e=1\) a perfectly elastic collision (kinetic energy conserved) and \(e=0\) perfectly inelastic (the particles coalesce). For a ball bouncing off a fixed wall or floor: rebound speed \(=e\times\) impact speed — whence the classic bouncing-ball geometric series, which is why this section follows the <a href="sequences.html">Sequences</a> topic's geometric sums.</li>
+<li>Kinetic energy is <em>not</em> conserved unless \(e=1\); computing the energy lost is a standard final part.</li>
+</ol></div>
+
+<h2><span class="sn">§M.7</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill new">New</span></div>
+<p>A particle moves with \(v(t)=6t-3t^2\) (metres per second) for \(t\ge0\). Find (i) its displacement when it first returns to its starting point, justifying your answer; (ii) the total <em>distance</em> travelled by \(t=3\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Displacement: \(x(t)=3t^2-t^3\), zero at \(t=0\) and \(t=3\) — so (i) the displacement at first return is, by definition, 0, at \(t=3\). (ii) \(v=0\) at \(t=2\); the particle goes forward to \(x(2)=4\), then back to \(x(3)=0\): total distance \(4+4=8\) m. Distance is the integral of \(|v|\) — split at the turning point, exactly like the signed-area discussion in the <a href="integration.html">Integration</a> topic.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill new">New</span></div>
+<p>A ball is projected from ground level with speed \(u\) at angle \(\theta\). Show that the maximum height and the range satisfy \(H=\frac R4\tan\theta\), and deduce the angle for which the ball's greatest height equals its range.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>\(\frac HR=\frac{u^2\sin^2\theta/2g}{u^2\cdot2\sin\theta\cos\theta/g}=\frac{\sin\theta}{4\cos\theta}=\frac{\tan\theta}4\), giving the identity. \(H=R\) requires \(\tan\theta=4\), i.e. \(\theta=\arctan4\approx76^\circ\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill new">New · STEP-style</span></div>
+<p>A particle is projected with speed \(u\) from the origin and must pass through the point \((a,b)\). Using the trajectory equation in its \(\tan\theta\) form, show that this is possible if and only if
+\[b\le\frac{u^2}{2g}-\frac{ga^2}{2u^2},\]
+and interpret the boundary curve geometrically.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Substituting \((a,b)\) into \(y=x\tan\theta-\frac{gx^2}{2u^2}(1+\tan^2\theta)\) and writing \(T=\tan\theta\):
+\[\frac{ga^2}{2u^2}T^2-aT+\left(b+\frac{ga^2}{2u^2}\right)=0,\]
+a quadratic in \(T\) with real solutions iff its discriminant is non-negative:
+\(a^2\ge4\cdot\frac{ga^2}{2u^2}\left(b+\frac{ga^2}{2u^2}\right)\), which rearranges to the stated inequality. The boundary \(y=\frac{u^2}{2g}-\frac{gx^2}{2u^2}\) is the <em>parabola of safety</em>: the envelope of all trajectories — points below it can be hit (generally by two angles, the flat and the lobbed shot), points above it by none.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill new">New</span></div>
+<p>A block of mass \(m\) rests on a rough plane inclined at angle \(\alpha\), with coefficient of friction \(\mu&gt;\tan\alpha\). A force \(P\) is applied <em>up the slope, along it</em>. Find the range of values of \(P\) for which the block remains in equilibrium.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Perpendicular: \(R=mg\cos\alpha\). Along the slope, friction can act either way with \(|F|\le\mu mg\cos\alpha\). Equilibrium requires \(P-mg\sin\alpha=-F\), i.e. \(|P-mg\sin\alpha|\le\mu mg\cos\alpha\):
+\[mg(\sin\alpha-\mu\cos\alpha)\le P\le mg(\sin\alpha+\mu\cos\alpha).\]
+Since \(\mu&gt;\tan\alpha\), the lower bound is negative, so every \(0\le P\le mg(\sin\alpha+\mu\cos\alpha)\) works — including \(P=0\), consistent with the block sitting still unaided. Push harder than the upper bound and it slides up.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill new">New</span></div>
+<p>A car of mass 1200 kg has a maximum engine power of 60 kW and experiences resistance of magnitude \(40v\) newtons at speed \(v\). Find its maximum speed on the flat, and its maximum steady speed up a slope of inclination \(\arcsin\frac1{20}\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>On the flat at top speed the driving force equals resistance: \(\frac{60000}v=40v\), so \(v^2=1500\), \(v=10\sqrt{15}\approx38.7\) m s(^{-1}). Uphill, the engine also fights the weight component \(1200g\cdot\frac1{20}=60g\approx588\) N:
+\[\frac{60000}v=40v+588\ \Rightarrow\ 40v^2+588v-60000=0,\]
+giving \(v\approx31.9\) m s(^{-1}) (the positive root). The structure \(P=Fv\) plus a force balance is the whole genre.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill new">New · STEP-style</span></div>
+<p>A particle of mass \(m\) moving with speed \(u\) strikes directly a stationary particle of mass \(km\) (\(k&gt;0\)), with coefficient of restitution \(e\).<br>
+(i) Find the velocities after impact. (ii) Show that the fraction of kinetic energy lost is \(\dfrac{k(1-e^2)}{1+k}\). (iii) For which \(e\) and \(k\) does the first particle rebound (reverse direction)?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>(i) Momentum: \(mu=mv_1+kmv_2\); restitution: \(v_2-v_1=eu\). Solving: \(v_1=\dfrac{(1-ke)u}{1+k}\), \(v_2=\dfrac{(1+e)u}{1+k}\).<br>
+(ii) Energy after: \(\frac12m v_1^2+\frac12kmv_2^2\); a (worthwhile) algebra exercise gives loss \(\frac12mu^2\cdot\frac{k(1-e^2)}{1+k}\) — zero iff \(e=1\), as it must be.<br>
+(iii) \(v_1&lt;0\iff ke&gt;1\): the struck particle must be heavy enough <em>and</em> the collision bouncy enough.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill new">New</span></div>
+<p>A ball is dropped from height \(h\) onto a fixed floor, with coefficient of restitution \(e\) at each bounce. Using the geometric sums of the <a href="sequences.html">Sequences</a> topic, show that the total distance travelled before the ball comes to rest is
+\[h\,\frac{1+e^2}{1-e^2},\]
+and find the total time taken.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Impact speed from height \(h\) is \(\sqrt{2gh}\); rebound speed \(e\sqrt{2gh}\) gives rebound height \(e^2h\), then \(e^4h\), and so on. Distance: \(h+2e^2h+2e^4h+\dots=h+\frac{2e^2h}{1-e^2}=h\frac{1+e^2}{1-e^2}\). Times: the first drop takes \(\sqrt{2h/g}\), and each subsequent up-and-down from height \(e^{2n}h\) takes \(2\sqrt{2e^{2n}h/g}\) — a geometric series in \(e^n\):
+\[T=\sqrt{\frac{2h}g}\left(1+\frac{2e}{1-e}\right)=\sqrt{\frac{2h}g}\cdot\frac{1+e}{1-e}.\]
+Infinitely many bounces, finite distance, finite time — Zeno would approve.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill">STEP-style · Hard</span></div>
+<p>A particle moves in a straight line against a resistance proportional to its speed, so \(\dot v=-kv\) with \(v(0)=u\).<br>
+(i) Find \(v(t)\), and show the particle never stops in finite time.<br>
+(ii) Using \(v\frac{\mathrm dv}{\mathrm dx}=-kv\), find the total distance it travels.<br>
+(iii) Now suppose instead \(\dot v=-kv^2\). Show that the particle again never stops — but this time travels an <em>infinite</em> distance. Reconcile the two answers physically.</p>
+<details class="sol"><summary>Show hints</summary>
+<p>(i) The separable equation of the <a href="differentiation.html">Differentiation</a> topic: \(v=ue^{-kt}&gt;0\) always. (ii) \(\frac{\mathrm dv}{\mathrm dx}=-k\), so \(v=u-kx\): the speed hits zero at \(x=\frac uk\) — total distance \(\frac uk\), approached asymptotically. (iii) For \(v^{-2}\,\mathrm dv=-k\,\mathrm dt\): \(v=\frac u{1+ukt}\); and \(\frac{\mathrm dv}{\mathrm dx}=-kv\) gives \(v=ue^{-kx}\), positive for all \(x\) — the quadratic drag dies away so fast at low speed that it can no longer bring the particle to rest within any bounded stretch of road.</p>
+</details></div>
+
+<div class="pn"><a href="complex.html">← Complex Numbers</a><a href="statistics.html">Statistics →</a></div>
+</div>

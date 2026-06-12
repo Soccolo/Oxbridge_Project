@@ -1,0 +1,271 @@
+<div class="page">
+<p class="crumb"><b>Topic 9</b> · TMUA Paper 2 · The Logic of Arguments · Mathematical Proof <span class="pill new">New chapter</span></p>
+<h1>Mathematical Logic and Proof</h1>
+<p class="lede">Half of the TMUA is not about computing but about <em>reasoning</em>: what statements mean, what follows from what, and how proofs go right — and wrong.</p>
+
+<h2><span class="sn">§L.1</span>Introduction</h2>
+<p>Paper 2 of the TMUA is unlike anything in the A-level syllabus. The questions don't ask you to find a value; they ask whether an argument is valid, what a statement's negation is, whether a condition is necessary or sufficient, or which line of a "proof" contains the error. The mathematics inside the questions is deliberately easy — the logic around it is the exam. We met the first of these ideas in the <a href="numbers.html">Numbers</a> topic, where induction taught us necessary versus sufficient; here we develop the full toolkit.</p>
+
+<h2><span class="sn">§L.2</span>Statements and their negations</h2>
+<div class="box def"><span class="bt">Statements</span>
+<p>A <strong>statement</strong> is a sentence which is either true or false (never both, never neither). "\(7\) is prime" is a true statement; "\(\pi&lt;3\)" is a false one; "\(x&gt;2\)" is not a statement until we say what \(x\) is — it is a <em>condition</em>, which becomes a statement once quantified or instantiated.</p></div>
+<div class="box def"><span class="bt">Negation</span>
+<p>The negation of a statement \(P\), written \(\lnot P\) ("not \(P\)"), is the statement which is true exactly when \(P\) is false. Negating twice returns the original: \(\lnot(\lnot P)=P\).</p></div>
+<p>Negating sounds trivial and is the single richest source of Paper 2 traps. The traps:</p>
+<div class="box warn"><span class="bt">Negation traps</span>
+<ol>
+<li><strong>Inequalities:</strong> the negation of \(x&gt;2\) is \(x\le2\), <em>not</em> \(x&lt;2\). The negation must cover every case where the original fails — including equality.</li>
+<li><strong>"And" and "or" swap (De Morgan's laws):</strong>
+\[\lnot(P\text{ and }Q)=(\lnot P)\text{ or }(\lnot Q),\qquad \lnot(P\text{ or }Q)=(\lnot P)\text{ and }(\lnot Q).\]
+"It is not true that \(n\) is even and positive" means "\(n\) is odd <em>or</em> \(n\le0\)". Note also that the mathematical "or" is inclusive: "\(P\) or \(Q\)" is true when both hold.</li>
+<li><strong>Quantifiers swap:</strong> the negation of "for all \(x\), \(P(x)\)" is "there exists an \(x\) with \(\lnot P(x)\)" — and vice versa:
+\[\lnot\big(\forall x:P(x)\big)=\exists x:\lnot P(x),\qquad \lnot\big(\exists x:P(x)\big)=\forall x:\lnot P(x).\]
+To deny "every swan is white" you need just <em>one</em> black swan — a single <strong>counterexample</strong> disproves a universal claim. To deny "some swan is black" you must show <em>every</em> swan is non-black.</li>
+</ol></div>
+<p><strong>Example.</strong> Negate: "for every \(x&gt;0\) there exists \(y\) such that \(y^2&lt;x\)." Work outside-in, flipping each quantifier: "there exists \(x&gt;0\) such that for every \(y\), \(y^2\ge x\)." Note the condition \(x&gt;0\) describing the domain is <em>not</em> negated — we are denying the claim about those \(x\), not changing which \(x\) we talk about.</p>
+
+<h2><span class="sn">§L.3</span>Implication, converse, contrapositive</h2>
+<div class="box def"><span class="bt">Implication</span>
+<p>"\(P\Rightarrow Q\)" ("if \(P\) then \(Q\)") asserts: whenever \(P\) is true, \(Q\) is true. It says nothing at all about what happens when \(P\) is false. Consequently \(P\Rightarrow Q\) is only false in one situation: \(P\) true and \(Q\) false. The statements "\(P\Rightarrow Q\)" and "\(\lnot P\) or \(Q\)" are identical.</p></div>
+<p>From \(P\Rightarrow Q\) we can manufacture three related statements, and telling them apart is the heart of Paper 2:</p>
+<div class="box thm"><span class="bt">The four faces of an implication</span>
+<table>
+<tr><th>Name</th><th>Statement</th><th>Relation to the original</th></tr>
+<tr><td>Original</td><td>\(P\Rightarrow Q\)</td><td>—</td></tr>
+<tr><td>Converse</td><td>\(Q\Rightarrow P\)</td><td><strong>independent</strong> — may be true or false regardless</td></tr>
+<tr><td>Inverse</td><td>\(\lnot P\Rightarrow\lnot Q\)</td><td>equivalent to the converse</td></tr>
+<tr><td>Contrapositive</td><td>\(\lnot Q\Rightarrow\lnot P\)</td><td><strong>equivalent</strong> to the original</td></tr>
+</table>
+<p>If both \(P\Rightarrow Q\) and \(Q\Rightarrow P\) hold, we write \(P\Leftrightarrow Q\): \(P\) <em>if and only if</em> ("iff") \(Q\); the statements are <strong>equivalent</strong>.</p></div>
+<p><strong>Example.</strong> "If \(n\) is a multiple of 4, then \(n\) is even" — true. Converse: "if \(n\) is even, then \(n\) is a multiple of 4" — false (\(n=6\)). Contrapositive: "if \(n\) is odd, then \(n\) is not a multiple of 4" — true, automatically, because the contrapositive of a true statement is always true. The most common Paper 2 error is treating an implication and its converse as the same statement — in everyday speech "if" often smuggles in "only if", but in mathematics never.</p>
+
+<h2><span class="sn">§L.4</span>Necessary and sufficient</h2>
+<p>These words are precise synonyms for the directions of implication:</p>
+<div class="box thm"><span class="bt">Translation table</span>
+<ol>
+<li>"\(P\) is <strong>sufficient</strong> for \(Q\)" means \(P\Rightarrow Q\): having \(P\) is enough to guarantee \(Q\).</li>
+<li>"\(P\) is <strong>necessary</strong> for \(Q\)" means \(Q\Rightarrow P\): you cannot have \(Q\) without \(P\).</li>
+<li>"\(P\) is necessary <em>and</em> sufficient for \(Q\)" means \(P\Leftrightarrow Q\).</li>
+<li>"\(Q\) <strong>if</strong> \(P\)" means \(P\Rightarrow Q\); "\(Q\) <strong>only if</strong> \(P\)" means \(Q\Rightarrow P\).</li>
+</ol></div>
+<p><strong>Example.</strong> For a real number \(x\): "\(x&gt;3\)" is <em>sufficient</em> for "\(x^2&gt;4\)" (it forces it) but not necessary (\(x=-5\) works too). "\(x\ne2\)" is <em>necessary</em> for "\(x^2\ne4\)" but not sufficient (\(x=-2\) fails). And as we saw with induction in the <a href="numbers.html">Numbers</a> topic: in weak induction, the truth of \(P(k)\) is both necessary and sufficient for the inductive step to deliver \(P(k+1)\); in strong induction it is necessary but not sufficient.</p>
+<div class="box warn"><span class="bt">A reasoning checklist for "must it be true?" questions</span>
+<p>Many TMUA questions give conditions and ask which statements <em>must</em> follow. The discipline:</p>
+<ol>
+<li>To show a statement <em>must</em> be true, derive it from the given conditions for <em>every</em> allowed case.</li>
+<li>To show it needn't be true, exhibit <em>one</em> concrete counterexample satisfying all the givens.</li>
+<li>Beware reasoning from a special case: checking one convenient example can only ever disprove, never prove, a universal claim.</li>
+</ol></div>
+
+<h2><span class="sn">§L.5</span>The dictionary of statements</h2>
+<p>What follows comes straight from my tutoring sessions: a compact "dictionary" for translating exam English into implications, fast. In Paper 2 you have under two minutes per question; the dictionary makes the translation mechanical, so your thinking time is spent on the mathematics rather than on the wording. Throughout, \(A\) and \(B\) are mathematical sentences — for instance \(A\): "\(x\) is a multiple of 3" and \(B\): "\(x\) is a multiple of 6".</p>
+<div class="box thm"><span class="bt">If/then statements</span>
+<ol>
+<li><strong>If \(A\) then \(B\)</strong>: &nbsp;\(A\Rightarrow B\).</li>
+<li><strong>\(A\) if \(B\)</strong>: &nbsp;\(B\Rightarrow A\).</li>
+<li><strong>\(A\) only if \(B\)</strong>: &nbsp;\(A\Rightarrow B\). &nbsp;("\(x\) is a multiple of 6 <em>only if</em> \(x\) is a multiple of 3.")</li>
+<li><strong>\(A\) if and only if \(B\)</strong>: &nbsp;\(A\Rightarrow B\) and \(B\Rightarrow A\).</li>
+</ol></div>
+<div class="box thm"><span class="bt">Necessity and sufficiency</span>
+<ol>
+<li><strong>\(A\) is necessary for \(B\)</strong>: &nbsp;\(B\Rightarrow A\). &nbsp;("\(x\) being a multiple of 3 is necessary for \(x\) to be a multiple of 6.")</li>
+<li><strong>\(A\) is sufficient for \(B\)</strong>: &nbsp;\(A\Rightarrow B\).</li>
+</ol></div>
+<div class="box"><span class="bt">Tip</span>
+<p>A statement \(A\) is sufficient for a statement \(B\) if, with only the knowledge from statement \(A\), you can prove the entirety of statement \(B\). Statement \(A\) may contain <em>more</em> information than needed for statement \(B\), so it may not be necessary. For instance, with \(A\): "\(x\) is a multiple of 12" and \(B\): "\(x\) is a multiple of 6" — the fact that \(x\) is a multiple of 12 is sufficient to prove that \(x\) is a multiple of 6, but it contains more information than needed, because not every multiple of 6 must be a multiple of 12.</p></div>
+<p>The dictionary entries chain together — these identifications are worth reciting until they are reflexes:</p>
+<div class="box thm"><span class="bt">The grand identifications</span>
+<ol>
+<li>"If \(A\) then \(B\)" \(=\) "\(A\) only if \(B\)" \(=\) "\(A\) is sufficient for \(B\)" — all three are \(A\Rightarrow B\).</li>
+<li>"\(A\) if \(B\)" \(=\) "\(A\) is necessary for \(B\)" — both are \(B\Rightarrow A\).</li>
+<li>If \(A\) is necessary for \(B\), then \(B\) is sufficient for \(A\) — the same arrow read from the other end.</li>
+</ol></div>
+<div class="box tmpl"><span class="bt">Template — Testing sufficiency and necessity by counterexample</span>
+<ol>
+<li>To check whether \(C\) is <strong>sufficient</strong> for \(B\), you have to see whether \(C\Rightarrow B\). Look for a counterexample: if statement \(B\) isn't true for a number that satisfies statement \(C\), then \(C\) is not sufficient for \(B\). For instance, \(C\): "\(x\) is a multiple of 4", \(B\): "\(x\) is a multiple of 6": \(x=4\) is a multiple of 4 but not of 6, therefore \(C\) is not sufficient for \(B\).</li>
+<li>Similarly, to check whether \(A\) is <strong>necessary</strong> for \(B\), look for a counterexample the other way: a number for which statement \(B\) is true but statement \(A\) isn't.</li>
+<li>No counterexample after honest searching is evidence, not proof — to <em>establish</em> sufficiency or necessity, prove the implication.</li>
+</ol></div>
+<div class="box tmpl"><span class="bt">Template — "Exactly one statement is true"</span>
+<p>Sometimes you may get a question where you have to find the true statement among many others, <em>given that only one statement is true</em>. In that case, rewrite all of the statements with the dictionary of statements and see which ones are the same. Equivalent statements share a truth value — so if several options translate to the same implication, none of them can be the unique true one, and the answer is the odd one out. Often you never need to think about the mathematics at all.</p></div>
+
+<h3>Drills from the tutoring room</h3>
+<p>These are the exercises I use with my own students when first teaching the dictionary. Translate first, think second.</p>
+
+<div class="q"><div class="qhead"><span class="qn">Drill 1</span><span class="pill">Translation</span></div>
+<p>Are the following statements true or false?<br>
+(a) \(x&gt;5\) <em>if</em> \(x&gt;10\)<br>
+(b) \(x&lt;5\) <em>only if</em> \(x&lt;3\)<br>
+(c) \(x\) is even <em>if and only if</em> \(x+1\) is odd<br>
+(d) \(ab=ac\) <em>if and only if</em> \(b=c\)<br>
+(e) \(a^2&lt;a\) <em>if</em> \(a&lt;1\)<br>
+(f) \(a^2&lt;a\) <em>only if</em> \(a&lt;1\)<br>
+(g) \(a^2&lt;a\) <em>if and only if</em> \(-1&lt;a&lt;1\)</p>
+<details class="sol"><summary>Show solutions</summary>
+<p>(a) <strong>True</strong>: translates to \(x&gt;10\Rightarrow x&gt;5\).<br>
+(b) <strong>False</strong>: translates to \(x&lt;5\Rightarrow x&lt;3\); counterexample \(x=4\).<br>
+(c) <strong>True</strong>: both directions hold.<br>
+(d) <strong>False</strong>: \(\Leftarrow\) holds, but \(\Rightarrow\) fails for \(a=0\) — the dividing-by-zero rogue of §L.7 in disguise.<br>
+(e) <strong>False</strong>: \(a&lt;1\Rightarrow a^2&lt;a\) fails at \(a=0\) (since \(0&lt;0\) is false) and at every negative \(a\).<br>
+(f) <strong>True</strong>: \(a^2&lt;a\) forces \(0&lt;a&lt;1\), so certainly \(a&lt;1\).<br>
+(g) <strong>False</strong>: the "if" direction fails — \(a=0\) satisfies \(-1&lt;a&lt;1\) but not \(a^2&lt;a\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Drill 2</span><span class="pill">Classification</span></div>
+<p>For each pair, decide whether \(P\) is necessary, sufficient, both, or neither, for \(Q\):<br>
+(a) \(P\): an integer being an even prime number; \(Q\): an integer being the number 2.<br>
+(b) \(P\): a function being a cubic polynomial; \(Q\): a function having at least one real root.<br>
+(c) \(P\): an integer being divisible by 5; \(Q\): an integer ending in a 5.<br>
+(d) \(P\): \(\sin x=\sin y\); \(Q\): \(x=y\).<br>
+(e) \(P\): \(|x|&lt;25\); \(Q\): \(x\ne25\).</p>
+<details class="sol"><summary>Show solutions</summary>
+<p>(a) <strong>Both</strong> — necessary and sufficient: 2 is the only even prime, so \(P\Leftrightarrow Q\).<br>
+(b) <strong>Sufficient, not necessary</strong>: every cubic has a real root (it goes to \(\mp\infty\) at the two ends and is continuous), but so do many non-cubics, e.g. \(f(x)=x\).<br>
+(c) <strong>Necessary, not sufficient</strong>: \(Q\Rightarrow P\) (anything ending in 5 is divisible by 5), but \(x=10\) is divisible by 5 without ending in a 5.<br>
+(d) <strong>Necessary, not sufficient</strong>: \(x=y\Rightarrow\sin x=\sin y\), but \(\sin0=\sin\pi\) with \(0\ne\pi\).<br>
+(e) <strong>Sufficient, not necessary</strong>: \(|x|&lt;25\Rightarrow x\ne25\), but \(x=100\ne25\) with \(|x|\ge25\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Drill 3</span><span class="pill">Exactly one is true</span></div>
+<p>(a) \(a\) and \(b\) are real numbers and \(f\) is a function. Given that exactly one of the following statements is true, which one is it?<br>
+A. If \(a&lt;b\) then \(f(a)&lt;f(b)\) &nbsp; B. \(a&lt;b\) only if \(f(a)&lt;f(b)\) &nbsp; C. \(f(a)&lt;f(b)\) is sufficient for \(a&lt;b\) &nbsp; D. \(f(a)&lt;f(b)\) is necessary for \(a&lt;b\)</p>
+<p>(b) \(a\) is a real number and \(f\) is a function. Given that exactly one of the following statements is true, which one is it?<br>
+A. If \(a&gt;0\) then \(f(a)&gt;0\) &nbsp; B. \(a&gt;0\) only if \(f(a)&gt;0\) &nbsp; C. \(a&gt;0\) is sufficient for \(f(a)&gt;0\) &nbsp; D. \(a&gt;0\) is necessary for \(f(a)&gt;0\)</p>
+<p>(c) Given that exactly one of the following statements is true, which one is it?<br>
+A. \(x\) is an even prime only if \(x\ne2\) &nbsp; B. If \(x\) is an even prime, then \(x\ne2\) &nbsp; C. \(x\ne2\) is sufficient for \(x\) to be an even prime &nbsp; D. \(x\ne2\) is necessary for \(x\) to be an even prime &nbsp; E. \(x=2\) if and only if \(x\) is not an even prime &nbsp; F. \(x\) is not an even prime only if \(x\ne2\)</p>
+<details class="sol"><summary>Show solutions</summary>
+<p>(a) <strong>C</strong>. Translate everything: A, B and D all say \(a&lt;b\Rightarrow f(a)&lt;f(b)\) — three copies of the same statement, which would be true or false together; with exactly one true, all three must be false. The odd one out, C, says \(f(a)&lt;f(b)\Rightarrow a&lt;b\), and it is the answer — no mathematics about \(f\) required.<br>
+(b) <strong>D</strong>. A, B and C are all \(a&gt;0\Rightarrow f(a)&gt;0\); D alone is \(f(a)&gt;0\Rightarrow a&gt;0\).<br>
+(c) <strong>F</strong>. Recall \(x\) is an even prime \(\iff x=2\). A, B and D each translate to "\(x\) is an even prime \(\Rightarrow x\ne2\)" — false; C says \(x\ne2\Rightarrow x\) is an even prime — false; E is false since \(x=2\) <em>is</em> an even prime. F says: \(x\) is not an even prime \(\Rightarrow x\ne2\) — the contrapositive of "\(x=2\Rightarrow x\) is an even prime", which is true. ✓</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Drill 4</span><span class="pill tmua">TMUA example</span></div>
+<p>Which of the following is a <em>sufficient but not necessary</em> condition for
+\[\sum_{k=1}^{n}\cos\!\left(\frac{k\pi}4\right)=0\;?\]
+A. \(n=2\) &nbsp; B. \(n=4\) &nbsp; C. \(n\) is 3 more than a multiple of 4 &nbsp; D. \(n\) is 3 more than a multiple of 8 &nbsp; E. \(n\) is an even integer &nbsp; F. \(n\) is an odd integer</p>
+<details class="sol"><summary>Show solution</summary>
+<p><strong>D.</strong> The terms \(\cos\frac{k\pi}4\) for \(k=1,\dots,8\) are \(\frac{\sqrt2}2,\,0,\,-\frac{\sqrt2}2,\,-1,\,-\frac{\sqrt2}2,\,0,\,\frac{\sqrt2}2,\,1\), summing to 0 — so the partial sums \(S_n\) are periodic with period 8. Computing one period: \(S_1=S_2=\frac{\sqrt2}2\), \(S_3=0\), \(S_4=-1\), \(S_5=S_6=-1-\frac{\sqrt2}2\), \(S_7=-1\), \(S_8=0\). So \(S_n=0\) exactly when \(n\equiv3\) or \(n\equiv0\pmod 8\). Now apply the dictionary: a <em>sufficient</em> condition must force \(S_n=0\); a <em>not necessary</em> one must miss some solutions. "\(n\) is 3 more than a multiple of 8" guarantees \(S_n=0\) (sufficient ✓) yet misses \(n=8,16,\dots\) (not necessary ✓). Checking the others: A gives \(S_2\ne0\); B gives \(S_4\ne0\); C includes \(n=7\), where \(S_7=-1\ne0\), so it isn't sufficient; E includes \(n=2\); F includes \(n=1\). The exam pattern: compute one period, characterise the solution set exactly, then test each option's set against it for containment.</p>
+</details></div>
+
+<h2><span class="sn">§L.6</span>Methods of proof</h2>
+<p>We collected proof techniques throughout the book; here is the full arsenal in one place.</p>
+<div class="box thm"><span class="bt">The arsenal</span>
+<ol>
+<li><strong>Direct proof:</strong> assume \(P\), deduce \(Q\) by a chain of implications.</li>
+<li><strong>Proof by exhaustion:</strong> split into finitely many cases and verify each — how we handled residues in <a href="numbers.html">modular arithmetic</a> (squares mod 4: check \(n\equiv0,1,2,3\) separately).</li>
+<li><strong>Proof by contrapositive:</strong> to prove \(P\Rightarrow Q\), prove \(\lnot Q\Rightarrow\lnot P\) instead — they are equivalent, and the contrapositive is often easier. To show "if \(n^2\) is even then \(n\) is even", show "if \(n\) is odd then \(n^2\) is odd": \(n=2k+1\) gives \(n^2=2(2k^2+2k)+1\). Done.</li>
+<li><strong>Proof by contradiction (reduction to absurd):</strong> assume the statement is false and derive an impossibility — the template from the <a href="numbers.html">Numbers</a> topic, including its specialised form, <em>infinite descent</em>, with which we proved \(\sqrt2\) irrational.</li>
+<li><strong>Proof by induction</strong> (weak and strong): the templates of §2.2.</li>
+<li><strong>Disproof by counterexample:</strong> one example where the claim fails. A counterexample must satisfy <em>all</em> the hypotheses and violate the conclusion.</li>
+</ol></div>
+
+<h2><span class="sn">§L.7</span>Identifying errors in proofs</h2>
+<p>The signature Paper 2 question: a purported proof with numbered lines, one of which is rotten. The classic rots, ranked by frequency:</p>
+<div class="box warn"><span class="bt">The rogues' gallery</span>
+<ol>
+<li><strong>Dividing by something that may be zero.</strong> The flagship fake proof that \(1=2\): let \(a=b\); then \(a^2=ab\); then \(a^2-b^2=ab-b^2\); factor: \((a-b)(a+b)=b(a-b)\); divide by \(a-b\) to get \(a+b=b\), i.e. \(2b=b\), so \(2=1\). The division by \(a-b=0\) is the crime. The same crime in trigonometric disguise: cancelling \(\cos\theta\) in Question 8 of the <a href="geometry.html">Geometry</a> topic.</li>
+<li><strong>Squaring (or applying any non-injective operation) and keeping all the "solutions".</strong> From \(x=\sqrt{x+2}\), squaring gives \(x^2-x-2=0\), so \(x=2\) or \(x=-1\) — but \(x=-1\) fails the original (a square root is non-negative). Squaring is a valid <em>forward</em> implication, not an equivalence; every solution of the original solves the squared equation, but not conversely. Always substitute candidates back.</li>
+<li><strong>Multiplying or dividing an inequality by a quantity of unknown sign.</strong> From \(\frac1x&lt;1\) it does <em>not</em> follow that \(1&lt;x\): if \(x&lt;0\) the multiplication flips the sign (recall Remark 2 of the <a href="algebra.html">Algebra</a> topic), and indeed every negative \(x\) satisfies \(\frac1x&lt;1\).</li>
+<li><strong>Assuming the converse / affirming the consequent.</strong> Knowing \(P\Rightarrow Q\) and observing \(Q\), one cannot conclude \(P\).</li>
+<li><strong>Circular reasoning:</strong> using (a disguised form of) the statement being proved as a step in its own proof.</li>
+<li><strong>An induction whose step fails for small \(n\).</strong> The famous "all horses are the same colour" proof breaks because the inductive step requires two overlapping sets, which fails going from \(n=1\) to \(n=2\). When checking an induction, test the step at its <em>smallest</em> instance.</li>
+<li><strong>Taking square roots carelessly:</strong> \(x^2=y^2\) gives \(|x|=|y|\), i.e. \(x=\pm y\) — not \(x=y\).</li>
+</ol></div>
+<div class="box tmpl"><span class="bt">Template — Auditing a proof</span>
+<ol>
+<li>Read the conclusion first; if it is absurd (\(1=2\)), an error certainly exists — your job is to locate the <em>first</em> invalid line, not merely a suspicious one.</li>
+<li>For each line, ask: is this step an equivalence (\(\Leftrightarrow\)) or a one-way implication (\(\Rightarrow\))? One-way steps can introduce false solutions (squaring) or lose true ones (dividing).</li>
+<li>Test each division, cancellation, root and inequality manipulation against zero and against negative values.</li>
+<li>If the proof is an induction, verify the base case <em>and</em> run the inductive step by hand at the smallest \(k\).</li>
+</ol></div>
+
+<h2><span class="sn">§L.8</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill new">New · Paper 2 style</span></div>
+<p>Write down the negation of each statement:<br>
+(i) Every prime greater than 2 is odd.<br>
+(ii) There exists a real \(x\) with \(x^2+1=0\).<br>
+(iii) \(n\) is positive and even.<br>
+(iv) For every \(\epsilon&gt;0\) there exists \(N\) such that for all \(n&gt;N\), \(|a_n|&lt;\epsilon\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>(i) There exists a prime greater than 2 which is even. (ii) For every real \(x\), \(x^2+1\ne0\). (iii) \(n\) is non-positive or odd (De Morgan; note \(\le0\), not \(&lt;0\)). (iv) There exists \(\epsilon&gt;0\) such that for every \(N\) there exists \(n&gt;N\) with \(|a_n|\ge\epsilon\) — flip every quantifier in turn, negate the core, and \(&lt;\) becomes \(\ge\). (You have just negated the definition of a sequence converging to 0.)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill new">New · Paper 2 style</span></div>
+<p>For real numbers \(x\), consider \(P\): "\(x^2-5x+6=0\)" and \(Q\): "\(x=2\)". Which of the following is true?<br>
+A. \(P\) is necessary and sufficient for \(Q\). &nbsp; B. \(P\) is necessary but not sufficient for \(Q\). &nbsp; C. \(P\) is sufficient but not necessary for \(Q\). &nbsp; D. \(P\) is neither.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>B. \(P\) holds iff \(x=2\) or \(x=3\). \(Q\Rightarrow P\) (so \(P\) is necessary for \(Q\)); but \(P\not\Rightarrow Q\), as \(x=3\) satisfies \(P\) and not \(Q\) (so \(P\) is not sufficient).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill new">New · Paper 2 style</span></div>
+<p>State the converse and the contrapositive of: "If a quadrilateral is a square, then it has equal diagonals." Decide the truth of all three statements.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Original: true. Converse: "if a quadrilateral has equal diagonals, then it is a square" — false (any non-square rectangle, or an isosceles trapezium). Contrapositive: "if a quadrilateral does not have equal diagonals, then it is not a square" — true, automatically equivalent to the original.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill new">New · Paper 2 style</span></div>
+<p>The integers \(a,b\) satisfy \(ab&gt;0\) and \(a+b&gt;0\). Which of the following <em>must</em> be true?<br>
+I. \(a&gt;0\) &nbsp; II. \(b&gt;0\) &nbsp; III. \(a^2+b^2&gt;0\)</p>
+<details class="sol"><summary>Show solution</summary>
+<p>All three. \(ab&gt;0\) forces \(a,b\) to share a sign; \(a+b&gt;0\) rules out both negative; hence both are positive (I and II), and III follows since neither is zero. The exam-day discipline: try to break each statement with signed examples before concluding "must".</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill new">New · Paper 2 style</span></div>
+<p>A student "proves" that \(-2=2\):<br>
+(1) \((-2)^2=4\). &nbsp; (2) \(2^2=4\). &nbsp; (3) Therefore \((-2)^2=2^2\). &nbsp; (4) Taking square roots of both sides, \(-2=2\).<br>
+In which line is the error, and what exactly is wrong?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Line (4). From \(x^2=y^2\) one may conclude only \(|x|=|y|\), i.e. \(x=\pm y\). "Taking the square root of both sides" of an equality of squares is a non-injective step — rogue #7 in our gallery.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill new">New · Paper 2 style</span></div>
+<p>A student solves \(\sqrt{x+3}=x-3\):<br>
+(1) Squaring: \(x+3=x^2-6x+9\). &nbsp; (2) So \(x^2-7x+6=0\). &nbsp; (3) Factorising: \((x-1)(x-6)=0\). &nbsp; (4) Hence the solutions are \(x=1\) and \(x=6\).<br>
+Identify and explain the error, and give the correct solution set.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Lines (1)–(3) are valid one-way implications; the error is the word "hence" in line (4), which silently upgrades \(\Rightarrow\) to \(\Leftrightarrow\). Squaring can introduce solutions: checking, \(x=1\) gives \(\sqrt4=2\) but \(x-3=-2\) — fails; \(x=6\) gives \(\sqrt9=3=6-3\) — works. The solution set is \(\{6\}\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill new">New · Paper 2 style</span></div>
+<p>Prove, by the method of your choice, that if \(n^2+2\) is divisible by 3, then \(n\) is not divisible by 3. Which proof method did you use, and what are the contrapositive and converse of the statement? Is the converse true?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Contrapositive: "if \(n\) is divisible by 3, then \(n^2+2\) is not divisible by 3" — and this is immediate: \(n=3k\) gives \(n^2+2=9k^2+2\equiv2\ (\mathrm{mod}\ 3)\). Proof by contrapositive. Converse: "if \(n\) is not divisible by 3, then \(n^2+2\) is divisible by 3" — true as well! If \(n\equiv\pm1\ (\mathrm{mod}\ 3)\) then \(n^2\equiv1\), so \(n^2+2\equiv0\). The original is thus an "iff" in disguise, but proving the converse required its own argument — the truth of an implication never comes free with its converse.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill new">New · Paper 2 style</span></div>
+<p>Consider the claim: "for all positive integers \(n\), \(n^2+n+41\) is prime." A student verifies it for \(n=1,2,\dots,20\) and declares it proven. What is wrong with the argument, and what is the status of the claim?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Twenty verifications prove nothing about "for all" — a universal claim needs a general argument; examples can only disprove. And the claim is in fact false: \(n=41\) gives \(41^2+41+41=41\cdot43\), composite (no computation needed — every term is divisible by 41). Euler's famous polynomial produces primes for \(n=1,\dots,39\) and then betrays you: the danger of pattern-spotting without proof.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill new">New · Paper 2 style</span></div>
+<p>Here is a "proof" that every real number equals 0. "Let \(x\) be any real number and let \(S=x+x^2+x^3+\dots\) Then \(xS=x^2+x^3+\dots=S-x\), so \(S(x-1)=-x\), giving \(S=\frac{x}{1-x}\), which is finite. But if \(x\ge1\) the sum is clearly infinite, a contradiction — unless \(x=0\)." Locate the error.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>The first line. Writing \(S=x+x^2+\dots\) and manipulating it presumes the infinite sum <em>converges</em> — which, as we saw in the <a href="sequences.html">Sequences</a> topic, holds only for \(|x|&lt;1\). For \(|x|\ge1\), \(S\) is not a number, and the algebra performed on it is meaningless. Manipulating a divergent series as if it were a number is a subtler cousin of dividing by zero.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 10</span><span class="pill new">New · Paper 2 style</span></div>
+<p>The statement \(P(n)\) satisfies: \(P(n)\Rightarrow P(n+2)\) for every positive integer \(n\); \(P(4)\) is true; and \(P(7)\) is false. For which \(n\) can the truth value of \(P(n)\) be determined, and what is it?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>From \(P(4)\) true and the step: \(P(n)\) is true for all even \(n\ge4\). From \(P(7)\) false, by the contrapositive \(\lnot P(n+2)\Rightarrow\lnot P(n)\): \(P(5)\), \(P(3)\) and \(P(1)\) are all false. Determined: even \(n\ge4\) (true) and odd \(n\le7\) (false). Undetermined: \(n=2\) (the implication only pushes forward) and odd \(n\ge9\) (a false hypothesis implies nothing). This is induction's machinery viewed through pure logic — the step transmits truth forwards and falsehood backwards, never the reverse.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 11</span><span class="pill tmua">TMUA 2020 (see Algebra Q9)</span></div>
+<p>The real numbers \(a,b,c,d\) satisfy both \(0&lt;a+b&lt;c+d\) and \(0&lt;a+c&lt;b+d\). Which of the following <em>must</em> be true?<br>
+I. \(a&lt;d\) &nbsp; II. \(b&lt;c\) &nbsp; III. \(a+b+c+d&gt;0\)<br>
+(Revisit this genuine TMUA question, from the <a href="algebra.html">Algebra</a> problems, with the checklist of §L.4 in hand.)</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Adding the two given inequalities: \(2a+b+c&lt;b+c+2d\), so \(a&lt;d\) — I must be true. III: \(a+b&gt;0\) and... careful — add \(0&lt;a+b\) and \(0&lt;c+d\)? We only know \(a+b&lt;c+d\) and \(a+b&gt;0\), hence \(c+d&gt;0\) too, and the total is positive — III must be true. II: try to break it. Take \(a=0,b=2,c=1,d=4\): then \(a+b=2&lt;5=c+d\) ✓, \(a+c=1&lt;6=b+d\) ✓, but \(b=2&gt;1=c\) — II fails. Answer: I and III only.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 12</span><span class="pill new">New · Paper 2 style · Hard</span></div>
+<p>Three statements about a function \(f:\mathbb R\to\mathbb R\):<br>
+\(P\): \(f(x)&gt;0\) for all \(x\). &nbsp; \(Q\): \(f(x)\ne0\) for all \(x\). &nbsp; \(R\): there is no \(x\) with \(f(x)\le0\).<br>
+Which pairs of statements are equivalent? For each non-equivalent pair, state which implication holds and give a counterexample to the other.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>\(P\) and \(R\) are equivalent: "no \(x\) with \(f(x)\le0\)" is exactly the negation-of-existence form of "for all \(x\), \(f(x)&gt;0\)". \(P\Rightarrow Q\) (positive numbers aren't zero) but \(Q\not\Rightarrow P\): \(f(x)=-1\) satisfies \(Q\) and violates \(P\). So \(P\Leftrightarrow R\), and \(Q\) is strictly weaker. The deeper lesson: a "for all" statement and the non-existence of a counterexample are the same statement in different clothing — the quantifier laws of §L.2.</p>
+</details></div>
+
+<div class="pn"><a href="counting.html">← Topic 8: Counting</a><a href="complex.html">Extension: Complex Numbers →</a></div>
+</div>

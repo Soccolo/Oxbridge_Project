@@ -1,0 +1,79 @@
+<div class="page">
+<p class="crumb"><b>Topic 8</b> · Underpinning knowledge · Counting · Probability · Statistics <span class="pill new">New chapter</span></p>
+<h1>Counting, Probability and Statistics</h1>
+<p class="lede">The TMUA assumes this material as "underpinning knowledge" — it appears inside Paper 1 questions rather than as a topic of its own, which makes it the easiest place to lose unexpected marks.</p>
+
+<h2><span class="sn">§C.1</span>Counting</h2>
+<div class="box thm"><span class="bt">The multiplication principle</span>
+<p>If a task splits into stages with \(m\) choices at the first stage and \(n\) at the second (whatever was chosen first), the number of outcomes is \(m\times n\). Everything below is this principle applied repeatedly.</p></div>
+<div class="box thm"><span class="bt">Arrangements and selections</span>
+<ol>
+<li><strong>Arrangements of \(n\) distinct objects:</strong> \(n!=1\cdot2\cdots n\) (with \(0!=1\)).</li>
+<li><strong>Arrangements of \(r\) objects from \(n\):</strong> \(\dfrac{n!}{(n-r)!}\) — order matters.</li>
+<li><strong>Selections of \(r\) objects from \(n\):</strong> \(\dbinom nr=\dfrac{n!}{r!(n-r)!}\) — order doesn't matter; divide the arrangements by the \(r!\) orderings of each selection. This is the same \(\binom nr\) as in the <a href="algebra.html">Binomial Theorem</a> — the coefficient of \(x^r\) in \((1+x)^n\) counts the ways of choosing which \(r\) brackets contribute an \(x\).</li>
+<li><strong>Arrangements with repeats:</strong> \(n\) objects of which groups of \(k_1,k_2,\dots\) are identical: \(\dfrac{n!}{k_1!\,k_2!\cdots}\).</li>
+</ol></div>
+<p><strong>Example.</strong> How many "words" can be formed from the letters of OXBRIDGE? Eight distinct letters: \(8!=40320\). And from BANANA? \(\frac{6!}{3!\,2!}=60\) — six letters with three A's and two N's identical.</p>
+<p>The slickest counting tool in multiple-choice settings is <strong>complementary counting</strong>: when "at least one…" appears, count the opposite. How many of the \(2^{10}\) binary strings of length 10 contain at least one 1? All but one: \(2^{10}-1\).</p>
+
+<h2><span class="sn">§C.2</span>Probability</h2>
+<div class="box def"><span class="bt">Probability</span>
+<p>For equally likely outcomes, \(\mathbb P(A)=\dfrac{\text{favourable outcomes}}{\text{total outcomes}}\) — which is why probability questions are usually counting questions wearing a disguise. Always \(0\le\mathbb P(A)\le1\), and \(\mathbb P(\text{not }A)=1-\mathbb P(A)\).</p></div>
+<div class="box thm"><span class="bt">Combining events</span>
+<ol>
+<li>\(\mathbb P(A\text{ or }B)=\mathbb P(A)+\mathbb P(B)-\mathbb P(A\text{ and }B)\); for <strong>mutually exclusive</strong> events the last term is 0.</li>
+<li>For <strong>independent</strong> events, \(\mathbb P(A\text{ and }B)=\mathbb P(A)\,\mathbb P(B)\). Successive draws <em>without replacement</em> are not independent — update the counts; a tree diagram keeps the bookkeeping honest.</li>
+</ol></div>
+<p><strong>Example.</strong> Two cards are drawn without replacement from a standard pack. \(\mathbb P(\text{both aces})=\frac4{52}\cdot\frac3{51}=\frac1{221}\). With replacement it would be \(\left(\frac1{13}\right)^2=\frac1{169}\) — the difference is precisely the loss of independence.</p>
+<p><strong>Example (complementary counting again).</strong> A fair die is rolled 4 times. \(\mathbb P(\text{at least one six})=1-\left(\frac56\right)^4=\frac{671}{1296}\approx0.52\) — de Méré's classic, and the standard pattern for every "at least one" probability.</p>
+
+<h2><span class="sn">§C.3</span>Statistics</h2>
+<div class="box thm"><span class="bt">Measures to know</span>
+<ol>
+<li><strong>Mean:</strong> \(\bar x=\frac1n\sum x_i\). Adding a constant to every datum adds it to the mean; scaling every datum scales the mean.</li>
+<li><strong>Median:</strong> the middle value when sorted (average of the middle two for even \(n\)) — robust to outliers, unlike the mean.</li>
+<li><strong>Mode:</strong> the most frequent value.</li>
+<li><strong>Range</strong> (max − min) and <strong>interquartile range</strong> (upper minus lower quartile) measure spread.</li>
+</ol></div>
+<p>TMUA questions on this material are reasoning questions: "the mean of five positive integers is 10 and their median is 12 — what is the largest possible value of the greatest of them?" (Fix the sum at 50, push the two below the median down to 1 each and the one between median and maximum down to 12: \(50-1-1-12-12=24\).) Reading information off charts — bar charts, pie charts, cumulative frequency — is also assumed; the mathematics is never deeper than proportional reasoning, but read the axes.</p>
+
+<h2><span class="sn">§C.4</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill new">New</span></div>
+<p>How many even four-digit numbers can be formed using the digits 1, 2, 3, 4, 5 with no digit repeated?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Constrain the most restricted position first: the last digit must be 2 or 4 (2 ways); the remaining three positions take an arrangement of 3 of the remaining 4 digits: \(4\cdot3\cdot2=24\). Total \(2\cdot24=48\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill new">New · TMUA-style</span></div>
+<p>A committee of 4 is chosen from 6 men and 5 women. In how many ways can it be chosen so that it contains at least one woman?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Complementary counting: all committees minus all-male committees: \(\binom{11}4-\binom64=330-15=315\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill new">New</span></div>
+<p>In the expansion of \((2+x)^6\), find the coefficient of \(x^4\), and verify that the sum of all seven coefficients equals \(3^6\) without computing them individually.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>The \(x^4\) term is \(\binom64\,2^2x^4=15\cdot4\,x^4\): coefficient 60. Setting \(x=1\) in the expansion sums the coefficients: \((2+1)^6=3^6=729\) — the substitution trick from MAT 2019 (Sequences, Question 8).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill new">New · TMUA-style</span></div>
+<p>A bag contains 5 red and 3 blue balls. Two balls are drawn without replacement. Given that \(\mathbb P(\text{both red})=\frac{5}{14}\), find \(\mathbb P(\text{the two balls have different colours})\), and decide: are the events "first ball red" and "second ball red" independent?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>\(\mathbb P(\text{both blue})=\frac38\cdot\frac27=\frac3{28}\). Different colours: \(1-\frac5{14}-\frac3{28}=1-\frac{10}{28}-\frac3{28}=\frac{15}{28}\). Independence fails: \(\mathbb P(\text{2nd red}\mid\text{1st red})=\frac47\ne\frac58=\mathbb P(\text{1st red})\) — drawing without replacement changes the composition of the bag.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill new">New · Paper 2 flavour</span></div>
+<p>A student argues: "When I roll two dice, the total is one of the eleven values \(2,3,\dots,12\); therefore each total has probability \(\frac1{11}\)." Identify the error and compute the correct probability that the total is 7.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>The error: the eleven totals are not equally likely — the equally-likely outcomes are the \(36\) ordered pairs. The total 7 arises from \((1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\): \(\mathbb P=\frac6{36}=\frac16\). Equal likelihood is a property to be justified, never assumed from a mere list of outcomes.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill new">New · TMUA-style</span></div>
+<p>Five positive integers have mean 7, median 8, a unique mode of 9, and range 6. Find the five integers, and explain why the answer is unique.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>The sum is 35 and, sorted, the list is \(a,b,8,d,e\). A unique mode of 9 forces at least two 9s, which can only sit above the median: \(d=e=9\). The maximum is 9, so range 6 gives \(a=3\); then \(b=35-3-8-9-9=6\), and \(3\le6\le8\) ✓. The integers are \(\{3,6,8,9,9\}\). Each condition pinned down one unknown in turn — mode placed the 9s, range fixed \(a\), the mean fixed \(b\) — so no other list is possible. (Exercise in the spirit of Paper 2: show that changing "range 6" to "range 10" makes the question <em>unsatisfiable</em>, since the maximum is forced to be 9 and \(a\ge1\) caps the range at 8.)</p>
+</details></div>
+
+<div class="pn"><a href="integration.html">← Topic 7: Integration</a><a href="logic.html">Topic 9: Logic and Proof →</a></div>
+</div>
