@@ -39,15 +39,15 @@ function toggleNav() {
   <hr>
   <p class="menu-label">TMUA topic menu</p>
   <ul class="nav">
-    <li><a href="numbers.html"><span class="n">1</span> Numbers &amp; Proof</a></li>
-    <li><a href="algebra.html"><span class="n">2</span> Algebra and Functions</a></li>
-    <li><a href="sequences.html"><span class="n">3</span> Sequences and Series</a></li>
-    <li><a href="functions.html"><span class="n">4</span> Graphs, Exponentials &amp; Logs</a></li>
+    <li><a href="numbers.html"><span class="n">1</span> Numbers</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Functions</a></li>
     <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
-    <li><a href="differentiation.html"><span class="n">6</span> Differentiation</a></li>
-    <li><a href="integration.html"><span class="n">7</span> Integration</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differential Calculus</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integrals</a></li>
     <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
-    <li><a href="logic.html"><span class="n">9</span> Logic and Proof (Paper 2)</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Mathematical Logic</a></li>
     <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
     <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
     <li><a href="statistics.html" class="active"><span class="n">12</span> Statistics (STEP)</a></li>
@@ -64,7 +64,7 @@ function toggleNav() {
 <div class="page">
 <p class="crumb"><b>Extension · STEP</b> · Probability and Statistics <span class="pill new">New chapter</span></p>
 <h1>Statistics</h1>
-<p class="lede">Personally, as an actuary and Statistics enjoyer, I find the STEP statistics questions easier than the pure ones — by the end of this topic, you may agree.</p>
+<p class="lede">Conditional probability, random variables, the normal distribution and its approximations, and the chi-squared test. Personally, as an actuary and Statistics enjoyer, I find the statistics questions easier than the pure ones — by the end of this topic, you may agree.</p>
 
 <h2><span class="sn">§S.1</span>Introduction</h2>
 <p>The other two unpopular questions on every STEP paper are statistics, and the same leverage argument from the <a href="mechanics.html">Mechanics</a> topic applies. STEP statistics is really probability with calculus: the counting of the <a href="counting.html">Counting</a> topic, conditional reasoning, and then random variables — whose continuous version is an application of the <a href="integration.html">Integration</a> topic, full stop. There is very little to memorise and a great deal to set up carefully.</p>
@@ -130,7 +130,47 @@ all integrals over the range where \(f\) is non-zero. For a density symmetric ab
 <p><strong>Example.</strong> Let \(f(x)=kx(2-x)\) on \([0,2]\) (zero elsewhere). Then \(1=k\int_0^2(2x-x^2)\,\mathrm dx=k\left[x^2-\frac{x^3}3\right]_0^2=\frac43k\), so \(k=\frac34\). By symmetry about \(x=1\), \(\mathbb E(X)=1\) and the median is also 1. And
 \[\mathbb E(X^2)=\frac34\int_0^2\left(2x^3-x^4\right)\mathrm dx=\frac34\left(8-\frac{32}5\right)=\frac65,\qquad\operatorname{Var}(X)=\frac65-1=\frac15.\]</p>
 
-<h2><span class="sn">§S.5</span>Problems</h2>
+<h2><span class="sn">§S.5</span>The normal distribution</h2>
+<p>One continuous distribution towers over the rest. The <strong>normal distribution</strong> \(N(\mu,\sigma^2)\) is the bell-shaped density centred at the mean \(\mu\) with standard deviation \(\sigma\) — symmetric, with tails that decay extremely fast. Its density \(f(x)=\frac1{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/2\sigma^2}\) cannot be integrated in closed form, which is why every normal calculation goes through tables (or a calculator) for the <strong>standard normal</strong> \(Z\sim N(0,1)\), whose cdf is written \(\Phi(z)=\mathbb P(Z\le z)\).</p>
+<div class="box tmpl"><span class="bt">Template — Normal probabilities</span>
+<ol>
+<li><strong>Standardise:</strong> if \(X\sim N(\mu,\sigma^2)\), then \(Z=\dfrac{X-\mu}{\sigma}\sim N(0,1)\). Every question reduces to \(\Phi\) of something.</li>
+<li>Convert the event: \(\mathbb P(X\le x)=\Phi\!\left(\frac{x-\mu}{\sigma}\right)\).</li>
+<li>Handle tails and intervals with the two symmetry rules: \(\mathbb P(Z&gt;z)=1-\Phi(z)\) and \(\Phi(-z)=1-\Phi(z)\) — tables only list \(z\ge0\) because symmetry supplies the rest.</li>
+<li><strong>Inverse problems</strong> ("find \(\mu\)", "find the cutoff"): translate the given probability into a \(z\)-value first (e.g. \(\Phi(1.96)=0.975\)), then unwind \(x=\mu+z\sigma\). With two unknown parameters, two conditions give simultaneous equations in \(\mu\) and \(\sigma\).</li>
+</ol></div>
+<p>Values worth knowing by heart, both for speed and for sanity-checking: \(\Phi(1)\approx0.8413\), \(\Phi(2)\approx0.9772\), \(\Phi(1.645)\approx0.95\), \(\Phi(1.96)\approx0.975\) — and the <em>68–95–99.7 rule</em>: roughly 68% of the distribution lies within one standard deviation of the mean, 95% within two, 99.7% within three.</p>
+<p><strong>Example.</strong> IQ scores are modelled as \(X\sim N(100,15^2)\). Then
+\[\mathbb P(X&gt;115)=\mathbb P\!\left(Z&gt;\tfrac{115-100}{15}\right)=\mathbb P(Z&gt;1)=1-\Phi(1)\approx0.159.\]
+And the score exceeded by only 2.5% of the population solves \(\Phi\!\left(\frac{x-100}{15}\right)=0.975\): \(x=100+1.96\cdot15\approx129\).</p>
+
+<h2><span class="sn">§S.6</span>Approximating with the normal</h2>
+<p>The normal distribution's real power is as an <em>approximation</em>: sums of many small independent contributions are approximately normal (the Central Limit Theorem, which you will meet properly at university). The exam-level instance is the binomial. A \(B(n,p)\) count is a sum of \(n\) independent 0/1 trials, so for large \(n\) its bar chart looks like a bell:</p>
+<div class="box thm"><span class="bt">Normal approximation to the binomial</span>
+<p>If \(X\sim B(n,p)\) with \(n\) large and \(p\) not too extreme (rule of thumb: \(np&gt;5\) and \(n(1-p)&gt;5\)), then approximately
+\[X\;\approx\;N\big(np,\;np(1-p)\big)\]
+— same mean, same variance, as it must be. Because a <em>discrete</em> count is being replaced by a <em>continuous</em> density, apply the <strong>continuity correction</strong>: the discrete event \(X\ge k\) becomes the continuous event \(X&gt;k-\tfrac12\), and \(X\le k\) becomes \(X&lt;k+\tfrac12\) — each integer \(k\) owns the interval \(\left[k-\tfrac12,k+\tfrac12\right]\).</p></div>
+<p><strong>Example.</strong> A fair coin is tossed 100 times; estimate \(\mathbb P(X\ge60)\) heads. Here \(np=50\), \(np(1-p)=25\), so \(X\approx N(50,5^2)\), and with the continuity correction:
+\[\mathbb P(X\ge60)\approx\mathbb P\!\left(Z\ge\tfrac{59.5-50}{5}\right)=\mathbb P(Z\ge1.9)=1-\Phi(1.9)\approx1-0.9713=0.029.\]
+The exact binomial value is about 0.028 — the approximation, with its correction, is excellent. (Without the correction one gets \(\mathbb P(Z\ge2)\approx0.023\) — noticeably worse; in a multiple-choice setting the corrected and uncorrected values are often <em>both</em> offered as options.)</p>
+
+<h2><span class="sn">§S.7</span>The chi-squared test</h2>
+<p>Beyond STEP now, into Further Statistics — and, I will admit as an actuary, into the single most-used test of my professional life. The question it answers: <em>do observed counts fit a claimed model?</em> Suppose a model predicts <strong>expected</strong> counts \(E_1,\dots,E_m\) across \(m\) categories, and an experiment delivers <strong>observed</strong> counts \(O_1,\dots,O_m\). The discrepancy is measured by
+\[\chi^2=\sum_{i=1}^{m}\frac{(O_i-E_i)^2}{E_i},\]
+each category's squared error weighted by how large it was expected to be. If the model is right, this statistic follows (approximately) a <strong>chi-squared distribution</strong>, and a value beyond the tabulated critical value is evidence against the model.</p>
+<div class="box tmpl"><span class="bt">Template — Goodness-of-fit test</span>
+<ol>
+<li>State the hypotheses: \(H_0\): the data follow the claimed model; \(H_1\): they do not.</li>
+<li>Compute the expected counts under \(H_0\) (total \(\times\) model probabilities). Every \(E_i\) should be at least 5 — merge small categories if not, since the approximation degrades.</li>
+<li>Compute \(\chi^2=\sum\frac{(O-E)^2}{E}\).</li>
+<li>Degrees of freedom: \(\nu=m-1\), <em>minus one more for every parameter estimated from the data</em>. For an \(r\times c\) contingency table (testing independence of two classifications, with expected counts \(E=\frac{\text{row total}\times\text{column total}}{\text{grand total}}\)): \(\nu=(r-1)(c-1)\).</li>
+<li>Compare with the critical value at the chosen significance level (5% values: \(\nu=1\): 3.841; \(\nu=2\): 5.991; \(\nu=3\): 7.815; \(\nu=4\): 9.488; \(\nu=5\): 11.070). Exceed it → reject \(H_0\); otherwise → no significant evidence against the model. Phrase the conclusion in context, and never claim the model is <em>proved</em> — failing to reject is not the same as confirming (a distinction straight out of the <a href="logic.html">Logic</a> topic).</li>
+</ol></div>
+<p><strong>Example.</strong> A die is rolled 60 times, giving observed counts \(5,8,9,8,10,20\) for the faces 1–6. Is the die fair, at the 5% level? Under fairness each \(E_i=10\), and
+\[\chi^2=\frac{25+4+1+4+0+100}{10}=13.4.\]
+With \(\nu=6-1=5\) the critical value is 11.07, and \(13.4&gt;11.07\): reject \(H_0\) — significant evidence the die is unfair. Note where the statistic came from: the six 20s-worth of excess sits almost entirely in one cell, and the test duly noticed.</p>
+
+<h2><span class="sn">§S.8</span>Problems</h2>
 
 <div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill new">New</span></div>
 <p>Two fair dice are rolled. Given that the total is at least 10, find the probability that at least one die shows a six. Are the events "total at least 10" and "at least one six" independent?</p>
@@ -182,6 +222,43 @@ Sanity checks: \(p=\frac12\) gives \(\frac12\) for any \(n\); \(p=0\) gives 1 (z
 <p>(i) Either sum the geometric series \(\frac16\left(1+\left(\frac56\right)^2+\left(\frac56\right)^4+\dots\right)=\frac{1/6}{1-25/36}=\frac6{11}\), or argue by self-similarity: if both miss, the game restarts, so \(a=\frac16+\left(\frac56\right)^2a\).<br>
 (ii) The number of rolls is geometric with \(p=\frac16\): expectation 6.<br>
 (iii) \(a=p+(1-p)^2a\) gives \(a=\frac p{1-(1-p)^2}=\frac1{2-p}\). As \(p\to1\), \(a\to1\) (the first roll settles it); as \(p\to0\), \(a\to\frac12\) — the first-mover advantage evaporates when success is rare, a one-line answer that would take pages by brute force.</p>
+</details></div>
+
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill new">New · Normal</span></div>
+<p>The mass of a loaf of bread is modelled as \(X\sim N(800,15^2)\) grams. Find (i) \(\mathbb P(X&gt;830)\), and (ii) the mass \(m\) such that 95% of loaves weigh more than \(m\). <em>(Use \(\Phi(2)=0.9772\), \(\Phi(1.645)=0.95\).)</em></p>
+<details class="sol"><summary>Show solution</summary>
+<p>(i) \(\mathbb P(X&gt;830)=\mathbb P(Z&gt;2)=1-0.9772=0.0228\).<br>
+(ii) "95% above \(m\)" means \(\mathbb P(X&lt;m)=0.05\), so \(\frac{m-800}{15}=-1.645\): \(m=800-24.7\approx775\) g. The sign is the trap — sketch the bell and shade before computing.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill new">New · Normal, inverse</span></div>
+<p>A machine fills bottles with volume \(X\sim N(\mu,5^2)\) ml. Exactly 2.5% of bottles contain more than 510 ml. Find \(\mu\). <em>(Use \(\Phi(1.96)=0.975\).)</em></p>
+<details class="sol"><summary>Show solution</summary>
+<p>\(\mathbb P(X&gt;510)=0.025\) means \(\frac{510-\mu}{5}=1.96\), so \(\mu=510-9.8=500.2\) ml. Inverse problems always start from the \(z\)-value, never from the probability directly.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 10</span><span class="pill new">New · Approximation</span></div>
+<p>A fair coin is tossed 400 times. Using a suitable approximation, estimate the probability of at least 220 heads. <em>(Use \(\Phi(1.95)=0.9744\).)</em></p>
+<details class="sol"><summary>Show solution</summary>
+<p>\(X\sim B(400,\tfrac12)\approx N(200,10^2)\) since \(np=200\), \(np(1-p)=100\). With the continuity correction, \(X\ge220\) becomes \(X&gt;219.5\):
+\[\mathbb P\!\left(Z&gt;\tfrac{219.5-200}{10}\right)=\mathbb P(Z&gt;1.95)=1-0.9744=0.0256.\]</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 11</span><span class="pill new">New · Chi-squared</span></div>
+<p>A genetics model predicts offspring types in the ratio \(9:3:3:1\). In 160 offspring the observed counts are \(95, 25, 28, 12\). Test the model at the 5% significance level. <em>(Critical value: \(\chi^2_3(5\%)=7.815\).)</em></p>
+<details class="sol"><summary>Show solution</summary>
+<p>Expected counts: \(160\times\frac9{16},\frac3{16},\frac3{16},\frac1{16}=90,30,30,10\) (all \(\ge5\) ✓). Then
+\[\chi^2=\frac{25}{90}+\frac{25}{30}+\frac4{30}+\frac4{10}\approx0.278+0.833+0.133+0.400=1.64.\]
+With \(\nu=4-1=3\): \(1.64&lt;7.815\), so do not reject \(H_0\) — the data are consistent with the \(9{:}3{:}3{:}1\) model. (Consistent, not proved: see step 5 of the template.)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 12</span><span class="pill new">New · Contingency table</span></div>
+<p>In a trial, 50 patients receive a treatment and 50 a placebo. Of the treated, 30 improve; of the placebo group, 20 improve. Test, at the 5% level, whether improvement is independent of treatment. <em>(Critical value: \(\chi^2_1(5\%)=3.841\).)</em></p>
+<details class="sol"><summary>Show solution</summary>
+<p>Totals: 50 improved, 50 did not, grand total 100 — so every expected count is \(\frac{50\times50}{100}=25\). Each observed cell (30, 20, 20, 30) misses its expectation by 5:
+\[\chi^2=4\times\frac{25}{25}=4.\]
+Degrees of freedom \((2-1)(2-1)=1\); since \(4&gt;3.841\), reject independence at 5% — though only just, a reminder that "significant" is a threshold, not a chasm. (At the 1% level, critical value 6.635, the same data would not reject.)</p>
 </details></div>
 
 <div class="pn"><a href="mechanics.html">← Mechanics</a><a href="exam-papers.html">TMUA Exam Papers →</a></div>

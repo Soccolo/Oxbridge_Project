@@ -39,15 +39,15 @@ function toggleNav() {
   <hr>
   <p class="menu-label">TMUA topic menu</p>
   <ul class="nav">
-    <li><a href="numbers.html"><span class="n">1</span> Numbers &amp; Proof</a></li>
-    <li><a href="algebra.html"><span class="n">2</span> Algebra and Functions</a></li>
-    <li><a href="sequences.html"><span class="n">3</span> Sequences and Series</a></li>
-    <li><a href="functions.html" class="active"><span class="n">4</span> Graphs, Exponentials &amp; Logs</a></li>
+    <li><a href="numbers.html"><span class="n">1</span> Numbers</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences</a></li>
+    <li><a href="functions.html" class="active"><span class="n">4</span> Functions</a></li>
     <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
-    <li><a href="differentiation.html"><span class="n">6</span> Differentiation</a></li>
-    <li><a href="integration.html"><span class="n">7</span> Integration</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differential Calculus</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integrals</a></li>
     <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
-    <li><a href="logic.html"><span class="n">9</span> Logic and Proof (Paper 2)</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Mathematical Logic</a></li>
     <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
     <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
     <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
@@ -200,6 +200,22 @@ The function \(\mathrm f\) is defined for \(x&gt;0\) by \(\mathrm f(x)=\dfrac{x(
 \[y=f(x_a)+f'(x_a)(x-x_a).\]</p>
 <div class="box def"><span class="bt">Normal of a graph</span>
 <p>The normal of a graph at point \(A\) is the line perpendicular to the tangent at \(A\). If two lines with slopes \(m\) and \(m'\) are perpendicular, then \(m\cdot m'=-1\); so the slope of the normal is \(\dfrac{-1}{f'(x_a)}\), and we proceed as before using the fact that the normal passes through \(A\).</p></div>
+
+
+<div class="box tmpl"><span class="bt">Template — Tangent and normal at a point</span>
+<ol>
+<li>Find the point: compute \(y_a=f(x_a)\) — and if the question gives \(y\) instead of \(x\), solve for \(x_a\) first.</li>
+<li>Differentiate and evaluate: \(m=f'(x_a)\) is the tangent's slope; \(-\frac1m\) is the normal's.</li>
+<li>Write both lines in point–gradient form through \((x_a,y_a)\):
+\[\text{tangent: } y=f(x_a)+f'(x_a)(x-x_a),\qquad \text{normal: } y=f(x_a)-\frac{x-x_a}{f'(x_a)}.\]</li>
+<li>Edge cases: if \(f'(x_a)=0\) the tangent is horizontal and the normal is the vertical line \(x=x_a\); a vertical tangent (e.g. \(\sqrt x\) at 0) gives a horizontal normal.</li>
+</ol></div>
+<p><strong>Worked example.</strong> Find the tangent and normal to \(y=x^3-2x+1\) at the point where \(x=1\). The point is \((1,0)\); the derivative \(3x^2-2\) evaluates to 1. Tangent: \(y=0+1\cdot(x-1)=x-1\). Normal: slope \(-1\), so \(y=-(x-1)=1-x\). The two lines meet the axes in a tidy bow around the point — sketching them against the curve takes ten seconds and catches sign errors.</p>
+<div class="box thm"><span class="bt">Tangency as a repeated root</span>
+<p>There is a second, purely algebraic characterisation, and it is the one multiple-choice questions love: a line is <strong>tangent</strong> to a polynomial curve exactly when substituting one into the other produces a <em>repeated root</em> — the line meets the curve "twice at the same point". For a quadratic curve this is the statement \(\Delta=0\), the same discriminant test used for tangent lines to circles in the <a href="geometry.html">Geometry</a> topic; for higher degrees, look for a squared factor.</p></div>
+<p><strong>Example (tangents from an external point).</strong> Find the tangents to \(y=x^2\) passing through \((0,-1)\) — a point <em>not on the curve</em>, so the template above doesn't apply directly. A line through \((0,-1)\) is \(y=mx-1\); it meets the parabola where \(x^2-mx+1=0\), and tangency demands a repeated root: \(\Delta=m^2-4=0\), so \(m=\pm2\). The tangents are \(y=2x-1\) and \(y=-2x-1\), touching at \((1,1)\) and \((-1,1)\). The same idea answers "how many tangents to the curve pass through point \(P\)?" — count the roots of the resulting equation in \(m\).</p>
+<div class="box"><span class="bt">Normals worth knowing</span>
+<p>Two facts that quietly solve whole questions. (1) The normal to a <em>circle</em> at any point passes through the centre — the tangent–radius right angle from the <a href="geometry.html">Geometry</a> topic restated. (2) Normals to a parabola are the engine of the MAT 2009 problem below (Question 4 of §5.10): "the normal through \(Q\) passes through \(P\)" converts to one equation in the parameter \(a\), and counting its solutions counts the normals through \(P\). Whenever a question says "the normal at \(Q\) passes through…", write the normal's equation with \(Q\) as a parameter and substitute the given point.</p></div>
 
 <h2><span class="sn">§5.10</span>Problems</h2>
 <div class="q"><div class="qhead"><span class="qn">Question 1</span></div><p>Find the equation of the tangent to the graph of \(x+e^x\) at the point \(x=2\). Then find the equation of the normal at the same point.</p></div>
