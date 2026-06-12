@@ -138,3 +138,30 @@ footer .inner{max-width:46rem;margin:0 auto}
 /* ---------- restored book figures ---------- */
 figure img{max-width:100%;height:auto;border:1px solid var(--rule);border-radius:8px;background:#fff;padding:6px}
 figure{margin:1.6rem auto}
+/* ---------- practice arena ---------- */
+.topics{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 .8rem}
+.topic-btn{font-family:var(--sans);font-size:.8rem;font-weight:600;cursor:pointer;
+  border:1px solid var(--rule);background:var(--card);color:var(--oxford-deep);
+  border-radius:99px;padding:.4rem .9rem;transition:border-color .15s}
+.topic-btn:hover{border-color:var(--cambridge)}
+.topic-btn.active{background:var(--oxford);border-color:var(--oxford);color:#fff}
+.scorebar{display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  font-family:var(--sans);font-size:.85rem;color:var(--ink-soft);margin-bottom:.4rem}
+.opts{display:flex;flex-direction:column;gap:.5rem;margin-top:.8rem}
+.opt{display:flex;align-items:baseline;gap:.7rem;text-align:left;cursor:pointer;
+  font-family:var(--serif);font-size:1rem;color:var(--ink);
+  background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:.6rem .9rem;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--oxford)}
+.opt:disabled{cursor:default;opacity:.92}
+.opt .ol{font-family:var(--sans);font-weight:700;font-size:.78rem;color:var(--cambridge);min-width:1.1em}
+.opt.correct{background:var(--cambridge-pale);border-color:#3E7164}
+.opt.correct .ol{color:#3E7164}
+.opt.wrong{background:#FBEAE5;border-color:#B7410E}
+.opt.wrong .ol{color:#B7410E}
+.verdict{font-family:var(--sans);font-weight:700;margin:.9rem 0 .3rem}
+.verdict.good{color:#3E7164}
+.verdict.bad{color:#B7410E}
+.soln{border-top:1px dashed var(--rule);padding-top:.5rem;margin-top:.3rem}
+.soln .st{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#3E7164}
+.feedback .next{display:inline-block;margin-top:.9rem;border:0;cursor:pointer;background:var(--cambridge);color:var(--oxford-deep)}
+.feedback .next:hover{background:#93C2B5}

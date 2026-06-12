@@ -55,6 +55,7 @@ function toggleNav() {
   <hr>
   <ul class="nav">
     <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="practice.html"><span class="n">▸</span> Practice Arena</a></li>
     <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
   </ul>
   </div>
@@ -63,7 +64,7 @@ function toggleNav() {
 <div class="page">
 <p class="crumb"><b>Topic 8</b> · Underpinning knowledge · Counting · Probability · Statistics <span class="pill new">New chapter</span></p>
 <h1>Counting, Probability and Statistics</h1>
-<p class="lede">The TMUA assumes this material as "underpinning knowledge" — it appears inside Paper 1 questions rather than as a topic of its own, which makes it the easiest place to lose unexpected marks.</p>
+<p class="lede">Arrangements, selections, and the binomial machinery for extracting coefficients — plus the probability and statistics the TMUA assumes as "underpinning knowledge". It appears inside Paper 1 questions rather than as a topic of its own, which makes it the easiest place to lose unexpected marks.</p>
 
 <h2><span class="sn">§C.1</span>Counting</h2>
 <div class="box thm"><span class="bt">The multiplication principle</span>
@@ -78,7 +79,31 @@ function toggleNav() {
 <p><strong>Example.</strong> How many "words" can be formed from the letters of OXBRIDGE? Eight distinct letters: \(8!=40320\). And from BANANA? \(\frac{6!}{3!\,2!}=60\) — six letters with three A's and two N's identical.</p>
 <p>The slickest counting tool in multiple-choice settings is <strong>complementary counting</strong>: when "at least one…" appears, count the opposite. How many of the \(2^{10}\) binary strings of length 10 contain at least one 1? All but one: \(2^{10}-1\).</p>
 
-<h2><span class="sn">§C.2</span>Probability</h2>
+<h2><span class="sn">§C.2</span>Extracting coefficients: the Binomial Theorem at work</h2>
+<p>The single most common counting question on TMUA Paper 1 doesn't look like a counting question at all: "find the coefficient of \(x^a\) in the expansion of …". It <em>is</em> counting — a coefficient counts the number of (weighted) ways of picking terms from brackets — and the <a href="algebra.html">Binomial Theorem</a> is the machine that does the count.</p>
+<div class="box thm"><span class="bt">The general term</span>
+<p>From \((a+b)^n=\sum_{k=0}^n\binom nk a^{n-k}b^k\), the expansion of \(\left(a+bx^m\right)^n\) has general term
+\[\binom nk\,a^{n-k}\,b^k\,x^{mk}.\]
+To find the coefficient of a target power: <strong>solve for \(k\) first</strong> (set \(mk=\) target), then evaluate that single term — never expand the whole bracket. The same discipline finds the term independent of \(x\) in expressions like \(\left(x+\frac2{x^2}\right)^9\): the general term carries \(x^{9-k}\cdot x^{-2k}=x^{9-3k}\), so the constant term is the one with \(k=3\).</p></div>
+<div class="box tmpl"><span class="bt">Template — Coefficients in \((a+f(x))^n\) with \(f\) a polynomial</span>
+<ol>
+<li>Treat \(f(x)\) as a single object: the expansion is \(\sum_k\binom nk a^{n-k}f(x)^k\) — a binomial in disguise, no multinomial theorem needed.</li>
+<li>Work out which values of \(k\) can contribute to the target power <em>before</em> expanding anything: if the lowest power in \(f\) is \(x^p\) and the highest is \(x^q\), then \(f(x)^k\) produces powers between \(x^{pk}\) and \(x^{qk}\), so only \(k\) with \(pk\le\text{target}\le qk\) matter — usually two or three values.</li>
+<li>For each surviving \(k\), extract the needed coefficient of \(f(x)^k\) (itself a small binomial if \(f\) has two terms), multiply by \(\binom nk a^{n-k}\), and add up.</li>
+<li>If the expression is a <em>product</em> of brackets, e.g. \((1+2x)^3(2-x)^4\), expand each general term separately and sum over the ways the powers can combine: coefficient of \(x^a\) \(=\sum_{i+j=a}\)(coeff of \(x^i\) in the first)(coeff of \(x^j\) in the second).</li>
+<li>Always carry the signs inside the bracket with the term — a stray minus is the genre's signature lost mark.</li>
+</ol></div>
+<p><strong>Worked example.</strong> Find the coefficient of \(x^3\) in \(\left(2+x-x^2\right)^5\).</p>
+<div class="proof"><span class="pt">Solution (nested binomial).</span> Write the bracket as \(\big(2+x(1-x)\big)^5\), with general term \(\binom5k2^{5-k}x^k(1-x)^k\), producing powers from \(x^k\) to \(x^{2k}\). For \(x^3\) we need \(k\le3\le2k\): only \(k=2\) and \(k=3\) contribute.<br>
+\(k=2\): \(\binom52\,2^3\,x^2(1-x)^2\) — we need the coefficient of \(x^1\) in \((1-x)^2\), which is \(-2\): contribution \(10\cdot8\cdot(-2)=-160\).<br>
+\(k=3\): \(\binom53\,2^2\,x^3(1-x)^3\) — we need the constant term of \((1-x)^3\), which is \(1\): contribution \(10\cdot4\cdot1=40\).<br>
+Total: \(-160+40=\mathbf{-120}\). <span class="qed">∎</span></div>
+<div class="proof"><span class="pt">Solution (factorising first).</span> Spot that \(2+x-x^2=(2-x)(1+x)\), so the expression is \((2-x)^5(1+x)^5\), and apply step 4 of the template:
+\[\sum_{i+j=3}\left[\binom5i2^{5-i}(-1)^i\right]\binom5j
+=32\cdot10\;-\;80\cdot10\;+\;80\cdot5\;-\;40\cdot1=-120.\]
+Same answer, and a reminder that thirty seconds spent looking for a factorisation can simplify the bookkeeping. <span class="qed">∎</span></div>
+
+<h2><span class="sn">§C.3</span>Probability</h2>
 <div class="box def"><span class="bt">Probability</span>
 <p>For equally likely outcomes, \(\mathbb P(A)=\dfrac{\text{favourable outcomes}}{\text{total outcomes}}\) — which is why probability questions are usually counting questions wearing a disguise. Always \(0\le\mathbb P(A)\le1\), and \(\mathbb P(\text{not }A)=1-\mathbb P(A)\).</p></div>
 <div class="box thm"><span class="bt">Combining events</span>
@@ -89,7 +114,7 @@ function toggleNav() {
 <p><strong>Example.</strong> Two cards are drawn without replacement from a standard pack. \(\mathbb P(\text{both aces})=\frac4{52}\cdot\frac3{51}=\frac1{221}\). With replacement it would be \(\left(\frac1{13}\right)^2=\frac1{169}\) — the difference is precisely the loss of independence.</p>
 <p><strong>Example (complementary counting again).</strong> A fair die is rolled 4 times. \(\mathbb P(\text{at least one six})=1-\left(\frac56\right)^4=\frac{671}{1296}\approx0.52\) — de Méré's classic, and the standard pattern for every "at least one" probability.</p>
 
-<h2><span class="sn">§C.3</span>Statistics</h2>
+<h2><span class="sn">§C.4</span>Statistics</h2>
 <div class="box thm"><span class="bt">Measures to know</span>
 <ol>
 <li><strong>Mean:</strong> \(\bar x=\frac1n\sum x_i\). Adding a constant to every datum adds it to the mean; scaling every datum scales the mean.</li>
@@ -99,7 +124,7 @@ function toggleNav() {
 </ol></div>
 <p>TMUA questions on this material are reasoning questions: "the mean of five positive integers is 10 and their median is 12 — what is the largest possible value of the greatest of them?" (Fix the sum at 50, push the two below the median down to 1 each and the one between median and maximum down to 12: \(50-1-1-12-12=24\).) Reading information off charts — bar charts, pie charts, cumulative frequency — is also assumed; the mathematics is never deeper than proportional reasoning, but read the axes.</p>
 
-<h2><span class="sn">§C.4</span>Problems</h2>
+<h2><span class="sn">§C.5</span>Problems</h2>
 
 <div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill new">New</span></div>
 <p>How many even four-digit numbers can be formed using the digits 1, 2, 3, 4, 5 with no digit repeated?</p>
@@ -135,6 +160,29 @@ function toggleNav() {
 <p>Five positive integers have mean 7, median 8, a unique mode of 9, and range 6. Find the five integers, and explain why the answer is unique.</p>
 <details class="sol"><summary>Show solution</summary>
 <p>The sum is 35 and, sorted, the list is \(a,b,8,d,e\). A unique mode of 9 forces at least two 9s, which can only sit above the median: \(d=e=9\). The maximum is 9, so range 6 gives \(a=3\); then \(b=35-3-8-9-9=6\), and \(3\le6\le8\) ✓. The integers are \(\{3,6,8,9,9\}\). Each condition pinned down one unknown in turn — mode placed the 9s, range fixed \(a\), the mean fixed \(b\) — so no other list is possible. (Exercise in the spirit of Paper 2: show that changing "range 6" to "range 10" makes the question <em>unsatisfiable</em>, since the maximum is forced to be 9 and \(a\ge1\) caps the range at 8.)</p>
+</details></div>
+
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill new">New · TMUA-style</span></div>
+<p>Find the term independent of \(x\) in the expansion of \(\left(x+\dfrac2{x^2}\right)^9\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>General term: \(\binom9k x^{9-k}\left(\frac2{x^2}\right)^k=\binom9k2^kx^{9-3k}\). Independent of \(x\) needs \(9-3k=0\), i.e. \(k=3\): the term is \(\binom93\cdot2^3=84\cdot8=672\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill new">New · TMUA-style</span></div>
+<p>Find the coefficient of \(x^4\) in the expansion of \(\left(1+x+x^2\right)^5\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Write \(\big(1+x(1+x)\big)^5\) with general term \(\binom5k x^k(1+x)^k\), spanning powers \(x^k\) to \(x^{2k}\); for \(x^4\), \(k=2,3,4\) contribute.<br>
+\(k=2\): need coeff of \(x^2\) in \((1+x)^2\): \(1\) → \(\binom52\cdot1=10\).<br>
+\(k=3\): need coeff of \(x^1\) in \((1+x)^3\): \(3\) → \(\binom53\cdot3=30\).<br>
+\(k=4\): need the constant of \((1+x)^4\): \(1\) → \(\binom54\cdot1=5\).<br>
+Total: \(10+30+5=45\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill new">New · TMUA-style</span></div>
+<p>In the expansion of \(\left(1+ax+2x^2\right)^4\), the coefficient of \(x^2\) is 32. Given \(a&gt;0\), find \(a\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Treat \(f(x)=ax+2x^2\): the expansion is \(\sum_k\binom4kf(x)^k\). The \(x^2\) contributions: \(k=1\) supplies the \(2x^2\) inside \(f\), giving \(\binom41\cdot2=8\); \(k=2\) supplies \((ax)^2\) from \(f(x)^2\), giving \(\binom42a^2=6a^2\). So \(6a^2+8=32\), \(a^2=4\), and with \(a&gt;0\): \(a=2\).</p>
 </details></div>
 
 <div class="pn"><a href="integration.html">← Topic 7: Integration</a><a href="logic.html">Topic 9: Logic and Proof →</a></div>

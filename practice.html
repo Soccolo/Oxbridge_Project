@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Arena — Random TMUA-style Problems</title>
+<meta name="description" content="Free theory and problems covering the entire TMUA syllabus, with STEP extensions — from the book Advanced Mathematics for High School: Preparing for Oxbridge.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers &amp; Proof</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra and Functions</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences and Series</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Graphs, Exponentials &amp; Logs</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differentiation</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integration</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Logic and Proof (Paper 2)</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="practice.html" class="active"><span class="n">▸</span> Practice Arena</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<div class="page">
+<p class="crumb"><b>Practice</b> · Random problems · All topics</p>
+<h1>Practice Arena</h1>
+<p class="lede">Pick a topic, get a TMUA-style multiple-choice problem, commit to an answer, then read the solution. Under two minutes per question — just like the real thing.</p>
+
+<p>Every question here is original, written in the style of the TMUA (Paper 2 logic included). The arena keeps score for your session: aim for accuracy first, speed second — in the exam, an answered-wrong question and an unanswered one cost the same, but the habit of committing and checking is what training is for. When a question defeats you, the solution links back to the topic page that teaches the technique.</p>
+
+<div class="arena">
+  <div class="topics" id="topicButtons">
+    <button class="topic-btn active" data-topic="all">Random (all topics)</button>
+    <button class="topic-btn" data-topic="algebra">Algebra</button>
+    <button class="topic-btn" data-topic="geometry">Geometry &amp; Trig</button>
+    <button class="topic-btn" data-topic="sequences">Sequences</button>
+    <button class="topic-btn" data-topic="functions">Functions &amp; Logs</button>
+    <button class="topic-btn" data-topic="differentiation">Differentiation</button>
+    <button class="topic-btn" data-topic="integration">Integration</button>
+    <button class="topic-btn" data-topic="counting">Counting &amp; Probability</button>
+    <button class="topic-btn" data-topic="logic">Logic (Paper 2)</button>
+  </div>
+  <div class="scorebar"><span id="scoreText">Session score: 0 / 0</span><button class="topic-btn" id="resetBtn" type="button">Reset score</button></div>
+  <div id="qArea"></div>
+</div>
+
+<script>
+(function(){
+var BANK = [
+// ---------------- ALGEBRA ----------------
+{t:"algebra", q:"How many distinct real solutions does the equation \\((x^2-4)(x^2+4)(x^2-2x+1)=0\\) have?",
+ o:["2","3","4","5","6"], a:1,
+ s:"\\(x^2-4=0\\) gives \\(x=\\pm2\\); \\(x^2+4=0\\) has no real solutions; \\(x^2-2x+1=(x-1)^2=0\\) gives \\(x=1\\) (a repeated root, but one <em>distinct</em> solution). Three distinct solutions in total. See the discriminant discussion in <a href='algebra.html'>Algebra</a>."},
+{t:"algebra", q:"The quadratic \\(x^2+kx+9\\) has two distinct real roots, both negative. The complete set of possible values of \\(k\\) is:",
+ o:["\\(k&gt;6\\)","\\(k&gt;0\\)","\\(k&lt;-6\\) or \\(k&gt;6\\)","\\(k\\ge6\\)","\\(-6&lt;k&lt;6\\)"], a:0,
+ s:"Three conditions. Distinct real roots: \\(\\Delta=k^2-36&gt;0\\), so \\(k&gt;6\\) or \\(k&lt;-6\\). Both roots negative: by Vieta, sum \\(=-k&lt;0\\) forces \\(k&gt;0\\), and product \\(=9&gt;0\\) holds automatically. Intersecting: \\(k&gt;6\\). The trap answer is the bare discriminant condition — always translate <em>all</em> the given properties via <a href='algebra.html'>Vieta</a>."},
+{t:"algebra", q:"What is the remainder when \\(x^3-2x^2+5\\) is divided by \\(x+1\\)?",
+ o:["2","\\(-2\\)","4","8","0"], a:0,
+ s:"By the remainder theorem (a consequence of polynomial division, <a href='algebra.html'>Algebra §3.4</a>), the remainder on division by \\(x+1\\) is the value at \\(x=-1\\): \\((-1)^3-2(-1)^2+5=-1-2+5=2\\)."},
+{t:"algebra", q:"The coefficient of \\(x^3\\) in the expansion of \\((2-x)^5\\) is:",
+ o:["\\(-40\\)","40","\\(-80\\)","80","\\(-10\\)"], a:0,
+ s:"General term \\(\\binom5k2^{5-k}(-x)^k\\); for \\(x^3\\), \\(k=3\\): \\(\\binom53\\cdot2^2\\cdot(-1)^3=10\\cdot4\\cdot(-1)=-40\\). Carry the sign with the term — see <a href='counting.html'>coefficient extraction</a>."},
+// ---------------- GEOMETRY ----------------
+{t:"geometry", q:"The circle \\(x^2+y^2-6x+8y=0\\) has radius:",
+ o:["3","4","5","\\(\\sqrt7\\)","25"], a:2,
+ s:"Complete both squares: \\((x-3)^2+(y+4)^2=9+16=25\\), so the radius is 5. (Centre \\((3,-4)\\); the circle passes through the origin, since the constant term of the original equation is 0.) See <a href='geometry.html'>Geometry §G.3</a>."},
+{t:"geometry", q:"How many solutions does \\(\\sin2\\theta=\\sin\\theta\\) have in the interval \\(0\\le\\theta&lt;2\\pi\\)?",
+ o:["2","3","4","5","6"], a:2,
+ s:"\\(2\\sin\\theta\\cos\\theta-\\sin\\theta=\\sin\\theta(2\\cos\\theta-1)=0\\). Then \\(\\sin\\theta=0\\): \\(\\theta=0,\\pi\\) (note \\(2\\pi\\) is excluded by the interval); \\(\\cos\\theta=\\tfrac12\\): \\(\\theta=\\tfrac\\pi3,\\tfrac{5\\pi}3\\). Four solutions. Dividing by \\(\\sin\\theta\\) instead of factorising silently loses two — the classic trap (<a href='geometry.html'>Geometry §G.5</a>)."},
+{t:"geometry", q:"The line \\(y=x+c\\) is tangent to the circle \\(x^2+y^2=8\\), and \\(c&gt;0\\). Then \\(c\\) equals:",
+ o:["2","\\(2\\sqrt2\\)","4","\\(4\\sqrt2\\)","8"], a:2,
+ s:"Tangency \\(\\iff\\) the distance from the centre (the origin) to \\(x-y+c=0\\) equals the radius \\(2\\sqrt2\\): \\(\\frac{|c|}{\\sqrt2}=2\\sqrt2\\), so \\(|c|=4\\), and \\(c=4\\). The point-to-line distance formula beats substitution-and-discriminant for speed (<a href='geometry.html'>Geometry §G.2–G.3</a>)."},
+{t:"geometry", q:"A triangle has sides 5, 7 and 8. The angle opposite the side of length 7 is:",
+ o:["\\(30^\\circ\\)","\\(45^\\circ\\)","\\(60^\\circ\\)","\\(90^\\circ\\)","\\(120^\\circ\\)"], a:2,
+ s:"Cosine rule: \\(\\cos\\theta=\\frac{5^2+8^2-7^2}{2\\cdot5\\cdot8}=\\frac{40}{80}=\\frac12\\), so \\(\\theta=60^\\circ\\). Extracting an angle from its cosine is unambiguous in a triangle (<a href='geometry.html'>Geometry §G.4</a>)."},
+// ---------------- SEQUENCES ----------------
+{t:"sequences", q:"A geometric series has first term 6 and sum to infinity 8. Its second term is:",
+ o:["\\(\\tfrac32\\)","2","3","\\(\\tfrac43\\)","\\(\\tfrac12\\)"], a:0,
+ s:"\\(\\frac6{1-r}=8\\) gives \\(r=\\tfrac14\\), so the second term is \\(6\\cdot\\tfrac14=\\tfrac32\\). Convergence check: \\(|r|&lt;1\\) ✓ (<a href='sequences.html'>Sequences §4.4</a>)."},
+{t:"sequences", q:"In an arithmetic sequence, \\(a_3=10\\) and \\(a_7=26\\). The sum of the first 10 terms is:",
+ o:["180","200","220","240","400"], a:1,
+ s:"\\(a_7-a_3=4d=16\\), so \\(d=4\\) and \\(a_1=a_3-2d=2\\). Sum: \\(\\frac{10}2\\big(2\\cdot2+9\\cdot4\\big)=5\\cdot40=200\\) (<a href='sequences.html'>Sequences §4.2</a>)."},
+{t:"sequences", q:"The sequence is defined by \\(u_{n+1}=\\dfrac1{1-u_n}\\) with \\(u_1=2\\). The value of \\(u_{100}\\) is:",
+ o:["2","\\(-1\\)","\\(\\tfrac12\\)","\\(-\\tfrac12\\)","1"], a:0,
+ s:"Compute a few terms: \\(u_2=\\frac1{1-2}=-1\\), \\(u_3=\\frac1{1-(-1)}=\\frac12\\), \\(u_4=\\frac1{1-1/2}=2\\) — period 3. Since \\(100=3\\cdot33+1\\), \\(u_{100}=u_1=2\\). With recurrences built from fractions, suspect periodicity and just compute (<a href='sequences.html'>Sequences §4.4</a>)."},
+// ---------------- FUNCTIONS ----------------
+{t:"functions", q:"The equation \\(\\log_2(x)+\\log_2(x-2)=3\\) has solution set:",
+ o:["\\(\\{4\\}\\)","\\(\\{4,-2\\}\\)","\\(\\{-2\\}\\)","\\(\\{3\\}\\)","no solutions"], a:0,
+ s:"Combine: \\(\\log_2\\big(x(x-2)\\big)=3\\), so \\(x^2-2x-8=0\\), giving \\(x=4\\) or \\(x=-2\\). But the original logarithms require \\(x&gt;2\\), so \\(x=-2\\) is a false solution introduced by the (non-reversible) combining step. Solution set \\(\\{4\\}\\) — set the domain <em>before</em> solving (<a href='functions.html'>Functions §5.2</a>)."},
+{t:"functions", q:"The sum of all real solutions of \\(9^x-4\\cdot3^x+3=0\\) is:",
+ o:["0","1","3","4","2"], a:1,
+ s:"Substitute \\(t=3^x&gt;0\\): \\(t^2-4t+3=(t-1)(t-3)=0\\), so \\(t=1\\) or \\(t=3\\), i.e. \\(x=0\\) or \\(x=1\\). Sum: 1. A disguised quadratic — the exponential substitution is the most common disguise (<a href='functions.html'>Functions</a>)."},
+{t:"functions", q:"The point \\((1,5)\\) lies on the graph of \\(y=f(x)\\). The corresponding point on the graph of \\(y=f(x-2)+3\\) is:",
+ o:["\\((3,8)\\)","\\((-1,8)\\)","\\((3,2)\\)","\\((-1,2)\\)","\\((1,8)\\)"], a:0,
+ s:"\\(f(x-2)\\) shifts the graph <em>right</em> by 2 (the inside-the-bracket trap), and \\(+3\\) shifts it up by 3: \\((1,5)\\mapsto(3,8)\\). See the transformations table in <a href='functions.html'>Functions §5.11</a>."},
+// ---------------- DIFFERENTIATION ----------------
+{t:"differentiation", q:"The local maximum value of \\(y=x^3-3x\\) is:",
+ o:["2","\\(-2\\)","0","1","3"], a:0,
+ s:"\\(y'=3x^2-3=0\\) at \\(x=\\pm1\\); \\(y''=6x\\) is negative at \\(x=-1\\) (maximum). The maximum <em>value</em> is \\(y(-1)=-1+3=2\\) — the question asks for the value, not the location (<a href='differentiation.html'>Differentiation</a>)."},
+{t:"differentiation", q:"The tangent to \\(y=x^2\\) at the point where \\(x=3\\) crosses the \\(x\\)-axis at \\(x=\\) :",
+ o:["\\(\\tfrac32\\)","\\(\\tfrac23\\)","3","\\(-9\\)","9"], a:0,
+ s:"Slope \\(y'(3)=6\\); tangent through \\((3,9)\\): \\(y=9+6(x-3)=6x-9\\); setting \\(y=0\\): \\(x=\\tfrac32\\). (This halving is exactly one Newton–Raphson step for \\(x^2=0\\) — see <a href='differentiation.html'>§6.5</a>.)"},
+{t:"differentiation", q:"If \\(f(x)=(2x+1)^5\\), then \\(f'(0)\\) equals:",
+ o:["5","10","2","32","80"], a:1,
+ s:"Chain rule: \\(f'(x)=5(2x+1)^4\\cdot2\\), so \\(f'(0)=10\\cdot1=10\\). Forgetting the inner derivative (the \\(\\times2\\)) gives the trap answer 5 (<a href='differentiation.html'>Differentiation §6.3</a>)."},
+// ---------------- INTEGRATION ----------------
+{t:"integration", q:"\\(\\displaystyle\\int_0^1\\left(3x^2+2x\\right)\\mathrm dx=\\)",
+ o:["1","2","3","\\(\\tfrac52\\)","\\(\\tfrac32\\)"], a:1,
+ s:"\\(\\left[x^3+x^2\\right]_0^1=1+1=2\\) (<a href='integration.html'>Integration §7.5</a>)."},
+{t:"integration", q:"The total area enclosed between the curve \\(y=4-x^2\\) and the \\(x\\)-axis is:",
+ o:["\\(\\tfrac{16}3\\)","\\(\\tfrac{32}3\\)","8","\\(\\tfrac{64}3\\)","16"], a:1,
+ s:"Roots at \\(x=\\pm2\\), and the curve sits above the axis between them. By even symmetry: \\(2\\int_0^2(4-x^2)\\,\\mathrm dx=2\\left(8-\\tfrac83\\right)=\\tfrac{32}3\\) (<a href='integration.html'>Integration §7.6</a>)."},
+{t:"integration", q:"\\(\\displaystyle\\int_1^4\\frac{\\mathrm dx}{\\sqrt x}=\\)",
+ o:["2","1","\\(\\tfrac32\\)","4","\\(\\tfrac72\\)"], a:0,
+ s:"\\(\\int x^{-1/2}\\mathrm dx=2\\sqrt x\\), so the value is \\(2\\sqrt4-2\\sqrt1=4-2=2\\)."},
+{t:"integration", q:"The trapezium rule with 2 strips is used on \\(\\int_0^2f(x)\\,\\mathrm dx\\), where \\(f(0)=1\\), \\(f(1)=4\\), \\(f(2)=9\\). The estimate is:",
+ o:["9","14","7","18","10"], a:0,
+ s:"With \\(h=1\\): \\(\\frac h2\\big(y_0+2y_1+y_2\\big)=\\frac12(1+8+9)=9\\). If \\(f\\) happened to be \\((x+1)^2\\), the true value is \\(\\tfrac{26}3\\approx8.67\\) — the convex curve makes the rule overestimate, as §7.7 predicts (<a href='integration.html'>Integration</a>)."},
+// ---------------- COUNTING ----------------
+{t:"counting", q:"The constant term in the expansion of \\(\\left(2x+\\dfrac1x\\right)^4\\) is:",
+ o:["24","6","8","16","4"], a:0,
+ s:"General term \\(\\binom4k(2x)^{4-k}x^{-k}\\), with power \\(x^{4-2k}\\); the constant needs \\(k=2\\): \\(\\binom42\\cdot2^2=6\\cdot4=24\\) (<a href='counting.html'>Counting §C.2</a>)."},
+{t:"counting", q:"A committee of 3 is chosen from 5 boys and 4 girls. The number of committees containing at least 2 girls is:",
+ o:["34","30","40","84","24"], a:0,
+ s:"Exactly 2 girls: \\(\\binom42\\binom51=30\\); exactly 3 girls: \\(\\binom43=4\\). Total 34. (Complementary counting also works but is longer here — \"at least\" doesn't always mean \"complement\"; compare the sizes first.)"},
+{t:"counting", q:"Two fair dice are rolled. The probability that the product of the two scores is even is:",
+ o:["\\(\\tfrac34\\)","\\(\\tfrac12\\)","\\(\\tfrac23\\)","\\(\\tfrac56\\)","\\(\\tfrac14\\)"], a:0,
+ s:"The product is odd only when <em>both</em> dice are odd: probability \\(\\left(\\tfrac12\\right)^2=\\tfrac14\\). Complement: \\(1-\\tfrac14=\\tfrac34\\) (<a href='counting.html'>Counting §C.3</a>)."},
+// ---------------- LOGIC ----------------
+{t:"logic", q:"The negation of the statement \"for all \\(x&gt;0\\), \\(f(x)\\ge2\\)\" is:",
+ o:["There exists \\(x&gt;0\\) with \\(f(x)&lt;2\\)","For all \\(x&gt;0\\), \\(f(x)&lt;2\\)","There exists \\(x&gt;0\\) with \\(f(x)\\le2\\)","For all \\(x\\le0\\), \\(f(x)&lt;2\\)","There exists \\(x\\le0\\) with \\(f(x)&lt;2\\)"], a:0,
+ s:"The quantifier flips (∀ → ∃) and the inequality is denied (\\(\\ge\\) becomes \\(&lt;\\)); the domain condition \\(x&gt;0\\) is <em>not</em> negated. The traps: keeping ∀ (option B) or denying \\(\\ge\\) as \\(\\le\\) (option C). See the negation traps in <a href='logic.html'>Logic §L.2</a>."},
+{t:"logic", q:"For real \\(x\\), the condition \\(x&gt;4\\) is ______ for \\(x^2&gt;16\\).",
+ o:["sufficient but not necessary","necessary but not sufficient","necessary and sufficient","neither necessary nor sufficient","equivalent"], a:0,
+ s:"\\(x&gt;4\\Rightarrow x^2&gt;16\\) ✓ (sufficient), but \\(x=-5\\) gives \\(x^2&gt;16\\) without \\(x&gt;4\\) (not necessary). Translate with the <a href='logic.html'>dictionary of statements</a>, then hunt counterexamples in both directions."},
+{t:"logic", q:"The contrapositive of \"if \\(n^2\\) is odd, then \\(n\\) is odd\" is:",
+ o:["If \\(n\\) is even, then \\(n^2\\) is even","If \\(n\\) is odd, then \\(n^2\\) is odd","If \\(n^2\\) is even, then \\(n\\) is even","If \\(n\\) is odd, then \\(n^2\\) is even","If \\(n^2\\) is odd, then \\(n\\) is even"], a:0,
+ s:"Contrapositive: negate both sides and swap: \\(\\lnot(n\\text{ odd})\\Rightarrow\\lnot(n^2\\text{ odd})\\), i.e. \"\\(n\\) even \\(\\Rightarrow n^2\\) even\". Option B is the converse and option C the inverse — both logically <em>independent</em> of the original (<a href='logic.html'>Logic §L.3</a>)."},
+{t:"logic", q:"A student argues: (1) \\((-1)^2=1\\). (2) \\(1^2=1\\). (3) Taking square roots in \\((-1)^2=1^2\\) gives \\(-1=1\\). (4) Therefore \\(1=-1\\). The first invalid step is line:",
+ o:["3","1","2","4","there is no error"], a:0,
+ s:"Lines (1) and (2) are true, and (4) merely restates (3). The crime is line (3): from \\(a^2=b^2\\) one may conclude only \\(|a|=|b|\\), i.e. \\(a=\\pm b\\) — \"taking square roots of both sides\" is not a reversible step. Rogue #7 in the <a href='logic.html'>gallery of proof errors</a>."}
+];
+
+var current = null, lastShown = {}, right = 0, total = 0;
+var qArea = document.getElementById('qArea');
+var scoreText = document.getElementById('scoreText');
+var topicWrap = document.getElementById('topicButtons');
+var activeTopic = 'all';
+
+function mathify(el){ if (window.renderMathInElement) renderMathInElement(el, {delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}], throwOnError:false}); }
+
+function pickQuestion(topic){
+  var pool = [];
+  for (var i=0;i<BANK.length;i++) if (topic==='all' || BANK[i].t===topic) pool.push(i);
+  if (!pool.length) return;
+  var idx;
+  do { idx = pool[Math.floor(Math.random()*pool.length)]; }
+  while (pool.length>1 && idx===lastShown[topic]);
+  lastShown[topic]=idx;
+  current = BANK[idx];
+  renderQuestion();
+}
+
+function renderQuestion(){
+  var labels = ['A','B','C','D','E','F'];
+  var html = '<div class="q arena-q"><div class="qhead"><span class="qn">Question</span><span class="pill tmua">'+topicName(current.t)+'</span></div>'
+           + '<p>'+current.q+'</p><div class="opts">';
+  for (var i=0;i<current.o.length;i++){
+    html += '<button class="opt" data-i="'+i+'"><span class="ol">'+labels[i]+'</span> '+current.o[i]+'</button>';
+  }
+  html += '</div><div class="feedback" id="feedback"></div></div>';
+  qArea.innerHTML = html;
+  var btns = qArea.querySelectorAll('.opt');
+  for (var j=0;j<btns.length;j++) btns[j].addEventListener('click', onAnswer);
+  mathify(qArea);
+  qArea.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function onAnswer(e){
+  var chosen = parseInt(e.currentTarget.getAttribute('data-i'),10);
+  var btns = qArea.querySelectorAll('.opt');
+  for (var i=0;i<btns.length;i++){
+    btns[i].disabled = true;
+    if (i===current.a) btns[i].classList.add('correct');
+    else if (i===chosen) btns[i].classList.add('wrong');
+  }
+  total++; if (chosen===current.a) right++;
+  scoreText.textContent = 'Session score: '+right+' / '+total;
+  var fb = document.getElementById('feedback');
+  fb.innerHTML = '<p class="verdict '+(chosen===current.a?'good':'bad')+'">'+(chosen===current.a?'Correct.':'Not quite.')+'</p>'
+               + '<div class="soln"><span class="st">Solution</span><p>'+current.s+'</p></div>'
+               + '<button class="btn primary next" id="nextBtn">Next problem →</button>';
+  document.getElementById('nextBtn').addEventListener('click', function(){ pickQuestion(activeTopic); });
+  mathify(fb);
+}
+
+function topicName(t){
+  return {algebra:'Algebra', geometry:'Geometry & Trig', sequences:'Sequences', functions:'Functions & Logs',
+          differentiation:'Differentiation', integration:'Integration', counting:'Counting & Probability', logic:'Logic · Paper 2'}[t] || t;
+}
+
+topicWrap.addEventListener('click', function(e){
+  var b = e.target.closest('.topic-btn'); if (!b || b.id==='resetBtn') return;
+  var all = topicWrap.querySelectorAll('.topic-btn');
+  for (var i=0;i<all.length;i++) all[i].classList.remove('active');
+  b.classList.add('active');
+  activeTopic = b.getAttribute('data-topic');
+  pickQuestion(activeTopic);
+});
+document.getElementById('resetBtn').addEventListener('click', function(){ right=0; total=0; scoreText.textContent='Session score: 0 / 0'; });
+
+document.addEventListener('DOMContentLoaded', function(){ pickQuestion('all'); });
+if (document.readyState !== 'loading') pickQuestion('all');
+})();
+</script>
+
+<div class="pn"><a href="exam-papers.html">← TMUA Exam Papers</a><a href="index.html">Home →</a></div>
+</div>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>

@@ -17,6 +17,7 @@ PAGES = [
     ("mechanics.html",      "11", "Mechanics (STEP)",             "Mechanics"),
     ("statistics.html",     "12", "Statistics (STEP)",            "Statistics"),
     ("exam-papers.html",    None, "TMUA Exam Papers",             "TMUA Exam Papers and Resources"),
+    ("practice.html",       None, "Practice Arena",               "Practice Arena — Random TMUA-style Problems"),
 ]
 
 HEAD = """<!DOCTYPE html>
@@ -65,6 +66,7 @@ function toggleNav() {{
   <hr>
   <ul class="nav">
     <li><a href="exam-papers.html"{ap_active}><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="practice.html"{pr_active}><span class="n">▸</span> Practice Arena</a></li>
     <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
   </ul>
   </div>
@@ -98,7 +100,8 @@ for i, (f, n, t, title) in enumerate(PAGES):
     with open(body_path) as fh:
         body = fh.read()
     ap = ' class="active"' if f == "exam-papers.html" else ""
-    html = HEAD.format(title=title, nav=navhtml(f), ap_active=ap) + body + FOOT
+    pr = ' class="active"' if f == "practice.html" else ""
+    html = HEAD.format(title=title, nav=navhtml(f), ap_active=ap, pr_active=pr) + body + FOOT
     with open(os.path.join("dist", f), "w") as out:
         out.write(html)
     print("built", f)
