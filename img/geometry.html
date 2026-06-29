@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geometry and Trigonometry</title>
+<meta name="description" content="Free theory and problems covering the entire TMUA syllabus, with STEP extensions — from the book Advanced Mathematics for High School: Preparing for Oxbridge.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Functions</a></li>
+    <li><a href="geometry.html" class="active"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differential Calculus</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integrals</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Mathematical Logic</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="practice.html"><span class="n">▸</span> Practice Arena</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<div class="page">
+<p class="crumb"><b>Topic 5</b> · Coordinate Geometry · Trigonometry <span class="pill new">New chapter</span></p>
+<h1>Geometry and Trigonometry</h1>
+<p class="lede">Lines and circles in the coordinate plane, the geometry of triangles, radians, identities, trigonometric equations — and a first expedition into three dimensions. The topic students avoid, and therefore the one to master.</p>
+
+<h2><span class="sn">§G.1</span>Introduction</h2>
+<p>As a tutor, I see students spend more time on the Geometry question than on any other — when I sat my own admissions test, the geometry problem took me longer than the rest of the paper combined. The lesson is not to avoid Geometry but to drill it until it is no longer hard. The good news: the TMUA's geometry is entirely <em>coordinate</em> geometry — lines, circles and triangles living in the \((x,y)\) plane — and almost every question reduces to a small number of formulas combined with the discriminant ideas from the <a href="algebra.html">Algebra</a> topic. We develop the toolkit, then trigonometry, then problems.</p>
+
+<h2><span class="sn">§G.2</span>Lines in the plane</h2>
+<div class="box thm"><span class="bt">The toolkit for two points</span>
+<p>For \(A(x_1,y_1)\) and \(B(x_2,y_2)\):</p>
+<ol>
+<li><strong>Distance:</strong> \(|AB|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\) — Pythagoras in disguise.</li>
+<li><strong>Midpoint:</strong> \(M=\left(\frac{x_1+x_2}2,\ \frac{y_1+y_2}2\right)\).</li>
+<li><strong>Gradient:</strong> \(m=\dfrac{y_2-y_1}{x_2-x_1}\) — the "rise over run", and (as we saw in <a href="functions.html">Functions</a>) the tangent of the angle the line makes with the \(x\)-axis.</li>
+</ol></div>
+<div class="box thm"><span class="bt">Equations of a line</span>
+<ol>
+<li><em>Gradient–intercept:</em> \(y=mx+c\), where \(c\) is the \(y\)-intercept.</li>
+<li><em>Point–gradient:</em> \(y-y_1=m(x-x_1)\) — the most useful form in practice: you almost always know a point and a gradient (e.g. tangents and normals).</li>
+<li><em>General form:</em> \(ax+by+c=0\), which also covers vertical lines \(x=k\), where the gradient is undefined.</li>
+</ol></div>
+<div class="box thm"><span class="bt">Parallel and perpendicular lines</span>
+<p>Lines with gradients \(m_1,m_2\) are <strong>parallel</strong> iff \(m_1=m_2\), and <strong>perpendicular</strong> iff \(m_1m_2=-1\). The second fact powered our normals in the Functions topic; to see why it is true, rotate the "rise over run" triangle by \(90^\circ\): the rise becomes the run and the run becomes minus the rise, so the new gradient is \(-\frac1m\).</p></div>
+<p>One more tool, less standard but devastatingly efficient in multiple-choice settings:</p>
+<div class="box thm"><span class="bt">Distance from a point to a line</span>
+<p>The distance from the point \(P(x_0,y_0)\) to the line \(ax+by+c=0\) is
+\[d=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}.\]</p></div>
+<p><strong>Example.</strong> How far is the origin from the line \(3x+4y-10=0\)? \(d=\frac{|{-10}|}{\sqrt{9+16}}=\frac{10}5=2.\) Compare this one-line computation with the alternative: find the perpendicular through the origin, intersect, apply the distance formula. In a 75-second-per-question exam, the formula wins.</p>
+
+<h2><span class="sn">§G.3</span>Circles</h2>
+<div class="box def"><span class="bt">Equation of a circle</span>
+<p>The circle with centre \((a,b)\) and radius \(r\) is the set of points at distance \(r\) from the centre:
+\[(x-a)^2+(y-b)^2=r^2.\]
+A circle often arrives in expanded form \(x^2+y^2+2gx+2fy+c=0\); <strong>complete the square</strong> to read off centre \((-g,-f)\) and radius \(r=\sqrt{g^2+f^2-c}\) (a genuine circle requires \(g^2+f^2-c&gt;0\)).</p></div>
+<p><strong>Example.</strong> \(x^2+y^2-6x+4y-3=0\) becomes \((x-3)^2+(y+2)^2=16\): centre \((3,-2)\), radius 4.</p>
+<div class="box tmpl"><span class="bt">Template — Line meets circle</span>
+<ol>
+<li>Substitute the line \(y=mx+c\) into the circle's equation to obtain a quadratic in \(x\).</li>
+<li>Compute the discriminant \(\Delta\).</li>
+<li>\(\Delta&gt;0\): the line is a <em>chord</em> (two intersections). \(\Delta=0\): the line is <em>tangent</em> (one touch). \(\Delta&lt;0\): the line misses the circle.</li>
+</ol>
+<p>Alternative for tangency: the line is tangent iff its distance from the centre equals the radius — often faster with the point-to-line formula.</p></div>
+<p>Three circle facts that the TMUA assumes from school geometry, and which convert many circle problems into right-angle problems:</p>
+<div class="box thm"><span class="bt">Circle theorems worth keeping</span>
+<ol>
+<li>A radius drawn to the point of tangency is <strong>perpendicular to the tangent</strong>. (So the normal to a circle always passes through the centre.)</li>
+<li>The <strong>angle in a semicircle</strong> is a right angle: if \(AB\) is a diameter and \(P\) is on the circle, \(\angle APB=90^\circ\).</li>
+<li>The perpendicular from the centre to a chord <strong>bisects the chord</strong> — half-chord, radius and centre-distance form a right triangle: \(\left(\frac{\text{chord}}2\right)^2+d^2=r^2\).</li>
+</ol></div>
+<p><strong>Example.</strong> Find the length of the chord cut from the line \(3x+4y-10=0\) by the circle \(x^2+y^2=9\). The centre is the origin and we computed \(d=2\) above; with \(r=3\), the half-chord is \(\sqrt{9-4}=\sqrt5\), so the chord has length \(2\sqrt5\). No intersection points were ever found — fact 3 did all the work.</p>
+
+<h2><span class="sn">§G.4</span>Triangles</h2>
+<p>Radians first. A full turn is \(2\pi\) radians, so \(180^\circ=\pi\); convert by multiplying by \(\frac\pi{180}\) or its reciprocal. Radians are not a stylistic preference — they are the units in which calculus works: \((\sin x)'=\cos x\) and the small-angle approximations \(\sin x\approx x\), \(\cos x\approx1-\frac{x^2}2\), \(\tan x\approx x\) are <em>false</em> in degrees.</p>
+<div class="box thm"><span class="bt">Arcs and sectors</span>
+<p>In a circle of radius \(r\), an angle of \(\theta\) radians at the centre subtends an <strong>arc of length \(r\theta\)</strong> and a <strong>sector of area \(\frac12r^2\theta\)</strong>. (Sanity check with the full turn \(\theta=2\pi\): circumference \(2\pi r\), area \(\pi r^2\).)</p></div>
+<div class="box thm"><span class="bt">The triangle toolkit</span>
+<p>In a triangle with angles \(A,B,C\) opposite sides \(a,b,c\):</p>
+<ol>
+<li><strong>Sine rule:</strong> \(\dfrac a{\sin A}=\dfrac b{\sin B}=\dfrac c{\sin C}=2R\), where \(R\) is the circumradius. Use it when you have an angle–opposite-side pair.</li>
+<li><strong>Cosine rule:</strong> \(a^2=b^2+c^2-2bc\cos A\). Use it with two sides and the included angle, or three sides and no angle. With \(A=90^\circ\) it degenerates into Pythagoras.</li>
+<li><strong>Area:</strong> \(\text{Area}=\frac12ab\sin C\) — half the product of two sides times the sine of the included angle; with \(C=90^\circ\) this is the familiar \(\frac12\,\text{base}\times\text{height}\).</li>
+</ol></div>
+<div class="box warn"><span class="bt">The ambiguous case</span>
+<p>The sine rule can betray you: from \(\sin B=k\) there are <em>two</em> candidate angles, \(B\) and \(180^\circ-B\), and both may produce a valid triangle. Whenever you extract an angle from its sine, check whether the obtuse alternative also satisfies the angle sum. (Extracting from a cosine is safe — \(\cos\) determines an angle of a triangle uniquely.)</p></div>
+
+<h2><span class="sn">§G.5</span>Trigonometric functions, identities and equations</h2>
+<p>The graphs of \(\sin\), \(\cos\) (period \(2\pi\)) and \(\tan\) (period \(\pi\), vertical asymptotes at \(\frac\pi2+k\pi\)) were sketched in the <a href="functions.html">Functions</a> topic; everything there about transformations applies — \(\sin(2x)\) squashes, \(2\sin x\) stretches, \(\cos x=\sin\!\left(x+\frac\pi2\right)\) is a translation. The exact values to know cold:</p>
+<table>
+<tr><th>\(\theta\)</th><th>\(0\)</th><th>\(\frac\pi6\)</th><th>\(\frac\pi4\)</th><th>\(\frac\pi3\)</th><th>\(\frac\pi2\)</th></tr>
+<tr><td>\(\sin\theta\)</td><td>\(0\)</td><td>\(\frac12\)</td><td>\(\frac{\sqrt2}2\)</td><td>\(\frac{\sqrt3}2\)</td><td>\(1\)</td></tr>
+<tr><td>\(\cos\theta\)</td><td>\(1\)</td><td>\(\frac{\sqrt3}2\)</td><td>\(\frac{\sqrt2}2\)</td><td>\(\frac12\)</td><td>\(0\)</td></tr>
+<tr><td>\(\tan\theta\)</td><td>\(0\)</td><td>\(\frac{1}{\sqrt3}\)</td><td>\(1\)</td><td>\(\sqrt3\)</td><td>—</td></tr>
+</table>
+<div class="box thm"><span class="bt">The two identities that generate everything</span>
+<ol>
+<li>\(\sin^2\theta+\cos^2\theta=1\) — Pythagoras on the unit circle. Dividing by \(\cos^2\theta\) gives \(\tan^2\theta+1=\sec^2\theta\).</li>
+<li>\(\tan\theta=\dfrac{\sin\theta}{\cos\theta}\).</li>
+</ol>
+</div>
+<div class="box thm"><span class="bt">The addition formulae</span>
+<p>For any angles \(a\) and \(b\):
+\[\sin(a\pm b)=\sin a\cos b\pm\cos a\sin b,\qquad
+\cos(a\pm b)=\cos a\cos b\mp\sin a\sin b,\]
+\[\tan(a\pm b)=\frac{\tan a\pm\tan b}{1\mp\tan a\tan b}.\]
+Watch the signs: cosine's are flipped. These four lines generate the rest of trigonometry. Setting \(b=a\) gives the <strong>double-angle formulae</strong>:
+\[\sin2\theta=2\sin\theta\cos\theta,\qquad
+\cos2\theta=\cos^2\theta-\sin^2\theta=2\cos^2\theta-1=1-2\sin^2\theta,\]
+where the three faces of \(\cos2\theta\) (obtained via \(\sin^2+\cos^2=1\)) are interchangeable; pick the one that removes the function you don't want. Read backwards, the \(\cos2\theta\) formulae become the <em>power-reduction</em> identities \(\cos^2\theta=\frac{1+\cos2\theta}2\) and \(\sin^2\theta=\frac{1-\cos2\theta}2\) — the standard way to integrate \(\sin^2\) and \(\cos^2\) in the <a href="integration.html">Integration</a> topic.</p></div>
+<div class="box thm"><span class="bt">Sum-to-product (the factorising formulae)</span>
+<p>Adding and subtracting the addition formulae in pairs, then substituting \(a=\frac{A+B}2\), \(b=\frac{A-B}2\):
+\[\sin A+\sin B=2\sin\frac{A+B}2\cos\frac{A-B}2,\qquad
+\sin A-\sin B=2\cos\frac{A+B}2\sin\frac{A-B}2,\]
+\[\cos A+\cos B=2\cos\frac{A+B}2\cos\frac{A-B}2,\qquad
+\cos A-\cos B=-2\sin\frac{A+B}2\sin\frac{A-B}2.\]
+Their power: they turn <em>sums</em> (hard to set to zero) into <em>products</em> (trivial to set to zero — factor and solve each factor). They are exactly what cracks MAT 1994's equation \(\sin5\theta+\sin3\theta+\sin\theta=0\) in the <a href="algebra.html">Algebra</a> problems: pair the outer terms to get \(2\sin3\theta\cos2\theta+\sin3\theta=\sin3\theta\,(2\cos2\theta+1)=0\).</p></div>
+<div class="box thm"><span class="bt">The harmonic form: a sin x + b cos x</span>
+<p>Any combination \(a\sin x+b\cos x\) is a single shifted sine wave:
+\[a\sin x+b\cos x=R\sin(x+\alpha),\qquad R=\sqrt{a^2+b^2},\quad \tan\alpha=\frac ba\]
+(expand \(R\sin(x+\alpha)\) with the addition formula and match coefficients: \(R\cos\alpha=a\), \(R\sin\alpha=b\)). Two immediate payoffs: the <strong>maximum and minimum</strong> of \(a\sin x+b\cos x\) are \(\pm R\) — no calculus needed — and the equation \(a\sin x+b\cos x=c\) has solutions iff \(|c|\le R\). For example, \(\sin x+\sqrt3\cos x=2\sin\!\left(x+\frac\pi3\right)\), so its greatest value is 2, attained when \(x+\frac\pi3=\frac\pi2\).</p></div>
+<div class="box thm"><span class="bt">Symmetries</span>
+<p>\(\sin(-\theta)=-\sin\theta\) (odd); \(\cos(-\theta)=\cos\theta\) (even); \(\sin(\pi-\theta)=\sin\theta\); \(\cos(\pi-\theta)=-\cos\theta\); \(\sin\!\left(\frac\pi2-\theta\right)=\cos\theta\). These six lines replace the "CAST diagram" entirely — and they are exactly the reflections and translations of §5.11 acting on the sine wave.</p></div>
+<div class="box tmpl"><span class="bt">Template — Trigonometric equations</span>
+<ol>
+<li>Use identities to rewrite the equation in a <em>single</em> trigonometric function — e.g. replace \(\cos2\theta\) by \(1-2\sin^2\theta\) if the rest is in \(\sin\theta\).</li>
+<li>Substitute \(t=\sin\theta\) (or \(\cos\theta\), \(\tan\theta\)): the equation becomes polynomial. Solve it; <em>discard roots outside \([-1,1]\)</em> for sine and cosine.</li>
+<li>For each valid \(t\), find all \(\theta\) in the required interval using the graph or the symmetries above: \(\sin\theta=k\) has solutions \(\theta\) and \(\pi-\theta\) plus multiples of \(2\pi\); \(\cos\theta=k\) has \(\pm\theta\) plus multiples of \(2\pi\); \(\tan\theta=k\) has \(\theta\) plus multiples of \(\pi\).</li>
+<li><em>Count carefully</em> — TMUA questions often ask only for the number of solutions, and the marks are lost at the endpoints of the interval.</li>
+</ol></div>
+<p><strong>Example.</strong> How many solutions does \(2\cos^2\theta+3\sin\theta=3\) have in \([0,2\pi]\)? Replace \(\cos^2\theta=1-\sin^2\theta\): \(2-2\sin^2\theta+3\sin\theta=3\), i.e. \(2\sin^2\theta-3\sin\theta+1=0\), so \((2\sin\theta-1)(\sin\theta-1)=0\). Then \(\sin\theta=\frac12\) gives \(\theta=\frac\pi6,\frac{5\pi}6\); \(\sin\theta=1\) gives \(\theta=\frac\pi2\). Three solutions. (Compare Question 7 in the <a href="algebra.html">Algebra</a> problems — the same machinery.)</p>
+
+<h2><span class="sn">§G.6</span>Into three dimensions</h2>
+<p>The TMUA stays in the plane, but STEP and interview questions do not — and the third dimension is where the infamous "Geometry question" usually lives. The encouraging secret: almost nothing new is needed. Every formula below is the two-dimensional one with a third coordinate bolted on, and every 3D angle problem is solved by finding the right <em>plane</em> inside the solid and doing 2D trigonometry there.</p>
+<div class="box thm"><span class="bt">The toolkit, one dimension up</span>
+<p>For \(A(x_1,y_1,z_1)\) and \(B(x_2,y_2,z_2)\):</p>
+<ol>
+<li><strong>Distance:</strong> \(|AB|=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}\) — Pythagoras applied twice: first across the floor, then up the wall.</li>
+<li><strong>Midpoint:</strong> average each coordinate.</li>
+<li><strong>Sphere</strong> with centre \((a,b,c)\) and radius \(r\): \((x-a)^2+(y-b)^2+(z-c)^2=r^2\). Complete the square to read off centre and radius, exactly as for circles.</li>
+</ol></div>
+<div class="box def"><span class="bt">Vectors and the scalar product</span>
+<p>A vector \(\mathbf a=\begin{pmatrix}a_1\\a_2\\a_3\end{pmatrix}\) encodes a displacement; its <strong>magnitude</strong> is \(|\mathbf a|=\sqrt{a_1^2+a_2^2+a_3^2}\). The <strong>scalar (dot) product</strong> is
+\[\mathbf a\cdot\mathbf b=a_1b_1+a_2b_2+a_3b_3=|\mathbf a||\mathbf b|\cos\theta,\]
+where \(\theta\) is the angle between the vectors. The two expressions together make the scalar product the angle-measuring machine of 3D geometry:
+\[\cos\theta=\frac{\mathbf a\cdot\mathbf b}{|\mathbf a||\mathbf b|},\]
+and in particular \(\mathbf a\perp\mathbf b\iff\mathbf a\cdot\mathbf b=0\) — the 3D replacement for "gradients multiply to \(-1\)", which has no direct analogue off the plane.</p></div>
+<div class="box thm"><span class="bt">Lines and planes</span>
+<ol>
+<li>A <strong>line</strong> through point \(\mathbf a\) with direction \(\mathbf d\): \(\mathbf r=\mathbf a+\lambda\mathbf d\), \(\lambda\in\mathbb R\). Two lines in space may intersect, be parallel — or be <strong>skew</strong>: non-parallel yet never meeting, a possibility that simply doesn't exist in the plane.</li>
+<li>A <strong>plane</strong> with normal vector \(\mathbf n\) through the point \(\mathbf a\): \(\mathbf n\cdot(\mathbf r-\mathbf a)=0\), i.e. \(n_1x+n_2y+n_3z=k\). The coefficients of \(x,y,z\) <em>are</em> the normal — the 3D sibling of reading the gradient off \(ax+by+c=0\).</li>
+<li>The angle between a line and a plane: find the angle between the line's direction and the normal, then subtract from \(90^\circ\).</li>
+</ol></div>
+<div class="box tmpl"><span class="bt">Template — Angles inside solids</span>
+<ol>
+<li>Identify the angle asked for, and the triangle that contains it: between two lines, take the triangle they span; between a line and a plane, drop a perpendicular from a point of the line onto the plane and join up the right triangle.</li>
+<li>Compute the three relevant lengths with the 3D distance formula (diagonals of boxes fall to "Pythagoras twice").</li>
+<li>Finish with plane trigonometry — usually \(\tan\theta=\frac{\text{opposite}}{\text{adjacent}}\) in the right triangle you built, or the cosine rule if no right angle offered itself.</li>
+<li>Alternatively, coordinatise: place the solid on axes, write the two directions as vectors, and let the scalar product compute the cosine. When in doubt, coordinates beat ingenuity.</li>
+</ol></div>
+<p><strong>Example.</strong> Find the angle between the space diagonal of a cube and one of its faces. Take the unit cube with a vertex at the origin; the diagonal runs from \((0,0,0)\) to \((1,1,1)\), and its shadow on the floor runs to \((1,1,0)\). The right triangle has horizontal leg \(\sqrt2\) (the face diagonal) and vertical leg \(1\), so
+\[\tan\theta=\frac1{\sqrt2},\qquad\theta=\arctan\frac1{\sqrt2}\approx35.3^\circ.\]
+Equivalently by vectors: \(\cos\) of the angle between \((1,1,1)\) and \((1,1,0)\) is \(\frac{2}{\sqrt3\sqrt2}=\sqrt{\tfrac23}\) — the same angle.</p>
+<div class="box thm"><span class="bt">Volumes and surfaces to know cold</span>
+<p>Prism/cylinder: \(V=\text{base area}\times\text{height}\). Pyramid/cone: \(V=\frac13\times\text{base area}\times\text{height}\) — the \(\frac13\) we <em>derived</em> by integration in the <a href="integration.html">Integration</a> topic. Sphere: \(V=\frac43\pi r^3\), surface \(4\pi r^2\); cylinder surface \(2\pi rh\) (curved part); cone curved surface \(\pi rl\) with \(l\) the slant height. STEP optimisation questions love fixing one of these and extremising another — set up the constraint, substitute, differentiate.</p></div>
+
+<h2><span class="sn">§G.7</span>Problems</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill new">New</span></div>
+<p>The points \(A(1,2)\) and \(B(7,10)\) are the ends of a diameter of a circle. Find the equation of the circle, and determine whether the point \((7,2)\) lies inside, on, or outside it.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>The centre is the midpoint \((4,6)\); the radius is \(\frac12|AB|=\frac12\sqrt{36+64}=5\). The circle is \((x-4)^2+(y-6)^2=25\). For \((7,2)\): \((7-4)^2+(2-6)^2=9+16=25\) — the point lies <em>on</em> the circle. (And by the angle-in-a-semicircle theorem, \(\angle A(7,2)B=90^\circ\) — check it via gradients!)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill new">New · TMUA-style</span></div>
+<p>For how many values of \(c\) is the line \(y=x+c\) tangent to the circle \(x^2+y^2-4x-2y+1=0\)?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Complete the square: \((x-2)^2+(y-1)^2=4\), centre \((2,1)\), radius 2. The line \(x-y+c=0\) is tangent iff its distance to the centre is 2:
+\(\frac{|2-1+c|}{\sqrt2}=2\), so \(|c+1|=2\sqrt2\): exactly <strong>two</strong> values, \(c=-1\pm2\sqrt2\). (Geometrically obvious — one tangent on each side — but the exam wants the values too.)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill new">New</span></div>
+<p>Find the equation of the tangent to the circle \(x^2+y^2=25\) at the point \((3,4)\), without using any calculus.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>The radius to \((3,4)\) has gradient \(\frac43\); the tangent is perpendicular to it (circle fact 1), so its gradient is \(-\frac34\). Point–gradient form: \(y-4=-\frac34(x-3)\), i.e. \(3x+4y=25\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill tmua">TMUA-style</span></div>
+<p>A circle has centre \((3,4)\) and is tangent to both coordinate axes... is this possible? If not, find the radius of the circle through the origin with centre \((3,4)\), and the equation of its tangent at the origin.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Tangency to both axes requires the centre to be equidistant from both, i.e. \(|3|=|4|\) — impossible. The circle through the origin has radius \(\sqrt{3^2+4^2}=5\). The radius to the origin has gradient \(\frac43\), so the tangent there is \(y=-\frac34x\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill new">New</span></div>
+<p>The line \(y=2x+k\) meets the curve \(y=x^2-3x+5\) at two points which are 3 units apart (measured horizontally, i.e. their \(x\)-coordinates differ by 3). Find \(k\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Intersections: \(x^2-5x+(5-k)=0\). By Vieta, \(x_1+x_2=5\), \(x_1x_2=5-k\). Then \((x_1-x_2)^2=(x_1+x_2)^2-4x_1x_2=25-4(5-k)=5+4k=9\), so \(k=1\). (Vieta's relationships from the Algebra topic — no need to find the points.)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill new">New · TMUA-style</span></div>
+<p>A sector of a circle has perimeter 12 and area 9. Find all possible values of its radius.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Perimeter: \(2r+r\theta=12\); area: \(\frac12r^2\theta=9\). From the first, \(r\theta=12-2r\); substituting, \(\frac12r(12-2r)=9\), i.e. \(r^2-6r+9=0\), so \((r-3)^2=0\): \(r=3\) only (with \(\theta=2\)).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill new">New</span></div>
+<p>In triangle \(ABC\), \(a=7\), \(b=8\) and \(\cos C=\frac{11}{14}\)... no — let us make it harder: \(a=7\), \(b=8\), \(c=9\). Find \(\cos A\), and hence the exact area of the triangle.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Cosine rule: \(\cos A=\frac{b^2+c^2-a^2}{2bc}=\frac{64+81-49}{144}=\frac{96}{144}=\frac23\). Then \(\sin A=\sqrt{1-\frac49}=\frac{\sqrt5}3\), and
+\[\text{Area}=\frac12bc\sin A=\frac12\cdot8\cdot9\cdot\frac{\sqrt5}3=12\sqrt5.\]</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill new">New · TMUA-style</span></div>
+<p>How many solutions does the equation \(\sin2\theta=\cos\theta\) have for \(0\le\theta\le2\pi\)?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>\(2\sin\theta\cos\theta-\cos\theta=0\), so \(\cos\theta\,(2\sin\theta-1)=0\). \(\cos\theta=0\): \(\theta=\frac\pi2,\frac{3\pi}2\). \(\sin\theta=\frac12\): \(\theta=\frac\pi6,\frac{5\pi}6\). <strong>Four</strong> solutions. The classic error is dividing by \(\cos\theta\) — which silently discards two of them. Never divide by something that can be zero; factor instead.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill new">New</span></div>
+<p>Find the greatest and least values of \(f(\theta)=3\sin^2\theta+8\cos\theta\) for \(\theta\in\mathbb R\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Write everything in cosine: \(f=3(1-\cos^2\theta)+8\cos\theta=-3t^2+8t+3\) with \(t=\cos\theta\in[-1,1]\). The parabola's vertex is at \(t=\frac43\) — outside the interval — so on \([-1,1]\) the quadratic is increasing. Greatest value at \(t=1\): \(f=8\); least at \(t=-1\): \(f=-8\). (The vertex trap: had we blindly evaluated at the vertex, we'd report a maximum the function never attains — always check the constraint \(|t|\le1\).)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 10</span><span class="pill">MAT-style</span></div>
+<p>A circle of radius 1 rolls inside a square of side 4, always touching at least one side. Find the area of the region of the square that the circle can never touch.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>The centre of the circle is confined to the square \([1,3]\times[1,3]\) (it must stay 1 away from every wall), and the circle covers every point within distance 1 of a possible centre. Every interior point of the big square is within distance 1 of \([1,3]^2\) — even the exact centre \((2,2)\) is reached — <em>except</em> near the corners: wedged into a corner, the disc leaves uncovered the region between the corner and the inscribed quarter-circle of radius 1, of area \(1-\frac\pi4\) per corner. Total unreachable area: \(4\left(1-\frac\pi4\right)=4-\pi\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 11</span><span class="pill">STEP-style · Hard</span></div>
+<p>The circle \(C_1\) has equation \(x^2+y^2=r^2\) and the circle \(C_2\) has equation \((x-d)^2+y^2=R^2\), with \(d&gt;R&gt;r&gt;0\) (so the circles are external to each other).<br>
+(i) Show that the circles do not intersect iff \(d&gt;R+r\).<br>
+(ii) A common external tangent touches \(C_1\) at \(P\) and \(C_2\) at \(Q\). By considering the trapezium formed by the centres and the points of tangency, show that \(|PQ|^2=d^2-(R-r)^2\).<br>
+(iii) Find the corresponding result for a common internal tangent, and deduce that the internal tangent is always shorter.</p>
+<details class="sol"><summary>Show hints</summary>
+<p>(i) Compare the distance \(d\) between centres with \(R+r\). (ii) The radii to \(P\) and \(Q\) are both perpendicular to the tangent, hence parallel; drop a perpendicular from the small centre to the long radius to form a right triangle with hypotenuse \(d\) and one leg \(R-r\). (iii) For the internal tangent the radii point to opposite sides, and the leg becomes \(R+r\): \(|PQ|^2=d^2-(R+r)^2&lt;d^2-(R-r)^2\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 12</span><span class="pill new">New · Paper 2 flavour</span></div>
+<p>A student claims: "If a quadrilateral has all four sides equal, then it is a square." Find the error, state the correct relationship between the two conditions in the language of <em>necessary</em> and <em>sufficient</em>, and give the counterexample.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>A rhombus that is not a square (e.g. vertices \((0,0),(2,1),(4,0),(2,-1)\) — all sides \(\sqrt5\), no right angles) is the counterexample. Equal sides are <em>necessary</em> for a quadrilateral to be a square, but not <em>sufficient</em>. Conversely, "being a square" is sufficient but not necessary for "having equal sides". The full machinery of these terms is in the <a href="logic.html">Logic and Proof</a> topic.</p>
+</details></div>
+
+
+<div class="q"><div class="qhead"><span class="qn">Question 13</span><span class="pill new">New · 3D</span></div>
+<p>A cuboid has dimensions \(3\times4\times12\). Find the length of its space diagonal, and the angle the diagonal makes with the largest face.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Diagonal: \(\sqrt{3^2+4^2+12^2}=\sqrt{169}=13\). The largest face is the \(4\times12\) one; the diagonal's shadow on it has length \(\sqrt{4^2+12^2}=\sqrt{160}=4\sqrt{10}\), and the leg perpendicular to that face is 3, so \(\sin\theta=\frac3{13}\), giving \(\theta=\arcsin\frac3{13}\approx13.3^\circ\). (A 5–12–13 and a 3–4–5 triangle hiding in one box.)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 14</span><span class="pill new">New · 3D</span></div>
+<p>The points \(A(1,2,2)\), \(B(3,6,2)\) and \(C(1,2,7)\) are given. Show that the triangle \(ABC\) is right-angled, and find its area.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>\(\vec{AB}=(2,4,0)\) and \(\vec{AC}=(0,0,5)\); their scalar product is \(0+0+0=0\), so the right angle is at \(A\). Area \(=\frac12|\vec{AB}||\vec{AC}|=\frac12\cdot\sqrt{20}\cdot5=5\sqrt5\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 15</span><span class="pill new">New · 3D</span></div>
+<p>Find the centre and radius of the sphere \(x^2+y^2+z^2-2x+4y-6z=2\), and determine whether the plane \(z=8\) meets it.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Completing three squares: \((x-1)^2+(y+2)^2+(z-3)^2=16\): centre \((1,-2,3)\), radius 4. The plane \(z=8\) sits at distance \(|8-3|=5&gt;4\) from the centre — it misses the sphere. (Had the distance been less than 4, the intersection would be a circle of radius \(\sqrt{16-d^2}\) — circle fact 3 of §G.3, one dimension up.)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 16</span><span class="pill">MAT/STEP-style · 3D</span></div>
+<p>A regular tetrahedron has all four faces equilateral with side length 1.<br>
+(i) Find its height. (ii) Find its volume. (iii) Find the angle between two faces (the dihedral angle).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>(i) The apex sits above the centroid of the base, which lies at distance \(\frac{1}{\sqrt3}\) from each base vertex (two-thirds of the median \(\frac{\sqrt3}2\)). Height: \(h=\sqrt{1-\frac13}=\sqrt{\frac23}\).<br>
+(ii) Base area \(\frac{\sqrt3}4\); volume \(\frac13\cdot\frac{\sqrt3}4\cdot\sqrt{\frac23}=\frac{1}{6\sqrt2}=\frac{\sqrt2}{12}\).<br>
+(iii) Take a base edge and the two face-midlines perpendicular to it: each has length \(\frac{\sqrt3}2\) (a face's height), and they meet the segment joining the two opposite vertices, of length 1. Cosine rule in that triangle: \(\cos\theta=\frac{\frac34+\frac34-1}{2\cdot\frac34}=\frac13\), so \(\theta=\arccos\frac13\approx70.5^\circ\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 17</span><span class="pill">STEP-style · Hard</span></div>
+<p>A right circular cone has fixed slant height \(l\). Show that its volume is maximised when the semi-vertical angle \(\alpha\) satisfies \(\tan\alpha=\sqrt2\), and find the maximum volume in terms of \(l\).</p>
+<details class="sol"><summary>Show hints</summary>
+<p>With radius \(r=l\sin\alpha\) and height \(h=l\cos\alpha\), \(V=\frac\pi3l^3\sin^2\alpha\cos\alpha\). Let \(c=\cos\alpha\): maximise \(c-c^3\) on \((0,1)\); the derivative vanishes at \(c=\frac1{\sqrt3}\), so \(\sin^2\alpha=\frac23\), \(\tan^2\alpha=2\). Maximum volume \(V=\frac\pi3l^3\cdot\frac23\cdot\frac1{\sqrt3}=\frac{2\pi l^3}{9\sqrt3}\).</p>
+</details></div>
+
+
+<div class="q"><div class="qhead"><span class="qn">Question 18</span><span class="pill new">New · TMUA-style</span></div>
+<p>How many solutions does the equation \(\cos3\theta+\cos\theta=0\) have in the interval \([0,2\pi]\)?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Sum-to-product: \(\cos3\theta+\cos\theta=2\cos2\theta\cos\theta=0\). Then \(\cos2\theta=0\) gives \(2\theta=\frac\pi2,\frac{3\pi}2,\frac{5\pi}2,\frac{7\pi}2\), i.e. \(\theta=\frac\pi4,\frac{3\pi}4,\frac{5\pi}4,\frac{7\pi}4\); and \(\cos\theta=0\) gives \(\theta=\frac\pi2,\frac{3\pi}2\). <strong>Six</strong> solutions, with no overlap between the two factors — and, as ever, factoring rather than dividing is what kept all of them.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 19</span><span class="pill new">New</span></div>
+<p>(i) Write \(3\sin\theta+4\cos\theta\) in the form \(R\sin(\theta+\alpha)\) with \(R&gt;0\) and \(0&lt;\alpha&lt;\frac\pi2\).<br>
+(ii) Hence find the greatest and least values of \(\dfrac{20}{3\sin\theta+4\cos\theta+10}\), and the smallest positive \(\theta\) at which the greatest value occurs.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>(i) \(R=\sqrt{9+16}=5\), \(\tan\alpha=\frac43\): \(3\sin\theta+4\cos\theta=5\sin(\theta+\alpha)\) with \(\alpha=\arctan\frac43\).<br>
+(ii) The denominator ranges over \([10-5,\,10+5]=[5,15]\), so the fraction ranges over \(\left[\frac{20}{15},\frac{20}5\right]=\left[\frac43,4\right]\): greatest value 4, least \(\frac43\). The greatest value needs the denominator at its minimum, i.e. \(\sin(\theta+\alpha)=-1\): \(\theta=\frac{3\pi}2-\arctan\frac43\). The fraction structure (constant over a harmonic form) is a TMUA favourite precisely because the \(\pm R\) bound replaces all calculus.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 20</span><span class="pill new">New · TMUA-style</span></div>
+<p>Find the number of points in the interval \([-2\pi,2\pi]\) at which
+\[\cos(\sin x)=\sin(\cos x).\]
+Before reaching for a calculator-style search, think about <em>periodicity</em> and <em>symmetry</em>: if \(x\) is a solution, is \(k\pi\pm x\) a solution too — for \(k\) a whole number, or a whole number plus a half?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Write \(f(x)=\cos(\sin x)-\sin(\cos x)\); we are counting the zeros of \(f\) in \([-2\pi,2\pi]\). The structure the question hints at is genuinely the fast way in — but, as we shall see, it carries a sting in the tail.</p>
+
+<p><strong>Step 1 — Periodicity.</strong> Both \(\sin\) and \(\cos\) have period \(2\pi\), so \(f(x+2\pi)=f(x)\): the picture repeats every \(2\pi\). The interval \([-2\pi,2\pi]\) is exactly two full periods, so any zero is one of a repeating family — we need only understand one period and then replicate.</p>
+
+<p><strong>Step 2 — Which of the maps \(x\mapsto k\pi\pm x\) are symmetries?</strong> A transformation helps us only if it sends a solution to a solution, i.e. leaves \(f\) unchanged. Test the candidates with \(\sin(-x)=-\sin x\), \(\cos(-x)=\cos x\), \(\sin(x+\pi)=-\sin x\), \(\cos(x+\pi)=-\cos x\):</p>
+<ul>
+<li><strong>\(x\mapsto -x\)</strong> (the case \(k=0\), minus sign): \(\cos(\sin(-x))=\cos(-\sin x)=\cos(\sin x)\) and \(\sin(\cos(-x))=\sin(\cos x)\), so \(f(-x)=f(x)\). The function is <strong>even</strong> ✓ — a solution at \(x_0\) forces one at \(-x_0\).</li>
+<li><strong>\(x\mapsto x+2\pi\)</strong> (\(k=2\), plus): unchanged by periodicity ✓.</li>
+<li><strong>\(x\mapsto x+\pi\)</strong> (\(k=1\), plus): \(\cos(\sin(x+\pi))=\cos(\sin x)\) but \(\sin(\cos(x+\pi))=\sin(-\cos x)=-\sin(\cos x)\), so \(f(x+\pi)=\cos(\sin x)+\sin(\cos x)\). The shift by \(\pi\) <em>flips the sign</em> of the second term — it turns our equation into the different equation \(\cos(\sin x)=-\sin(\cos x)\). <strong>Not</strong> a symmetry ✗.</li>
+<li><strong>\(x\mapsto \pi-x\)</strong> (\(k=1\), minus): \(\sin(\pi-x)=\sin x\), \(\cos(\pi-x)=-\cos x\) give \(f(\pi-x)=\cos(\sin x)+\sin(\cos x)\) — the same sign-flipped sibling. <strong>Not</strong> a symmetry ✗.</li>
+<li><strong>\(x\mapsto \tfrac\pi2\pm x\)</strong> (the half-integer case \(k=\tfrac12\)): since \(\sin(\tfrac\pi2+x)=\cos x\) and \(\cos(\tfrac\pi2+x)=-\sin x\), this sends the equation to one in \(\cos(\cos x)\) and \(\sin(\sin x)\) — a completely different beast. <strong>Not</strong> a symmetry ✗.</li>
+</ul>
+<p>So of the whole family \(x\mapsto k\pi\pm x\), <strong>only the even-integer cases survive</strong>: \(x\mapsto x+2n\pi\) and \(x\mapsto 2n\pi-x\). The equation is symmetric under reflection in any <em>multiple of \(\pi\)</em> and translation by any <em>multiple of \(2\pi\)</em> — but it is <em>not</em> symmetric about \(\tfrac\pi2\), and <em>not</em> invariant under a shift by a single \(\pi\). That asymmetry is the examinable subtlety: \(\cos(\sin x)\) on its own has period \(\pi\), yet \(\sin(\cos x)\) has period \(2\pi\) and reverses sign under \(x\mapsto x+\pi\), so the <em>equation</em> keeps only the coarser symmetry.</p>
+<p>The payoff: a fundamental domain is \([0,\pi]\) (fold \([-\pi,0]\) onto it by evenness, reflect about \(\pi\) for \([\pi,2\pi]\), translate by \(2\pi\) for the rest), and \([-2\pi,2\pi]\) is <strong>four</strong> such copies. So the total count is \(4\times(\text{number of solutions in }[0,\pi])\).</p>
+
+<p><strong>Step 3 — But are there any solutions at all?</strong> All this symmetry is worthless if the solution set is empty, so we must settle existence. Use the co-function identity \(\sin\theta=\cos\!\left(\tfrac\pi2-\theta\right)\) to put both sides under a cosine:
+\[\cos(\sin x)=\cos\!\left(\tfrac\pi2-\cos x\right).\]
+Now \(\cos\) is even and <em>strictly decreasing on \([0,\pi]\)</em>; both \(|\sin x|\in[0,1]\) and \(\tfrac\pi2-\cos x\in[\tfrac\pi2-1,\tfrac\pi2+1]\) lie inside \([0,\pi]\), where \(\cos\) is one-to-one. Equality of the two cosines therefore demands equality of arguments:
+\[|\sin x|=\tfrac\pi2-\cos x,\qquad\text{i.e.}\qquad |\sin x|+\cos x=\tfrac\pi2.\]
+But the harmonic form of §G.5 caps the left-hand side: for \(\sin x\ge0\) it is \(\sin x+\cos x=\sqrt2\,\sin\!\left(x+\tfrac\pi4\right)\le\sqrt2\), and for \(\sin x&lt;0\) it is \(\cos x-\sin x=\sqrt2\,\cos\!\left(x+\tfrac\pi4\right)\le\sqrt2\). So
+\[|\sin x|+\cos x\le\sqrt2\approx1.414\;&lt;\;\tfrac\pi2\approx1.571.\]
+The required equality \(|\sin x|+\cos x=\tfrac\pi2\) is therefore <em>never</em> reached. Equivalently \(\cos(\sin x)&gt;\sin(\cos x)\) for every real \(x\): the two graphs never meet.</p>
+
+<figure><img src="img/fig-cossin.svg" alt="Graphs of y = cos(sin x) and y = sin(cos x) on [-2pi, 2pi]. The cos(sin x) curve stays between about 0.54 and 1; the sin(cos x) curve swings between about -0.84 and 0.84. The upper curve never touches the lower one, coming closest near x = pi/4 with a gap of about 0.11." style="max-width:540px"><figcaption>The curves \(y=\cos(\sin x)\) (period \(\pi\), trapped in \([\cos 1,1]\)) and \(y=\sin(\cos x)\) (period \(2\pi\), reaching only up to \(\sin 1\approx0.84\)). They come closest near \(x=\pm\tfrac\pi4\), a gap of about \(0.11\), but never touch.</figcaption></figure>
+
+<p>So the number of solutions in \([0,\pi]\) is \(0\), and \(4\times0=\boxed{0}\) over \([-2\pi,2\pi]\) — indeed there are none anywhere on \(\mathbb R\).</p>
+
+<p><strong>The trap.</strong> The exam reflex — find one root, then multiply by the symmetry count (\(2,4,8,\dots\)) — would here hand you a confident wrong answer. Periodicity and symmetry tell you how solutions are <em>arranged</em>; they never promise any <em>exist</em>. The whole result turns on the single comparison \(\sqrt2&lt;\tfrac\pi2\): the most the upper curve can be pulled down (\(\cos 1\)) still clears the most the lower curve can rise (\(\sin 1\)). Always establish existence before you count.</p>
+</details></div>
+
+<div class="pn"><a href="functions.html">← Topic 4: Graphs &amp; Logs</a><a href="differentiation.html">Topic 6: Differentiation →</a></div>
+</div>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>
