@@ -198,3 +198,33 @@ footer .inner{max-width:46rem;margin:0 auto}
 .summary{text-align:center}
 .summary .bigscore{font-family:var(--display);font-size:2.8rem;font-weight:700;color:var(--accent-ink);margin:.4rem 0;letter-spacing:-.02em}
 .summary .smallnote{font-family:var(--mono);font-size:.76rem;color:var(--ink-soft);margin-top:.9rem}
+/* ---------- about / intro page ---------- */
+.about-page{max-width:54rem;margin:0 auto;padding:0 2rem}
+.about-hero{display:grid;grid-template-columns:1fr 256px;gap:2.8rem;align-items:center;padding:3.4rem 0 3rem;position:relative}
+.about-hero .eyebrow{display:inline-flex;align-items:center;font-family:var(--mono);font-size:.66rem;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--accent-ink);border:1px solid var(--accent-line);border-radius:99px;padding:.3rem .75rem;margin:0 0 1.1rem}
+.about-hero h1{font-family:var(--display);font-weight:700;font-size:2.9rem;line-height:1.02;letter-spacing:-.03em;color:var(--ink);margin:0 0 .8rem;max-width:15ch}
+.about-hero .lede{font-size:1.08rem;color:var(--ink-soft);margin:0;line-height:1.55;max-width:46ch}
+.about-hero .acts{margin-top:1.5rem;display:flex;gap:.7rem;flex-wrap:wrap}
+.about-portrait{position:relative}
+.about-portrait img{width:100%;display:block;border-radius:14px;border:1px solid var(--line);box-shadow:0 16px 44px -18px rgba(14,23,38,.5)}
+.about-portrait::after{content:"";position:absolute;left:-13px;bottom:-13px;width:64%;height:58%;border:2px solid var(--accent-line);border-radius:14px;z-index:-1}
+.about-portrait .tag{position:absolute;left:-10px;bottom:16px;background:var(--ink);color:#fff;font-family:var(--mono);
+  font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;padding:.42rem .7rem;border-radius:8px}
+.creds{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.6rem 0 0;align-items:start}
+.cred{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:1.15rem 1.25rem 1.2rem 1.35rem;position:relative;overflow:hidden}
+.cred::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.cred .cl{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-ink);display:block;margin-bottom:.5rem}
+.cred .ch{font-family:var(--display);font-weight:700;font-size:1.4rem;letter-spacing:-.02em;color:var(--ink);line-height:1.05;margin-bottom:.35rem}
+.cred p{margin:0;font-size:.85rem;color:var(--ink-soft);line-height:1.45}
+.unis{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem}
+.uni{font-family:var(--mono);font-size:.66rem;font-weight:500;background:var(--accent-soft);color:var(--accent-ink);border-radius:6px;padding:.22rem .55rem;letter-spacing:.01em}
+.about-foot{margin:2.4rem 0 0;padding:1.5rem 0 0;border-top:1px solid var(--line);font-size:1rem;color:var(--ink-soft)}
+.about-foot b{color:var(--ink);font-weight:600}
+@media (max-width:900px){
+  .about-page{padding:0 1.2rem}
+  .about-hero{grid-template-columns:1fr;gap:1.8rem;padding:2.4rem 0 2.2rem}
+  .about-hero h1{font-size:2.1rem}
+  .about-portrait{max-width:240px}
+  .creds{grid-template-columns:1fr}
+}
