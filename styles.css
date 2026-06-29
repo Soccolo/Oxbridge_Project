@@ -217,6 +217,7 @@ footer .inner{max-width:46rem;margin:0 auto}
 .cred .cl{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-ink);display:block;margin-bottom:.5rem}
 .cred .ch{font-family:var(--display);font-weight:700;font-size:1.4rem;letter-spacing:-.02em;color:var(--ink);line-height:1.05;margin-bottom:.35rem}
 .cred p{margin:0;font-size:.85rem;color:var(--ink-soft);line-height:1.45}
+.cred.wide{grid-column:1 / -1}
 .unis{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem}
 .uni{font-family:var(--mono);font-size:.66rem;font-weight:500;background:var(--accent-soft);color:var(--accent-ink);border-radius:6px;padding:.22rem .55rem;letter-spacing:.01em}
 .about-foot{margin:2.4rem 0 0;padding:1.5rem 0 0;border-top:1px solid var(--line);font-size:1rem;color:var(--ink-soft)}
