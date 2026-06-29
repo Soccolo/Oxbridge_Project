@@ -149,7 +149,7 @@ exists, it is called the <strong>derivative</strong> of \(f\) at \(x\). An equal
 <p> We needn't look that far: if \(\lim_{x\to x_0}f(x)\ne f(x_0)\), the function isn't differentiable at \(x_0\) — the numerator of \(\frac{f(x)-f(x_0)}{x-x_0}\) stays away from 0 while the denominator goes to 0.</p>
 <div class="box thm"><span class="bt">Sign of the derivative</span>
 <p>If \(f\) is differentiable and \(f'(x_0)&gt;0\), the function is increasing at \(x_0\); if \(f'(x_0)&lt;0\), it is decreasing.</p></div>
-<p>When \(f'(x_0)=0\), the derivative may change sign at \(x_0\) — giving a local maximum (positive→negative) or local minimum (negative→positive) — or keep its sign, giving a <em>saddle/stationary inflection</em> point. Since we can't check infinitely many nearby points, we use the second derivative:</p>
+<p>When \(f'(x_0)=0\), the derivative may change sign at \(x_0\), giving a local maximum (positive→negative) or local minimum (negative→positive), or keep its sign, giving a <em>saddle/stationary inflection</em> point. Since we can't check infinitely many nearby points, we use the second derivative:</p>
 <div class="box tmpl"><span class="bt">Template — Classifying a point x₀</span>
 <ol>
 <li>Compute \(f'(x_0)\): positive → increasing; negative → decreasing.</li>
@@ -158,8 +158,8 @@ exists, it is called the <strong>derivative</strong> of \(f\) at \(x\). An equal
 
 <div class="box tmpl"><span class="bt">Template — Maximum and minimum problems</span>
 <ol>
-<li><strong>To find a maximum or minimum, differentiate and solve \(f'(x)=0\).</strong> Almost every optimisation question — the largest volume, the shortest distance, the least cost — comes down to writing the quantity as a function, finding its stationary points from \(f'=0\), and selecting the right one (classify with the test above, or simply compare the candidates against the endpoints).</li>
-<li><strong>The TMUA never asks you to differentiate a function of two variables.</strong> So when the quantity naturally depends on two unknowns, look for a <em>constraint</em> relating them — very often Pythagoras, or a fixed perimeter, area or volume — and use it to write one variable in terms of the other. That collapses the problem to a single-variable function you <em>can</em> differentiate.</li>
+<li><strong>To find a maximum or minimum, differentiate and solve \(f'(x)=0\).</strong> Almost every optimisation question (find the maximum/minimum of something) comes down to writing the quantity as a function, finding its stationary points from \(f'=0\), and selecting the right one (classify with the test above, or simply compare the candidates against the endpoints).</li>
+<li><strong>The TMUA never asks you to differentiate a function of two variables.</strong> So when the quantity naturally depends on two unknowns, look for a <em>constraint</em> relating them, such as the below example, and use it to write one variable in terms of the other. That collapses the problem to a single-variable function you <em>can</em> differentiate.</li>
 </ol></div>
 <p>The second point is the one students forget under exam pressure — they see two unknowns and freeze, when a single line of constraint removes one of them. Here is the archetype.</p>
 <p><strong>Example</strong> (TMUA 2016, Paper 1). A right circular cylinder sits inside a sphere of radius \(5\,\text{cm}\) so that the circular edge of each end lies on the sphere. What is the maximum possible volume of the cylinder?</p>
