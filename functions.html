@@ -37,9 +37,6 @@ function toggleNav() {
   <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
   <div id="sidenav">
   <hr>
-  <ul class="nav">
-    <li><a href="about.html"><span class="n">▸</span> About your tutor</a></li>
-  </ul>
   <p class="menu-label">TMUA topic menu</p>
   <ul class="nav">
     <li><a href="numbers.html"><span class="n">1</span> Numbers</a></li>
@@ -158,6 +155,38 @@ exists, it is called the <strong>derivative</strong> of \(f\) at \(x\). An equal
 <li>Compute \(f'(x_0)\): positive → increasing; negative → decreasing.</li>
 <li>If \(f'(x_0)=0\): compute \(f''(x_0)\). If \(f''(x_0)&gt;0\) — minimum; if \(f''(x_0)&lt;0\) — maximum; if \(f''(x_0)=0\) — differentiate further and check the signs of higher derivatives.</li>
 </ol></div>
+
+<div class="box tmpl"><span class="bt">Template — Maximum and minimum problems</span>
+<ol>
+<li><strong>To find a maximum or minimum, differentiate and solve \(f'(x)=0\).</strong> Almost every optimisation question — the largest volume, the shortest distance, the least cost — comes down to writing the quantity as a function, finding its stationary points from \(f'=0\), and selecting the right one (classify with the test above, or simply compare the candidates against the endpoints).</li>
+<li><strong>The TMUA never asks you to differentiate a function of two variables.</strong> So when the quantity naturally depends on two unknowns, look for a <em>constraint</em> relating them — very often Pythagoras, or a fixed perimeter, area or volume — and use it to write one variable in terms of the other. That collapses the problem to a single-variable function you <em>can</em> differentiate.</li>
+</ol></div>
+<p>The second point is the one students forget under exam pressure — they see two unknowns and freeze, when a single line of constraint removes one of them. Here is the archetype.</p>
+<p><strong>Example</strong> (TMUA 2016, Paper 1). A right circular cylinder sits inside a sphere of radius \(5\,\text{cm}\) so that the circular edge of each end lies on the sphere. What is the maximum possible volume of the cylinder?</p>
+<figure><svg style="max-width:250px;width:100%;height:auto;border:1px solid #DCD8CC;border-radius:8px;background:#fff;padding:6px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 214" role="img" aria-label="Cross-section through the centre: the cylinder is a rectangle inscribed in the circle of the sphere of radius 5; the radius to a corner makes a right triangle with legs r and h over 2 and hypotenuse 5.">
+<rect x="0" y="0" width="250" height="214" fill="#FBFAF5"/>
+<circle cx="118.0" cy="108.0" r="85.0" fill="none" stroke="#13294B" stroke-width="1.8"/>
+<rect x="67.0" y="40.0" width="102.0" height="136.0" fill="#E7ECF3" stroke="#13294B" stroke-width="1.6"/>
+<line x1="118.0" y1="108.0" x2="169.0" y2="40.0" stroke="#B7410E" stroke-width="2"/>
+<line x1="118.0" y1="108.0" x2="169.0" y2="108.0" stroke="#8C6E14" stroke-width="1.6"/>
+<line x1="169.0" y1="108.0" x2="169.0" y2="40.0" stroke="#8C6E14" stroke-width="1.6"/>
+<path d="M 162.0 108.0 L 162.0 101.0 L 169.0 101.0" fill="none" stroke="#5A6068" stroke-width="1"/>
+<circle cx="118.0" cy="108.0" r="3.2" fill="#23282E"/>
+<text x="143.5" y="123.0" font-size="12.5" fill="#8C6E14" text-anchor="middle" font-family="Georgia,serif" font-style="italic">r</text>
+<text x="180.0" y="78.0" font-size="12.5" fill="#8C6E14" text-anchor="middle" font-family="Georgia,serif" font-style="italic">h/2</text>
+<text x="136.5" y="71.0" font-size="12.5" fill="#B7410E" text-anchor="middle" font-family="Georgia,serif">5</text>
+<text x="118.0" y="194.0" font-size="12" fill="#13294B" text-anchor="middle" font-family="Georgia,serif">width = 2r</text>
+<text x="55.0" y="112.0" font-size="12" fill="#13294B" text-anchor="middle" font-family="Georgia,serif" transform="rotate(-90 55.0 108.0)">height = h</text>
+</svg><figcaption>Cross-section through the centre. The cylinder becomes a rectangle (\(2r\) wide, \(h\) tall) inscribed in the sphere’s great circle. The radius drawn to a corner gives a right triangle with legs \(r\) and \(\tfrac h2\) and hypotenuse \(5\) — the constraint that links \(r\) and \(h\).</figcaption></figure>
+<p>Let the cylinder have radius \(r\) and height \(h\); its volume is \(V=\pi r^2 h\) — <em>two</em> variables, which we cannot yet differentiate. Take the cross-section through the centre: it is a rectangle inscribed in the sphere's great circle, so the radius drawn to a corner makes a right triangle with legs \(r\) and \(\tfrac h2\) and hypotenuse \(5\). That is the constraint we need:
+\[r^2+\left(\tfrac h2\right)^2=5^2\quad\Longrightarrow\quad r^2=25-\tfrac{h^2}{4}.\]
+Substituting turns the volume into a function of \(h\) <em>alone</em>:
+\[V(h)=\pi\left(25-\tfrac{h^2}{4}\right)h=\pi\!\left(25h-\tfrac{h^3}{4}\right).\]
+Now it is single-variable, so apply the universal reflex — differentiate and set to zero:
+\[V'(h)=\pi\!\left(25-\tfrac{3h^2}{4}\right)=0\quad\Longrightarrow\quad h^2=\tfrac{100}{3}\quad\Longrightarrow\quad h=\tfrac{10}{\sqrt3}.\]
+This is a maximum, not a minimum (\(V''(h)=-\tfrac{3\pi h}{2}&lt;0\); or simply note \(V=0\) at the extremes \(h=0\) and \(h=10\)). Then \(r^2=25-\tfrac{25}{3}=\tfrac{50}{3}\), giving
+\[V=\pi\cdot\tfrac{50}{3}\cdot\tfrac{10}{\sqrt3}=\frac{500\sqrt3}{9}\,\pi\ \text{cm}^3,\]
+which is option <strong>E</strong>. Two moves did everything: <em>a constraint turned two variables into one</em>, and then <em>differentiate, set to zero</em> finished it — the entire toolkit the TMUA expects for optimisation.</p>
 
 <h2><span class="sn">§5.7</span>Graphs of functions</h2>
 <p>One property can dramatically simplify a sketch: <strong>periodicity</strong>. A function is periodic if \(f(x)=f(x+t)\) for all \(x\) (period \(t\)); \(\sin x\) has period \(2\pi\). If a function is periodic, draw it on one period and copy.</p>
