@@ -334,6 +334,78 @@ Equivalently by vectors: \(\cos\) of the angle between \((1,1,1)\) and \((1,1,0)
 (ii) The denominator ranges over \([10-5,\,10+5]=[5,15]\), so the fraction ranges over \(\left[\frac{20}{15},\frac{20}5\right]=\left[\frac43,4\right]\): greatest value 4, least \(\frac43\). The greatest value needs the denominator at its minimum, i.e. \(\sin(\theta+\alpha)=-1\): \(\theta=\frac{3\pi}2-\arctan\frac43\). The fraction structure (constant over a harmonic form) is a TMUA favourite precisely because the \(\pm R\) bound replaces all calculus.</p>
 </details></div>
 
+<div class="q"><div class="qhead"><span class="qn">Question 20</span><span class="pill new">New · TMUA-style</span></div>
+<p>Find the number of points in the interval \([-2\pi,2\pi]\) at which
+\[\cos(\sin x)=\sin(\cos x).\]
+Before reaching for a calculator-style search, think about <em>periodicity</em> and <em>symmetry</em>: if \(x\) is a solution, is \(k\pi\pm x\) a solution too — for \(k\) a whole number, or a whole number plus a half?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Write \(f(x)=\cos(\sin x)-\sin(\cos x)\); we are counting the zeros of \(f\) in \([-2\pi,2\pi]\). The structure the question hints at is genuinely the fast way in — but, as we shall see, it carries a sting in the tail.</p>
+
+<p><strong>Step 1 — Periodicity.</strong> Both \(\sin\) and \(\cos\) have period \(2\pi\), so \(f(x+2\pi)=f(x)\): the picture repeats every \(2\pi\). The interval \([-2\pi,2\pi]\) is exactly two full periods, so any zero is one of a repeating family — we need only understand one period and then replicate.</p>
+
+<p><strong>Step 2 — Which of the maps \(x\mapsto k\pi\pm x\) are symmetries?</strong> A transformation helps us only if it sends a solution to a solution, i.e. leaves \(f\) unchanged. Test the candidates with \(\sin(-x)=-\sin x\), \(\cos(-x)=\cos x\), \(\sin(x+\pi)=-\sin x\), \(\cos(x+\pi)=-\cos x\):</p>
+<ul>
+<li><strong>\(x\mapsto -x\)</strong> (the case \(k=0\), minus sign): \(\cos(\sin(-x))=\cos(-\sin x)=\cos(\sin x)\) and \(\sin(\cos(-x))=\sin(\cos x)\), so \(f(-x)=f(x)\). The function is <strong>even</strong> ✓ — a solution at \(x_0\) forces one at \(-x_0\).</li>
+<li><strong>\(x\mapsto x+2\pi\)</strong> (\(k=2\), plus): unchanged by periodicity ✓.</li>
+<li><strong>\(x\mapsto x+\pi\)</strong> (\(k=1\), plus): \(\cos(\sin(x+\pi))=\cos(\sin x)\) but \(\sin(\cos(x+\pi))=\sin(-\cos x)=-\sin(\cos x)\), so \(f(x+\pi)=\cos(\sin x)+\sin(\cos x)\). The shift by \(\pi\) <em>flips the sign</em> of the second term — it turns our equation into the different equation \(\cos(\sin x)=-\sin(\cos x)\). <strong>Not</strong> a symmetry ✗.</li>
+<li><strong>\(x\mapsto \pi-x\)</strong> (\(k=1\), minus): \(\sin(\pi-x)=\sin x\), \(\cos(\pi-x)=-\cos x\) give \(f(\pi-x)=\cos(\sin x)+\sin(\cos x)\) — the same sign-flipped sibling. <strong>Not</strong> a symmetry ✗.</li>
+<li><strong>\(x\mapsto \tfrac\pi2\pm x\)</strong> (the half-integer case \(k=\tfrac12\)): since \(\sin(\tfrac\pi2+x)=\cos x\) and \(\cos(\tfrac\pi2+x)=-\sin x\), this sends the equation to one in \(\cos(\cos x)\) and \(\sin(\sin x)\) — a completely different beast. <strong>Not</strong> a symmetry ✗.</li>
+</ul>
+<p>So of the whole family \(x\mapsto k\pi\pm x\), <strong>only the even-integer cases survive</strong>: \(x\mapsto x+2n\pi\) and \(x\mapsto 2n\pi-x\). The equation is symmetric under reflection in any <em>multiple of \(\pi\)</em> and translation by any <em>multiple of \(2\pi\)</em> — but it is <em>not</em> symmetric about \(\tfrac\pi2\), and <em>not</em> invariant under a shift by a single \(\pi\). That asymmetry is the examinable subtlety: \(\cos(\sin x)\) on its own has period \(\pi\), yet \(\sin(\cos x)\) has period \(2\pi\) and reverses sign under \(x\mapsto x+\pi\), so the <em>equation</em> keeps only the coarser symmetry.</p>
+<p>The payoff: a fundamental domain is \([0,\pi]\) (fold \([-\pi,0]\) onto it by evenness, reflect about \(\pi\) for \([\pi,2\pi]\), translate by \(2\pi\) for the rest), and \([-2\pi,2\pi]\) is <strong>four</strong> such copies. So the total count is \(4\times(\text{number of solutions in }[0,\pi])\).</p>
+
+<p><strong>Step 3 — But are there any solutions at all?</strong> All this symmetry is worthless if the solution set is empty, so we must settle existence. Use the co-function identity \(\sin\theta=\cos\!\left(\tfrac\pi2-\theta\right)\) to put both sides under a cosine:
+\[\cos(\sin x)=\cos\!\left(\tfrac\pi2-\cos x\right).\]
+Now \(\cos\) is even and <em>strictly decreasing on \([0,\pi]\)</em>; both \(|\sin x|\in[0,1]\) and \(\tfrac\pi2-\cos x\in[\tfrac\pi2-1,\tfrac\pi2+1]\) lie inside \([0,\pi]\), where \(\cos\) is one-to-one. Equality of the two cosines therefore demands equality of arguments:
+\[|\sin x|=\tfrac\pi2-\cos x,\qquad\text{i.e.}\qquad |\sin x|+\cos x=\tfrac\pi2.\]
+But the harmonic form of §G.5 caps the left-hand side: for \(\sin x\ge0\) it is \(\sin x+\cos x=\sqrt2\,\sin\!\left(x+\tfrac\pi4\right)\le\sqrt2\), and for \(\sin x&lt;0\) it is \(\cos x-\sin x=\sqrt2\,\cos\!\left(x+\tfrac\pi4\right)\le\sqrt2\). So
+\[|\sin x|+\cos x\le\sqrt2\approx1.414\;&lt;\;\tfrac\pi2\approx1.571.\]
+The required equality \(|\sin x|+\cos x=\tfrac\pi2\) is therefore <em>never</em> reached. Equivalently \(\cos(\sin x)&gt;\sin(\cos x)\) for every real \(x\): the two graphs never meet.</p>
+
+<figure><img src="img/fig-cossin.svg" alt="Graphs of y = cos(sin x) and y = sin(cos x) on [-2pi, 2pi]. The cos(sin x) curve stays between about 0.54 and 1; the sin(cos x) curve swings between about -0.84 and 0.84. The upper curve never touches the lower one, coming closest near x = pi/4 with a gap of about 0.11." style="max-width:540px"><figcaption>The curves \(y=\cos(\sin x)\) (period \(\pi\), trapped in \([\cos 1,1]\)) and \(y=\sin(\cos x)\) (period \(2\pi\), reaching only up to \(\sin 1\approx0.84\)). They come closest near \(x=\pm\tfrac\pi4\), a gap of about \(0.11\), but never touch.</figcaption></figure>
+
+<p>So the number of solutions in \([0,\pi]\) is \(0\), and \(4\times0=\boxed{0}\) over \([-2\pi,2\pi]\) — indeed there are none anywhere on \(\mathbb R\).</p>
+
+<p><strong>The trap.</strong> The exam reflex — find one root, then multiply by the symmetry count (\(2,4,8,\dots\)) — would here hand you a confident wrong answer. Periodicity and symmetry tell you how solutions are <em>arranged</em>; they never promise any <em>exist</em>. The whole result turns on the single comparison \(\sqrt2&lt;\tfrac\pi2\): the most the upper curve can be pulled down (\(\cos 1\)) still clears the most the lower curve can rise (\(\sin 1\)). Always establish existence before you count.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 21</span><span class="pill new">SMC 2020</span></div>
+<p>A regular \(m\)-gon, a regular \(n\)-gon and a regular \(p\)-gon share a vertex and pairwise share edges, as shown. What is the largest possible value of \(p\)?</p>
+<p style="text-align:center">A &nbsp;6 &nbsp;&nbsp;&nbsp; B &nbsp;20 &nbsp;&nbsp;&nbsp; C &nbsp;42 &nbsp;&nbsp;&nbsp; D &nbsp;50 &nbsp;&nbsp;&nbsp; E &nbsp;100</p>
+<figure><svg style="max-width:290px;width:100%;height:auto;border:1px solid #DCD8CC;border-radius:8px;background:#fff;padding:6px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 319" role="img" aria-label="Three regular polygons (a square, a hexagon and a regular twelve-gon) sharing one vertex and pairwise sharing edges; their interior angles 90, 120 and 150 degrees fill the 360 degrees around the vertex">
+<rect x="0" y="0" width="241" height="319" fill="#FBFAF5"/>
+<polygon points="134.8,95.0 134.8,49.0 88.8,49.0 88.8,95.0" fill="#E4EFEA" stroke="#3E7164" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="134.8,95.0 174.7,118.0 214.5,95.0 214.5,49.0 174.7,26.0 134.8,49.0" fill="#FBF4DE" stroke="#8C6E14" stroke-width="1.8" stroke-linejoin="round"/>
+<polygon points="134.8,95.0 88.8,95.0 49.0,118.0 26.0,157.8 26.0,203.8 49.0,243.7 88.8,266.7 134.8,266.7 174.7,243.7 197.7,203.8 197.7,157.8 174.7,118.0" fill="#E7ECF3" stroke="#13294B" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="134.8" y1="95.0" x2="134.8" y2="49.0" stroke="#B7410E" stroke-width="3" stroke-linecap="round"/>
+<line x1="134.8" y1="95.0" x2="88.8" y2="95.0" stroke="#B7410E" stroke-width="3" stroke-linecap="round"/>
+<line x1="134.8" y1="95.0" x2="174.7" y2="118.0" stroke="#B7410E" stroke-width="3" stroke-linecap="round"/>
+<circle cx="134.8" cy="95.0" r="4.2" fill="#23282E"/>
+<text x="107.8" y="65.0" font-size="13.5" font-style="italic" fill="#3E7164" text-anchor="middle" font-family="Georgia,serif">m-gon</text>
+<text x="122.8" y="86.5" font-size="10.5" fill="#5A6068" text-anchor="middle" font-family="sans-serif">90°</text>
+<text x="174.7" y="76.0" font-size="13.5" font-style="italic" fill="#8C6E14" text-anchor="middle" font-family="Georgia,serif">n-gon</text>
+<text x="152.2" y="88.5" font-size="10.5" fill="#5A6068" text-anchor="middle" font-family="sans-serif">120°</text>
+<text x="125.2" y="135.1" font-size="13.5" font-style="italic" fill="#13294B" text-anchor="middle" font-family="Georgia,serif">p-gon</text>
+<text x="129.7" y="117.8" font-size="10.5" fill="#5A6068" text-anchor="middle" font-family="sans-serif">150°</text>
+<line x1="14" y1="306" x2="38" y2="306" stroke="#B7410E" stroke-width="3" stroke-linecap="round"/>
+<text x="44" y="310" font-size="11.5" fill="#5A6068" font-family="sans-serif">shared edges</text>
+</svg><figcaption>Three regular polygons meeting at one shared vertex, each pair sharing a full edge (shown in red). Their interior angles must fill the \(360^\circ\) around the vertex. The sizes here are just one valid arrangement — a square, a regular hexagon and a regular 12-gon (\(90^\circ+120^\circ+150^\circ=360^\circ\)); the question asks how large \(p\) can be made.</figcaption></figure>
+<details class="sol"><summary>Show solution</summary>
+<p><strong>Set up the angle equation.</strong> The three polygons fill the space around the shared vertex, so their interior angles sum to a full turn, \(360^\circ\). A regular \(k\)-gon has interior angle \(180-\frac{360}{k}\) degrees, so
+\[\left(180-\tfrac{360}{m}\right)+\left(180-\tfrac{360}{n}\right)+\left(180-\tfrac{360}{p}\right)=360.\]
+That is \(540-360\!\left(\frac1m+\frac1n+\frac1p\right)=360\), which rearranges to the clean Diophantine condition
+\[\frac1m+\frac1n+\frac1p=\frac12,\qquad m,n,p\ge3.\]</p>
+<p><strong>Cut the casework: bound the smallest.</strong> A blind search over \(m,n,p\) is unbounded, so order the three and take cases on the <em>smallest</em>, say \(s\). Being smallest, \(s\) has the <em>largest</em> reciprocal, so it carries at least its fair share of the total:
+\[\frac1s\ge\frac13\cdot\frac12=\frac16\quad\Longrightarrow\quad s\le6,\]
+and \(s\ge3\) since it is a polygon (and \(\frac1s&lt;\frac12\)). So the smallest polygon has only <strong>four</strong> possible sizes, \(s\in\{3,4,5,6\}\) — that single bound is what makes the problem finite and quick.</p>
+<p><strong>Maximise \(p\).</strong> To make \(p\) as large as possible we make \(\frac1p\) as small as possible, i.e. we make the other two polygons as small as possible — so we want the smallest one to be a triangle, \(s=3\). Then
+\[\frac1n+\frac1p=\frac12-\frac13=\frac16.\]
+Now minimise \(\frac1p\) again by taking the smaller of these two as small as possible: we need \(\frac1n&lt;\frac16\), so \(n\ge7\), and the smallest choice \(n=7\) leaves the most for \(p\):
+\[\frac1p=\frac16-\frac17=\frac1{42}\quad\Longrightarrow\quad p=42.\]
+Checking the other starting cases confirms this is best: \(s=4\) gives at most \(p=20\) (from \(4,5,20\)); \(s=5\) gives \(p=10\) (from \(5,5,10\)); \(s=6\) gives \(p=6\) (from \(6,6,6\)). The largest is \(p=\boxed{42}\) — answer <strong>C</strong>.</p>
+<p><strong>Sanity check.</strong> The triple is a triangle, a regular heptagon and a regular 42-gon: \(\frac13+\frac17+\frac1{42}=\frac{14+6+1}{42}=\frac{21}{42}=\frac12\) ✓, and the angles \(60^\circ+\frac{900}{7}^\circ+\frac{1200}{7}^\circ=360^\circ\). The recurring move — <em>order the unknowns, bound the smallest, then push the largest by keeping the rest minimal</em> — solves essentially every "unit-fraction" angle problem.</p>
+</details></div>
+
 <div class="pn"><a href="functions.html">← Topic 4: Graphs &amp; Logs</a><a href="differentiation.html">Topic 6: Differentiation →</a></div>
 </div>
 
