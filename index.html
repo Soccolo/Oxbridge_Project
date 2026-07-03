@@ -82,12 +82,12 @@ function toggleNav() {
 <p>An admission test is a test that you need to take in order to be accepted at university. Based on the score from the admission test, a university may decide whether to call a candidate for an interview or not. Most of the time, when universities have admission tests, the tests are much more important than the personal statement. Thus, preparing for the admission test is of utmost importance, and shouldn't be neglected.</p>
 <p>In the case of STEM tests, most have one of three formats: multiple choice, problem-based, or a combination. Usually, the problems are from different areas of Mathematics, coupled with some problems from other relevant topics (such as Mechanics and Statistics in STEP). Most admission tests last between 2 and 3 hours.</p>
 <p>The most important aspect of Mathematics admission tests is to <em>solve problems</em>. During my first year at Imperial, my Real Analysis professor Richard Thomas used to say that "Mathematics isn't a spectator sport". A student can't turn up to the admission test without having prepared thoroughly, expecting to get admitted into Oxbridge or Russell Group universities. Usually, the student who gets accepted is the one that has developed enough intuition and experience in Mathematics that they can solve the problems in the fastest way possible under exam conditions. Remember, genius is 1% inspiration and 99% perspiration.</p>
-
+ 
 <h2><span class="sn">§1.2</span>How to use this site</h2>
 <p>This site is meant to teach both problem-solving strategies and tips on how to solve the exam in the fastest way. Each topic page contains all the theory you need for the admission tests in that area, <strong>templates</strong> that organise commonly-used techniques step by step (in my experience as a tutor, the worst mistake a student can make is being disorganised), and a set of problems selected from diverse sources — admission tests, Olympiads, and original questions.</p>
 <p>While working with students, I have seen that most of them are very good at Mathematics, but require small pushes in specific areas. A key ingredient in preparing is to <em>not avoid the subjects you feel are harder</em>: if you feel that Geometry problems are hard, focus especially on Geometry problems until they are no longer hard. The theory here often favours intuition over full rigour — when students miss the intuition of a theorem, they are less likely to apply it well, so we base understanding on intuition and then invite you to prove the theorem rigorously yourself.</p>
 <p>The topic menu mirrors the TMUA syllabus. Work through it in order, or use the <a href="#aptitude">initial aptitude test</a> below to find your weakest area and jump straight there.</p>
-
+ 
 <h2><span class="sn">§1.3</span>The tests</h2>
 <h3>The Test of Mathematics for University Admission (TMUA)</h3>
 <p>The TMUA is now <em>the</em> mathematics admissions test: it is used by Cambridge, Oxford, Imperial, LSE, Durham, Warwick and others (depending on the course and year), with a single sitting covering all of your applications. It consists of 2 papers, each with 20 multiple-choice questions: Paper 1 tests <em>applications of mathematical knowledge</em>, while Paper 2 tests <em>mathematical reasoning</em> — logic, proof, and identifying errors in arguments. With under two minutes per question, the winning strategy is accuracy at speed: prioritise the questions you can do cleanly, flag and return to the rest, and leave your slowest question type (for most students, Geometry) for last — in the time you would spend on it, you can often solve two others.</p>
@@ -95,7 +95,7 @@ function toggleNav() {
 <p>STEP is the admission test that Cambridge, Warwick, Imperial College and some other universities may ask for. It takes place in summer, so its syllabus is larger — everything up to Further Mathematics, Mechanics and Statistics — and it is widely considered the hardest of the admissions tests. Each paper consists of 12 problems (8 pure, 2 mechanics, 2 statistics) of which you choose 6 to solve in 3 hours. Use the freedom to specialise to your advantage: the first question usually works as an "icebreaker", and the Statistics and Mechanics questions are the least popular, so knowing them well gives you leverage — which is exactly why this site includes dedicated <a href="mechanics.html">Mechanics</a> and <a href="statistics.html">Statistics</a> topics.</p>
 <h3>A word on the MAT</h3>
 <p>This book was originally written when Oxford's Mathematics Admissions Test (MAT) was still running. The MAT has since been discontinued — it ran from 2007 to 2025, and from 2026 Oxford uses the TMUA instead. Its past papers, however, remain some of the finest practice material in existence, particularly for the TMUA's multiple-choice format, which is why MAT problems appear as sources throughout this site.</p>
-
+ 
 <h2 id="topics">Topics</h2>
 <div class="grid">
   <a class="tcard" href="numbers.html"><span class="tn">Topic 1</span><h3>Numbers &amp; Proof Foundations</h3><p>Peano axioms, induction, divisibility, modular arithmetic, infinite descent.</p></a>
@@ -112,7 +112,7 @@ function toggleNav() {
   <a class="tcard" href="statistics.html"><span class="tn">Extension · STEP</span><h3>Statistics</h3><p>Conditional probability and Bayes, random variables, expectation and variance, continuous distributions.</p></a>
   <a class="tcard" href="practice.html"><span class="tn">Interactive</span><h3>Practice Arena</h3><p>Click a topic, get a random TMUA-style problem, commit to an answer, read the solution. Keeps your session score.</p></a>
 </div>
-
+ 
 <h2 id="syllabus">TMUA syllabus coverage map</h2>
 <p>The TMUA specification splits into Paper 1 (applications of mathematical knowledge) and Paper 2 (mathematical reasoning). Every part of the specification is covered here:</p>
 <table>
@@ -130,29 +130,31 @@ function toggleNav() {
 <tr><td>Paper 2: mathematical proof &amp; identifying errors</td><td><a href="logic.html">Topic 9</a> · <a href="numbers.html">Topic 1</a></td></tr>
 <tr><td><em>Beyond the TMUA (STEP / MAT / interviews)</em></td><td><a href="complex.html">Complex Numbers</a> · <a href="geometry.html">3D Geometry</a> · <a href="mechanics.html">Mechanics</a> · <a href="statistics.html">Statistics</a></td></tr>
 </table>
-
+ 
 <h2 id="aptitude"><span class="sn">§1.6</span>Initial Aptitude Test</h2>
 <p>As a starting point, here is a short test containing the main topics of the Mathematics admission tests. Solve it in one hour; it should suggest areas of improvement. Based on this test, jump to the topic involving the problem you found hardest. Alternatively, the topics are written progressively, so going through them in order is also a very sound strategy.</p>
-
+ 
 <div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill">Number Theory</span></div>
 <p>Let \(N\) be a positive integer. How many integers are between \(\sqrt{N^2+N+1}\) and \(\sqrt{9N^2+N+1}\)?</p>
 <details class="sol"><summary>Show solution</summary>
 <p>We compare the two quantities with natural numbers. We see that \(N=\sqrt{N^2}\le \sqrt{N^2+N+1}\le\sqrt{N^2+2N+1}=N+1\), and similarly \(3N\le\sqrt{9N^2+N+1}\le 3N+1\). Thus the integers between the two square roots are those between \(N+1\) and \(3N\), and there are \(2N\) such numbers.</p>
 </details></div>
-
+ 
 <div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill">Geometry</span></div>
 <p>A circle of radius 2, centred on the origin, is drawn on a grid of points with integer coordinates. Let \(n\) be the number of grid points that lie within or on the circle. What is the smallest amount the radius needs to increase by for there to be \(2n-5\) grid points within or on the circle?</p>
 <details class="sol"><summary>Show solution</summary>
 <p>The points inside or on the circle are \((0,0)\), \((\pm1,\pm1)\), \((\pm1,0)\), \((0,\pm1)\), \((\pm2,0)\), \((0,\pm2)\), so \(n=13\) and \(2n-5=21\): we want to include 8 more points. The closest excluded points are \((\pm2,\pm1)\) and \((\pm1,\pm2)\) — exactly 8 of them, at distance \(\sqrt5\) from the origin. So we expand the radius by \(\sqrt5-2\).</p>
 </details></div>
-
+ 
 <div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill">Algebra</span></div>
 <p>Two triangles are inscribed in a circle, as shown in the diagram below. The triangles have respective areas \(s\) and \(t\), and \(S\) is the smaller triangle, so that \(s&lt;t\). What is the smallest value that \(\dfrac{4s^2+t^2}{5st}\) can equal?</p>
+<p><strong>Follow-up:</strong> suppose instead that the labelling is reversed, so that \(s&gt;t\). What is the smallest value of the same expression now?</p>
 <figure><img src="img/q3-circle.png" alt="Two triangles inscribed in a circle, for Question 3." style="max-width:300px"><figcaption>Two triangles inscribed in a circle, for Question 3.</figcaption></figure>
 <details class="sol"><summary>Show solution</summary>
 <p>Consider \(x=\frac st\). The expression becomes \(f(x)=\frac{4x}{5}+\frac{1}{5x}\). Then \(f'(x)=\frac45-\frac1{5x^2}\), which vanishes at \(x=\frac12\) (taking the value in \((0,1)\)). Substituting, the smallest value is \(f\!\left(\frac12\right)=\frac45\). (Can you redo this with AM–GM? See the Algebra problems.)</p>
+<p><strong>Follow-up.</strong> Now \(x=\frac st\) ranges over \((1,\infty)\), and the stationary point \(x=\frac12\) falls <em>outside</em> this interval — so it tells us nothing about the minimum. When that happens, the extremes must live at the edges: since \(f'(x)&gt;0\) for every \(x&gt;\frac12\), the function is increasing on the whole of \((1,\infty)\), so the smallest values occur towards the left edge. As \(x\to1^+\) we get \(f(x)\to f(1)=1\); but \(x=1\) itself is excluded (it would mean \(s=t\)), so the expression gets arbitrarily close to 1 without ever equalling it — there is no smallest value at all, and the greatest lower bound, 1, is attained only if the condition is relaxed to \(s\ge t\). The moral: solving \(f'(x)=0\) is only half the job. A stationary point counts only if it lies inside the region you are optimising over; otherwise the boundary takes charge — and whether the boundary is <em>included</em> decides whether a minimum even exists.</p>
 </details></div>
-
+ 
 <div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill">Calculus</span></div>
 <p>Find all functions \(f:\mathbb R\to\mathbb R\) that satisfy the equation \(f(x)+(1-x)f(-x)=x^2\).</p>
 <details class="sol"><summary>Show solution</summary>
@@ -160,21 +162,21 @@ function toggleNav() {
 \[f(x)+(1-x)f(-x)=x^2,\qquad f(-x)+(1+x)f(x)=x^2.\]
 Multiplying the second by \((1-x)\) and subtracting gives \(-x^2f(x)=-x^3\), so \(f(x)=x\) is the only solution — and this applies for every \(x\), since no conditions were imposed when we changed variables.</p>
 </details></div>
-
+ 
 <div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill">Number Theory</span></div>
 <p>The numbers \(l, m, n\) are positive integers such that \(l\ge m\ge n\) and \(l^{-1}+m^{-1}+n^{-1}=1\). Prove that \(n\le 3\) and \(m\le 4\), and hence find all possibilities for \(l, m, n\).</p>
 <details class="sol"><summary>Show solution</summary>
 <p>If \(n&gt;3\), then from \(l\ge m\ge n&gt;3\) we get \(l^{-1}+m^{-1}+n^{-1}&lt;3\cdot\frac13=1\), a contradiction, so \(n\le 3\). Since \(n\ne 1\), take cases. \(n=2\) gives \(l^{-1}+m^{-1}=\frac12\); the same logic gives \(m\le4\), and checking \(2\le m\le4\) gives \(m=3,l=6\) or \(m=l=4\). \(n=3\) gives \(l^{-1}+m^{-1}=\frac23\), forcing \(m\le3\) and the only solution \(l=m=n=3\).</p>
 </details></div>
-
+ 
 <div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill">Combinatorics</span></div>
 <p>A plane contains \(n\) distinct given lines, no two of which are parallel, and no three of which intersect at a point. By first considering the cases \(n = 1, 2, 3, 4\), provide and justify, by induction or otherwise, a formula for the number of line segments (including the infinite segments). Prove also that the plane is divided into \(\frac12(n^2+n+2)\) regions (including those extending to infinity).</p>
 <details class="sol"><summary>Show solution</summary>
 <p>With two lines we have 4 segments; adding a third gives 9. We conjecture \(n^2\) segments and prove it by induction: a new line meets the previous \(n\) lines in \(n\) points, giving \(n+1\) new segments on itself, and creates one new segment on each pre-existing line — \(2n+1\) new segments in total, so \(n^2+2n+1=(n+1)^2\). For regions: each of the \(n+1\) segments of the new line splits a region in two, adding \(n+1\) regions; an analogous induction gives \(\frac12(n^2+n+2)\). A fully rigorous version of this induction is worked through on the <a href="numbers.html">Numbers</a> page.</p>
 </details></div>
-
+ 
 </div>
-
+ 
 <footer><div class="inner">
 <p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
 Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
