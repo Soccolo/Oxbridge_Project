@@ -68,9 +68,9 @@ function toggleNav() {
 <p class="crumb"><b>Practice</b> · Timed-style sessions · All topics</p>
 <h1>Practice Arena</h1>
 <p class="lede">Pick a topic and run a session of up to 10 TMUA-style problems — no repeats, score at the end, solutions linking back to the theory.</p>
-
+ 
 <p>Every question is original, written in the style of the TMUA (Paper 2 logic included). A session deals you up to 10 questions from the chosen topic with no repeats, and questions you have already met this visit are held back until you have seen the whole pool. Commit to an answer before peeking — in the exam, the habit of deciding under pressure is the skill being trained.</p>
-
+ 
 <div class="arena">
   <div class="topics" id="topicButtons">
     <button class="topic-btn active" data-topic="all">Random (all topics)</button>
@@ -86,7 +86,7 @@ function toggleNav() {
   <div class="scorebar"><span id="progressText">Choose a topic to begin</span><span id="seenText"></span></div>
   <div id="qArea"></div>
 </div>
-
+ 
 <script>
 (function(){
 var BANK = [
@@ -466,9 +466,377 @@ var BANK = [
  s:"\"All are odd\" = \"none are even\": a universal statement equals the non-existence of a counterexample (<a href='logic.html'>§L.2</a>). Options B and E are converses; D changes the domain (2 itself is an even prime)."},
 {t:"logic", q:"It is known that \"if a quadrilateral is a rhombus, its diagonals are perpendicular\" (true). A quadrilateral \\(Q\\) has perpendicular diagonals. The conclusion \"\\(Q\\) is a rhombus\" is:",
  o:["invalid — it affirms the consequent","valid — by the converse","valid — by the contrapositive","valid — the statement is an \"if and only if\"","invalid — the original statement is false"], a:0,
- s:"From \\(P\\Rightarrow Q\\) and \\(Q\\), nothing follows about \\(P\\): a kite has perpendicular diagonals without being a rhombus. Affirming the consequent — rogue #4 (<a href='logic.html'>§L.7</a>)."}
+ s:"From \\(P\\Rightarrow Q\\) and \\(Q\\), nothing follows about \\(P\\): a kite has perpendicular diagonals without being a rhombus. Affirming the consequent — rogue #4 (<a href='logic.html'>§L.7</a>)."},
+// ---------------- ALGEBRA (15 more) ----------------
+{t:"algebra", q:"For which values of the non-zero constant \\(k\\) does \\(kx^2+4x+k=0\\) have no real solutions?",
+ o:["\\(-2&lt;k&lt;2\\), \\(k\\ne0\\)","\\(k&gt;2\\) only","\\(k&lt;-2\\) or \\(k&gt;2\\)","\\(k&gt;4\\)","\\(0&lt;k&lt;2\\)"], a:2,
+ s:"No real roots needs \\(16-4k^2&lt;0\\), i.e. \\(k^2&gt;4\\), so \\(k&lt;-2\\) or \\(k&gt;2\\). Note \\(-2&lt;k&lt;2\\) gives <em>two</em> roots — the inequality direction is the trap (<a href='algebra.html'>Algebra</a>)."},
+{t:"algebra", q:"Given \\(x+y=5\\) and \\(xy=6\\), the value of \\(x^2+y^2\\) is:",
+ o:["11","12","25","13","19"], a:3,
+ s:"\\(x^2+y^2=(x+y)^2-2xy=25-12=13\\) — no need to find \\(x\\) and \\(y\\) (<a href='algebra.html'>Algebra §3.4</a>)."},
+{t:"algebra", q:"The complete solution set of \\(x^3&gt;x\\) is:",
+ o:["\\(x&gt;1\\)","\\(-1&lt;x&lt;0\\) or \\(x&gt;1\\)","\\(x&gt;0\\)","\\(x&lt;-1\\) or \\(x&gt;1\\)","\\(x&gt;-1\\)"], a:1,
+ s:"\\(x^3-x=x(x-1)(x+1)&gt;0\\): sign chart gives \\(-1&lt;x&lt;0\\) or \\(x&gt;1\\). Dividing by \\(x\\) loses the negative branch (<a href='algebra.html'>Algebra</a>)."},
+{t:"algebra", q:"\\(\\dfrac{\\sqrt7+\\sqrt3}{\\sqrt7-\\sqrt3}\\) simplifies to:",
+ o:["\\(\\dfrac{5+\\sqrt{21}}{2}\\)","\\(\\dfrac{2+\\sqrt{21}}{5}\\)","\\(\\dfrac{10+\\sqrt{21}}{4}\\)","\\(\\dfrac{5-\\sqrt{21}}{2}\\)","\\(5+\\sqrt{21}\\)"], a:0,
+ s:"Multiply by \\(\\dfrac{\\sqrt7+\\sqrt3}{\\sqrt7+\\sqrt3}\\): numerator \\(7+2\\sqrt{21}+3=10+2\\sqrt{21}\\), denominator \\(4\\); halve (<a href='numbers.html'>surds</a>)."},
+{t:"algebra", q:"A polynomial \\(p(x)\\) leaves remainder 3 on division by \\(x-1\\) and remainder \\(-9\\) on division by \\(x+2\\). The remainder on division by \\((x-1)(x+2)\\) is:",
+ o:["\\(-6\\)","\\(3x\\)","\\(x+2\\)","\\(3x-12\\)","\\(4x-1\\)"], a:4,
+ s:"The remainder has degree \\(&lt;2\\): write \\(ax+b\\). Then \\(p(1)=a+b=3\\) and \\(p(-2)=-2a+b=-9\\); subtracting, \\(3a=12\\), so \\(a=4,\\ b=-1\\) (<a href='algebra.html'>remainder theorem</a>)."},
+{t:"algebra", q:"The sum of all the coefficients in the expansion of \\((2x-1)^6\\) is:",
+ o:["64","1","0","\\(-1\\)","729"], a:1,
+ s:"The sum of coefficients is the value at \\(x=1\\): \\((2-1)^6=1\\). No expansion needed (<a href='algebra.html'>Algebra</a>)."},
+{t:"algebra", q:"The roots of \\(x^2-px+q=0\\) are \\(\\alpha\\) and \\(\\beta\\). The quadratic with roots \\(\\alpha+1\\) and \\(\\beta+1\\) is:",
+ o:["\\(x^2-(p+1)x+(q+1)=0\\)","\\(x^2-(p+2)x+(p+q+1)=0\\)","\\(x^2+(p+2)x+(p+q+1)=0\\)","\\(x^2-(p+2)x+(q-p+1)=0\\)","\\(x^2-px+(q+p)=0\\)"], a:1,
+ s:"New sum \\(=\\alpha+\\beta+2=p+2\\); new product \\(=\\alpha\\beta+(\\alpha+\\beta)+1=q+p+1\\). So \\(x^2-(p+2)x+(p+q+1)=0\\) (<a href='algebra.html'>Vieta</a>)."},
+{t:"algebra", q:"The number of real solutions of \\(x^4-5x^2+4=0\\) is:",
+ o:["0","1","2","3","4"], a:4,
+ s:"Let \\(u=x^2\\): \\(u^2-5u+4=(u-1)(u-4)=0\\), so \\(x^2=1\\) or \\(x^2=4\\) — four real roots \\(\\pm1,\\pm2\\) (<a href='algebra.html'>disguised quadratics</a>)."},
+{t:"algebra", q:"The number of real solutions of \\(\\sqrt{x+6}=x\\) is:",
+ o:["0","1","2","3","4"], a:1,
+ s:"Squaring: \\(x^2-x-6=0\\) gives \\(x=3\\) or \\(x=-2\\); but the left side is non-negative, so \\(x=-2\\) is extraneous. One solution — always check after squaring (<a href='algebra.html'>Algebra</a>)."},
+{t:"algebra", q:"The cubic \\(x^3+ax^2+bx+6\\) is divisible by both \\(x-1\\) and \\(x-3\\). The value of \\(b\\) is:",
+ o:["\\(-2\\)","5","\\(-5\\)","2","\\(-7\\)"], a:2,
+ s:"\\(p(1)=0\\Rightarrow a+b=-7\\); \\(p(3)=0\\Rightarrow 3a+b=-11\\). Subtract: \\(a=-2\\), so \\(b=-5\\) (<a href='algebra.html'>factor theorem</a>)."},
+{t:"algebra", q:"The number of real solutions of \\(|x-2|=2x+1\\) is:",
+ o:["0","1","2","3","infinitely many"], a:1,
+ s:"Case \\(x\\ge2\\): \\(x-2=2x+1\\Rightarrow x=-3\\), outside the case. Case \\(x&lt;2\\): \\(2-x=2x+1\\Rightarrow x=\\tfrac13\\) ✓ (and the right side must be \\(\\ge0\\), which holds). One solution (<a href='algebra.html'>modulus equations</a>)."},
+{t:"algebra", q:"Given \\(x-y=4\\) and \\(xy=5\\), the value of \\(x^2+y^2\\) is:",
+ o:["21","6","16","36","26"], a:4,
+ s:"\\(x^2+y^2=(x-y)^2+2xy=16+10=26\\) — the sign flip on \\(2xy\\) versus \\((x+y)^2\\) is the point (<a href='algebra.html'>Algebra</a>)."},
+{t:"algebra", q:"The complete solution set of \\((x-1)(x-2)(x-3)&gt;0\\) is:",
+ o:["\\(x&gt;3\\)","\\(x&lt;1\\) or \\(2&lt;x&lt;3\\)","\\(1&lt;x&lt;2\\) or \\(x&gt;3\\)","\\(x&gt;1\\)","\\(x&lt;1\\) or \\(x&gt;3\\)"], a:2,
+ s:"Sign chart with simple roots at 1, 2, 3: positive on \\((1,2)\\) and \\((3,\\infty)\\), alternating from the right (<a href='algebra.html'>inequalities</a>)."},
+{t:"algebra", q:"Constants \\(A\\) and \\(B\\) satisfy \\(\\dfrac1{x(x+1)}=\\dfrac Ax+\\dfrac B{x+1}\\) for all valid \\(x\\). The value of \\(A-B\\) is:",
+ o:["0","1","\\(-1\\)","2","\\(-2\\)"], a:3,
+ s:"Cover-up: \\(A=1\\) (set \\(x=0\\)), \\(B=-1\\) (set \\(x=-1\\)). So \\(A-B=2\\) (<a href='algebra.html'>Algebra</a>)."},
+{t:"algebra", q:"The roots of \\(x^3-2x^2-5x+6=0\\) are \\(\\alpha,\\beta,\\gamma\\). The value of \\(\\alpha\\beta+\\beta\\gamma+\\gamma\\alpha\\) is:",
+ o:["2","\\(-5\\)","5","\\(-6\\)","6"], a:1,
+ s:"For \\(x^3+px^2+qx+r\\), the pair-sum of roots is \\(q\\): here \\(q=-5\\), read straight off the coefficients (<a href='algebra.html'>Vieta for cubics</a>)."},
+// ---------------- GEOMETRY (15 more) ----------------
+{t:"geometry", q:"The length of a tangent from the point \\((8,0)\\) to the circle \\(x^2+y^2=25\\) is:",
+ o:["\\(\\sqrt{39}\\)","3","\\(\\sqrt{89}\\)","5","\\(\\sqrt{34}\\)"], a:0,
+ s:"Tangent–radius right angle: \\(\\text{tangent}^2=d^2-r^2=64-25=39\\) (<a href='geometry.html'>circles</a>)."},
+{t:"geometry", q:"The number of solutions of \\(\\tan\\theta=\\sqrt3\\) in \\(0\\le\\theta&lt;2\\pi\\) is:",
+ o:["1","4","3","2","0"], a:3,
+ s:"\\(\\tan\\) has period \\(\\pi\\): solutions \\(\\theta=\\tfrac\\pi3\\) and \\(\\theta=\\tfrac{4\\pi}3\\) — two of them (<a href='geometry.html'>trig equations</a>)."},
+{t:"geometry", q:"The sum of all solutions of \\(\\cos\\theta=-\\tfrac12\\) in \\(0\\le\\theta&lt;2\\pi\\) is:",
+ o:["\\(\\pi\\)","\\(\\tfrac{4\\pi}3\\)","\\(2\\pi\\)","\\(\\tfrac{5\\pi}3\\)","\\(3\\pi\\)"], a:2,
+ s:"Solutions \\(\\tfrac{2\\pi}3\\) and \\(\\tfrac{4\\pi}3\\) are symmetric about \\(\\pi\\); they sum to \\(2\\pi\\) (<a href='geometry.html'>unit circle</a>)."},
+{t:"geometry", q:"A triangle has sides of length 6 and 8 with an included angle of \\(30^\\circ\\). Its area is:",
+ o:["24","12","\\(12\\sqrt3\\)","\\(24\\sqrt3\\)","6"], a:1,
+ s:"\\(\\text{Area}=\\tfrac12ab\\sin C=\\tfrac12\\cdot48\\cdot\\tfrac12=12\\) (<a href='geometry.html'>triangle formulae</a>)."},
+{t:"geometry", q:"The shortest distance from the origin to the line \\(3x+4y=12\\) is:",
+ o:["3","\\(\\tfrac{12}7\\)","4","\\(\\tfrac{12}5\\)","\\(\\tfrac57\\)"], a:3,
+ s:"Distance \\(=\\dfrac{|3\\cdot0+4\\cdot0-12|}{\\sqrt{3^2+4^2}}=\\dfrac{12}5\\) (<a href='geometry.html'>coordinate geometry</a>)."},
+{t:"geometry", q:"The line \\(x+y=4\\) is tangent to the circle \\(x^2+y^2=r^2\\) (with \\(r&gt;0\\)). The value of \\(r^2\\) is:",
+ o:["4","16","\\(2\\sqrt2\\)","2","8"], a:4,
+ s:"Tangency means the distance from the centre \\((0,0)\\) equals \\(r\\): \\(r=\\tfrac{4}{\\sqrt2}=2\\sqrt2\\), so \\(r^2=8\\) (<a href='geometry.html'>circles</a>)."},
+{t:"geometry", q:"The number of solutions of \\(\\sin^2\\theta=\\tfrac34\\) in \\(0\\le\\theta&lt;2\\pi\\) is:",
+ o:["2","3","4","6","8"], a:2,
+ s:"\\(\\sin\\theta=\\pm\\tfrac{\\sqrt3}2\\): each sign gives two solutions in a full turn — four in total: \\(\\tfrac\\pi3,\\tfrac{2\\pi}3,\\tfrac{4\\pi}3,\\tfrac{5\\pi}3\\) (<a href='geometry.html'>trig equations</a>)."},
+{t:"geometry", q:"The area of an equilateral triangle with side length 6 is:",
+ o:["18","\\(9\\sqrt3\\)","\\(18\\sqrt3\\)","\\(12\\sqrt3\\)","36"], a:1,
+ s:"\\(\\text{Area}=\\tfrac{\\sqrt3}4s^2=\\tfrac{\\sqrt3}4\\cdot36=9\\sqrt3\\) (<a href='geometry.html'>triangle formulae</a>)."},
+{t:"geometry", q:"Given that \\(\\cos\\theta=\\tfrac35\\) with \\(\\theta\\) acute, the value of \\(\\cos2\\theta\\) is:",
+ o:["\\(\\tfrac{7}{25}\\)","\\(\\tfrac{24}{25}\\)","\\(-\\tfrac{24}{25}\\)","\\(\\tfrac{6}{5}\\)","\\(-\\tfrac{7}{25}\\)"], a:4,
+ s:"\\(\\cos2\\theta=2\\cos^2\\theta-1=\\tfrac{18}{25}-1=-\\tfrac7{25}\\) (<a href='geometry.html'>double angle</a>)."},
+{t:"geometry", q:"The number of solutions of \\(\\sin x=\\tfrac12\\) in \\(0\\le x\\le4\\pi\\) is:",
+ o:["2","3","4","5","6"], a:2,
+ s:"Two solutions per \\(2\\pi\\) period (\\(\\tfrac\\pi6\\) and \\(\\tfrac{5\\pi}6\\), then add \\(2\\pi\\)); two periods give four (<a href='geometry.html'>trig equations</a>)."},
+{t:"geometry", q:"A sector has angle 2 radians and perimeter 20. Its area is:",
+ o:["20","24","25","50","16"], a:2,
+ s:"Perimeter \\(=2r+r\\theta=2r+2r=4r=20\\Rightarrow r=5\\); area \\(=\\tfrac12r^2\\theta=\\tfrac12\\cdot25\\cdot2=25\\) (<a href='geometry.html'>radians and sectors</a>)."},
+{t:"geometry", q:"Two sides of a triangle have lengths 3 and 5, with an included angle of \\(60^\\circ\\). The third side has length:",
+ o:["\\(\\sqrt{34}\\)","4","\\(\\sqrt{19}\\)","\\(\\sqrt{22}\\)","\\(\\sqrt{7}\\)"], a:2,
+ s:"Cosine rule: \\(c^2=9+25-2\\cdot3\\cdot5\\cdot\\tfrac12=34-15=19\\) (<a href='geometry.html'>cosine rule</a>)."},
+{t:"geometry", q:"A circle with centre \\((2,-1)\\) is tangent to the line \\(y=x\\). The square of its radius is:",
+ o:["\\(\\tfrac92\\)","9","\\(\\tfrac32\\)","\\(\\tfrac94\\)","3"], a:0,
+ s:"Radius \\(=\\) distance from \\((2,-1)\\) to \\(x-y=0\\): \\(\\dfrac{|2-(-1)|}{\\sqrt2}=\\dfrac3{\\sqrt2}\\), so \\(r^2=\\dfrac92\\) (<a href='geometry.html'>distance to a line</a>)."},
+{t:"geometry", q:"The space diagonal of a \\(1\\times4\\times8\\) cuboid has length:",
+ o:["\\(\\sqrt{73}\\)","13","9","\\(\\sqrt{81}\\!-\\!1\\)","11"], a:2,
+ s:"\\(\\sqrt{1^2+4^2+8^2}=\\sqrt{81}=9\\) — 3D Pythagoras (<a href='geometry.html'>3D geometry</a>)."},
+{t:"geometry", q:"Given \\(\\tan\\theta=\\tfrac12\\), the value of \\(\\tan\\!\\left(\\theta+45^\\circ\\right)\\) is:",
+ o:["\\(\\tfrac32\\)","2","3","\\(\\tfrac13\\)","\\(\\tfrac12\\)"], a:2,
+ s:"\\(\\tan(\\theta+45^\\circ)=\\dfrac{\\tan\\theta+1}{1-\\tan\\theta}=\\dfrac{3/2}{1/2}=3\\) (<a href='geometry.html'>compound angles</a>)."},
+// ---------------- SEQUENCES (15 more) ----------------
+{t:"sequences", q:"A sequence has sum of first \\(n\\) terms \\(S_n=n^2+3n\\). The fifth term is:",
+ o:["40","28","12","8","10"], a:2,
+ s:"\\(a_5=S_5-S_4=40-28=12\\). (In fact \\(a_n=2n+2\\).) (<a href='sequences.html'>Sequences</a>)"},
+{t:"sequences", q:"The sum to infinity of \\(1+\\tfrac13+\\tfrac19+\\tfrac1{27}+\\dots\\) is:",
+ o:["\\(\\tfrac43\\)","\\(\\tfrac32\\)","2","\\(\\tfrac95\\)","\\(\\tfrac53\\)"], a:1,
+ s:"Geometric with \\(a=1,\\ r=\\tfrac13\\): \\(S_\\infty=\\dfrac1{1-\\frac13}=\\dfrac32\\) (<a href='sequences.html'>geometric series</a>)."},
+{t:"sequences", q:"In the arithmetic sequence \\(5, 9, 13, 17,\\dots\\), the number 101 is which term?",
+ o:["24th","32nd","26th","25th","27th"], a:3,
+ s:"\\(a_n=5+4(n-1)=101\\Rightarrow n-1=24\\Rightarrow n=25\\) (<a href='sequences.html'>arithmetic sequences</a>)."},
+{t:"sequences", q:"A sequence satisfies \\(u_{n+1}=6-u_n\\) with \\(u_1=2\\). The value of \\(u_{50}\\) is:",
+ o:["2","6","3","5","4"], a:4,
+ s:"The sequence alternates \\(2,4,2,4,\\dots\\): odd-numbered terms are 2, even-numbered are 4. So \\(u_{50}=4\\) (<a href='sequences.html'>periodic sequences</a>)."},
+{t:"sequences", q:"The sum of all multiples of 3 that are less than 100 is:",
+ o:["1650","1683","1584","1700","1533"], a:1,
+ s:"\\(3+6+\\dots+99=3(1+2+\\dots+33)=3\\cdot\\tfrac{33\\cdot34}2=1683\\) (<a href='sequences.html'>arithmetic series</a>)."},
+{t:"sequences", q:"A geometric series has first term 5 and sum to infinity 20. Its second term is:",
+ o:["\\(\\tfrac{15}4\\)","\\(\\tfrac54\\)","4","\\(\\tfrac{20}3\\)","\\(\\tfrac{45}{16}\\)"], a:0,
+ s:"\\(\\dfrac5{1-r}=20\\Rightarrow r=\\tfrac34\\); second term \\(=5r=\\tfrac{15}4\\) (<a href='sequences.html'>geometric series</a>)."},
+{t:"sequences", q:"\\(\\displaystyle\\sum_{k=1}^{6}k^2=\\)",
+ o:["55","70","96","85","91"], a:4,
+ s:"\\(\\tfrac{n(n+1)(2n+1)}6\\) with \\(n=6\\): \\(\\tfrac{6\\cdot7\\cdot13}6=91\\) (<a href='sequences.html'>standard sums</a>)."},
+{t:"sequences", q:"Five numbers are inserted between 7 and 31 so that all seven numbers form an arithmetic sequence. The middle (third) inserted number is:",
+ o:["17","18","19","20","21"], a:2,
+ s:"Six gaps span \\(31-7=24\\), so \\(d=4\\); the third inserted term is \\(7+3d=19\\) — it is also the mean of 7 and 31 by symmetry (<a href='sequences.html'>arithmetic sequences</a>)."},
+{t:"sequences", q:"A sequence satisfies \\(u_{n+1}=2u_n+1\\) with \\(u_1=1\\). The value of \\(u_6\\) is:",
+ o:["31","32","127","63","65"], a:3,
+ s:"Terms: \\(1,3,7,15,31,63\\) — in fact \\(u_n=2^n-1\\), since adding 1 doubles each time (<a href='sequences.html'>recurrences</a>)."},
+{t:"sequences", q:"A sequence satisfies \\(u_{n+2}=u_{n+1}+u_n\\) with \\(u_1=2\\), \\(u_2=3\\). The value of \\(u_6\\) is:",
+ o:["13","18","21","24","34"], a:2,
+ s:"\\(2,3,5,8,13,21\\) — each term is the sum of the previous two (<a href='sequences.html'>recurrences</a>)."},
+{t:"sequences", q:"A geometric sequence has \\(a_3=12\\) and \\(a_6=96\\). Its first term is:",
+ o:["2","3","4","6","\\(\\tfrac32\\)"], a:1,
+ s:"\\(\\dfrac{a_6}{a_3}=r^3=8\\Rightarrow r=2\\); then \\(a_1=\\dfrac{a_3}{r^2}=\\dfrac{12}4=3\\) (<a href='sequences.html'>geometric sequences</a>)."},
+{t:"sequences", q:"The sum of the first 20 positive even numbers is:",
+ o:["400","410","420","440","380"], a:2,
+ s:"\\(2+4+\\dots+40=2(1+\\dots+20)=2\\cdot210=420\\) (<a href='sequences.html'>arithmetic series</a>)."},
+{t:"sequences", q:"An arithmetic sequence has first term 4, and its fifth term is three times its second term. The common difference is:",
+ o:["4","6","2","10","8"], a:4,
+ s:"\\(4+4d=3(4+d)\\Rightarrow 4+4d=12+3d\\Rightarrow d=8\\) (<a href='sequences.html'>arithmetic sequences</a>)."},
+{t:"sequences", q:"\\(\\displaystyle\\sum_{k=1}^{99}\\frac1{k(k+1)}=\\)",
+ o:["\\(\\tfrac{99}{100}\\)","\\(\\tfrac{100}{101}\\)","1","\\(\\tfrac{98}{99}\\)","\\(\\ln 100\\)"], a:0,
+ s:"Telescope: \\(\\tfrac1{k(k+1)}=\\tfrac1k-\\tfrac1{k+1}\\), so the sum collapses to \\(1-\\tfrac1{100}=\\tfrac{99}{100}\\) (<a href='sequences.html'>telescoping</a>)."},
+{t:"sequences", q:"The sum to infinity of \\(8-4+2-1+\\tfrac12-\\dots\\) is:",
+ o:["4","\\(\\tfrac{16}3\\)","\\(\\tfrac{16}5\\)","6","\\(\\tfrac{32}5\\)"], a:1,
+ s:"Geometric with \\(a=8,\\ r=-\\tfrac12\\): \\(S_\\infty=\\dfrac8{1+\\frac12}=\\dfrac{16}3\\) (<a href='sequences.html'>geometric series</a>)."},
+// ---------------- FUNCTIONS (15 more) ----------------
+{t:"functions", q:"\\(\\log_5 100-\\log_5 4=\\)",
+ o:["4","\\(\\log_5 96\\)","2","25","\\(\\tfrac{\\log 100}{\\log 4}\\)"], a:2,
+ s:"\\(\\log_5\\tfrac{100}4=\\log_5 25=2\\) — subtract logs, divide arguments (<a href='functions.html'>log laws</a>)."},
+{t:"functions", q:"The solution of \\(3^{x+1}=27^{x-1}\\) is:",
+ o:["\\(x=1\\)","\\(x=3\\)","\\(x=\\tfrac32\\)","\\(x=2\\)","\\(x=\\tfrac12\\)"], a:3,
+ s:"\\(27=3^3\\): \\(x+1=3(x-1)\\Rightarrow x+1=3x-3\\Rightarrow x=2\\) (<a href='functions.html'>indices</a>)."},
+{t:"functions", q:"Let \\(f(x)=x^2+2\\) and \\(g(x)=3x-1\\). The sum of all real solutions of \\(f(g(x))=6\\) is:",
+ o:["\\(\\tfrac23\\)","2","\\(\\tfrac43\\)","0","\\(-\\tfrac23\\)"], a:0,
+ s:"\\((3x-1)^2=4\\Rightarrow 3x-1=\\pm2\\Rightarrow x=1\\) or \\(x=-\\tfrac13\\); sum \\(=\\tfrac23\\) (<a href='functions.html'>composition</a>)."},
+{t:"functions", q:"Given \\(f(x)=\\dfrac{x+1}{x-2}\\), the value of \\(f^{-1}(3)\\) is:",
+ o:["2","\\(\\tfrac72\\)","3","\\(\\tfrac52\\)","4"], a:1,
+ s:"\\(f^{-1}(3)\\) is the \\(x\\) with \\(f(x)=3\\): \\(x+1=3x-6\\Rightarrow x=\\tfrac72\\) — no need to find \\(f^{-1}\\) in full (<a href='functions.html'>inverse functions</a>)."},
+{t:"functions", q:"The natural domain of \\(f(x)=\\ln(x^2-9)\\) is:",
+ o:["\\(x&gt;3\\)","\\(x\\ne\\pm3\\)","\\(-3&lt;x&lt;3\\)","\\(x&lt;-3\\) or \\(x&gt;3\\)","\\(x\\ge3\\)"], a:3,
+ s:"Need \\(x^2-9&gt;0\\), i.e. \\(|x|&gt;3\\): both tails, not just the right one (<a href='functions.html'>domains</a>)."},
+{t:"functions", q:"The number of real solutions of \\(e^x=x^2\\) is:",
+ o:["0","1","2","3","4"], a:1,
+ s:"For \\(x\\ge0\\), \\(e^x&gt;x^2\\) always (compare growth; equality never occurs). For \\(x&lt;0\\), \\(e^x\\) falls from 1 to 0 while \\(x^2\\) rises — exactly one crossing. One solution (<a href='functions.html'>graph sketching</a>)."},
+{t:"functions", q:"\\(\\log_2 3\\times\\log_3 4=\\)",
+ o:["\\(\\log_6 12\\)","2","\\(\\log_2 7\\)","3","\\(\\tfrac32\\)"], a:1,
+ s:"Change of base: \\(\\log_2 3\\cdot\\log_3 4=\\log_2 4=2\\) — the middle base cancels (<a href='functions.html'>log laws</a>)."},
+{t:"functions", q:"A function satisfies \\(f(2x)=6x+4\\) for all real \\(x\\). The value of \\(f(5)\\) is:",
+ o:["34","22","15","19","17"], a:3,
+ s:"Let \\(u=2x\\): \\(f(u)=3u+4\\). So \\(f(5)=19\\) — substitute for the <em>input</em>, not for \\(x\\) (<a href='functions.html'>functions</a>)."},
+{t:"functions", q:"The solution set of \\(\\log_{10}x+\\log_{10}(x+3)=1\\) is:",
+ o:["\\(\\{2\\}\\)","\\(\\{-5,2\\}\\)","\\(\\{5\\}\\)","\\(\\{-2,5\\}\\)","\\(\\{7\\}\\)"], a:0,
+ s:"\\(x(x+3)=10\\Rightarrow x^2+3x-10=0\\Rightarrow x=2\\) or \\(x=-5\\); logs need \\(x&gt;0\\), so only \\(x=2\\) survives (<a href='functions.html'>log equations</a>)."},
+{t:"functions", q:"The reflection of the graph \\(y=2^x\\) in the \\(y\\)-axis is the graph of:",
+ o:["\\(y=-2^x\\)","\\(y=\\log_2 x\\)","\\(y=\\left(\\tfrac12\\right)^{x}\\)","\\(y=2^{x}-1\\)","\\(y=-2^{-x}\\)"], a:2,
+ s:"Reflection in the \\(y\\)-axis replaces \\(x\\) by \\(-x\\): \\(y=2^{-x}=(\\tfrac12)^x\\). Reflection in the \\(x\\)-axis would give \\(-2^x\\); in \\(y=x\\), the logarithm (<a href='functions.html'>transformations</a>)."},
+{t:"functions", q:"The range of \\(f(x)=3-2\\sin x\\) over all real \\(x\\) is:",
+ o:["\\([-2,2]\\)","\\([1,5]\\)","\\([-1,5]\\)","\\([1,3]\\)","\\([3,5]\\)"], a:1,
+ s:"\\(\\sin x\\in[-1,1]\\), so \\(-2\\sin x\\in[-2,2]\\) and \\(f\\in[1,5]\\). The minus sign flips which end is which — but not the interval (<a href='functions.html'>ranges</a>)."},
+{t:"functions", q:"The solution of \\(2^x\\cdot4^{\\,x+1}=8\\) is:",
+ o:["\\(x=1\\)","\\(x=\\tfrac13\\)","\\(x=\\tfrac12\\)","\\(x=\\tfrac23\\)","\\(x=0\\)"], a:1,
+ s:"Powers of 2: \\(x+2(x+1)=3\\Rightarrow 3x+2=3\\Rightarrow x=\\tfrac13\\) (<a href='functions.html'>indices</a>)."},
+{t:"functions", q:"The number of real solutions of \\(\\ln\\!\\left(x^2\\right)=2\\ln 3\\) is:",
+ o:["0","1","2","3","4"], a:2,
+ s:"\\(x^2=9\\Rightarrow x=\\pm3\\), and \\(\\ln(x^2)\\) is defined for both. Writing \\(\\ln(x^2)=2\\ln x\\) first silently discards \\(x=-3\\) — the trap (<a href='functions.html'>log equations</a>)."},
+{t:"functions", q:"Given \\(f(x)=\\dfrac{x}{x+1}\\), the composition \\(f(f(x))\\) simplifies to:",
+ o:["\\(\\dfrac{x}{2x+1}\\)","\\(\\dfrac{x^2}{(x+1)^2}\\)","\\(\\dfrac{2x}{x+1}\\)","\\(\\dfrac{x}{x+2}\\)","\\(\\dfrac{x+1}{2x+1}\\)"], a:0,
+ s:"\\(f(f(x))=\\dfrac{\\frac x{x+1}}{\\frac x{x+1}+1}=\\dfrac{x}{x+(x+1)}=\\dfrac x{2x+1}\\) (<a href='functions.html'>composition</a>)."},
+{t:"functions", q:"The function \\(g\\) is odd, and \\(g(3)=5\\). The value of \\(g(-3)+g(0)\\) is:",
+ o:["5","0","\\(-5\\)","2","cannot be determined"], a:2,
+ s:"Odd means \\(g(-x)=-g(x)\\): so \\(g(-3)=-5\\), and \\(g(0)=-g(0)\\Rightarrow g(0)=0\\). Total \\(-5\\) (<a href='functions.html'>odd and even functions</a>)."},
+// ---------------- DIFFERENTIATION (15 more) ----------------
+{t:"differentiation", q:"If \\(y=x^2\\!\\left(x^3-1\\right)\\), the value of \\(\\dfrac{\\mathrm dy}{\\mathrm dx}\\) at \\(x=1\\) is:",
+ o:["5","0","2","3","6"], a:3,
+ s:"Expand first: \\(y=x^5-x^2\\), so \\(y'=5x^4-2x=3\\) at \\(x=1\\) (<a href='differentiation.html'>Differentiation</a>)."},
+{t:"differentiation", q:"At how many points does the curve \\(y=x^3-3x+2\\) have a horizontal tangent?",
+ o:["0","1","2","3","4"], a:2,
+ s:"\\(y'=3x^2-3=0\\Rightarrow x=\\pm1\\): two points (<a href='differentiation.html'>stationary points</a>)."},
+{t:"differentiation", q:"If \\(y=(3x-2)^4\\), the value of \\(\\dfrac{\\mathrm dy}{\\mathrm dx}\\) at \\(x=1\\) is:",
+ o:["4","12","36","108","24"], a:1,
+ s:"Chain rule: \\(y'=4(3x-2)^3\\cdot3\\); at \\(x=1\\): \\(4\\cdot1\\cdot3=12\\). Forgetting the inner factor 3 gives 4 — the classic slip (<a href='differentiation.html'>chain rule</a>)."},
+{t:"differentiation", q:"For \\(x&gt;0\\), the minimum value of \\(f(x)=x+\\dfrac4x\\) is:",
+ o:["2","8","4","\\(2\\sqrt2\\)","5"], a:2,
+ s:"\\(f'(x)=1-\\tfrac4{x^2}=0\\Rightarrow x=2\\), giving \\(f(2)=4\\) (a minimum since \\(f''=\\tfrac8{x^3}&gt;0\\)) (<a href='differentiation.html'>optimisation</a>)."},
+{t:"differentiation", q:"The function \\(f(x)=2x^3-9x^2+12x\\) is increasing exactly when:",
+ o:["\\(1&lt;x&lt;2\\)","\\(x&gt;2\\) only","\\(x&lt;1\\) or \\(x&gt;2\\)","\\(x&lt;\\tfrac32\\)","all \\(x\\)"], a:2,
+ s:"\\(f'(x)=6x^2-18x+12=6(x-1)(x-2)&gt;0\\) outside the roots: \\(x&lt;1\\) or \\(x&gt;2\\) (<a href='differentiation.html'>increasing functions</a>)."},
+{t:"differentiation", q:"The area of a circle is \\(A=\\pi r^2\\). The rate of change of \\(A\\) with respect to \\(r\\) at \\(r=3\\) is:",
+ o:["\\(9\\pi\\)","\\(3\\pi\\)","\\(12\\pi\\)","\\(6\\pi\\)","\\(6\\pi r\\)"], a:3,
+ s:"\\(\\dfrac{\\mathrm dA}{\\mathrm dr}=2\\pi r=6\\pi\\) at \\(r=3\\) — the circumference, not the area (<a href='differentiation.html'>rates of change</a>)."},
+{t:"differentiation", q:"The curve \\(y=x^3-6x^2\\) has \\(\\dfrac{\\mathrm d^2y}{\\mathrm dx^2}=0\\) at \\(x=\\)",
+ o:["0","4","2","3","6"], a:2,
+ s:"\\(y''=6x-12=0\\Rightarrow x=2\\) — the point of inflection, midway between the stationary points (<a href='differentiation.html'>second derivative</a>)."},
+{t:"differentiation", q:"The tangent to \\(y=x^3+x\\) at the point \\((1,2)\\) has \\(y\\)-intercept:",
+ o:["2","\\(-2\\)","4","\\(-4\\)","0"], a:1,
+ s:"Gradient \\(y'(1)=3+1=4\\); line \\(y=4x+c\\) through \\((1,2)\\) gives \\(c=-2\\) (<a href='differentiation.html'>tangents</a>)."},
+{t:"differentiation", q:"The local maximum value of \\(f(x)=x^2(3-x)\\) is:",
+ o:["0","2","3","4","6"], a:3,
+ s:"\\(f'(x)=6x-3x^2=3x(2-x)=0\\) at \\(x=0\\) (min) and \\(x=2\\) (max): \\(f(2)=4\\cdot1=4\\) (<a href='differentiation.html'>stationary points</a>)."},
+{t:"differentiation", q:"The normal to the curve \\(y=x^3\\) at the point \\((2,8)\\) has gradient:",
+ o:["12","\\(-12\\)","\\(\\tfrac1{12}\\)","\\(-\\tfrac1{12}\\)","\\(-\\tfrac16\\)"], a:3,
+ s:"Tangent gradient \\(3x^2=12\\); the normal is perpendicular: \\(-\\tfrac1{12}\\) (<a href='differentiation.html'>normals</a>)."},
+{t:"differentiation", q:"\\(\\displaystyle\\lim_{h\\to0}\\frac{\\sqrt{4+h}-2}{h}=\\)",
+ o:["\\(\\tfrac12\\)","0","\\(\\tfrac14\\)","1","2"], a:2,
+ s:"This is the derivative of \\(\\sqrt x\\) at \\(x=4\\): \\(\\tfrac1{2\\sqrt4}=\\tfrac14\\) — recognise the definition, don't rationalise under time pressure (<a href='differentiation.html'>first principles</a>)."},
+{t:"differentiation", q:"If \\(y=\\dfrac1{x^2}\\), the value of \\(\\dfrac{\\mathrm dy}{\\mathrm dx}\\) at \\(x=-1\\) is:",
+ o:["\\(-2\\)","2","1","\\(-1\\)","0"], a:1,
+ s:"\\(y=x^{-2}\\Rightarrow y'=-2x^{-3}\\); at \\(x=-1\\): \\(-2/(-1)=2\\). The two sign flips cancel (<a href='differentiation.html'>negative indices</a>)."},
+{t:"differentiation", q:"The cubic \\(f(x)=x^3+px^2+qx\\) has stationary points at \\(x=1\\) and \\(x=3\\). The value of \\(q\\) is:",
+ o:["3","\\(-6\\)","6","12","9"], a:4,
+ s:"\\(f'(x)=3x^2+2px+q\\) has roots 1 and 3: product \\(=\\tfrac q3=3\\Rightarrow q=9\\) (and sum gives \\(p=-6\\)) — Vieta on the <em>derivative</em> (<a href='differentiation.html'>stationary points</a>)."},
+{t:"differentiation", q:"A particle moves along a line with displacement \\(x(t)=t^3-3t^2\\). Its acceleration is zero at \\(t=\\)",
+ o:["0","3","2","\\(\\tfrac32\\)","1"], a:4,
+ s:"\\(v=3t^2-6t\\), \\(a=6t-6=0\\Rightarrow t=1\\) — differentiate twice, not once (<a href='differentiation.html'>kinematics</a>)."},
+{t:"differentiation", q:"For \\(f(x)=x^4\\) at \\(x=0\\), which statement is correct?",
+ o:["\\(f''(0)&gt;0\\), so it is a minimum","\\(f''(0)=0\\), so it is a point of inflection","\\(f''(0)=0\\), yet it is a minimum","it is not a stationary point","it is a maximum"], a:2,
+ s:"\\(f'(0)=f''(0)=0\\), but \\(f(x)&gt;0=f(0)\\) either side, so \\(x=0\\) is a minimum. \\(f''=0\\) is <em>inconclusive</em>, not a verdict of inflection (<a href='differentiation.html'>classifying stationary points</a>)."},
+// ---------------- INTEGRATION (15 more) ----------------
+{t:"integration", q:"\\(\\displaystyle\\int_0^2\\left(3x^2-2x+1\\right)\\mathrm dx=\\)",
+ o:["4","6","8","10","12"], a:1,
+ s:"\\(\\left[x^3-x^2+x\\right]_0^2=8-4+2=6\\) (<a href='integration.html'>Integration</a>)."},
+{t:"integration", q:"\\(\\displaystyle\\int_1^8 x^{1/3}\\,\\mathrm dx=\\)",
+ o:["\\(\\tfrac{45}4\\)","\\(\\tfrac{15}4\\)","12","\\(\\tfrac{45}2\\)","\\(\\tfrac{33}4\\)"], a:0,
+ s:"\\(\\left[\\tfrac34x^{4/3}\\right]_1^8=\\tfrac34(16-1)=\\tfrac{45}4\\) — note \\(8^{4/3}=16\\) (<a href='integration.html'>powers</a>)."},
+{t:"integration", q:"The area of the region enclosed between \\(y=2x\\) and \\(y=x^2\\) is:",
+ o:["\\(\\tfrac83\\)","2","\\(\\tfrac23\\)","\\(\\tfrac43\\)","4"], a:3,
+ s:"They meet at \\(x=0,2\\); \\(\\int_0^2(2x-x^2)\\,\\mathrm dx=4-\\tfrac83=\\tfrac43\\) (<a href='integration.html'>areas between curves</a>)."},
+{t:"integration", q:"\\(\\displaystyle\\int_0^1(x+1)^2\\,\\mathrm dx=\\)",
+ o:["\\(\\tfrac43\\)","2","\\(\\tfrac73\\)","\\(\\tfrac83\\)","3"], a:2,
+ s:"\\(\\left[\\tfrac{(x+1)^3}3\\right]_0^1=\\tfrac{8-1}3=\\tfrac73\\) (or expand first) (<a href='integration.html'>Integration</a>)."},
+{t:"integration", q:"Given \\(\\displaystyle\\int_0^a 3x^2\\,\\mathrm dx=64\\) with \\(a&gt;0\\), the value of \\(a\\) is:",
+ o:["2","3","4","8","16"], a:2,
+ s:"\\(\\left[x^3\\right]_0^a=a^3=64\\Rightarrow a=4\\) (<a href='integration.html'>Integration</a>)."},
+{t:"integration", q:"\\(\\displaystyle\\int_{-1}^{1}\\left(x^5+x^3+x\\right)\\mathrm dx=\\)",
+ o:["2","\\(\\tfrac{11}6\\)","1","0","\\(\\tfrac{23}{12}\\)"], a:3,
+ s:"Every term is odd and the interval is symmetric: the integral is 0 by symmetry — no antiderivative needed (<a href='integration.html'>symmetry</a>)."},
+{t:"integration", q:"\\(\\displaystyle\\int_1^4\\frac{\\mathrm dx}{x^2}=\\)",
+ o:["\\(\\tfrac34\\)","\\(\\ln4\\)","\\(\\tfrac14\\)","\\(\\tfrac43\\)","\\(-\\tfrac34\\)"], a:0,
+ s:"\\(\\left[-x^{-1}\\right]_1^4=-\\tfrac14+1=\\tfrac34\\) (<a href='integration.html'>negative powers</a>)."},
+{t:"integration", q:"The trapezium rule is used to estimate \\(\\displaystyle\\int_0^2 x^2\\,\\mathrm dx\\). The estimate is:",
+ o:["exact","an underestimate","an overestimate","an underestimate only if more strips are used","impossible to compare"], a:2,
+ s:"\\(y=x^2\\) is convex (bends upward), so every chord lies <em>above</em> the curve: trapezia overestimate (<a href='integration.html'>trapezium rule</a>)."},
+{t:"integration", q:"\\(\\displaystyle\\int_0^4\\sqrt x\\,\\mathrm dx=\\)",
+ o:["8","\\(\\tfrac{16}3\\)","\\(\\tfrac83\\)","4","\\(\\tfrac{32}3\\)"], a:1,
+ s:"\\(\\left[\\tfrac23x^{3/2}\\right]_0^4=\\tfrac23\\cdot8=\\tfrac{16}3\\) (<a href='integration.html'>powers</a>)."},
+{t:"integration", q:"Given \\(\\displaystyle\\int_1^3f(x)\\,\\mathrm dx=5\\) and \\(\\displaystyle\\int_1^3g(x)\\,\\mathrm dx=2\\), the value of \\(\\displaystyle\\int_1^3\\left(2f(x)-3g(x)\\right)\\mathrm dx\\) is:",
+ o:["16","3","7","4","1"], a:3,
+ s:"Linearity: \\(2\\cdot5-3\\cdot2=4\\) (<a href='integration.html'>Integration</a>)."},
+{t:"integration", q:"The region under \\(y=\\sqrt x\\) for \\(0\\le x\\le4\\) is rotated fully about the \\(x\\)-axis. The volume generated is:",
+ o:["\\(16\\pi\\)","\\(\\tfrac{16\\pi}3\\)","\\(4\\pi\\)","\\(8\\pi\\)","\\(\\tfrac{64\\pi}5\\)"], a:3,
+ s:"\\(V=\\pi\\!\\int_0^4(\\sqrt x)^2\\,\\mathrm dx=\\pi\\!\\int_0^4x\\,\\mathrm dx=8\\pi\\) — squaring removes the root (<a href='integration.html'>volumes</a>)."},
+{t:"integration", q:"\\(\\displaystyle\\int_0^{\\pi/2}\\cos x\\,\\mathrm dx=\\)",
+ o:["0","\\(\\tfrac{\\pi}2\\)","1","2","\\(-1\\)"], a:2,
+ s:"\\(\\left[\\sin x\\right]_0^{\\pi/2}=1-0=1\\) (<a href='integration.html'>trig integrals</a>)."},
+{t:"integration", q:"If \\(F(x)=\\displaystyle\\int_0^x\\left(t^2+1\\right)\\mathrm dt\\), then \\(F'(x)=\\)",
+ o:["\\(x^2+1\\)","\\(\\tfrac{x^3}3+x\\)","\\(2x\\)","\\(x^2\\)","\\(t^2+1\\)"], a:0,
+ s:"The fundamental theorem: differentiating the integral returns the integrand, evaluated at \\(x\\) (<a href='integration.html'>fundamental theorem</a>)."},
+{t:"integration", q:"The total area enclosed between \\(y=x^2-1\\) and the \\(x\\)-axis is:",
+ o:["\\(\\tfrac23\\)","\\(\\tfrac43\\)","2","\\(-\\tfrac43\\)","\\(\\tfrac83\\)"], a:1,
+ s:"Roots \\(\\pm1\\); the curve is below the axis there, so area \\(=\\int_{-1}^1(1-x^2)\\,\\mathrm dx=\\tfrac43\\) — positive, though the raw integral is negative (<a href='integration.html'>areas</a>)."},
+{t:"integration", q:"\\(\\displaystyle\\int_0^1\\left(e^x+1\\right)\\mathrm dx=\\)",
+ o:["\\(e\\)","\\(e-1\\)","\\(e+1\\)","\\(e-2\\)","2"], a:0,
+ s:"\\(\\left[e^x+x\\right]_0^1=(e+1)-(1+0)=e\\) (<a href='integration.html'>exponentials</a>)."},
+// ---------------- COUNTING (15 more) ----------------
+{t:"counting", q:"The number of distinct arrangements of the letters of BANANA is:",
+ o:["720","120","60","360","20"], a:2,
+ s:"\\(\\dfrac{6!}{3!\\,2!}=\\dfrac{720}{12}=60\\) — divide by repeats of A (three) and N (two) (<a href='counting.html'>arrangements</a>)."},
+{t:"counting", q:"A committee of 2 men and 2 women is chosen from 6 men and 5 women. The number of possible committees is:",
+ o:["300","150","25","330","900"], a:1,
+ s:"\\(\\binom62\\binom52=15\\times10=150\\) — multiply independent choices (<a href='counting.html'>combinations</a>)."},
+{t:"counting", q:"Two fair dice are rolled. The probability of at least one six is:",
+ o:["\\(\\tfrac16\\)","\\(\\tfrac13\\)","\\(\\tfrac{11}{36}\\)","\\(\\tfrac{25}{36}\\)","\\(\\tfrac5{18}\\)"], a:2,
+ s:"Complement: \\(1-\\left(\\tfrac56\\right)^2=1-\\tfrac{25}{36}=\\tfrac{11}{36}\\). Adding \\(\\tfrac16+\\tfrac16\\) double-counts (<a href='counting.html'>complement</a>)."},
+{t:"counting", q:"The coefficient of \\(x^2\\) in the expansion of \\((1-2x)^5\\) is:",
+ o:["\\(-40\\)","20","40","\\(-80\\)","10"], a:2,
+ s:"\\(\\binom52(-2x)^2=10\\cdot4x^2\\): coefficient \\(40\\) — the even power kills the sign (<a href='counting.html'>binomial expansion</a>)."},
+{t:"counting", q:"Eight people each shake hands exactly once with every other person. The total number of handshakes is:",
+ o:["56","36","64","28","24"], a:3,
+ s:"Each handshake is a pair: \\(\\binom82=28\\). Multiplying \\(8\\times7\\) counts each twice (<a href='counting.html'>combinations</a>)."},
+{t:"counting", q:"Three distinct maths books and two distinct physics books are arranged on a shelf with the physics books adjacent. The number of arrangements is:",
+ o:["24","120","12","96","48"], a:4,
+ s:"Glue the physics pair into one block: \\(4!\\) arrangements, times \\(2!\\) internal orders \\(=48\\) (<a href='counting.html'>block method</a>)."},
+{t:"counting", q:"A bag holds 5 red and 3 blue balls. Two are drawn without replacement. The probability that both are red is:",
+ o:["\\(\\tfrac{25}{64}\\)","\\(\\tfrac5{14}\\)","\\(\\tfrac{15}{28}\\)","\\(\\tfrac58\\)","\\(\\tfrac{10}{28}\\)"], a:1,
+ s:"\\(\\tfrac58\\times\\tfrac47=\\tfrac5{14}\\) — the second factor updates for the missing ball (<a href='counting.html'>without replacement</a>)."},
+{t:"counting", q:"On a grid, a path moves only right or up from \\((0,0)\\) to \\((3,2)\\). The number of such paths is:",
+ o:["6","12","10","20","8"], a:2,
+ s:"Five steps, choose which 2 are ups: \\(\\binom52=10\\) (<a href='counting.html'>lattice paths</a>)."},
+{t:"counting", q:"Two fair dice are rolled, and the sum is 6. Given this, the probability that at least one die shows a 2 is:",
+ o:["\\(\\tfrac13\\)","\\(\\tfrac16\\)","\\(\\tfrac{11}{36}\\)","\\(\\tfrac25\\)","\\(\\tfrac12\\)"], a:3,
+ s:"Sum-6 outcomes: \\((1,5),(2,4),(3,3),(4,2),(5,1)\\) — five equally likely; two contain a 2. Conditional probability \\(\\tfrac25\\) (<a href='counting.html'>conditional probability</a>)."},
+{t:"counting", q:"The constant term in the expansion of \\(\\left(x+\\dfrac2{x^2}\\right)^{6}\\) is:",
+ o:["15","160","20","240","60"], a:4,
+ s:"General term \\(\\binom6k x^{6-k}\\left(\\tfrac2{x^2}\\right)^k\\) has power \\(6-3k=0\\Rightarrow k=2\\): \\(\\binom62\\cdot2^2=60\\) (<a href='counting.html'>binomial expansion</a>)."},
+{t:"counting", q:"How many three-digit numbers have strictly increasing digits (e.g. 137), using digits 1–9?",
+ o:["504","84","120","729","81"], a:1,
+ s:"Any 3-element subset of \\(\\{1,\\dots,9\\}\\) arranges in exactly one increasing order: \\(\\binom93=84\\) — a selection problem in disguise (<a href='counting.html'>combinations</a>)."},
+{t:"counting", q:"A fair coin is tossed 5 times. The probability of at least 2 heads is:",
+ o:["\\(\\tfrac{13}{16}\\)","\\(\\tfrac{31}{32}\\)","\\(\\tfrac{26}{31}\\)","\\(\\tfrac{11}{16}\\)","\\(\\tfrac34\\)"], a:0,
+ s:"Complement of 0 or 1 heads: \\(1-\\dfrac{\\binom50+\\binom51}{32}=1-\\dfrac6{32}=\\dfrac{13}{16}\\) (<a href='counting.html'>binomial probability</a>)."},
+{t:"counting", q:"Five people sit around a circular table, where arrangements are considered the same if one is a rotation of another. The number of distinct seatings is:",
+ o:["120","60","24","12","20"], a:2,
+ s:"Fix one person to remove rotations: \\((5-1)!=24\\) (<a href='counting.html'>circular arrangements</a>)."},
+{t:"counting", q:"Events \\(A\\) and \\(B\\) are independent, with \\(P(A)=\\tfrac13\\) and \\(P(B)=\\tfrac14\\). Then \\(P(A\\cup B)=\\)",
+ o:["\\(\\tfrac7{12}\\)","\\(\\tfrac12\\)","\\(\\tfrac1{12}\\)","\\(\\tfrac{5}{12}\\)","\\(\\tfrac23\\)"], a:1,
+ s:"\\(P(A\\cup B)=\\tfrac13+\\tfrac14-\\tfrac13\\cdot\\tfrac14=\\tfrac{4+3-1}{12}=\\tfrac12\\) — independence supplies the intersection (<a href='counting.html'>probability laws</a>)."},
+{t:"counting", q:"How many subsets of \\(\\{1,2,3,4,5,6\\}\\) contain the element 1?",
+ o:["64","31","36","32","63"], a:3,
+ s:"Element 1 is fixed in; each of the other five is in or out: \\(2^5=32\\) — half of all \\(64\\) subsets (<a href='counting.html'>subsets</a>)."},
+// ---------------- LOGIC (15 more) ----------------
+{t:"logic", q:"The negation of the statement \\(\\exists\\,x\\) such that \\(f(x)=0\\) is:",
+ o:["\\(\\exists\\,x\\) such that \\(f(x)\\ne0\\)","\\(\\forall x,\\ f(x)=0\\)","\\(\\forall x,\\ f(x)\\ne0\\)","\\(\\exists\\,x\\) such that \\(f(x)&gt;0\\)","\\(f\\) has no domain"], a:2,
+ s:"Negating swaps the quantifier and negates the inside: no \\(x\\) works means <em>every</em> \\(x\\) fails (<a href='logic.html'>negation</a>)."},
+{t:"logic", q:"The condition \\(x=2\\) is sufficient but not necessary for which of the following?",
+ o:["\\(x&gt;2\\)","\\(x^2=4\\)","\\(x=2\\)","\\(x&lt;2\\)","\\(x^3=27\\)"], a:1,
+ s:"\\(x=2\\Rightarrow x^2=4\\) (sufficient), but \\(x=-2\\) also gives \\(x^2=4\\) (not necessary). For option C it is both; for the others it is not even sufficient (<a href='logic.html'>§L.4</a>)."},
+{t:"logic", q:"The contrapositive of \\(\\text{“if }x^2\\text{ is even, then }x\\text{ is even”}\\) is:",
+ o:["if \\(x\\) is even, then \\(x^2\\) is even","if \\(x^2\\) is odd, then \\(x\\) is odd","if \\(x\\) is odd, then \\(x^2\\) is odd","if \\(x^2\\) is even, then \\(x\\) is odd","\\(x^2\\) and \\(x\\) are both even"], a:2,
+ s:"Contrapositive of \\(P\\Rightarrow Q\\) is \\(\\lnot Q\\Rightarrow\\lnot P\\): negate both and swap. “\\(x\\) odd \\(\\Rightarrow x^2\\) odd” (option B negates without swapping — that is the inverse of the converse, i.e. the converse in disguise) (<a href='logic.html'>§L.3</a>)."},
+{t:"logic", q:"Consider the claim: \\(n^2+n+41\\) is prime for every positive integer \\(n\\). Which of the following is a counterexample?",
+ o:["\\(n=1\\)","\\(n=10\\)","\\(n=20\\)","\\(n=30\\)","\\(n=41\\)"], a:4,
+ s:"At \\(n=41\\): \\(41^2+41+41=41\\cdot43\\), visibly composite — every term is divisible by 41. The other options all give primes (<a href='logic.html'>counterexamples</a>)."},
+{t:"logic", q:"The statement \\(\\lnot Q\\Rightarrow\\lnot P\\) is logically equivalent to:",
+ o:["\\(P\\Rightarrow Q\\)","\\(Q\\Rightarrow P\\)","\\(\\lnot P\\Rightarrow\\lnot Q\\)","\\(P\\Leftrightarrow Q\\)","\\(\\lnot(P\\Rightarrow Q)\\)"], a:0,
+ s:"It is exactly the contrapositive of \\(P\\Rightarrow Q\\) — the one equivalence in the family. \\(Q\\Rightarrow P\\) is the converse, a different statement (<a href='logic.html'>§L.3</a>)."},
+{t:"logic", q:"You know that \\(\\text{“}P\\text{ or }Q\\text{”}\\) is true and that \\(P\\) is false. What can you deduce?",
+ o:["\\(Q\\) is false","\\(Q\\) is true","\\(P\\Rightarrow Q\\) is false","nothing about \\(Q\\)","\\(Q\\) is true only if \\(P\\) is true"], a:1,
+ s:"An “or” needs at least one true part; with \\(P\\) out, \\(Q\\) must carry it (<a href='logic.html'>disjunction</a>)."},
+{t:"logic", q:"Which of the following statements about real numbers is TRUE?",
+ o:["there exists \\(y\\) such that \\(y&gt;x\\) for every \\(x\\)","for every \\(x\\) there exists \\(y\\) with \\(y&gt;x\\)","for every \\(x\\) and every \\(y\\), \\(y&gt;x\\)","there exist no \\(x,y\\) with \\(y&gt;x\\)","for every \\(y\\) there exists \\(x\\) with \\(x&gt;y\\) and \\(x&lt;y\\)"], a:1,
+ s:"Given any \\(x\\), take \\(y=x+1\\). Option A swaps the quantifiers and asserts a largest-beating single \\(y\\) — false: the <em>order</em> of quantifiers is everything (<a href='logic.html'>quantifiers</a>)."},
+{t:"logic", q:"For a positive integer \\(n\\), the condition “\\(n\\) is divisible by 12” is ______ for “\\(n\\) is divisible by 6”.",
+ o:["necessary but not sufficient","necessary and sufficient","neither necessary nor sufficient","sufficient but not necessary","equivalent"], a:3,
+ s:"Divisible by 12 \\(\\Rightarrow\\) divisible by 6 (sufficient); but \\(n=6\\) shows it is not necessary (<a href='logic.html'>§L.4</a>)."},
+{t:"logic", q:"The negation of \\(\\text{“if }P\\text{ then }Q\\text{”}\\) is:",
+ o:["if \\(P\\) then \\(\\lnot Q\\)","if \\(\\lnot P\\) then \\(\\lnot Q\\)","\\(P\\) and \\(\\lnot Q\\)","\\(\\lnot P\\) and \\(Q\\)","\\(\\lnot P\\) or \\(\\lnot Q\\)"], a:2,
+ s:"An implication fails in exactly one way: \\(P\\) holds and \\(Q\\) does not. The negation of an “if” is an “and”, never another “if” (<a href='logic.html'>negation</a>)."},
+{t:"logic", q:"It is known that every square is a rectangle. Shape \\(S\\) is not a rectangle. The conclusion “\\(S\\) is not a square” is:",
+ o:["invalid — it affirms the consequent","valid — by the contrapositive","invalid — the premise says nothing about \\(S\\)","valid — by the converse","invalid — squares might not be rectangles"], a:1,
+ s:"From (square \\(\\Rightarrow\\) rectangle) and “not rectangle”, the contrapositive gives “not square”. This is denying the consequent — the valid direction (<a href='logic.html'>§L.7</a>)."},
+{t:"logic", q:"Which of the following is a counterexample to the claim “\\(x^2\\ge x\\) for every real \\(x\\)”?",
+ o:["\\(x=-1\\)","\\(x=0\\)","\\(x=2\\)","\\(x=\\tfrac12\\)","\\(x=1\\)"], a:3,
+ s:"\\(\\left(\\tfrac12\\right)^2=\\tfrac14&lt;\\tfrac12\\) ✗. At \\(x=-1\\): \\(1\\ge-1\\) ✓; at 0 and 1, equality ✓ — squaring only shrinks numbers strictly between 0 and 1 (<a href='logic.html'>counterexamples</a>)."},
+{t:"logic", q:"Consider: “if \\(n\\) is a prime greater than 2, then \\(n\\) is odd” (true). Which value of \\(n\\) is a counterexample to its CONVERSE?",
+ o:["\\(n=3\\)","\\(n=9\\)","\\(n=5\\)","\\(n=11\\)","\\(n=7\\)"], a:1,
+ s:"The converse says “if \\(n\\) is odd and greater than 2, then \\(n\\) is prime”. \\(n=9\\) is odd, exceeds 2, and is \\(3\\times3\\) — the others are all prime, so they confirm rather than refute (<a href='logic.html'>converse</a>)."},
+{t:"logic", q:"To DISPROVE the claim “the product of two irrational numbers is always irrational”, it is enough to:",
+ o:["prove the product is always rational","show the claim fails for every pair of irrationals","give one pair of irrationals whose product is rational","show that irrational numbers exist","prove the sum of two irrationals can be rational"], a:2,
+ s:"A universal claim dies by a single counterexample: \\(\\sqrt2\\times\\sqrt2=2\\). Nothing more is required — and nothing less will do (<a href='logic.html'>disproof</a>)."},
+{t:"logic", q:"\\(P\\) is the statement “3 is even” and \\(Q\\) is the statement “5 is odd”. The implication \\(P\\Rightarrow Q\\) is:",
+ o:["false, because \\(P\\) is false","true, because \\(Q\\) is true and \\(P\\) is false","false, because \\(P\\) and \\(Q\\) are unrelated","true, because \\(P\\) is true","neither true nor false"], a:1,
+ s:"An implication with a false antecedent is (vacuously) true — it only fails when \\(P\\) holds and \\(Q\\) fails. Relevance is not required by the logic (<a href='logic.html'>truth tables</a>)."},
+{t:"logic", q:"The statement \\(\\lnot(P\\text{ and }Q)\\) is logically equivalent to:",
+ o:["\\(\\lnot P\\) and \\(\\lnot Q\\)","\\(\\lnot P\\) or \\(\\lnot Q\\)","\\(P\\) or \\(Q\\)","\\(\\lnot(P\\text{ or }Q)\\)","\\(P\\Rightarrow\\lnot Q\\) is false"], a:1,
+ s:"De Morgan: denying “both” means at least one fails — the “and” flips to “or”. Option A (both fail) is stronger than the negation (<a href='logic.html'>De Morgan</a>)."}
 ];
-
+ 
 var SESSION_LENGTH = 10;
 var qArea = document.getElementById('qArea');
 var progressText = document.getElementById('progressText');
@@ -476,7 +844,7 @@ var seenText = document.getElementById('seenText');
 var topicWrap = document.getElementById('topicButtons');
 var seen = {};            // ids seen this visit, per pool exhaustion handling
 var session = null;       // {queue:[ids], i, right, topic}
-
+ 
 function mathify(el){ if (window.renderMathInElement) renderMathInElement(el, {delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}], throwOnError:false}); }
 function shuffle(arr){ for (var i=arr.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=arr[i]; arr[i]=arr[j]; arr[j]=t; } return arr; }
 function topicName(t){
@@ -486,7 +854,7 @@ function topicName(t){
 function poolFor(topic){
   var p=[]; for (var i=0;i<BANK.length;i++) if (topic==='all' || BANK[i].t===topic) p.push(i); return p;
 }
-
+ 
 function startSession(topic){
   var pool = poolFor(topic);
   var unseen = pool.filter(function(i){ return !seen[i]; });
@@ -503,12 +871,12 @@ function startSession(topic){
   renderQuestion();
   updateSeenText();
 }
-
+ 
 function updateSeenText(){
   var totalSeen = Object.keys(seen).length;
   seenText.textContent = totalSeen ? ('Seen this visit: ' + totalSeen + ' / ' + BANK.length) : '';
 }
-
+ 
 function renderQuestion(){
   var id = session.queue[session.i];
   var item = BANK[id];
@@ -528,7 +896,7 @@ function renderQuestion(){
   mathify(qArea);
   updateSeenText();
 }
-
+ 
 function onAnswer(e){
   var id = session.queue[session.i];
   var item = BANK[id];
@@ -554,7 +922,7 @@ function onAnswer(e){
   });
   mathify(fb);
 }
-
+ 
 function renderSummary(){
   var n = session.queue.length, r = session.right;
   var pct = Math.round(100*r/n);
@@ -572,7 +940,7 @@ function renderSummary(){
   document.getElementById('againBtn').addEventListener('click', function(){ startSession(session.topic); });
   updateSeenText();
 }
-
+ 
 topicWrap.addEventListener('click', function(e){
   var b = e.target.closest('.topic-btn'); if (!b) return;
   var all = topicWrap.querySelectorAll('.topic-btn');
@@ -580,15 +948,15 @@ topicWrap.addEventListener('click', function(e){
   b.classList.add('active');
   startSession(b.getAttribute('data-topic'));
 });
-
+ 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ startSession('all'); });
 else startSession('all');
 })();
 </script>
-
+ 
 <div class="pn"><a href="exam-papers.html">← TMUA Exam Papers</a><a href="index.html">Home →</a></div>
 </div>
-
+ 
 <footer><div class="inner">
 <p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
 Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
