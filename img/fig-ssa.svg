@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 340" font-family="Georgia,serif">
+<rect x="0" y="0" width="620" height="340" fill="#FBFAF5"/>
+<line x1="55.6" y1="250.0" x2="487.6" y2="250.0" stroke="#23282E" stroke-width="1.6"/>
+<polygon points="487.6,250.0 478.6,246.0 478.6,254.0" fill="#23282E"/>
+<polyline points="449.0,231.0 446.4,233.5 443.9,236.1 441.2,238.5 438.5,241.0 435.8,243.3 433.0,245.6 430.2,247.9 427.3,250.1 424.4,252.2 421.4,254.3 418.4,256.3 415.4,258.3 412.3,260.2 409.2,262.0 406.1,263.8 402.9,265.5 399.7,267.1 396.4,268.7 393.1,270.2 389.8,271.7 386.5,273.0 383.1,274.4 379.7,275.6 376.3,276.8 372.8,277.9 369.4,278.9 365.9,279.9 362.4,280.8 358.9,281.6 355.3,282.4 351.8,283.1 348.2,283.7 344.6,284.2 341.1,284.7 337.5,285.1 333.9,285.4 330.3,285.7 326.6,285.9 323.0,286.0 319.4,286.0 315.8,286.0 312.2,285.9 308.6,285.7 305.0,285.4 301.4,285.1 297.8,284.7 294.2,284.2 290.6,283.7 287.1,283.1 283.5,282.4 280.0,281.6 276.4,280.8 272.9,279.9 269.5,278.9 266.0,277.9 262.6,276.8 259.1,275.6 255.7,274.4 252.4,273.0 249.0,271.7 245.7,270.2 242.4,268.7 239.2,267.1 236.0,265.5 232.8,263.8 229.6,262.0 226.5,260.2 223.4,258.3 220.4,256.3 217.4,254.3 214.4,252.2 211.5,250.1 208.6,247.9 205.8,245.6 203.0,243.3 200.3,241.0 197.6,238.5 195.0,236.1 192.4,233.5 189.9,231.0" fill="none" stroke="#5A6068" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="169.4" y="284.0" font-size="11" fill="#5A6068" font-family="sans-serif">arc of radius a — the compass swing</text>
+<line x1="70.0" y1="250.0" x2="319.4" y2="106.0" stroke="#13294B" stroke-width="2.6"/>
+<line x1="319.4" y1="106.0" x2="427.4" y2="250.0" stroke="#B7410E" stroke-width="2.6"/>
+<line x1="319.4" y1="106.0" x2="211.4" y2="250.0" stroke="#3E7164" stroke-width="2.6"/>
+<line x1="319.4" y1="106.0" x2="319.4" y2="250.0" stroke="#23282E" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M 311.4 250.0 L 311.4 242.0 L 319.4 242.0" fill="none" stroke="#23282E" stroke-width="1"/>
+<text x="325.4" y="178.0" font-size="11" fill="#23282E" font-family="sans-serif">h = b sin A = 4</text>
+<path d="M 100.0 250.0 A 30 30 0 0 0 96.0 235.0" fill="none" stroke="#23282E" stroke-width="1.2"/>
+<text x="110.0" y="236.0" font-size="11.5" fill="#23282E" font-family="sans-serif">A = 30°</text>
+<circle cx="70.0" cy="250.0" r="3.2" fill="#23282E"/>
+<text x="56.0" y="266.0" font-size="13" fill="#23282E" font-family="sans-serif">A</text>
+<circle cx="319.4" cy="106.0" r="3.2" fill="#13294B"/>
+<text x="326.4" y="102.0" font-size="13" fill="#13294B" font-family="sans-serif">C</text>
+<circle cx="211.4" cy="250.0" r="3.2" fill="#3E7164"/>
+<text x="207.4" y="268.0" font-size="12.5" fill="#3E7164" font-family="sans-serif">B₁</text>
+<circle cx="427.4" cy="250.0" r="3.2" fill="#B7410E"/>
+<text x="423.4" y="268.0" font-size="12.5" fill="#B7410E" font-family="sans-serif">B₂</text>
+<text x="178.7" y="174.0" font-size="12" fill="#13294B" font-family="sans-serif">b = 8</text>
+<text x="377.4" y="176.0" font-size="12" fill="#B7410E" font-family="sans-serif">a = 5</text>
+<text x="235.4" y="178.0" font-size="12" fill="#3E7164" font-family="sans-serif">a = 5</text>
+<line x1="360" y1="40" x2="384" y2="40" stroke="#B7410E" stroke-width="2.8"/>
+<text x="390" y="44" font-size="12" fill="#B7410E" font-family="sans-serif">triangle AB₂C  (B acute)</text>
+<line x1="360" y1="60" x2="384" y2="60" stroke="#3E7164" stroke-width="2.8"/>
+<text x="390" y="64" font-size="12" fill="#3E7164" font-family="sans-serif">triangle AB₁C  (B obtuse)</text>
+</svg>
