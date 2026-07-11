@@ -89,7 +89,46 @@ function toggleNav() {
 \[\lnot\big(\forall x:P(x)\big)=\exists x:\lnot P(x),\qquad \lnot\big(\exists x:P(x)\big)=\forall x:\lnot P(x).\]
 To deny "every swan is white" you need just <em>one</em> black swan — a single <strong>counterexample</strong> disproves a universal claim. To deny "some swan is black" you must show <em>every</em> swan is non-black.</li>
 </ol></div>
-<p><strong>Example.</strong> Negate: "for every \(x&gt;0\) there exists \(y\) such that \(y^2&lt;x\)." Work outside-in, flipping each quantifier: "there exists \(x&gt;0\) such that for every \(y\), \(y^2\ge x\)." Note the condition \(x&gt;0\) describing the domain is <em>not</em> negated — we are denying the claim about those \(x\), not changing which \(x\) we talk about.</p>
+
+<h3>Quantifiers in slow motion</h3>
+<div class="box def"><span class="bt">The two quantifiers</span>
+<p>The symbol \(\forall\) means <strong>for every</strong>, while \(\exists\) means <strong>there exists at least one</strong>. A quantifier tells us how many values from a stated domain must make a condition true:</p>
+<ul>
+<li>\(\forall x\in\mathbb R,\;x^2\ge0\) says that <em>every</em> real number has a non-negative square.</li>
+<li>\(\exists x\in\mathbb R,\;x^2=4\) says that <em>at least one</em> real number has square 4. It does not say there is exactly one: both \(2\) and \(-2\) work.</li>
+</ul>
+<p>The <strong>domain</strong> matters. The statement \(\exists x,\;x^2=2\) is false if \(x\) must be rational, but true if \(x\) may be real.</p></div>
+
+<div class="box thm"><span class="bt">Order matters</span>
+<p>When two quantifiers occur, read them from left to right. In general they cannot be swapped:</p>
+\[\forall x\,\exists y:\;y&gt;x\qquad\text{and}\qquad \exists y\,\forall x:\;y&gt;x.\]
+<p>The first statement is true over the real numbers: after somebody chooses \(x\), we may choose \(y=x+1\). The choice of \(y\) is allowed to <em>depend on \(x\)</em>. The second is false: it asks for one fixed real number \(y\) that is greater than every real \(x\). Thus "everyone has someone who is taller" is very different from "there is someone taller than everyone."</p></div>
+
+<div class="box tmpl"><span class="bt">Template — Negating quantified statements</span>
+<ol>
+<li>Write the statement with its quantifiers visible.</li>
+<li>Move from left to right, swapping each \(\forall\) with \(\exists\), and each \(\exists\) with \(\forall\).</li>
+<li>Negate the final condition: \(=\) becomes \(\ne\), \(&gt;\) becomes \(\le\), "and" becomes "or", and so on.</li>
+<li>Keep the original domain. You are changing the claim, not the collection of objects being discussed.</li>
+</ol>
+<p>In symbols:</p>
+\[\lnot\big(\forall x\,\exists y:\;P(x,y)\big)
+=\exists x\,\forall y:\;\lnot P(x,y).\]
+<p>A useful spoken version is: to refute "every \(x\) has a suitable \(y\)", find one \(x\) for which no \(y\) is suitable.</p></div>
+
+<p><strong>Worked example.</strong> Negate: "for every real \(x&gt;0\) there exists a real \(y\) such that \(y^2&lt;x\)." First expose the structure:
+\[\forall x&gt;0\,\exists y\in\mathbb R:\;y^2&lt;x.\]
+Swap \(\forall\) to \(\exists\), swap \(\exists\) to \(\forall\), and negate \(y^2&lt;x\) to \(y^2\ge x\):
+\[\exists x&gt;0\,\forall y\in\mathbb R:\;y^2\ge x.\]
+The restriction \(x&gt;0\) still describes the domain of \(x\); it is not replaced by \(x\le0\).</p>
+
+<div class="box warn"><span class="bt">Common quantifier mistakes</span>
+<ul>
+<li><strong>Proving a universal statement from examples:</strong> ten successful examples do not prove "for every"; one failed example disproves it.</li>
+<li><strong>Forgetting that a witness may depend on an earlier variable:</strong> in \(\forall x\,\exists y\), different values of \(x\) may use different values of \(y\).</li>
+<li><strong>Using a moving witness where one fixed witness is required:</strong> in \(\exists y\,\forall x\), the same \(y\) must work for every \(x\).</li>
+<li><strong>Reading "exists" as "exists exactly one":</strong> uniqueness needs its own words or the symbol \(\exists!\).</li>
+</ul></div>
  
 <h2><span class="sn">§L.3</span>Implication, converse, contrapositive</h2>
 <div class="box def"><span class="bt">Implication</span>
@@ -211,6 +250,33 @@ A. \(x^2&gt;0\) only if \(x&gt;0\) &nbsp; B. If \(x^2&gt;0\) then \(x&gt;0\) &nb
 A. \(n\) is a multiple of 4 &nbsp; B. \(n\) is a multiple of 8 &nbsp; C. \(n\) is even &nbsp; D. \(n\equiv2\pmod4\) &nbsp; E. \(n\ge4\) &nbsp; F. \(n\) is a multiple of 4 or of 6</p>
 <details class="sol"><summary>Show solution</summary>
 <p><strong>B.</strong> The units digits of \(7^1,7^2,7^3,7^4,\dots\) run \(7,9,3,1,7,9,3,1,\dots\) — period 4 — so \(7^n\) ends in 1 exactly when \(n\equiv0\pmod4\). Now test each option's set against the solution set \(\{n:4\mid n\}\): a <em>sufficient</em> condition is a <em>subset</em> of it, and <em>not necessary</em> means a <em>strict</em> subset. A is the solution set itself — sufficient but also necessary, so it fails "not necessary". B (multiples of 8) is a strict subset: every multiple of 8 is a multiple of 4 (sufficient ✓), yet \(n=4\) is missed (not necessary ✓). C, D, E and F each contain a value with \(n\not\equiv0\pmod4\) — namely \(n=2,\,2,\,5,\,6\) — so none of them even guarantees the digit, i.e. none is sufficient. The exam move is always the same: pin down the solution set exactly, then test each option for <em>containment</em>.</p>
+</details></div>
+ 
+
+<div class="q"><div class="qhead"><span class="qn">Drill 5</span><span class="pill tmua">TMUA-style</span></div>
+<p>Let \(f\) be a polynomial. Which of the following is necessary for the statement
+\[\frac{f(x)+f(y)}{2}\ge f\!\left(\frac{x+y}{2}\right)\qquad\text{for all real }x\text{ and }y?\]
+A. \(f\ge0\) &nbsp; B. \(f'\ge0\) &nbsp; C. \(f''\ge0\) &nbsp; D. \(f\le0\) &nbsp; E. \(f'\le0\) &nbsp; F. \(f''\le0\)</p>
+<details class="sol"><summary>Show solution 1 — Jensen's inequality</summary>
+<div class="box def"><span class="bt">Jensen's inequality</span>
+<p>A function is called <strong>convex</strong> when its graph bends upwards: the straight chord joining any two points on the graph lies on or above the graph. Jensen's inequality says that for a convex function \(f\), a weighted average of the function values is at least the function evaluated at the same weighted average of the inputs:</p>
+\[\lambda f(x)+(1-\lambda)f(y)\ge f\big(\lambda x+(1-\lambda)y\big),\qquad 0\le\lambda\le1.\]
+<p>With equal weights \(\lambda=\tfrac12\), this becomes
+\[\frac{f(x)+f(y)}2\ge f\!\left(\frac{x+y}2\right),\]
+which is exactly the statement in the question. For a twice-differentiable function, and therefore for a polynomial, convexity is equivalent to \(f''(t)\ge0\) for every real \(t\). Hence the necessary condition is <strong>C: \(f''\ge0\)</strong>.</p></div>
+<p>The other signs are not necessary. For example, adding a constant changes whether \(f\) is positive or negative without changing the inequality; a convex polynomial can also decrease on part of its domain and increase on another part, as \(f(x)=x^2\) does.</p>
+</details>
+<details class="sol"><summary>Show solution 2 — Start with the smallest non-trivial polynomial</summary>
+<p>A constant or linear polynomial has \(f''=0\), so its midpoint inequality is always an equality and reveals no sign. The smallest degree with a non-trivial second derivative is therefore two. Set
+\[f(x)=ax^2+bx+c.\]
+Then
+\[\frac{f(x)+f(y)}2-f\!\left(\frac{x+y}2\right)=\frac{a}{4}(x-y)^2.\]
+For this to be non-negative for <em>all</em> real \(x,y\), we must have \(a\ge0\). Since \(f''=2a\), the quadratic case points precisely to \(f''\ge0\).</p>
+<p>Now make the argument valid for an arbitrary polynomial. Fix any real number \(t\), and choose \(x=t+h\) and \(y=t-h\). Their midpoint is \(t\), so the given statement says
+\[f(t+h)-2f(t)+f(t-h)\ge0.\]
+For \(h\ne0\), divide by \(h^2&gt;0\):
+\[\frac{f(t+h)-2f(t)+f(t-h)}{h^2}\ge0.\]
+As \(h\to0\), the left-hand side tends to \(f''(t)\). Therefore \(f''(t)\ge0\). Because \(t\) was arbitrary, \(f''\ge0\) for every real input. The answer is again <strong>C</strong>.</p>
 </details></div>
  
 <h2><span class="sn">§L.6</span>Methods of proof</h2>
