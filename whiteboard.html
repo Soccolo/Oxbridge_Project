@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maths Whiteboard — Live Notation &amp; Graphs</title>
+<meta name="description" content="A live teaching whiteboard: type formulae in plain text and see beautiful notation, plot functions, annotate with a pen, paste images, and export equations or the whole board.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<!-- math.js: parses & evaluates functions for graphing -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.js"></script>
+<script>
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <ul class="nav">
+    <li><a href="about.html"><span class="n">▸</span> About your tutor</a></li>
+  </ul>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Functions</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differential Calculus</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integrals</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Mathematical Logic</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="practice.html"><span class="n">▸</span> Practice Arena</a></li>
+    <li><a href="whiteboard.html" class="active"><span class="n">▸</span> Maths Whiteboard</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+
+<!-- ================= MATHS WHITEBOARD ================= -->
+<style>
+/* All whiteboard styles are scoped under .wb so they never touch other pages. */
+.wb{padding:2.2rem clamp(1rem,3vw,2.4rem) 3rem}
+.wb .crumb{margin-bottom:1rem}
+.wb h1{margin:.1rem 0 .5rem}
+.wb .lede{max-width:60ch;margin-bottom:1.4rem}
+
+.wb-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem;
+  background:var(--card);border:1px solid var(--line);border-radius:11px;
+  padding:.6rem .7rem;margin-bottom:1rem}
+.wb-group{display:flex;align-items:center;gap:.4rem;padding:0 .55rem;
+  border-right:1px solid var(--line-soft)}
+.wb-group:last-child{border-right:0}
+.wb-group .lbl{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--ink-soft)}
+.wb-btn{font-family:var(--display);font-size:.8rem;font-weight:600;cursor:pointer;
+  border:1px solid var(--line);background:#fff;color:var(--ink);
+  border-radius:8px;padding:.42rem .8rem;transition:border-color .14s,background .14s,color .14s;
+  display:inline-flex;align-items:center;gap:.35rem}
+.wb-btn:hover{border-color:var(--accent);color:var(--accent-ink)}
+.wb-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.wb-btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.wb-btn.primary:hover{background:var(--ink-deep);color:#fff}
+.wb select,.wb input[type=range]{font:inherit}
+.wb select{font-family:var(--display);font-size:.8rem;color:var(--ink);background:#fff;
+  border:1px solid var(--line);border-radius:8px;padding:.38rem .5rem;cursor:pointer}
+.wb input[type=range]{accent-color:var(--accent);width:96px}
+.wb input[type=color]{width:30px;height:30px;padding:0;border:1px solid var(--line);
+  border-radius:7px;background:#fff;cursor:pointer}
+
+.wb-split{display:flex;gap:1rem;height:min(74vh,780px)}
+.wb-editor{flex:0 0 38%;min-width:280px;display:flex;flex-direction:column;
+  background:var(--ink);border-radius:12px;overflow:hidden}
+.wb-editor .elabel{padding:.6rem .9rem;font-family:var(--mono);font-size:.64rem;
+  text-transform:uppercase;letter-spacing:.12em;color:#8fa0bd;border-bottom:1px solid rgba(255,255,255,.08)}
+#wbSrc{flex:1;resize:none;border:0;outline:none;padding:1rem 1.1rem;background:transparent;
+  color:#e7eefb;font-family:var(--mono);font-size:.95rem;line-height:1.75;tab-size:2}
+#wbSrc::placeholder{color:#5f7290}
+
+.wb-boardwrap{flex:1;min-width:0;display:flex;flex-direction:column;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.wb-board{position:relative;flex:1;overflow:auto}
+.wb-content{position:relative;z-index:1;padding:2rem 2.2rem;min-height:100%;
+  line-height:1.4;transition:background .2s,color .2s}
+.wb-overlay{position:absolute;top:0;left:0;z-index:2;pointer-events:none;touch-action:none}
+.wb-board.pen .wb-overlay{pointer-events:auto;cursor:crosshair}
+.wb-board.erase .wb-overlay{pointer-events:auto;cursor:cell}
+
+/* board themes */
+.wb-theme-white{background:#ffffff;color:#141414}
+.wb-theme-chalk{background:#0f3d2e;color:#f3f1e7;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px);background-size:22px 22px}
+.wb-theme-slate{background:#1e293b;color:#e8eefb}
+
+.wb-content .wb-line{margin:.5rem 0}
+.wb-content .wb-math{margin:1rem 0;position:relative}
+.wb-content .katex{font-size:1.5em}
+.wb-content .katex-display{margin:.4rem 0}
+.wb-content h2.wb-head{font-family:var(--display);font-weight:700;font-size:1.7em;
+  margin:1.4rem 0 .5rem;padding:0 0 .35rem;border:0;border-bottom:2px solid currentColor;
+  letter-spacing:-.01em;color:inherit}
+.wb-content .wb-spacer{height:.7rem}
+.wb-content .wb-err{color:#e0564a;font-family:var(--mono);font-size:.85em}
+.wb-content figure{margin:1.2rem 0;position:relative}
+.wb-content figure canvas.wb-graph{max-width:100%;border-radius:10px;border:1px solid rgba(128,128,128,.25)}
+.wb-content figcaption{font-family:var(--mono);font-size:.72rem;opacity:.7;margin-top:.4rem}
+.wb-content .wb-img{max-width:100%;max-height:420px;border-radius:10px;border:1px solid rgba(128,128,128,.3);
+  background:#fff;padding:6px;display:inline-block}
+
+/* per-item hover buttons (export PNG / remove) */
+.wb-tool{position:absolute;top:2px;right:2px;display:flex;gap:4px;opacity:0;transition:opacity .12s;z-index:3}
+.wb-math:hover .wb-tool,.wb-content figure:hover .wb-tool{opacity:1}
+.wb-mini{font-family:var(--mono);font-size:.6rem;font-weight:600;cursor:pointer;
+  border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:6px;padding:.2rem .45rem;
+  letter-spacing:.03em}
+.wb-mini:hover{border-color:var(--accent);color:var(--accent-ink)}
+.wb-mini.rm:hover{border-color:var(--bad);color:var(--bad)}
+
+.wb-status{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);margin-top:.7rem;letter-spacing:.01em;min-height:1.1em}
+
+/* cheat sheet */
+.wb-cheat{margin-top:1.4rem;border:1px solid var(--line);border-radius:12px;background:var(--card);
+  padding:0;overflow:hidden}
+.wb-cheat>summary{cursor:pointer;list-style:none;padding:.85rem 1.1rem;font-family:var(--display);
+  font-weight:600;font-size:.95rem;color:var(--ink)}
+.wb-cheat>summary::before{content:"▸ ";color:var(--accent)}
+.wb-cheat[open]>summary::before{content:"▾ "}
+.wb-cheat .sheet-body{padding:0 1.1rem 1.1rem;display:grid;grid-template-columns:1fr 1fr;gap:0 1.8rem}
+.wb-cheat table{margin:.4rem 0;font-size:.82rem;background:transparent}
+.wb-cheat td{border:0;border-bottom:1px solid var(--line-soft);padding:.32rem .3rem;text-align:left;vertical-align:top}
+.wb-cheat td.k{font-family:var(--mono);color:var(--accent-ink);white-space:nowrap;font-size:.78rem}
+.wb-cheat .gh{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--ink-soft);margin:.9rem 0 .2rem}
+
+@media (max-width:900px){
+  .wb-split{flex-direction:column;height:auto}
+  .wb-editor{flex:none;height:220px}
+  .wb-boardwrap{height:60vh}
+  .wb-cheat .sheet-body{grid-template-columns:1fr}
+}
+
+/* ---- print: Save as PDF prints only the board ---- */
+@media print{
+  .sidebar,.wb-toolbar,.wb-editor,.wb-cheat,.wb .crumb,.wb .lede,.wb h1,
+  .wb-status,footer,.menu-toggle,.wb-tool{display:none !important}
+  .shell{display:block}
+  main{padding:0}
+  .wb{padding:0}
+  .wb-split{height:auto;display:block}
+  .wb-boardwrap{border:0;border-radius:0}
+  .wb-board{overflow:visible;height:auto}
+  .wb-content{padding:1rem}
+  body{background:#fff}
+}
+</style>
+
+<div class="wb">
+  <p class="crumb"><b>Tools</b> · Live teaching whiteboard</p>
+  <h1>Maths Whiteboard</h1>
+  <p class="lede">Type formulae in plain text on the left — <code>int_a^b f(x) dx</code> — and watch them become
+  proper notation on the board. Write <code>draw f(x)</code> to plot a function. Annotate with the pen, paste or drop
+  images, export any single equation as a PNG, or save the whole board as a PDF for your students.</p>
+
+  <div class="wb-toolbar" id="wbToolbar">
+    <div class="wb-group">
+      <span class="lbl">Board</span>
+      <select id="wbTheme">
+        <option value="wb-theme-white" selected>Whiteboard</option>
+        <option value="wb-theme-chalk">Chalkboard</option>
+        <option value="wb-theme-slate">Slate</option>
+      </select>
+      <span class="lbl">Size</span>
+      <input id="wbSize" type="range" min="1" max="2.4" step="0.1" value="1.5" title="Equation size">
+    </div>
+    <div class="wb-group">
+      <span class="lbl">Pen</span>
+      <button class="wb-btn" id="wbPen" title="Free-draw on the board">✎ Pen</button>
+      <button class="wb-btn" id="wbErase" title="Erase strokes">Eraser</button>
+      <input id="wbInk" type="color" value="#2f5cff" title="Pen colour">
+      <input id="wbInkW" type="range" min="1" max="14" step="1" value="3" title="Pen thickness">
+      <button class="wb-btn" id="wbClearInk" title="Remove all pen marks">Clear ink</button>
+    </div>
+    <div class="wb-group">
+      <span class="lbl">Insert</span>
+      <button class="wb-btn" id="wbImgBtn" title="Insert an image (or just paste / drop one)">🖼 Image</button>
+      <input id="wbImgFile" type="file" accept="image/*" hidden>
+    </div>
+    <div class="wb-group">
+      <button class="wb-btn" id="wbExample">Example</button>
+      <button class="wb-btn" id="wbClear">Clear text</button>
+      <button class="wb-btn primary" id="wbPdf" title="Save the whole board as a PDF">⭳ Save PDF</button>
+    </div>
+  </div>
+
+  <div class="wb-split">
+    <div class="wb-editor">
+      <div class="elabel">Type here — one expression per line</div>
+      <textarea id="wbSrc" spellcheck="false" placeholder="int_a^b f(x) dx = F(b) - F(a)&#10;draw sin(x), cos(x)"></textarea>
+    </div>
+    <div class="wb-boardwrap">
+      <div class="wb-board" id="wbBoard">
+        <div class="wb-content wb-theme-white" id="wbContent"></div>
+        <canvas class="wb-overlay" id="wbOverlay"></canvas>
+      </div>
+    </div>
+  </div>
+  <p class="wb-status" id="wbStatus">Ready.</p>
+
+  <details class="wb-cheat" id="wbCheatBox">
+    <summary>Shorthand cheat sheet — what to type</summary>
+    <div class="sheet-body">
+      <div>
+        <div class="gh">Calculus &amp; structure</div>
+        <table>
+          <tr><td class="k">int_a^b</td><td>integral a→b · <span class="k">oint</span> ∮</td></tr>
+          <tr><td class="k">sum_{n=1}^N</td><td>summation · <span class="k">prod</span> product</td></tr>
+          <tr><td class="k">lim_{x-&gt;0}</td><td>limit</td></tr>
+          <tr><td class="k">sqrt(x)</td><td>√x · <span class="k">sqrt[3](x)</span> cube root</td></tr>
+          <tr><td class="k">frac(a,b)</td><td>fraction · or just <span class="k">a/b</span></td></tr>
+          <tr><td class="k">x^2 , a_i</td><td>power / subscript (auto-grouped)</td></tr>
+          <tr><td class="k">x^(n+1)</td><td>grouped exponent</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="gh">Symbols &amp; Greek</div>
+        <table>
+          <tr><td class="k">&lt;= &gt;= != ~=</td><td>≤ ≥ ≠ ≈</td></tr>
+          <tr><td class="k">-&gt; &lt;- =&gt;</td><td>→ ← ⇒</td></tr>
+          <tr><td class="k">+- &nbsp; *</td><td>± &nbsp; · (times)</td></tr>
+          <tr><td class="k">infinity</td><td>∞</td></tr>
+          <tr><td class="k">alpha … omega</td><td>Greek letters</td></tr>
+          <tr><td class="k">in cup cap subset</td><td>∈ ∪ ∩ ⊂</td></tr>
+          <tr><td class="k">forall exists</td><td>∀ ∃</td></tr>
+        </table>
+        <div class="gh">Special lines</div>
+        <table>
+          <tr><td class="k"># Title</td><td>a heading</td></tr>
+          <tr><td class="k">f(x) = x^2-1</td><td>defines f (usable in draw)</td></tr>
+          <tr><td class="k">draw f(x)</td><td>plots the function</td></tr>
+          <tr><td class="k">draw sin(x), cos(x)</td><td>multiple curves</td></tr>
+          <tr><td class="k">draw x^2, [-4, 6]</td><td>custom x-range</td></tr>
+        </table>
+      </div>
+    </div>
+  </details>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* =========================================================================
+   1. SHORTHAND  ->  LaTeX
+   ========================================================================= */
+const WORDS = [
+  'iiint','iint','oint','int','sum','prod','coprod','lim','limsup','liminf',
+  'partial','nabla','infty',
+  'arcsin','arccos','arctan','sinh','cosh','tanh','sin','cos','tan','cot','sec','csc',
+  'log','ln','exp','max','min','sup','inf','det','dim','ker','deg','gcd','arg',
+  'alpha','beta','gamma','delta','epsilon','varepsilon','zeta','eta','theta','vartheta',
+  'iota','kappa','lambda','mu','nu','xi','rho','sigma','tau','upsilon','phi','varphi',
+  'chi','psi','omega','pi',
+  'Gamma','Delta','Theta','Lambda','Xi','Pi','Sigma','Upsilon','Phi','Psi','Omega',
+  'times','div','cdot','pm','mp','leq','geq','neq','approx','equiv','cong','sim','propto',
+  'to','gets','mapsto','implies','iff','forall','exists','nexists','in','notin','ni',
+  'subset','subseteq','supset','supseteq','cup','cap','setminus','emptyset','varnothing',
+  'wedge','vee','neg','oplus','otimes','perp','parallel','angle',
+  'cdots','ldots','vdots','ddots','dots','langle','rangle','lfloor','rfloor','lceil','rceil',
+  'hbar','ell','aleph','prime','circ','star','ast','Rightarrow','Leftarrow','Leftrightarrow'
+];
+const ALIAS = { infinity:'infty', union:'cup', intersect:'cap' };
+
+function balanced(str, i){
+  let depth=0;
+  for(let j=i;j<str.length;j++){
+    if(str[j]==='(') depth++;
+    else if(str[j]===')'){ depth--; if(depth===0) return j; }
+  }
+  return -1;
+}
+function replaceFn(str, name, builder){
+  let out='', i=0;
+  while(i<str.length){
+    const at = str.indexOf(name, i);
+    if(at<0){ out += str.slice(i); break; }
+    out += str.slice(i, at);
+    let k = at + name.length, opt=null;
+    if(str[k]==='['){ const e=str.indexOf(']',k); if(e>0){ opt=str.slice(k+1,e); k=e+1; } }
+    if(str[k]==='('){
+      const close = balanced(str,k);
+      if(close>0){ out += builder(str.slice(k+1, close), opt); i = close+1; continue; }
+    }
+    out += str.slice(at, at+name.length);
+    i = at + name.length;
+  }
+  return out;
+}
+function splitComma(s){
+  let depth=0;
+  for(let i=0;i<s.length;i++){
+    const c=s[i];
+    if(c==='(') depth++; else if(c===')') depth--;
+    else if(c===',' && depth===0) return [s.slice(0,i), s.slice(i+1)];
+  }
+  return [s, null];
+}
+function convertToLatex(input){
+  let s = input;
+  const passFns = t=>{
+    t = replaceFn(t, 'frac', (inner)=>{
+      const [a,b] = splitComma(inner);
+      return b!==null ? '\\frac{'+passFns(a.trim())+'}{'+passFns(b.trim())+'}'
+                      : '\\frac{'+passFns(inner.trim())+'}{}';
+    });
+    t = replaceFn(t, 'sqrt', (inner, opt)=>
+      opt!=null ? '\\sqrt['+opt+']{'+passFns(inner)+'}' : '\\sqrt{'+passFns(inner)+'}');
+    return t;
+  };
+  s = passFns(s);
+  s = s.replace(/([_^])\(([^()]*)\)/g, '$1{$2}');
+  s = s.replace(/([_^])\s*(-?[A-Za-z0-9.]+)/g, '$1{$2}');
+  const operand = '(\\{[^{}]*\\}|(?:[A-Za-z]\\w*)?\\([^()]*\\)|[A-Za-z0-9.]+(?:\\^\\{[^{}]*\\}|_\\{[^{}]*\\})?)';
+  const slashRe = new RegExp(operand + '\\s*/\\s*' + operand, 'g');
+  const strip = x => x.replace(/^\(([^()]*)\)$/, '$1');
+  s = s.replace(slashRe, (m,a,b)=> '\\frac{'+strip(a)+'}{'+strip(b)+'}');
+  const OPS = [
+    ['<->','\\leftrightarrow '],['<=>','\\Leftrightarrow '],
+    ['->','\\to '],['<-','\\gets '],['=>','\\Rightarrow '],
+    ['>=','\\geq '],['<=','\\leq '],['!=','\\neq '],['~=','\\approx '],
+    ['+-','\\pm '],['-+','\\mp '],['...','\\dots '],['*','\\cdot ']
+  ];
+  for(const [a,b] of OPS) s = s.split(a).join(b);
+  const L='(?<![\\\\A-Za-z0-9])', R='(?![A-Za-z0-9])';
+  for(const w of WORDS)      s = s.replace(new RegExp(L+w+R,'g'), '\\'+w);
+  for(const k in ALIAS)      s = s.replace(new RegExp(L+k+R,'g'), '\\'+ALIAS[k]);
+  s = s.replace(/(^|[\s)}])d([xyztuvw])\b/g, '$1\\,d$2');
+  return s.replace(/\s{2,}/g,' ').trim();
+}
+
+/* =========================================================================
+   2. GRAPHING
+   ========================================================================= */
+const COLORS = ['#2f5cff','#e0564a','#15803d','#9333ea','#ea580c','#0891b2','#db2777'];
+function niceStep(range, target){
+  const rough = range/target;
+  const pow = Math.pow(10, Math.floor(Math.log10(rough)));
+  const n = rough/pow;
+  return (n<1.5?1 : n<3?2 : n<7?5 : 10)*pow;
+}
+function fmt(v){
+  if(Math.abs(v)<1e-9) return '0';
+  if(Math.abs(v)>=1e4 || Math.abs(v)<1e-3) return v.toExponential(1);
+  return (Math.round(v*1000)/1000).toString();
+}
+function parseDraw(rest, parser){
+  const ev = (str)=>{ try{ return Number(parser.evaluate(str)); }
+                      catch(e){ const f=parseFloat(str); return isNaN(f)?0:f; } };
+  let xmin=-10, xmax=10, m;
+  if(m = rest.match(/\bfrom\s+([^\s]+)\s+to\s+([^\s]+)\s*$/i)){
+    xmin=ev(m[1]); xmax=ev(m[2]); rest=rest.slice(0,m.index);
+  } else if(m = rest.match(/,?\s*(?:for\s+)?x\s*(?:in|=|:)\s*\[([^\],]+),([^\]]+)\]\s*$/i)){
+    xmin=ev(m[1]); xmax=ev(m[2]); rest=rest.slice(0,m.index);
+  } else if(m = rest.match(/,?\s*\[([^\],]+),([^\]]+)\]\s*$/)){
+    xmin=ev(m[1]); xmax=ev(m[2]); rest=rest.slice(0,m.index);
+  }
+  if(!(xmax>xmin)){ const t=xmin; xmin=Math.min(t,xmax); xmax=Math.max(t,xmax); if(xmax===xmin){xmin=-10;xmax=10;} }
+  const fns=[]; let depth=0, cur='';
+  for(const c of rest){
+    if(c==='(') depth++; else if(c===')') depth--;
+    if(c===',' && depth===0){ if(cur.trim()) fns.push(cur.trim()); cur=''; }
+    else cur+=c;
+  }
+  if(cur.trim()) fns.push(cur.trim());
+  return { fns, xmin, xmax };
+}
+function drawGraph(spec, parser, theme){
+  const W=720, H=430, m={l:52,r:16,t:16,b:34};
+  const canvas=document.createElement('canvas');
+  canvas.className='wb-graph';
+  const dpr=window.devicePixelRatio||1;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  canvas.style.width='100%'; canvas.style.maxWidth=W+'px';
+  const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+  const plotW=W-m.l-m.r, plotH=H-m.t-m.b;
+  const {xmin,xmax}=spec;
+  const scope = parser.getAll();
+  const evals = spec.fns.map(expr=>{
+    let code=null; try{ code = math.parse(expr).compile(); }catch(e){}
+    return (xv)=>{ if(!code) return NaN;
+      try{ scope.x=xv; const v=code.evaluate(scope); return (typeof v==='number'&&isFinite(v))?v:NaN; }
+      catch(e){ return NaN; } };
+  });
+  const N=900, xs=[], series=evals.map(()=>[]);
+  for(let i=0;i<=N;i++){ const x=xmin+(xmax-xmin)*i/N; xs.push(x); evals.forEach((f,k)=>series[k].push(f(x))); }
+  const all=[]; series.forEach(s=>s.forEach(y=>{ if(isFinite(y)) all.push(y); }));
+  let ymin=-10,ymax=10;
+  if(all.length){
+    all.sort((a,b)=>a-b);
+    ymin=all[Math.floor(all.length*0.02)]; ymax=all[Math.floor(all.length*0.98)];
+    if(!(ymax>ymin)){ ymin=all[0]; ymax=all[all.length-1]; }
+    if(!(ymax>ymin)){ ymin-=1; ymax+=1; }
+    const pad=(ymax-ymin)*0.1; ymin-=pad; ymax+=pad;
+  }
+  const px=x=>m.l+(x-xmin)/(xmax-xmin)*plotW, py=y=>m.t+(1-(y-ymin)/(ymax-ymin))*plotH;
+  const fg = theme==='wb-theme-white' ? '#141414' : theme==='wb-theme-slate' ? '#e8eefb' : '#f3f1e7';
+  const gridC = theme==='wb-theme-white' ? 'rgba(0,0,0,.10)' : 'rgba(255,255,255,.13)';
+  const paper = theme==='wb-theme-white' ? '#fbfcfe' : theme==='wb-theme-slate' ? '#16202f' : '#0c3324';
+  ctx.fillStyle=paper; ctx.fillRect(0,0,W,H);
+  ctx.save(); ctx.beginPath(); ctx.rect(m.l,m.t,plotW,plotH); ctx.clip();
+  ctx.font='11px "IBM Plex Mono",monospace'; ctx.fillStyle=fg; ctx.strokeStyle=gridC; ctx.lineWidth=1;
+  const sx=niceStep(xmax-xmin,10);
+  for(let x=Math.ceil(xmin/sx)*sx;x<=xmax;x+=sx){ const X=px(x); ctx.beginPath(); ctx.moveTo(X,m.t); ctx.lineTo(X,m.t+plotH); ctx.stroke(); }
+  const sy=niceStep(ymax-ymin,8);
+  for(let y=Math.ceil(ymin/sy)*sy;y<=ymax;y+=sy){ const Y=py(y); ctx.beginPath(); ctx.moveTo(m.l,Y); ctx.lineTo(m.l+plotW,Y); ctx.stroke(); }
+  ctx.strokeStyle=fg; ctx.lineWidth=1.6; ctx.globalAlpha=.75;
+  if(0>=ymin&&0<=ymax){ const Y=py(0); ctx.beginPath(); ctx.moveTo(m.l,Y); ctx.lineTo(m.l+plotW,Y); ctx.stroke(); }
+  if(0>=xmin&&0<=xmax){ const X=px(0); ctx.beginPath(); ctx.moveTo(X,m.t); ctx.lineTo(X,m.t+plotH); ctx.stroke(); }
+  ctx.globalAlpha=1;
+  const jump=(ymax-ymin)*50+1e3;
+  series.forEach((s,k)=>{
+    ctx.strokeStyle=COLORS[k%COLORS.length]; ctx.lineWidth=2.4; ctx.lineJoin='round'; ctx.beginPath(); let pen=false;
+    for(let i=0;i<s.length;i++){ const y=s[i];
+      if(!isFinite(y)||Math.abs(y)>jump){ pen=false; continue; }
+      const X=px(xs[i]), Y=py(y);
+      if(!pen){ ctx.moveTo(X,Y); pen=true; } else ctx.lineTo(X,Y);
+    } ctx.stroke();
+  });
+  ctx.restore();
+  ctx.fillStyle=fg; ctx.font='11px "IBM Plex Mono",monospace'; ctx.globalAlpha=.85;
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  for(let x=Math.ceil(xmin/sx)*sx;x<=xmax;x+=sx){ if(Math.abs(x)<1e-9&&0>=xmin&&0<=xmax) continue; ctx.fillText(fmt(x),px(x),m.t+plotH+5); }
+  ctx.textAlign='right'; ctx.textBaseline='middle';
+  for(let y=Math.ceil(ymin/sy)*sy;y<=ymax;y+=sy){ if(Math.abs(y)<1e-9&&0>=ymin&&0<=ymax) continue; ctx.fillText(fmt(y),m.l-6,py(y)); }
+  ctx.globalAlpha=1;
+  ctx.textAlign='left'; ctx.textBaseline='middle'; ctx.font='13px "IBM Plex Mono",monospace';
+  let ly=m.t+8;
+  spec.fns.forEach((label,k)=>{ ctx.fillStyle=COLORS[k%COLORS.length]; ctx.fillRect(m.l+8,ly-2,16,4);
+    ctx.fillStyle=fg; ctx.fillText(label,m.l+30,ly); ly+=18; });
+  ctx.strokeStyle=gridC; ctx.strokeRect(m.l,m.t,plotW,plotH);
+  return canvas;
+}
+
+/* =========================================================================
+   3. STATE + ELEMENTS
+   ========================================================================= */
+const $ = id => document.getElementById(id);
+const board=$('wbBoard'), content=$('wbContent'), overlay=$('wbOverlay'),
+      src=$('wbSrc'), status=$('wbStatus');
+let fontScale=1.5, theme='wb-theme-white';
+let images = load('wb.images', {});
+let ink    = load('wb.ink', []);      // array of strokes {c,w,pts:[[x,y]...]}
+
+function load(key, def){ try{ const v=localStorage.getItem(key); return v?JSON.parse(v):def; }catch(e){ return def; } }
+function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+function setStatus(t){ status.textContent=t; }
+
+/* =========================================================================
+   4. RENDER
+   ========================================================================= */
+function render(){
+  content.className='wb-content '+theme;
+  content.style.fontSize=fontScale+'em';
+  content.innerHTML='';
+  const parser=math.parser();
+  const lines=src.value.split('\n');
+  let graphs=0, eqs=0;
+  for(const raw of lines){
+    const line=raw.replace(/\s+$/,'');
+    if(line.trim()===''){ const s=document.createElement('div'); s.className='wb-spacer'; content.appendChild(s); continue; }
+
+    // image line
+    const im=line.trim().match(/^@img:(\w+)$/);
+    if(im){
+      const id=im[1], data=images[id];
+      const fig=document.createElement('figure');
+      if(data){ const img=document.createElement('img'); img.className='wb-img'; img.src=data; fig.appendChild(img); }
+      else { const d=document.createElement('div'); d.className='wb-err'; d.textContent='[missing image]'; fig.appendChild(d); }
+      const tool=document.createElement('div'); tool.className='wb-tool';
+      const rm=document.createElement('button'); rm.className='wb-mini rm'; rm.textContent='remove';
+      rm.onclick=()=>removeImageLine(id); tool.appendChild(rm);
+      fig.appendChild(tool); content.appendChild(fig); continue;
+    }
+
+    // heading
+    if(line.trim().startsWith('#')){
+      const h=document.createElement('h2'); h.className='wb-head';
+      h.textContent=line.trim().replace(/^#+\s*/,''); content.appendChild(h); continue;
+    }
+
+    // draw / plot / graph
+    const dm=line.trim().match(/^(?:draw|plot|graph)\s+(.+)$/i);
+    if(dm){
+      try{
+        const spec=parseDraw(dm[1], parser);
+        if(!spec.fns.length) throw new Error('nothing to plot');
+        const fig=document.createElement('figure');
+        const cv=drawGraph(spec, parser, theme); fig.appendChild(cv);
+        const cap=document.createElement('figcaption');
+        cap.textContent=spec.fns.join(',  ')+'  on ['+fmt(spec.xmin)+', '+fmt(spec.xmax)+']';
+        fig.appendChild(cap);
+        const tool=document.createElement('div'); tool.className='wb-tool';
+        const png=document.createElement('button'); png.className='wb-mini'; png.textContent='PNG';
+        png.onclick=()=>downloadCanvas(cv,'graph.png'); tool.appendChild(png);
+        fig.appendChild(tool);
+        content.appendChild(fig); graphs++;
+      }catch(e){ const d=document.createElement('div'); d.className='wb-err'; d.textContent='⚠ could not plot: '+dm[1]; content.appendChild(d); }
+      continue;
+    }
+
+    // definition -> register with parser so later draws can use it
+    if(/^\s*[A-Za-z]\w*\s*(\([A-Za-z]\w*\))?\s*=[^=]/.test(line)){
+      try{ parser.evaluate(line); }catch(e){}
+    }
+
+    // math line
+    const box=document.createElement('div'); box.className='wb-line wb-math';
+    const tex=convertToLatex(line);
+    try{
+      katex.render(tex, box, {displayMode:true, throwOnError:false});
+      const tool=document.createElement('div'); tool.className='wb-tool';
+      const png=document.createElement('button'); png.className='wb-mini'; png.textContent='PNG';
+      png.onclick=()=>exportEquation(tex, png); tool.appendChild(png);
+      box.appendChild(tool); eqs++;
+    }catch(e){ box.className='wb-err'; box.textContent=line; }
+    content.appendChild(box);
+  }
+  sizeOverlay();
+  setStatus(eqs+' equation'+(eqs!==1?'s':'')+' · '+graphs+' graph'+(graphs!==1?'s':'')+' · autosaved');
+  save('wb.src', src.value);
+}
+
+/* =========================================================================
+   5. PEN / ANNOTATION OVERLAY
+   ========================================================================= */
+function sizeOverlay(){
+  const dpr=window.devicePixelRatio||1;
+  const w=content.offsetWidth, h=Math.max(content.offsetHeight, board.clientHeight);
+  overlay.style.width=w+'px'; overlay.style.height=h+'px';
+  overlay.width=Math.round(w*dpr); overlay.height=Math.round(h*dpr);
+  const cx=overlay.getContext('2d'); cx.setTransform(dpr,0,0,dpr,0,0);
+  redrawInk();
+}
+function redrawInk(){
+  const cx=overlay.getContext('2d');
+  cx.clearRect(0,0,overlay.width,overlay.height);
+  cx.lineCap='round'; cx.lineJoin='round';
+  for(const st of ink){
+    if(!st.pts.length) continue;
+    cx.strokeStyle=st.c; cx.lineWidth=st.w; cx.beginPath();
+    cx.moveTo(st.pts[0][0], st.pts[0][1]);
+    for(let i=1;i<st.pts.length;i++) cx.lineTo(st.pts[i][0], st.pts[i][1]);
+    if(st.pts.length===1){ cx.lineTo(st.pts[0][0]+0.1, st.pts[0][1]+0.1); }
+    cx.stroke();
+  }
+}
+let penMode=false, eraseMode=false, drawing=false, cur=null;
+function ptFromEvent(e){ const r=overlay.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; }
+overlay.addEventListener('pointerdown', e=>{
+  if(!penMode && !eraseMode) return;
+  try{ overlay.setPointerCapture(e.pointerId); }catch(err){}
+  drawing=true;
+  const p=ptFromEvent(e);
+  if(eraseMode){ eraseAt(p); return; }
+  cur={ c:$('wbInk').value, w:parseInt($('wbInkW').value,10), pts:[p] };
+  ink.push(cur); redrawInk();
+});
+overlay.addEventListener('pointermove', e=>{
+  if(!drawing) return;
+  const p=ptFromEvent(e);
+  if(eraseMode){ eraseAt(p); return; }
+  cur.pts.push(p);
+  const cx=overlay.getContext('2d'); cx.strokeStyle=cur.c; cx.lineWidth=cur.w; cx.lineCap='round';
+  const n=cur.pts.length; cx.beginPath(); cx.moveTo(cur.pts[n-2][0],cur.pts[n-2][1]); cx.lineTo(p[0],p[1]); cx.stroke();
+});
+function endStroke(){ if(!drawing) return; drawing=false; cur=null; save('wb.ink', ink); }
+overlay.addEventListener('pointerup', endStroke);
+overlay.addEventListener('pointercancel', endStroke);
+function eraseAt(p){
+  const r=12; let changed=false;
+  for(let i=ink.length-1;i>=0;i--){
+    if(ink[i].pts.some(q=>Math.hypot(q[0]-p[0],q[1]-p[1])<r)){ ink.splice(i,1); changed=true; }
+  }
+  if(changed){ redrawInk(); save('wb.ink', ink); }
+}
+function setPen(on){ penMode=on; if(on) eraseMode=false; syncPenUI(); }
+function setErase(on){ eraseMode=on; if(on) penMode=false; syncPenUI(); }
+function syncPenUI(){
+  $('wbPen').classList.toggle('on', penMode);
+  $('wbErase').classList.toggle('on', eraseMode);
+  board.classList.toggle('pen', penMode);
+  board.classList.toggle('erase', eraseMode);
+}
+
+/* =========================================================================
+   6. IMAGES  (paste / drop / pick  ->  @img:ID line in the text)
+   ========================================================================= */
+function persistImages(){ save('wb.images', images); }
+function addImageData(dataURL){
+  const id='i'+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36);
+  images[id]=dataURL; persistImages();
+  insertAtCursor('\n@img:'+id+'\n');
+  render();
+  setStatus('Image inserted.');
+}
+function insertAtCursor(text){
+  const a=src.selectionStart||src.value.length, b=src.selectionEnd||src.value.length;
+  src.value=src.value.slice(0,a)+text+src.value.slice(b);
+  const pos=a+text.length; src.selectionStart=src.selectionEnd=pos;
+}
+function removeImageLine(id){
+  src.value=src.value.split('\n').filter(l=>l.trim()!=='@img:'+id).join('\n');
+  delete images[id]; persistImages(); render();
+}
+function fileToScaledDataURL(file, cb){
+  const rd=new FileReader();
+  rd.onload=()=>{ const im=new Image(); im.onload=()=>{
+    const max=1400; const s=Math.min(1, max/Math.max(im.width, im.height));
+    const c=document.createElement('canvas'); c.width=Math.round(im.width*s); c.height=Math.round(im.height*s);
+    c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+    cb(c.toDataURL('image/png'));
+  }; im.src=rd.result; };
+  rd.readAsDataURL(file);
+}
+window.addEventListener('paste', e=>{
+  const items=(e.clipboardData&&e.clipboardData.items)||[];
+  for(const it of items){ if(it.type && it.type.indexOf('image')===0){
+    const f=it.getAsFile(); if(f){ fileToScaledDataURL(f, addImageData); e.preventDefault(); return; } } }
+});
+board.addEventListener('dragover', e=>{ e.preventDefault(); });
+board.addEventListener('drop', e=>{
+  e.preventDefault();
+  const files=(e.dataTransfer&&e.dataTransfer.files)||[];
+  for(const f of files){ if(f.type.indexOf('image')===0){ fileToScaledDataURL(f, addImageData); break; } }
+});
+
+/* =========================================================================
+   7. EXPORT: single equation -> PNG (lazy-load MathJax SVG)
+   ========================================================================= */
+let mjP=null;
+function ensureMathJax(){
+  if(mjP) return mjP;
+  window.MathJax={ tex:{}, svg:{fontCache:'local'}, startup:{typeset:false} };
+  mjP=new Promise((res,rej)=>{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js';
+    s.async=true;
+    s.onload=()=>window.MathJax.startup.promise.then(()=>res(window.MathJax));
+    s.onerror=()=>rej(new Error('Could not load MathJax'));
+    document.head.appendChild(s);
+  });
+  return mjP;
+}
+async function exportEquation(tex, btn){
+  const old=btn.textContent; btn.textContent='…';
+  try{
+    const MJ=await ensureMathJax();
+    const node=MJ.tex2svg(tex, {display:true});
+    const svg=node.querySelector('svg');
+    const wrap=document.createElement('div');
+    wrap.style.cssText='position:fixed;left:-9999px;top:0;font-size:'+Math.round(fontScale*22)+'px;color:#111';
+    wrap.appendChild(node); document.body.appendChild(wrap);
+    const rect=svg.getBoundingClientRect();
+    const w=Math.max(1,Math.ceil(rect.width)), h=Math.max(1,Math.ceil(rect.height));
+    svg.setAttribute('width', w+'px'); svg.setAttribute('height', h+'px');
+    svg.style.color='#111';
+    const xml=new XMLSerializer().serializeToString(svg);
+    document.body.removeChild(wrap);
+    const url='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(xml)));
+    const img=new Image();
+    img.onload=()=>{
+      const scale=3, c=document.createElement('canvas');
+      c.width=w*scale; c.height=h*scale;
+      const cx=c.getContext('2d'); cx.fillStyle='#ffffff'; cx.fillRect(0,0,c.width,c.height);
+      cx.setTransform(scale,0,0,scale,0,0); cx.drawImage(img,0,0,w,h);
+      downloadCanvas(c,'equation.png'); btn.textContent=old;
+    };
+    img.onerror=()=>{ setStatus('Equation export failed.'); btn.textContent=old; };
+    img.src=url;
+  }catch(err){ setStatus(err.message||'Export failed (need internet for first export).'); btn.textContent=old; }
+}
+function downloadCanvas(canvas, name){
+  canvas.toBlob(b=>{ if(!b){ setStatus('Export failed.'); return; }
+    const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+    setStatus('Saved '+name+'.');
+  },'image/png');
+}
+
+/* =========================================================================
+   8. EXPORT: whole board -> PDF (lazy-load html2canvas + jsPDF)
+   ========================================================================= */
+const libP={};
+function ensureLib(url, ready){
+  if(ready()) return Promise.resolve();
+  if(libP[url]) return libP[url];
+  libP[url]=new Promise((res,rej)=>{ const s=document.createElement('script');
+    s.src=url; s.onload=()=>res(); s.onerror=()=>rej(new Error('Could not load '+url)); document.head.appendChild(s); });
+  return libP[url];
+}
+async function savePDF(){
+  setStatus('Building PDF… (loads a library on first use)');
+  try{
+    await ensureLib('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', ()=>window.html2canvas);
+    await ensureLib('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', ()=>window.jspdf);
+    const paper = theme==='wb-theme-white' ? '#ffffff' : theme==='wb-theme-slate' ? '#1e293b' : '#0f3d2e';
+    const shot=await window.html2canvas(content, {backgroundColor:paper, scale:2, useCORS:true,
+      windowWidth:content.scrollWidth, height:content.scrollHeight});
+    // composite the pen overlay on top, scaled to match
+    const full=document.createElement('canvas'); full.width=shot.width; full.height=shot.height;
+    const fx=full.getContext('2d'); fx.drawImage(shot,0,0);
+    if(overlay.width && overlay.height)
+      fx.drawImage(overlay, 0,0, overlay.width, overlay.height, 0,0, full.width, full.height);
+    const { jsPDF } = window.jspdf;
+    const pdf=new jsPDF('p','pt','a4');
+    const pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
+    const stripPx=Math.floor(full.width*ph/pw);
+    let sY=0, first=true;
+    while(sY<full.height){
+      const sH=Math.min(stripPx, full.height-sY);
+      const pc=document.createElement('canvas'); pc.width=full.width; pc.height=sH;
+      pc.getContext('2d').drawImage(full,0,sY,full.width,sH,0,0,full.width,sH);
+      const hOnPage=sH*pw/full.width;
+      if(!first) pdf.addPage();
+      pdf.addImage(pc.toDataURL('image/png'),'PNG',0,0,pw,hOnPage);
+      first=false; sY+=sH;
+    }
+    pdf.save('whiteboard.pdf');
+    setStatus('Saved whiteboard.pdf');
+  }catch(err){ setStatus((err&&err.message)||'PDF export failed — needs internet for the first export.'); }
+}
+
+/* =========================================================================
+   9. WIRING
+   ========================================================================= */
+let timer=null;
+src.addEventListener('input', ()=>{ clearTimeout(timer); timer=setTimeout(render,150); });
+$('wbTheme').addEventListener('change', e=>{ theme=e.target.value; render(); });
+$('wbSize').addEventListener('input', e=>{ fontScale=parseFloat(e.target.value); render(); });
+$('wbPen').addEventListener('click', ()=>setPen(!penMode));
+$('wbErase').addEventListener('click', ()=>setErase(!eraseMode));
+$('wbClearInk').addEventListener('click', ()=>{ ink=[]; save('wb.ink',ink); redrawInk(); setStatus('Ink cleared.'); });
+$('wbImgBtn').addEventListener('click', ()=>$('wbImgFile').click());
+$('wbImgFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) fileToScaledDataURL(f, addImageData); e.target.value=''; });
+$('wbPdf').addEventListener('click', savePDF);
+$('wbClear').addEventListener('click', ()=>{ src.value=''; render(); src.focus(); });
+$('wbExample').addEventListener('click', ()=>{ src.value=EXAMPLE; render(); });
+board.addEventListener('scroll', ()=>{}, {passive:true});
+window.addEventListener('resize', ()=>{ clearTimeout(timer); timer=setTimeout(sizeOverlay,120); });
+
+const EXAMPLE =
+`# Calculus — Lecture 1
+
+int_a^b f(x) dx = F(b) - F(a)
+
+lim_{x->0} sin(x)/x = 1
+
+sum_{n=1}^{infinity} 1/n^2 = pi^2/6
+
+f(x) = x^2 - 2*x - 3
+draw f(x), [-4, 6]
+
+draw sin(x), cos(x) from -2*pi to 2*pi`;
+
+function boot(){
+  const saved=load('wb.src', null);
+  src.value = (saved && saved.trim()) ? saved : EXAMPLE;
+  render();
+}
+function whenReady(){
+  if(window.katex && window.math){ boot(); }
+  else setTimeout(whenReady, 60);
+}
+whenReady();
+
+})();
+</script>
+<!-- ================= /MATHS WHITEBOARD ================= -->
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>
