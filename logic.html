@@ -399,7 +399,50 @@ Which pairs of statements are equivalent? For each non-equivalent pair, state wh
 <details class="sol"><summary>Show solution</summary>
 <p>\(P\) and \(R\) are equivalent: "no \(x\) with \(f(x)\le0\)" is exactly the negation-of-existence form of "for all \(x\), \(f(x)&gt;0\)". \(P\Rightarrow Q\) (positive numbers aren't zero) but \(Q\not\Rightarrow P\): \(f(x)=-1\) satisfies \(Q\) and violates \(P\). So \(P\Leftrightarrow R\), and \(Q\) is strictly weaker. The deeper lesson: a "for all" statement and the non-existence of a counterexample are the same statement in different clothing — the quantifier laws of §L.2.</p>
 </details></div>
- 
+
+<div class="q"><div class="qhead"><span class="qn">Question 13</span><span class="pill new">New · Quantifiers</span></div>
+<p>Write down the negation of each statement, simplifying so that no negation symbol stands in front of a quantifier:<br>
+(i) \(\forall x\in\mathbb R\ \exists y\in\mathbb R:\ y^3=x\).<br>
+(ii) \(\exists M\in\mathbb R\ \forall n\in\mathbb N:\ a_n\le M\) &nbsp;("the sequence is bounded above").<br>
+(iii) Every student in the class has read at least one of the set texts.<br>
+(iv) \(\forall\epsilon&gt;0\ \exists\delta&gt;0\ \forall x:\ |x-a|&lt;\delta\Rightarrow|f(x)-f(a)|&lt;\epsilon\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>March from left to right, swapping each quantifier, then negate the core. (i) \(\exists x\in\mathbb R\ \forall y\in\mathbb R:\ y^3\ne x\). (ii) \(\forall M\in\mathbb R\ \exists n\in\mathbb N:\ a_n&gt;M\) — "however high you aim, some term overshoots": this is what <em>unbounded above</em> means. (iii) There is a student in the class who has read none of the set texts. (iv) The core is an implication, and \(\lnot(P\Rightarrow Q)=P\wedge\lnot Q\) — the implication fails only when the hypothesis holds and the conclusion does not: \(\exists\epsilon&gt;0\ \forall\delta&gt;0\ \exists x:\ |x-a|&lt;\delta\ \text{and}\ |f(x)-f(a)|\ge\epsilon\). You have just written down what it means for \(f\) to be discontinuous at \(a\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 14</span><span class="pill new">New · Quantifiers</span></div>
+<p>Decide, with a one-line reason, whether each statement is true or false over the real numbers:<br>
+(i) \(\forall x\ \exists y:\ y&gt;x\) &nbsp; (ii) \(\exists y\ \forall x:\ y&gt;x\) &nbsp; (iii) \(\forall x\ \exists y:\ xy=1\) &nbsp; (iv) \(\exists x\ \forall y:\ x+y=y\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>(i) True: given \(x\), take \(y=x+1\) — the witness is allowed to depend on \(x\). (ii) False: it demands a single \(y\) exceeding <em>every</em> real; taking \(x=y\) would give \(y&gt;y\). (iii) False: the lone rogue \(x=0\) has no reciprocal, and one counterexample kills a "for all". (iv) True: \(x=0\) works for every \(y\) — this time one fixed witness must serve all comers, which is exactly what \(\exists\,\forall\) demands (you have identified the additive identity). The moral of (i) against (ii): the two statements differ only in the order of their quantifiers, and one is true while the other is false.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 15</span><span class="pill new">New · Paper 2 style · Quantifiers</span></div>
+<p>Let \(S\) be the statement: "for every prime \(p\) there exists a prime \(q\) with \(q&gt;p\)". Which of the following is the negation of \(S\)?<br>
+A. For every prime \(p\) there exists a prime \(q\) with \(q\le p\).<br>
+B. There exists a prime \(p\) such that every prime \(q\) satisfies \(q\le p\).<br>
+C. There exists a prime \(p\) and a prime \(q\) with \(q\le p\).<br>
+D. For every prime \(p\), every prime \(q\) satisfies \(q\le p\).<br>
+Is \(S\) itself true or false?</p>
+<details class="sol"><summary>Show solution</summary>
+<p>B: swap \(\forall\to\exists\), \(\exists\to\forall\), and negate \(q&gt;p\) to \(q\le p\). The popular wrong answer is A, which negates the core but leaves both quantifiers standing — the trap this whole set is designed to expose. \(S\) is true: it is Euclid's theorem on the infinitude of primes (see the <a href="numbers.html">Numbers</a> topic), so B would assert the existence of a largest prime.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 16</span><span class="pill new">New · Quantifiers</span></div>
+<p>Consider the statement \(P(S)\): "\(\forall x\in S:\ x^2\ge x\)". For each of \(S=\mathbb N\), \(S=\mathbb Z\) and \(S=\mathbb R\), decide whether \(P(S)\) is true; where it is false, write down the negation and exhibit a counterexample.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>\(\mathbb N\): true — \(0^2=0\ge0\), and for \(x\ge1\), multiplying \(x\ge1\) by \(x&gt;0\) gives \(x^2\ge x\). \(\mathbb Z\): also true — for \(x\le0\) we have \(x^2\ge0\ge x\). \(\mathbb R\): false. The negation is \(\exists x\in\mathbb R:\ x^2&lt;x\), and \(x=\tfrac12\) is a witness: \(\tfrac14&lt;\tfrac12\) (indeed every \(0&lt;x&lt;1\) works). One formula, three different verdicts: a quantified statement has no truth value until its domain is declared — the point made in §L.2.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 17</span><span class="pill new">New · Quantifiers · Hard</span></div>
+<p>Let \(f:\mathbb R\to\mathbb R\). The statement \(P\): "\(\forall x\ \exists y:\ f(y)=x\)" says that \(f\) is surjective. A student claims that the negation of \(P\) is \(N\): "\(\forall x\ \exists y:\ f(y)\ne x\)".<br>
+(i) Write down the correct negation of \(P\).<br>
+(ii) Take \(f(x)=x\). Show that \(P\) and \(N\) are then <em>both</em> true.<br>
+(iii) Explain why part (ii), on its own, proves the student wrong.</p>
+<details class="sol"><summary>Show solution</summary>
+<p>(i) \(\exists x\ \forall y:\ f(y)\ne x\) — some value is missed by \(f\) entirely. (ii) For \(f(x)=x\): \(P\) holds, since given \(x\) we take \(y=x\); and \(N\) holds too, since given \(x\) we take \(y=x+1\), whence \(f(y)=x+1\ne x\). (iii) A statement and its genuine negation can never be true simultaneously. Since \(P\) and \(N\) are both true for this \(f\), \(N\) cannot be the negation of \(P\). This is the sharpest available test of a proposed negation — and the student's error, negating the core while leaving the quantifiers untouched, is precisely option A of Question 15 in disguise.</p>
+</details></div>
+
 <div class="pn"><a href="counting.html">← Topic 8: Counting</a><a href="complex.html">Extension: Complex Numbers →</a></div>
 </div>
  
