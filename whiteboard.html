@@ -86,6 +86,10 @@ function toggleNav() {
 .wb input[type=range]{accent-color:var(--accent);width:96px}
 .wb input[type=color]{width:30px;height:30px;padding:0;border:1px solid var(--line);
   border-radius:7px;background:#fff;cursor:pointer}
+.wb-code{font-family:var(--mono);font-size:.8rem;text-transform:uppercase;width:5.4em;text-align:center;
+  border:1px solid var(--line);border-radius:8px;padding:.4rem .3rem;color:var(--ink);background:#fff}
+.wb-code:read-only{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent-ink);font-weight:600}
+.wb [hidden]{display:none !important}
 
 .wb-split{display:flex;gap:1rem;height:min(74vh,780px)}
 .wb-editor{flex:0 0 38%;min-width:280px;display:flex;flex-direction:column;
@@ -179,7 +183,8 @@ function toggleNav() {
   <h1>Maths Whiteboard</h1>
   <p class="lede">Type formulae in plain text on the left — <code>int_a^b f(x) dx</code> — and watch them become
   proper notation on the board. Write <code>draw f(x)</code> to plot a function. Annotate with the pen, paste or drop
-  images, export any single equation as a PNG, or save the whole board as a PDF for your students.</p>
+  images, export any single equation as a PNG, or save the whole board as a PDF for your students.
+  Press <em>👥 Share board</em> to get a code your students can join — then everyone writes on the same board, live.</p>
 
   <div class="wb-toolbar" id="wbToolbar">
     <div class="wb-group">
@@ -205,6 +210,13 @@ function toggleNav() {
       <button class="wb-btn" id="wbPasteBtn" title="Paste a screenshot from the clipboard — or just press Ctrl+V">📋 Paste screenshot</button>
       <button class="wb-btn" id="wbImgBtn" title="Insert an image file (or drop one onto the board)">🖼 Image</button>
       <input id="wbImgFile" type="file" accept="image/*" hidden>
+    </div>
+    <div class="wb-group">
+      <span class="lbl">Live</span>
+      <input id="wbCode" class="wb-code" type="text" maxlength="8" placeholder="code" autocomplete="off" spellcheck="false">
+      <button class="wb-btn" id="wbHost" title="Create a shared board — students join with the code">👥 Share board</button>
+      <button class="wb-btn" id="wbJoin" title="Join a shared board using its code">Join</button>
+      <button class="wb-btn" id="wbLeave" title="Disconnect from the shared board" hidden>Leave</button>
     </div>
     <div class="wb-group">
       <button class="wb-btn" id="wbExample">Example</button>
@@ -261,6 +273,29 @@ function toggleNav() {
           <tr><td class="k">draw sin(x), cos(x)</td><td>multiple curves</td></tr>
           <tr><td class="k">draw x^2, [-4, 6]</td><td>custom x-range</td></tr>
         </table>
+      </div>
+    </div>
+  </details>
+
+  <details class="wb-cheat" id="wbLiveHelp">
+    <summary>Live shared boards — teach and type together (one-time setup)</summary>
+    <div class="sheet-body" style="grid-template-columns:1fr">
+      <div style="font-size:.9rem;max-width:62ch">
+        <p><strong>How it works.</strong> Press <em>👥 Share board</em> to get a code (e.g. <span style="font-family:var(--mono);color:var(--accent-ink)">QK7MP</span>).
+        Students type the code and press <em>Join</em> — or simply open
+        <span style="font-family:var(--mono);color:var(--accent-ink)">whiteboard.html?board=QK7MP</span> —
+        and everyone sees and edits the same board live: the text, the pen strokes and any pasted images.</p>
+        <p><strong>One-time setup (teacher only, ~5 minutes, free).</strong> Because this site is fully static,
+        live sync needs a small free database from Google Firebase:</p>
+        <ol style="padding-left:1.3rem">
+          <li>Go to <span style="font-family:var(--mono)">console.firebase.google.com</span> → <em>Add project</em> (Analytics not needed).</li>
+          <li><em>Build → Realtime Database → Create database</em> → start in test mode. Then, under <em>Rules</em>, set:<br>
+          <span style="font-family:var(--mono);font-size:.78rem">{ "rules": { "boards": { ".read": true, ".write": true } } }</span></li>
+          <li><em>Project settings → Your apps → Web app &lt;/&gt;</em> → Register → copy the <span style="font-family:var(--mono)">firebaseConfig</span> values.</li>
+          <li>Open <span style="font-family:var(--mono)">whiteboard.html</span>, find <span style="font-family:var(--mono)">WB_FIREBASE</span> near the top of the script, and paste your values there. Push the file to the site.</li>
+        </ol>
+        <p><strong>Notes.</strong> If two people type in the very same instant, the later keystroke wins — take turns or work on different lines.
+        Anyone with a board's code can edit that board, so treat codes like the key to the classroom, and use a fresh board (new code) per lesson.</p>
       </div>
     </div>
   </details>
@@ -593,7 +628,7 @@ overlay.addEventListener('pointermove', e=>{
   const cx=overlay.getContext('2d'); cx.strokeStyle=cur.c; cx.lineWidth=cur.w; cx.lineCap='round';
   const n=cur.pts.length; cx.beginPath(); cx.moveTo(cur.pts[n-2][0],cur.pts[n-2][1]); cx.lineTo(p[0],p[1]); cx.stroke();
 });
-function endStroke(){ if(!drawing) return; drawing=false; cur=null; save('wb.ink', ink); }
+function endStroke(){ if(!drawing) return; drawing=false; cur=null; save('wb.ink', ink); pushInk(); }
 overlay.addEventListener('pointerup', endStroke);
 overlay.addEventListener('pointercancel', endStroke);
 function eraseAt(p){
@@ -601,7 +636,7 @@ function eraseAt(p){
   for(let i=ink.length-1;i>=0;i--){
     if(ink[i].pts.some(q=>Math.hypot(q[0]-p[0],q[1]-p[1])<r)){ ink.splice(i,1); changed=true; }
   }
-  if(changed){ redrawInk(); save('wb.ink', ink); }
+  if(changed){ redrawInk(); save('wb.ink', ink); pushInk(); }
 }
 function setPen(on){ penMode=on; if(on) eraseMode=false; syncPenUI(); }
 function setErase(on){ eraseMode=on; if(on) penMode=false; syncPenUI(); }
@@ -615,12 +650,12 @@ function syncPenUI(){
 /* =========================================================================
    6. IMAGES  (paste / drop / pick  ->  @img:ID line in the text)
    ========================================================================= */
-function persistImages(){ save('wb.images', images); }
+function persistImages(){ save('wb.images', images); pushImages(); }
 function addImageData(dataURL){
   const id='i'+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36);
   images[id]=dataURL; persistImages();
   insertAtCursor('\n@img:'+id+'\n');
-  render();
+  render(); pushSrcNow();
   setStatus('✓ Screenshot pasted onto the board.');
   // scroll the board so the newly added image is visible
   requestAnimationFrame(()=>{
@@ -636,7 +671,7 @@ function insertAtCursor(text){
 }
 function removeImageLine(id){
   src.value=src.value.split('\n').filter(l=>l.trim()!=='@img:'+id).join('\n');
-  delete images[id]; persistImages(); render();
+  delete images[id]; persistImages(); render(); pushSrcNow();
 }
 function fileToScaledDataURL(file, cb){
   const rd=new FileReader();
@@ -788,21 +823,141 @@ async function savePDF(){
 }
 
 /* =========================================================================
+   8b. LIVE SHARED BOARDS — teach and type together via a room code
+   One-time (free) teacher setup — full steps in the panel under the cheat
+   sheet on this page:
+     1. console.firebase.google.com → Add project (Analytics not needed).
+     2. Build → Realtime Database → Create database → start in test mode,
+        then set the rules to:
+          { "rules": { "boards": { ".read": true, ".write": true } } }
+     3. Project settings → Your apps → Web app (</>) → Register → copy the
+        firebaseConfig values into WB_FIREBASE just below (or define
+        window.WB_FIREBASE_CONFIG in a small <script> tag before this one).
+   ========================================================================= */
+const WB_FIREBASE = {
+  // apiKey: "AIza....................",
+  // authDomain: "your-project.firebaseapp.com",
+  // databaseURL: "https://your-project-default-rtdb.europe-west1.firebasedatabase.app",
+  // projectId: "your-project",
+  // appId: "1:1234567890:web:abcdef123456"
+};
+function fbConfig(){
+  return (window.WB_FIREBASE_CONFIG && window.WB_FIREBASE_CONFIG.databaseURL)
+    ? window.WB_FIREBASE_CONFIG : WB_FIREBASE;
+}
+function fbReady(){ return !!fbConfig().databaseURL; }
+const clientId='c'+Math.random().toString(36).slice(2,10);
+let roomRef=null, roomCode=null, applyingRemote=false, srcPushT=null;
+const SETUP_MSG='Live sharing needs a one-time free setup by the teacher — open "Live shared boards" below the cheat sheet.';
+
+async function ensureFirebase(){
+  await ensureLib('https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js',
+    ()=>window.firebase && window.firebase.initializeApp);
+  await ensureLib('https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js',
+    ()=>window.firebase && window.firebase.database);
+  if(!firebase.apps || !firebase.apps.length) firebase.initializeApp(fbConfig());
+  return firebase.database();
+}
+function makeCode(){
+  const A='ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let s='';   // no 0/O/1/I/L
+  for(let i=0;i<5;i++) s+=A[Math.floor(Math.random()*A.length)];
+  return s;
+}
+/* pushes: tag every write with our clientId so we can ignore our own echoes */
+function pushSrcNow(){ if(roomRef && !applyingRemote) roomRef.child('src').set({v:src.value, by:clientId}); }
+function pushSrcSoon(){ if(!roomRef || applyingRemote) return; clearTimeout(srcPushT); srcPushT=setTimeout(pushSrcNow,250); }
+function pushInk(){ if(roomRef && !applyingRemote) roomRef.child('ink').set({v:JSON.stringify(ink), by:clientId}); }
+function pushImages(){ if(roomRef && !applyingRemote) roomRef.child('images').set(Object.keys(images).length?images:null); }
+
+function hostBoard(){
+  if(!fbReady()){ setStatus(SETUP_MSG); const h=$('wbLiveHelp'); if(h) h.open=true; return; }
+  connectRoom(makeCode(), true);
+}
+function joinBoard(){
+  if(!fbReady()){ setStatus(SETUP_MSG); const h=$('wbLiveHelp'); if(h) h.open=true; return; }
+  const code=($('wbCode').value||'').trim().toUpperCase();
+  if(code.length<4){ setStatus('Type the board code first (e.g. QK7MP), then press Join.'); return; }
+  connectRoom(code, false);
+}
+async function connectRoom(code, seed){
+  setStatus('Connecting…');
+  try{
+    const db=await ensureFirebase();
+    const ref=db.ref('boards/'+code);
+    if(seed){
+      await ref.set({ src:{v:src.value, by:clientId},
+                      ink:{v:JSON.stringify(ink), by:clientId},
+                      images:Object.keys(images).length?images:null });
+    }else{
+      const snap=await ref.once('value');
+      if(!snap.exists()){ setStatus('No live board with code '+code+' — check the code with your teacher.'); return; }
+    }
+    roomRef=ref; roomCode=code;
+    ref.child('src').on('value', s=>{
+      const d=s.val(); if(!d || d.by===clientId) return;
+      applyingRemote=true;
+      const keep=(document.activeElement===src)?src.selectionStart:null;
+      src.value=d.v||''; render();
+      if(keep!==null){ try{ src.selectionStart=src.selectionEnd=Math.min(keep, src.value.length); }catch(e){} }
+      applyingRemote=false;
+    });
+    ref.child('ink').on('value', s=>{
+      const d=s.val(); if(!d || d.by===clientId) return;
+      try{ ink=JSON.parse(d.v)||[]; }catch(e){ return; }
+      save('wb.ink', ink); redrawInk();
+    });
+    ref.child('images').on('value', s=>{
+      const v=s.val()||{};
+      if(JSON.stringify(v)===JSON.stringify(images)) return;
+      images=v; save('wb.images', images);
+      applyingRemote=true; render(); applyingRemote=false;
+    });
+    const me=ref.child('present/'+clientId);
+    me.set(true);
+    if(me.onDisconnect) me.onDisconnect().remove();
+    ref.child('present').on('value', s=>{
+      const n=s.numChildren ? s.numChildren() : Object.keys(s.val()||{}).length;
+      if(roomCode) setStatus('LIVE · code '+roomCode+' · '+n+' connected — students press Join with this code, or open ?board='+roomCode);
+    });
+    try{ history.replaceState(null,'',location.pathname+'?board='+code); }catch(e){}
+    syncLiveUI();
+  }catch(err){
+    roomRef=null; roomCode=null; syncLiveUI();
+    setStatus('Could not connect: '+((err&&err.message)||err));
+  }
+}
+function leaveBoard(){
+  if(roomRef){ try{ roomRef.child('present/'+clientId).remove(); roomRef.off(); }catch(e){} }
+  roomRef=null; roomCode=null;
+  try{ history.replaceState(null,'',location.pathname); }catch(e){}
+  syncLiveUI(); setStatus('Left the shared board — you are back on your private board.');
+}
+function syncLiveUI(){
+  const live=!!roomRef;
+  $('wbHost').hidden=live; $('wbJoin').hidden=live; $('wbLeave').hidden=!live;
+  $('wbCode').value=roomCode||''; $('wbCode').readOnly=live;
+}
+
+/* =========================================================================
    9. WIRING
    ========================================================================= */
 let timer=null;
-src.addEventListener('input', ()=>{ clearTimeout(timer); timer=setTimeout(render,150); });
+src.addEventListener('input', ()=>{ clearTimeout(timer); timer=setTimeout(render,150); pushSrcSoon(); });
 $('wbTheme').addEventListener('change', e=>{ theme=e.target.value; render(); });
 $('wbSize').addEventListener('input', e=>{ fontScale=parseFloat(e.target.value); render(); });
 $('wbPen').addEventListener('click', ()=>setPen(!penMode));
 $('wbErase').addEventListener('click', ()=>setErase(!eraseMode));
-$('wbClearInk').addEventListener('click', ()=>{ ink=[]; save('wb.ink',ink); redrawInk(); setStatus('Ink cleared.'); });
+$('wbClearInk').addEventListener('click', ()=>{ ink=[]; save('wb.ink',ink); redrawInk(); pushInk(); setStatus('Ink cleared.'); });
+$('wbHost').addEventListener('click', hostBoard);
+$('wbJoin').addEventListener('click', joinBoard);
+$('wbLeave').addEventListener('click', leaveBoard);
+$('wbCode').addEventListener('keydown', e=>{ if(e.key==='Enter') joinBoard(); });
 $('wbPasteBtn').addEventListener('click', pasteFromClipboard);
 $('wbImgBtn').addEventListener('click', ()=>$('wbImgFile').click());
 $('wbImgFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) fileToScaledDataURL(f, addImageData); e.target.value=''; });
 $('wbPdf').addEventListener('click', savePDF);
-$('wbClear').addEventListener('click', ()=>{ src.value=''; render(); src.focus(); });
-$('wbExample').addEventListener('click', ()=>{ src.value=EXAMPLE; render(); });
+$('wbClear').addEventListener('click', ()=>{ src.value=''; render(); pushSrcNow(); src.focus(); });
+$('wbExample').addEventListener('click', ()=>{ src.value=EXAMPLE; render(); pushSrcNow(); });
 board.addEventListener('scroll', ()=>{}, {passive:true});
 window.addEventListener('resize', ()=>{ clearTimeout(timer); timer=setTimeout(sizeOverlay,120); });
 
@@ -824,6 +979,15 @@ function boot(){
   const saved=load('wb.src', null);
   src.value = (saved && saved.trim()) ? saved : EXAMPLE;
   render();
+  // arriving via a shared link? (whiteboard.html?board=CODE)
+  let code=null;
+  try{ code=new URLSearchParams(location.search).get('board'); }catch(e){}
+  if(code){
+    code=code.trim().toUpperCase();
+    $('wbCode').value=code;
+    if(fbReady()) connectRoom(code, false);
+    else setStatus(SETUP_MSG);
+  }
 }
 function whenReady(){
   if(window.katex && window.math){ boot(); }
