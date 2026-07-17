@@ -98,7 +98,8 @@ function toggleNav() {
 
 .wb-boardwrap{flex:1;min-width:0;display:flex;flex-direction:column;
   border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
-.wb-board{position:relative;flex:1;overflow:auto}
+.wb-board{position:relative;flex:1;overflow:auto;outline:none}
+.wb-board:focus-visible{box-shadow:inset 0 0 0 2px var(--accent-line)}
 .wb-content{position:relative;z-index:1;padding:2rem 2.2rem;min-height:100%;
   line-height:1.4;transition:background .2s,color .2s}
 .wb-overlay{position:absolute;top:0;left:0;z-index:2;pointer-events:none;touch-action:none}
@@ -201,7 +202,8 @@ function toggleNav() {
     </div>
     <div class="wb-group">
       <span class="lbl">Insert</span>
-      <button class="wb-btn" id="wbImgBtn" title="Insert an image (or just paste / drop one)">🖼 Image</button>
+      <button class="wb-btn" id="wbPasteBtn" title="Paste a screenshot from the clipboard — or just press Ctrl+V">📋 Paste screenshot</button>
+      <button class="wb-btn" id="wbImgBtn" title="Insert an image file (or drop one onto the board)">🖼 Image</button>
       <input id="wbImgFile" type="file" accept="image/*" hidden>
     </div>
     <div class="wb-group">
@@ -217,7 +219,7 @@ function toggleNav() {
       <textarea id="wbSrc" spellcheck="false" placeholder="int_a^b f(x) dx = F(b) - F(a)&#10;draw sin(x), cos(x)"></textarea>
     </div>
     <div class="wb-boardwrap">
-      <div class="wb-board" id="wbBoard">
+      <div class="wb-board" id="wbBoard" tabindex="0" aria-label="Whiteboard — click here and press Ctrl+V to paste a screenshot">
         <div class="wb-content wb-theme-white" id="wbContent"></div>
         <canvas class="wb-overlay" id="wbOverlay"></canvas>
       </div>
@@ -619,7 +621,13 @@ function addImageData(dataURL){
   images[id]=dataURL; persistImages();
   insertAtCursor('\n@img:'+id+'\n');
   render();
-  setStatus('Image inserted.');
+  setStatus('✓ Screenshot pasted onto the board.');
+  // scroll the board so the newly added image is visible
+  requestAnimationFrame(()=>{
+    const img=[...content.querySelectorAll('img.wb-img')].pop();
+    if(img){ const r=img.getBoundingClientRect(), br=board.getBoundingClientRect();
+      board.scrollTop += (r.top - br.top) - 40; }
+  });
 }
 function insertAtCursor(text){
   const a=src.selectionStart||src.value.length, b=src.selectionEnd||src.value.length;
@@ -640,17 +648,48 @@ function fileToScaledDataURL(file, cb){
   }; im.src=rd.result; };
   rd.readAsDataURL(file);
 }
+// Pull image files out of a clipboard/drop payload, trying both the items and
+// the files APIs (browsers differ on which one they populate for screenshots).
+function imageFilesFrom(dt){
+  const out=[];
+  const items=(dt&&dt.items)||[];
+  for(const it of items){
+    if(it.kind==='file' && it.type && it.type.indexOf('image')===0){ const f=it.getAsFile(); if(f) out.push(f); }
+  }
+  if(!out.length){ const files=(dt&&dt.files)||[];
+    for(const f of files){ if(f.type && f.type.indexOf('image')===0) out.push(f); } }
+  return out;
+}
+function acceptImages(files){ if(files && files.length){ fileToScaledDataURL(files[0], addImageData); return true; } return false; }
+
+// Ctrl+V anywhere on the page (screenshot straight from the clipboard).
 window.addEventListener('paste', e=>{
-  const items=(e.clipboardData&&e.clipboardData.items)||[];
-  for(const it of items){ if(it.type && it.type.indexOf('image')===0){
-    const f=it.getAsFile(); if(f){ fileToScaledDataURL(f, addImageData); e.preventDefault(); return; } } }
+  const files=imageFilesFrom(e.clipboardData);
+  if(files.length){ e.preventDefault(); acceptImages(files); }
 });
+// Drag & drop an image onto the board.
 board.addEventListener('dragover', e=>{ e.preventDefault(); });
-board.addEventListener('drop', e=>{
-  e.preventDefault();
-  const files=(e.dataTransfer&&e.dataTransfer.files)||[];
-  for(const f of files){ if(f.type.indexOf('image')===0){ fileToScaledDataURL(f, addImageData); break; } }
-});
+board.addEventListener('drop', e=>{ e.preventDefault(); acceptImages(imageFilesFrom(e.dataTransfer)); });
+
+// One-click paste: reads the clipboard directly (robust fallback that works even
+// when a paste event wouldn't fire). Needs HTTPS + a user gesture, which the
+// button click provides.
+async function pasteFromClipboard(){
+  if(!(navigator.clipboard && navigator.clipboard.read)){
+    setStatus('This browser can’t read the clipboard from a button — click the board and press Ctrl+V.'); return;
+  }
+  setStatus('Reading clipboard…');
+  try{
+    const items=await navigator.clipboard.read();
+    for(const it of items){
+      const type=(it.types||[]).find(t=>t.indexOf('image')===0);
+      if(type){ const blob=await it.getType(type); fileToScaledDataURL(blob, addImageData); return; }
+    }
+    setStatus('No image on the clipboard — take a screenshot first (e.g. Win+Shift+S / ⌘⇧4), then paste.');
+  }catch(err){
+    setStatus('Clipboard access was blocked — click the board and press Ctrl+V instead.');
+  }
+}
 
 /* =========================================================================
    7. EXPORT: single equation -> PNG (lazy-load MathJax SVG)
@@ -758,6 +797,7 @@ $('wbSize').addEventListener('input', e=>{ fontScale=parseFloat(e.target.value);
 $('wbPen').addEventListener('click', ()=>setPen(!penMode));
 $('wbErase').addEventListener('click', ()=>setErase(!eraseMode));
 $('wbClearInk').addEventListener('click', ()=>{ ink=[]; save('wb.ink',ink); redrawInk(); setStatus('Ink cleared.'); });
+$('wbPasteBtn').addEventListener('click', pasteFromClipboard);
 $('wbImgBtn').addEventListener('click', ()=>$('wbImgFile').click());
 $('wbImgFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) fileToScaledDataURL(f, addImageData); e.target.value=''; });
 $('wbPdf').addEventListener('click', savePDF);
