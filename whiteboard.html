@@ -360,6 +360,62 @@ function splitComma(s){
   }
   return [s, null];
 }
+/* ---- balanced-aware "a/b -> \frac{a}{b}" (handles nested parens, sqrt, powers) ---- */
+function matchFwd(s,i,o,c){ let d=0; for(let k=i;k<s.length;k++){ if(s[k]===o)d++; else if(s[k]===c){ d--; if(d===0) return k; } } return -1; }
+function matchBack(s,i,o,c){ let d=0; for(let k=i;k>=0;k--){ if(s[k]===c)d++; else if(s[k]===o){ d--; if(d===0) return k; } } return -1; }
+function eatScripts(s,k){                       // consume trailing ^{..}/_{..} or ^x/_x
+  while(k<s.length && (s[k]==='^'||s[k]==='_')){
+    k++;
+    if(s[k]==='{'){ const e=matchFwd(s,k,'{','}'); if(e<0) break; k=e+1; }
+    else { if(s[k]==='-') k++; while(k<s.length && /[A-Za-z0-9.]/.test(s[k])) k++; }
+  }
+  return k;
+}
+function grabLeft(s,i){                          // operand ending just before index i
+  let j=i-1; while(j>=0 && s[j]===' ') j--;
+  if(j<0) return null;
+  const end=j+1;
+  if(s[j]===')'){ const o=matchBack(s,j,'(',')'); if(o<0) return null;
+    let m=o-1; while(m>=0 && /[A-Za-z0-9]/.test(s[m])) m--;      // include a function name
+    return {start:m+1, text:s.slice(m+1,end)}; }
+  if(s[j]==='}'){ let start=matchBack(s,j,'{','}'); if(start<0) return null;
+    let go=true;
+    while(go){ go=false; const m=start-1;
+      if(m>=0 && /[A-Za-z]/.test(s[m])){ let p=m; while(p>=0 && /[A-Za-z]/.test(s[p])) p--;
+        if(p>=0 && s[p]==='\\'){ start=p; go=true; } }              // \sqrt{..}
+      else if(m>=0 && (s[m]==='^'||s[m]==='_')){ let q=m-1; while(q>=0 && /[A-Za-z0-9.]/.test(s[q])) q--; start=q+1; go=true; } // base^{..}
+      else if(m>=0 && s[m]==='}'){ const o=matchBack(s,m,'{','}'); if(o>=0){ start=o; go=true; } } // previous {..} (e.g. \frac arg)
+    }
+    return {start, text:s.slice(start,end)}; }
+  if(/[A-Za-z0-9.]/.test(s[j])){ let k=j; while(k>=0 && /[A-Za-z0-9.]/.test(s[k])) k--;
+    return {start:k+1, text:s.slice(k+1,end)}; }
+  return null;
+}
+function grabRight(s,i){                         // operand starting just after index i
+  let j=i+1; while(j<s.length && s[j]===' ') j++;
+  if(j>=s.length) return null;
+  const start=j;
+  if(s[j]==='('){ const e=matchFwd(s,j,'(',')'); if(e<0) return null; return {end:eatScripts(s,e+1), text:s.slice(start,eatScripts(s,e+1))}; }
+  if(s[j]==='{'){ const e=matchFwd(s,j,'{','}'); if(e<0) return null; return {end:eatScripts(s,e+1), text:s.slice(start,eatScripts(s,e+1))}; }
+  if(s[j]==='\\'){ let k=j+1; while(k<s.length && /[A-Za-z]/.test(s[k])) k++; if(s[k]==='{'){ const e=matchFwd(s,k,'{','}'); if(e>=0) k=e+1; } k=eatScripts(s,k); return {end:k, text:s.slice(start,k)}; }
+  if(/[A-Za-z]/.test(s[j])){ let k=j; while(k<s.length && /[A-Za-z0-9.]/.test(s[k])) k++;
+    if(s[k]==='('){ const e=matchFwd(s,k,'(',')'); if(e>=0) k=e+1; } k=eatScripts(s,k); return {end:k, text:s.slice(start,k)}; }
+  if(/[0-9.]/.test(s[j])){ let k=j; while(k<s.length && /[0-9.]/.test(s[k])) k++; k=eatScripts(s,k); return {end:k, text:s.slice(start,k)}; }
+  return null;
+}
+function stripOuterParens(x){ x=x.trim(); if(x[0]==='(' && matchFwd(x,0,'(',')')===x.length-1) return x.slice(1,-1); return x; }
+function slashToFrac(s){
+  let i=s.indexOf('/'), guard=0;
+  while(i!==-1 && guard++<300){
+    const L=grabLeft(s,i), R=grabRight(s,i);
+    if(L && R && L.text.trim() && R.text.trim()){
+      const frac='\\frac{'+stripOuterParens(L.text)+'}{'+stripOuterParens(R.text)+'}';
+      s=s.slice(0,L.start)+frac+s.slice(R.end);
+      i=s.indexOf('/', L.start+frac.length);
+    } else i=s.indexOf('/', i+1);
+  }
+  return s;
+}
 function convertToLatex(input){
   let s = input;
   const passFns = t=>{
@@ -375,10 +431,7 @@ function convertToLatex(input){
   s = passFns(s);
   s = s.replace(/([_^])\(([^()]*)\)/g, '$1{$2}');
   s = s.replace(/([_^])\s*(-?[A-Za-z0-9.]+)/g, '$1{$2}');
-  const operand = '(\\{[^{}]*\\}|(?:[A-Za-z]\\w*)?\\([^()]*\\)|[A-Za-z0-9.]+(?:\\^\\{[^{}]*\\}|_\\{[^{}]*\\})?)';
-  const slashRe = new RegExp(operand + '\\s*/\\s*' + operand, 'g');
-  const strip = x => x.replace(/^\(([^()]*)\)$/, '$1');
-  s = s.replace(slashRe, (m,a,b)=> '\\frac{'+strip(a)+'}{'+strip(b)+'}');
+  s = slashToFrac(s);   // a/b -> \frac{a}{b}, balanced-aware (nested parens, sqrt, powers)
   const OPS = [
     ['<->','\\leftrightarrow '],['<=>','\\Leftrightarrow '],
     ['->','\\to '],['<-','\\gets '],['=>','\\Rightarrow '],
@@ -850,7 +903,7 @@ function fbConfig(){
 function fbReady(){ return !!fbConfig().databaseURL; }
 const clientId='c'+Math.random().toString(36).slice(2,10);
 let roomRef=null, roomCode=null, applyingRemote=false, srcPushT=null;
-const SETUP_MSG='Live sharing needs a one-time free setup by the teacher — open "Live shared boards" below the cheat sheet.';
+const SETUP_MSG='Live sharing is off: no Firebase config found in this copy of the file. Paste your config into WB_FIREBASE, re-upload whiteboard.html, then hard-refresh (Ctrl/Cmd+Shift+R). Details in "Live shared boards" below the cheat sheet.';
 
 async function ensureFirebase(){
   await ensureLib('https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js',
@@ -925,7 +978,13 @@ async function connectRoom(code, seed){
     syncLiveUI();
   }catch(err){
     roomRef=null; roomCode=null; syncLiveUI();
-    setStatus('Could not connect: '+((err&&err.message)||err));
+    console.error('[whiteboard] live-share connect failed:', err);
+    const m=(err&&err.message)||String(err);
+    if(/gstatic|load|network|Failed to fetch/i.test(m))
+      setStatus('Could not reach Firebase — is gstatic.com blocked on this network (school firewall)? Details: '+m);
+    else if(/permission|denied|PERMISSION/i.test(m))
+      setStatus('Firebase refused the write — check your Realtime Database rules allow read/write on "boards". Details: '+m);
+    else setStatus('Could not connect: '+m);
   }
 }
 function leaveBoard(){
@@ -977,7 +1036,10 @@ draw f(x), [-4, 6]
 
 draw sin(x), cos(x) from -2*pi to 2*pi`;
 
+const WB_BUILD='2025-07-build3 (balanced fractions + live-share diagnostics)';
 function boot(){
+  console.log('[whiteboard] '+WB_BUILD+' · live sharing '+
+    (fbReady() ? 'ON — Firebase config detected' : 'OFF — no Firebase config in this file'));
   const saved=load('wb.src', null);
   src.value = (saved && saved.trim()) ? saved : EXAMPLE;
   render();
