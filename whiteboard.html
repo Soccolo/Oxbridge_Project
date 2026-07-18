@@ -634,7 +634,7 @@ function render(){
     content.appendChild(box);
   }
   sizeOverlay();
-  setStatus(eqs+' equation'+(eqs!==1?'s':'')+' · '+graphs+' graph'+(graphs!==1?'s':'')+' · autosaved');
+  setStatus((roomCode?'LIVE · code '+roomCode+' · ':'')+eqs+' equation'+(eqs!==1?'s':'')+' · '+graphs+' graph'+(graphs!==1?'s':'')+' · autosaved');
   save('wb.src', src.value);
 }
 
@@ -890,6 +890,7 @@ async function savePDF(){
 const WB_FIREBASE = {
   apiKey: "AIzaSyAj3rRMAJ7ghIDEynLxwfrEkWJmQXBto-M",
   authDomain: "oxbridge-project.firebaseapp.com",
+  databaseURL: "https://oxbridge-project-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "oxbridge-project",
   storageBucket: "oxbridge-project.firebasestorage.app",
   messagingSenderId: "667343456205",
@@ -1036,7 +1037,7 @@ draw f(x), [-4, 6]
 
 draw sin(x), cos(x) from -2*pi to 2*pi`;
 
-const WB_BUILD='2025-07-build3 (balanced fractions + live-share diagnostics)';
+const WB_BUILD='2025-07-build4 (Firebase config wired — live sharing ready)';
 function boot(){
   console.log('[whiteboard] '+WB_BUILD+' · live sharing '+
     (fbReady() ? 'ON — Firebase config detected' : 'OFF — no Firebase config in this file'));
