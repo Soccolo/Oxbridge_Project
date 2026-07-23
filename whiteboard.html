@@ -64,32 +64,6 @@ function toggleNav() {
 .wb h1{margin:.1rem 0 .5rem}
 .wb .lede{max-width:60ch;margin-bottom:1.4rem}
 
-.wb-quickstart{display:grid;grid-template-columns:minmax(180px,1.2fr) repeat(3,minmax(150px,1fr));
-  gap:.65rem;margin:0 0 1rem;padding:.75rem;border:1px solid var(--accent-line);
-  border-radius:12px;background:var(--accent-soft)}
-.wb-quickstart .intro{padding:.25rem .35rem}
-.wb-quickstart strong{display:block;font-family:var(--display);color:var(--accent-ink);margin-bottom:.18rem}
-.wb-quickstart p{margin:0;font-size:.82rem;line-height:1.45;color:var(--ink-soft)}
-.wb-tip{min-width:0;padding:.55rem .65rem;border:1px solid var(--accent-line);border-radius:9px;background:#fff}
-.wb-tip code{display:block;width:max-content;max-width:100%;margin-bottom:.2rem;color:var(--accent-ink);
-  overflow-wrap:anywhere;white-space:normal}
-
-.wb-connect{display:flex;align-items:center;gap:.9rem;margin:0 0 1rem;padding:.8rem .9rem;
-  border:2px solid var(--accent);border-radius:12px;background:#fff;box-shadow:0 4px 16px rgba(47,92,255,.09)}
-.wb-connect-copy{display:flex;align-items:center;gap:.65rem;min-width:210px;margin-right:auto}
-.wb-connect-icon{display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border-radius:10px;
-  background:var(--accent);color:#fff;font-size:1.15rem}
-.wb-connect-copy strong{display:block;font-family:var(--display);font-size:.95rem;color:var(--ink)}
-.wb-connect-copy span:last-child{display:block;font-size:.76rem;color:var(--ink-soft);line-height:1.35}
-.wb-connect-actions{display:flex;align-items:end;gap:.45rem;flex-wrap:wrap}
-.wb-code-label{display:flex;flex-direction:column;gap:.2rem;font-family:var(--mono);font-size:.62rem;
-  font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--accent-ink)}
-.wb-connect .wb-code{width:8.2em;font-size:.95rem;letter-spacing:.12em;padding:.55rem .5rem}
-.wb-connect .wb-btn{min-height:41px}
-.wb-live-state{width:100%;margin:.1rem 0 0;font-family:var(--mono);font-size:.68rem;color:var(--ink-soft)}
-.wb-connect.is-live{border-color:#15803d;background:#f0fdf4;box-shadow:0 4px 16px rgba(21,128,61,.09)}
-.wb-connect.is-live .wb-connect-icon{background:#15803d}
-
 .wb-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem;
   background:var(--card);border:1px solid var(--line);border-radius:11px;
   padding:.6rem .7rem;margin-bottom:1rem}
@@ -128,10 +102,9 @@ function toggleNav() {
 
 .wb-boardwrap{flex:1;min-width:0;display:flex;flex-direction:column;
   border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
-.wb-board{position:relative;flex:1;overflow-y:auto;overflow-x:hidden;outline:none}
+.wb-board{position:relative;flex:1;overflow:auto;outline:none}
 .wb-board:focus-visible{box-shadow:inset 0 0 0 2px var(--accent-line)}
 .wb-content{position:relative;z-index:1;padding:2rem 2.2rem;min-height:100%;
-  min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:anywhere;
   line-height:1.4;transition:background .2s,color .2s}
 .wb-overlay{position:absolute;top:0;left:0;z-index:2;pointer-events:none;touch-action:none}
 .wb-board.pen .wb-overlay{pointer-events:auto;cursor:crosshair}
@@ -143,10 +116,8 @@ function toggleNav() {
   background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px);background-size:22px 22px}
 .wb-theme-slate{background:#1e293b;color:#e8eefb}
 
-.wb-content .wb-line{min-width:0;max-width:100%;margin:.5rem 0}
-.wb-content .wb-text{font-family:var(--display);font-size:.82em;line-height:1.55;white-space:pre-wrap;
-  overflow-wrap:anywhere;word-break:break-word}
-.wb-content .wb-math{margin:1rem 0;position:relative;overflow-x:auto;overflow-y:hidden}
+.wb-content .wb-line{margin:.5rem 0}
+.wb-content .wb-math{margin:1rem 0;position:relative}
 .wb-content .katex{font-size:1.5em}
 .wb-content .katex-display{margin:.4rem 0}
 .wb-content h2.wb-head{font-family:var(--display);font-weight:700;font-size:1.7em;
@@ -186,31 +157,15 @@ function toggleNav() {
   color:var(--ink-soft);margin:.9rem 0 .2rem}
 
 @media (max-width:900px){
-  .wb-quickstart{grid-template-columns:1fr 1fr}
-  .wb-quickstart .intro{grid-column:1/-1}
-  .wb-connect{align-items:flex-start;flex-wrap:wrap}
-  .wb-connect-copy{width:100%}
-  .wb-connect-actions{width:100%}
   .wb-split{flex-direction:column;height:auto}
   .wb-editor{flex:none;height:220px}
   .wb-boardwrap{height:60vh}
   .wb-cheat .sheet-body{grid-template-columns:1fr}
 }
-@media (max-width:560px){
-  .wb-quickstart{grid-template-columns:1fr}
-  .wb-quickstart .intro{grid-column:auto}
-  .wb-connect-actions,.wb-code-label{width:100%}
-  .wb-connect .wb-code{box-sizing:border-box;width:100%}
-  .wb-connect .wb-btn{flex:1;justify-content:center}
-  .wb-toolbar{align-items:stretch;overflow:hidden}
-  .wb-group{box-sizing:border-box;flex:1 1 100%;max-width:100%;flex-wrap:wrap;padding:.35rem 0;
-    border-right:0;border-bottom:1px solid var(--line-soft)}
-  .wb-group:last-child{border-bottom:0}
-}
 
 /* ---- print: Save as PDF prints only the board ---- */
 @media print{
-  .sidebar,.wb-toolbar,.wb-quickstart,.wb-connect,.wb-editor,.wb-cheat,.wb .crumb,.wb .lede,.wb h1,
+  .sidebar,.wb-toolbar,.wb-editor,.wb-cheat,.wb .crumb,.wb .lede,.wb h1,
   .wb-status,footer,.menu-toggle,.wb-tool{display:none !important}
   .shell{display:block}
   main{padding:0}
@@ -229,46 +184,7 @@ function toggleNav() {
   <p class="lede">Type formulae in plain text on the left — <code>int_a^b f(x) dx</code> — and watch them become
   proper notation on the board. Write <code>draw f(x)</code> to plot a function. Annotate with the pen, paste or drop
   images, export any single equation as a PNG, or save the whole board as a PDF for your students.
-  Teachers can share a new board below; students use the highlighted join box and their teacher's 5-character code.</p>
-
-  <section class="wb-quickstart" aria-label="Whiteboard typing instructions">
-    <div class="intro">
-      <strong>Type one idea per line</strong>
-      <p>Normal sentences become wrapping text automatically. Formulae become mathematical notation.</p>
-    </div>
-    <div class="wb-tip">
-      <code>sqrt(x + 1)</code>
-      <p>Square roots need no backslash or braces.</p>
-    </div>
-    <div class="wb-tip">
-      <code>int_a^b f(x) dx</code>
-      <p>Use familiar shorthand for integrals, powers and more.</p>
-    </div>
-    <div class="wb-tip">
-      <code>x = 2 \text{ when } y &gt; 0</code>
-      <p>Use <code>\text{...}</code> only for words inside an equation.</p>
-    </div>
-  </section>
-
-  <section class="wb-connect" id="wbConnect" aria-labelledby="wbConnectTitle">
-    <div class="wb-connect-copy">
-      <span class="wb-connect-icon" aria-hidden="true">👥</span>
-      <div>
-        <strong id="wbConnectTitle">Join a live class whiteboard</strong>
-        <span>1. Ask your teacher for the 5-character code. 2. Enter it here. 3. Press Join.</span>
-      </div>
-    </div>
-    <div class="wb-connect-actions">
-      <label class="wb-code-label" for="wbCode">Board code
-        <input id="wbCode" class="wb-code" type="text" maxlength="5" placeholder="ABCDE"
-          autocomplete="one-time-code" autocapitalize="characters" spellcheck="false" aria-describedby="wbLiveState">
-      </label>
-      <button class="wb-btn primary" id="wbJoin" title="Join your teacher's shared board using its code">Join board</button>
-      <button class="wb-btn" id="wbHost" title="Create a shared board and show students its code">Teacher: share a new board</button>
-      <button class="wb-btn" id="wbLeave" title="Disconnect from the shared board" hidden>Leave board</button>
-      <p class="wb-live-state" id="wbLiveState" aria-live="polite">Not connected yet — enter the code from your teacher.</p>
-    </div>
-  </section>
+  Press <em>👥 Share board</em> to get a code your students can join — then everyone writes on the same board, live.</p>
 
   <div class="wb-toolbar" id="wbToolbar">
     <div class="wb-group">
@@ -296,8 +212,15 @@ function toggleNav() {
       <input id="wbImgFile" type="file" accept="image/*" hidden>
     </div>
     <div class="wb-group">
+      <span class="lbl">Live</span>
+      <input id="wbCode" class="wb-code" type="text" maxlength="8" placeholder="code" autocomplete="off" spellcheck="false">
+      <button class="wb-btn" id="wbHost" title="Create a shared board — students join with the code">👥 Share board</button>
+      <button class="wb-btn" id="wbJoin" title="Join a shared board using its code">Join</button>
+      <button class="wb-btn" id="wbLeave" title="Disconnect from the shared board" hidden>Leave</button>
+    </div>
+    <div class="wb-group">
       <button class="wb-btn" id="wbExample">Example</button>
-      <button class="wb-btn" id="wbClear">Clear text</button>
+      <button class="wb-btn" id="wbClear" title="Wipe everything — text, pen drawings and images">Clear board</button>
       <button class="wb-btn primary" id="wbPdf" title="Save the whole board as a PDF">⭳ Save PDF</button>
     </div>
   </div>
@@ -305,7 +228,7 @@ function toggleNav() {
   <div class="wb-split">
     <div class="wb-editor">
       <div class="elabel">Type here — one expression per line</div>
-      <textarea id="wbSrc" spellcheck="false" wrap="soft" placeholder="Write a sentence here — it will wrap automatically.&#10;sqrt(x + 1)&#10;int_a^b f(x) dx = F(b) - F(a)"></textarea>
+      <textarea id="wbSrc" spellcheck="false" placeholder="int_a^b f(x) dx = F(b) - F(a)&#10;draw sin(x), cos(x)"></textarea>
     </div>
     <div class="wb-boardwrap">
       <div class="wb-board" id="wbBoard" tabindex="0" aria-label="Whiteboard — click here and press Ctrl+V to paste a screenshot">
@@ -320,18 +243,12 @@ function toggleNav() {
     <summary>Shorthand cheat sheet — what to type</summary>
     <div class="sheet-body">
       <div>
-        <div class="gh">Writing words</div>
-        <table>
-          <tr><td class="k">A normal sentence</td><td>plain text that wraps to fit the board</td></tr>
-          <tr><td class="k">text: in this case...</td><td>force a line to be text if it looks like maths</td></tr>
-          <tr><td class="k">x \in A \text{ when } x&gt;0</td><td>words inside an equation; words such as “in” stay words</td></tr>
-        </table>
         <div class="gh">Calculus &amp; structure</div>
         <table>
           <tr><td class="k">int_a^b</td><td>integral a→b · <span class="k">oint</span> ∮</td></tr>
           <tr><td class="k">sum_{n=1}^N</td><td>summation · <span class="k">prod</span> product</td></tr>
           <tr><td class="k">lim_{x-&gt;0}</td><td>limit</td></tr>
-          <tr><td class="k">sqrt(x)</td><td>√x · <span class="k">sqrt[3](x)</span> cube root · <span class="k">\sqrt{x}</span> also works</td></tr>
+          <tr><td class="k">sqrt(x)</td><td>√x · <span class="k">sqrt[3](x)</span> cube root</td></tr>
           <tr><td class="k">frac(a,b)</td><td>fraction · or just <span class="k">a/b</span></td></tr>
           <tr><td class="k">x^2 , a_i</td><td>power / subscript (auto-grouped)</td></tr>
           <tr><td class="k">x^(n+1)</td><td>grouped exponent</td></tr>
@@ -499,36 +416,8 @@ function slashToFrac(s){
   }
   return s;
 }
-/* Keep the contents of \text{...} out of the shorthand replacements. Without
-   this, ordinary words such as "in" were changed to mathematical symbols. */
-function protectTextCommands(input){
-  let out='', i=0;
-  const saved=[];
-  while(i<input.length){
-    const rest=input.slice(i);
-    const found=rest.match(/\\text\s*\{/);
-    if(!found){ out+=rest; break; }
-    const at=i+found.index;
-    const brace=at+found[0].lastIndexOf('{');
-    const close=matchFwd(input,brace,'{','}');
-    if(close<0){ out+=input.slice(i); break; }
-    out+=input.slice(i,at);
-    const token=String.fromCharCode(0xE000+saved.length);
-    saved.push({token,value:input.slice(at,close+1)});
-    out+=token;
-    i=close+1;
-  }
-  return {
-    value:out,
-    restore(value){
-      for(const item of saved) value=value.split(item.token).join(item.value);
-      return value;
-    }
-  };
-}
 function convertToLatex(input){
-  const protectedText=protectTextCommands(input);
-  let s = protectedText.value;
+  let s = input;
   const passFns = t=>{
     t = replaceFn(t, 'frac', (inner)=>{
       const [a,b] = splitComma(inner);
@@ -554,41 +443,7 @@ function convertToLatex(input){
   for(const w of WORDS)      s = s.replace(new RegExp(L+w+R,'g'), '\\'+w);
   for(const k in ALIAS)      s = s.replace(new RegExp(L+k+R,'g'), '\\'+ALIAS[k]);
   s = s.replace(/(^|[\s)}])d([xyztuvw])\b/g, '$1\\,d$2');
-  return protectedText.restore(s.replace(/\s{2,}/g,' ').trim());
-}
-
-const MATH_WORDS = new Set([...WORDS, ...Object.keys(ALIAS), 'sqrt', 'frac'].map(w=>w.toLowerCase()));
-function unwrapTextCommand(line){
-  const t=line.trim();
-  const found=t.match(/^\\text\s*\{/);
-  if(!found) return null;
-  const brace=found[0].lastIndexOf('{');
-  const close=matchFwd(t,brace,'{','}');
-  return close===t.length-1 ? t.slice(brace+1,close) : null;
-}
-function looksLikePlainText(line){
-  const t=line.trim();
-  if(!/[A-Za-z]/.test(t)) return false;
-  if(/\\[A-Za-z]+/.test(t)) return false;
-  if(/[=<>^_*+/]|[≤≥≠≈∈∉⊂⊆∪∩∀∃∑∏∫√]/.test(t)) return false;
-  if(/(?:^|\s)-(?=\s|[A-Za-z0-9])|\b(?:[A-Za-z]-[A-Za-z]|[A-Za-z]-\d|\d-[A-Za-z]|\d+-\d)\b/.test(t)) return false;
-  if(/\b(?:draw|plot|graph)\b/i.test(t)) return false;
-  if(/\b[A-Za-z]\w*\(/.test(t)) return false;
-  const words=t.match(/[A-Za-z]+(?:['’\-][A-Za-z]+)*/g)||[];
-  if(!words.length) return false;
-  const known=words.filter(w=>MATH_WORDS.has(w.toLowerCase()));
-  const other=words.filter(w=>!MATH_WORDS.has(w.toLowerCase()));
-  if(words.length===1) return !known.length && words[0].length>1;
-  // Short expressions such as "x in A" and "sin x" should remain maths.
-  if(known.length && words.length<=4 && (!other.length || other.every(w=>w.length===1))) return false;
-  return true;
-}
-function textFromLine(line){
-  const forced=line.match(/^\s*(?:text|say)\s*:\s*(.*)$/i);
-  if(forced) return forced[1];
-  const wrapped=unwrapTextCommand(line);
-  if(wrapped!==null) return wrapped;
-  return looksLikePlainText(line) ? line.trim() : null;
+  return s.replace(/\s{2,}/g,' ').trim();
 }
 
 /* =========================================================================
@@ -717,7 +572,7 @@ function render(){
   content.innerHTML='';
   const parser=math.parser();
   const lines=src.value.split('\n');
-  let graphs=0, eqs=0, notes=0;
+  let graphs=0, eqs=0;
   for(const raw of lines){
     const line=raw.replace(/\s+$/,'');
     if(line.trim()===''){ const s=document.createElement('div'); s.className='wb-spacer'; content.appendChild(s); continue; }
@@ -739,14 +594,6 @@ function render(){
     if(line.trim().startsWith('#')){
       const h=document.createElement('h2'); h.className='wb-head';
       h.textContent=line.trim().replace(/^#+\s*/,''); content.appendChild(h); continue;
-    }
-
-    // A sentence on its own line is ordinary wrapping text. "text:" forces
-    // this mode for ambiguous lines; a whole-line \text{...} works too.
-    const note=textFromLine(line);
-    if(note!==null){
-      const p=document.createElement('div'); p.className='wb-line wb-text';
-      p.textContent=note; content.appendChild(p); notes++; continue;
     }
 
     // draw / plot / graph
@@ -787,8 +634,7 @@ function render(){
     content.appendChild(box);
   }
   sizeOverlay();
-  setStatus((roomCode?'LIVE · code '+roomCode+' · ':'')+notes+' text line'+(notes!==1?'s':'')+' · '+
-    eqs+' equation'+(eqs!==1?'s':'')+' · '+graphs+' graph'+(graphs!==1?'s':'')+' · autosaved');
+  setStatus((roomCode?'LIVE · code '+roomCode+' · ':'')+eqs+' equation'+(eqs!==1?'s':'')+' · '+graphs+' graph'+(graphs!==1?'s':'')+' · autosaved');
   save('wb.src', src.value);
 }
 
@@ -1127,10 +973,7 @@ async function connectRoom(code, seed){
     if(me.onDisconnect) me.onDisconnect().remove();
     ref.child('present').on('value', s=>{
       const n=s.numChildren ? s.numChildren() : Object.keys(s.val()||{}).length;
-      if(roomCode){
-        setStatus('LIVE · code '+roomCode+' · '+n+' connected — students press Join with this code, or open ?board='+roomCode);
-        $('wbLiveState').textContent='Connected to '+roomCode+' · '+n+' participant'+(n!==1?'s':'')+' online.';
-      }
+      if(roomCode) setStatus('LIVE · code '+roomCode+' · '+n+' connected — students press Join with this code, or open ?board='+roomCode);
     });
     try{ history.replaceState(null,'',location.pathname+'?board='+code); }catch(e){}
     syncLiveUI();
@@ -1155,11 +998,6 @@ function syncLiveUI(){
   const live=!!roomRef;
   $('wbHost').hidden=live; $('wbJoin').hidden=live; $('wbLeave').hidden=!live;
   $('wbCode').value=roomCode||''; $('wbCode').readOnly=live;
-  $('wbConnect').classList.toggle('is-live',live);
-  $('wbConnectTitle').textContent=live ? 'Live class whiteboard connected' : 'Join a live class whiteboard';
-  $('wbLiveState').textContent=live
-    ? 'Connected to '+roomCode+' — everyone with this code can edit the board.'
-    : 'Not connected yet — enter the code from your teacher.';
 }
 
 /* =========================================================================
@@ -1176,14 +1014,17 @@ $('wbHost').addEventListener('click', hostBoard);
 $('wbJoin').addEventListener('click', joinBoard);
 $('wbLeave').addEventListener('click', leaveBoard);
 $('wbCode').addEventListener('keydown', e=>{ if(e.key==='Enter') joinBoard(); });
-$('wbCode').addEventListener('input', e=>{
-  e.target.value=e.target.value.toUpperCase().replace(/[^A-HJ-KM-NP-Z2-9]/g,'').slice(0,5);
-});
 $('wbPasteBtn').addEventListener('click', pasteFromClipboard);
 $('wbImgBtn').addEventListener('click', ()=>$('wbImgFile').click());
 $('wbImgFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) fileToScaledDataURL(f, addImageData); e.target.value=''; });
 $('wbPdf').addEventListener('click', savePDF);
-$('wbClear').addEventListener('click', ()=>{ src.value=''; render(); pushSrcNow(); src.focus(); });
+$('wbClear').addEventListener('click', ()=>{
+  src.value='';
+  ink=[]; save('wb.ink', ink); redrawInk(); pushInk();      // wipe pen drawings too
+  images={}; persistImages();                                // and any pasted images
+  render(); pushSrcNow(); src.focus();
+  setStatus('Board cleared.');
+});
 $('wbExample').addEventListener('click', ()=>{ src.value=EXAMPLE; render(); pushSrcNow(); });
 board.addEventListener('scroll', ()=>{}, {passive:true});
 window.addEventListener('resize', ()=>{ clearTimeout(timer); timer=setTimeout(sizeOverlay,120); });
@@ -1191,15 +1032,9 @@ window.addEventListener('resize', ()=>{ clearTimeout(timer); timer=setTimeout(si
 const EXAMPLE =
 `# Calculus — Lecture 1
 
-This is a normal sentence, so words such as in stay as text and the line wraps to fit the board.
-
-sqrt(x + 1)
-
 int_a^b f(x) dx = F(b) - F(a)
 
 lim_{x->0} sin(x)/x = 1
-
-x in A \\text{ when } x > 0
 
 sum_{n=1}^{infinity} 1/n^2 = pi^2/6
 
@@ -1208,7 +1043,7 @@ draw f(x), [-4, 6]
 
 draw sin(x), cos(x) from -2*pi to 2*pi`;
 
-const WB_BUILD='2026-07-build5 (plain text, protected text commands and clearer live joining)';
+const WB_BUILD='2025-07-build5 (Clear board wipes pen + images too)';
 function boot(){
   console.log('[whiteboard] '+WB_BUILD+' · live sharing '+
     (fbReady() ? 'ON — Firebase config detected' : 'OFF — no Firebase config in this file'));

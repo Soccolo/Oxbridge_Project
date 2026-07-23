@@ -182,6 +182,14 @@ Once the limits are changed, do <em>not</em> substitute back — the answer is a
 </ol></div>
 <p><strong>Example.</strong> Find the area enclosed by \(y=x\) and \(y=x^2\). They intersect where \(x=x^2\), i.e. \(x=0\) and \(x=1\); between them, the line is on top (check \(x=\frac12\)). Hence
 \[\text{Area}=\int_0^1\left(x-x^2\right)\mathrm dx=\left[\frac{x^2}2-\frac{x^3}3\right]_0^1=\frac12-\frac13=\frac16.\]</p>
+<div class="box warn"><span class="bt">Subtract first — the axis is irrelevant</span>
+<p>"Top minus bottom" needs no adjustment when part (or all) of the region sits below the \(x\)-axis: the difference \(f-g\) measures the vertical gap between the curves wherever they are, and the signed-area subtleties cancel in the subtraction. The genuine danger is different — <strong>curves that cross inside the interval</strong>. There \(f-g\) changes sign, and integrating straight across silently subtracts one piece of area from another.</p></div>
+<p><strong>Example (curves that cross).</strong> Find the total area enclosed between \(y=x^3\) and \(y=x\). Solving \(x^3=x\): they meet at \(x=-1,\,0,\,1\), so the enclosed region has <em>two</em> pieces. On \([-1,0]\) the cubic is on top (at \(x=-\frac12\): \(-\frac18&gt;-\frac12\)); on \([0,1]\) the line is on top. Split at the crossing:
+\[\int_{-1}^0\left(x^3-x\right)\mathrm dx+\int_0^1\left(x-x^3\right)\mathrm dx=\frac14+\frac14=\frac12.\]
+Integrating \(x-x^3\) straight across \([-1,1]\) would give \(0\) — the two congruent pieces cancel by symmetry, a wrong "answer" that the exam is happy to offer you as option A.</p>
+<p><strong>Example (integrating with respect to \(y\)).</strong> Find the area enclosed by the parabola \(y^2=x\) and the line \(y=x-2\). They meet where \(y^2=y+2\), i.e. \(y=-1\) (point \((1,-1)\)) and \(y=2\) (point \((4,2)\)). Viewed vertically, the region's lower boundary changes at \(x=1\) (parabola below, then line), forcing a split. Viewed <em>horizontally</em>, every strip runs from the parabola \(x=y^2\) on the left to the line \(x=y+2\) on the right — one integral:
+\[\text{Area}=\int_{-1}^{2}\Big((y+2)-y^2\Big)\,\mathrm dy=\left[\frac{y^2}2+2y-\frac{y^3}3\right]_{-1}^{2}=\frac{10}3-\left(-\frac76\right)=\frac92.\]
+(The \(x\)-version, \(2\int_0^1\sqrt x\,\mathrm dx+\int_1^4\left(\sqrt x-(x-2)\right)\mathrm dx=\frac43+\frac{19}6\), gives the same \(\frac92\) with twice the work.) When one curve is a sideways parabola, turn your head: "right minus left, \(\mathrm dy\)" is the same template with the axes swapped.</p>
 
 <h2><span class="sn">§7.7</span>The trapezium rule</h2>
 <p>Just as Newton–Raphson approximates the roots of equations we can't solve, the <strong>trapezium rule</strong> approximates the integrals we can't evaluate — and even when we can, the TMUA likes to ask <em>how good</em> the approximation is. The idea: instead of rectangles, join the points on the curve by straight segments and sum the trapezia underneath.</p>
@@ -193,6 +201,23 @@ Each interior ordinate is counted twice because it is the right wall of one trap
 <p><strong>Example.</strong> Approximate \(\int_1^2\frac1x\,\mathrm dx\) with two strips. Here \(h=\frac12\), \(y_0=1\), \(y_1=\frac23\), \(y_2=\frac12\):
 \[\int_1^2\frac{\mathrm dx}x\approx\frac{1/2}2\left(1+2\cdot\frac23+\frac12\right)=\frac14\cdot\frac{17}6=\frac{17}{24}\approx0.708.\]
 The true value is \(\ln2\approx0.693\). Since \(\frac1x\) is convex on \([1,2]\), we knew in advance the estimate would be too large — and it is.</p>
+<div class="box warn"><span class="bt">Concavity decides, not direction</span>
+<p>Whether the trapezium rule over- or underestimates has <em>nothing to do with the function increasing or decreasing</em> — that is the exam's favourite distractor. The chords of an increasing function can lie above or below the curve; it is the <strong>bending</strong> that decides. Keep the two families of estimates straight:</p>
+<ol>
+<li><strong>Trapezium rule</strong> — governed by concavity: convex (\(f''&gt;0\)) → chords above the curve → <strong>overestimate</strong>; concave (\(f''&lt;0\)) → <strong>underestimate</strong>.</li>
+<li><strong>Endpoint-rectangle sums</strong> — governed by direction: for an <em>increasing</em> \(f\), left endpoints underestimate and right endpoints overestimate (and vice versa for decreasing). Direction says nothing about the trapezium rule, and concavity says nothing about the rectangles.</li>
+</ol>
+<p>One picture to memorise: on \(y=\mathrm e^x\) (increasing <em>and</em> convex) the chord over any interval sits above the curve — increasing did not save the trapezium from overshooting.</p></div>
+<p><strong>Example (an underestimate this time).</strong> Approximate \(\int_0^\pi\sin x\,\mathrm dx\) (true value \(2\)) with two strips: \(h=\frac\pi2\), ordinates \(0,\,1,\,0\):
+\[T_2=\frac{\pi/2}2\big(0+2\cdot1+0\big)=\frac\pi2\approx1.571.\]
+With four strips, ordinates \(0,\frac{\sqrt2}2,1,\frac{\sqrt2}2,0\):
+\[T_4=\frac{\pi/4}2\left(0+2\left(\tfrac{\sqrt2}2+1+\tfrac{\sqrt2}2\right)+0\right)=\frac\pi8\left(2+2\sqrt2\right)\approx1.896.\]
+Both fall short, exactly as the concave sine (chords below the arch) predicts — and more strips fall short by less.</p>
+<p><strong>How fast does it improve?</strong> For a smooth curve the error of the trapezium rule shrinks like \(h^2\), i.e. like \(1/n^2\): <strong>doubling the number of strips divides the error by roughly four</strong>. Check it on the sine: the errors above are \(2-1.571=0.429\) and \(2-1.896=0.104\), with ratio \(\approx4.1\). The TMUA asks this qualitatively — "the number of strips is doubled; what happens to the error?" — and "quartered, roughly" is the answer it wants. Two consequences worth having ready:</p>
+<ol>
+<li>All the \(T_n\) sit on the <em>same side</em> of the true value while the concavity doesn't change: for a convex curve \(I&lt;T_{2n}&lt;T_n\), for a concave curve \(T_n&lt;T_{2n}&lt;I\). Refining strips walks the estimate monotonically towards the answer, never past it.</li>
+<li>If the concavity <em>changes</em> inside the interval, split at the inflection point and argue each piece separately — over- and under-shoots can then partially cancel, and without the split no verdict is safe.</li>
+</ol>
 
 <h2><span class="sn">§7.8</span>Solids of revolution</h2>
 <p>We promised in the introduction an application of integrals, and here is the most spectacular one. Take the region under the graph of \(f\) on \([a,b]\) and spin it around the \(x\)-axis: a solid appears. What is its volume? The Riemann philosophy applies unchanged: slice the solid into thin discs perpendicular to the axis. The disc at position \(x\) has radius \(f(x)\), hence cross-sectional area \(\pi f(x)^2\), and thickness \(\mathrm dx\). Summing the discs:</p>
@@ -352,6 +377,29 @@ About the \(y\)-axis: the region in \(y\)-terms is bounded by \(x=y^2\) and \(x=
 (iii) Show that \(I_{n+1}\le I_n\) and deduce that \(\dfrac{I_{n+1}}{I_n}\to1\) as \(n\to\infty\).</p>
 <details class="sol"><summary>Show hints</summary>
 <p>(i) Write \(\sin^nx=\sin^{n-1}x\cdot\sin x\) and integrate by parts with \(g'(x)=\sin x\); use \(\cos^2x=1-\sin^2x\) to bring \(I_n\) back to the left side. (ii) \(I_0=\frac\pi2\), \(I_1=1\); then \(I_4=\frac34\cdot\frac12\cdot\frac\pi2=\frac{3\pi}{16}\) and \(I_5=\frac45\cdot\frac23=\frac8{15}\). (iii) On \([0,\frac\pi2]\), \(0\le\sin x\le1\) gives \(\sin^{n+1}x\le\sin^nx\); use the comparison property, then squeeze \(\frac{I_{n+1}}{I_n}\) between \(\frac{I_{n+2}}{I_n}=\frac{n+1}{n+2}\) and \(1\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 15</span><span class="pill new">New · Area between curves</span></div>
+<p>Find the area of the region enclosed by the parabola \(y=x^2-4x+3\) and the line \(y=3-x\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Intersections: \(x^2-4x+3=3-x\) gives \(x^2-3x=0\), so \(x=0\) and \(x=3\). At \(x=1\) the line gives \(2\) and the parabola gives \(0\): the line is on top throughout. Then
+\[\int_0^3\Big((3-x)-(x^2-4x+3)\Big)\mathrm dx=\int_0^3\left(3x-x^2\right)\mathrm dx=\left[\frac{3x^2}2-\frac{x^3}3\right]_0^3=\frac{27}2-9=\frac92.\]
+Notice the shortcut: the difference simplified <em>before</em> integrating — always subtract first.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 16</span><span class="pill new">New · Area between curves</span></div>
+<p>Find the area of the region enclosed by the parabola \(y^2=4x\) and the line \(y=2x-4\).</p>
+<details class="sol"><summary>Show solution</summary>
+<p>Substituting \(x=\frac{y+4}2\) into \(y^2=4x\): \(y^2=2(y+4)\), i.e. \(y^2-2y-8=(y-4)(y+2)=0\), so the curves meet at \((1,-2)\) and \((4,4)\). Horizontal strips run from the parabola \(x=\frac{y^2}4\) (left) to the line \(x=\frac{y+4}2\) (right) for the whole range, so one integral suffices:
+\[\int_{-2}^{4}\left(\frac{y+4}2-\frac{y^2}4\right)\mathrm dy=\left[\frac{y^2}4+2y-\frac{y^3}{12}\right]_{-2}^{4}=\frac{20}3-\left(-\frac{7}3\right)=9.\]
+Integrating with respect to \(x\) instead would need a split at \(x=1\) (where the lower boundary switches from the parabola's lower arm to the line) — legal, but twice the algebra. §7.6's rule of thumb: a sideways parabola is an invitation to integrate sideways.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 17</span><span class="pill new">New · Trapezium · TMUA-style</span></div>
+<p>Let \(I=\displaystyle\int_0^1\mathrm e^{x^2}\,\mathrm dx\), and let \(T_4\) and \(T_8\) be the trapezium-rule estimates of \(I\) using 4 and 8 strips. Which of the following orderings is correct?<br>
+A. \(T_4&lt;T_8&lt;I\) &nbsp; B. \(I&lt;T_8&lt;T_4\) &nbsp; C. \(T_8&lt;T_4&lt;I\) &nbsp; D. \(I&lt;T_4&lt;T_8\) &nbsp; E. \(T_4&lt;I&lt;T_8\)</p>
+<details class="sol"><summary>Show solution</summary>
+<p>B. Differentiate twice: \(\left(\mathrm e^{x^2}\right)''=\left(2+4x^2\right)\mathrm e^{x^2}&gt;0\), so the integrand is convex on \([0,1]\) and every trapezium estimate <em>overestimates</em>: \(I&lt;T_8\) and \(I&lt;T_4\). Refining strips (roughly quartering the error, §7.7) moves the estimate towards \(I\) while staying on the same side: \(T_8&lt;T_4\). Hence \(I&lt;T_8&lt;T_4\). Note that "\(\mathrm e^{x^2}\) is increasing" is irrelevant — direction governs endpoint rectangles, concavity governs trapezia.</p>
 </details></div>
 
 <div class="pn"><a href="differentiation.html">← Topic 6: Differentiation</a><a href="counting.html">Topic 8: Counting →</a></div>
