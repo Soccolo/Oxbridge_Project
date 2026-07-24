@@ -135,7 +135,9 @@ function toggleNav() {
   line-height:1.4;transition:background .2s,color .2s}
 .wb-overlay{position:absolute;top:0;left:0;z-index:2;pointer-events:none;touch-action:none}
 .wb-board.pen .wb-overlay{pointer-events:auto;cursor:crosshair}
-.wb-board.erase .wb-overlay{pointer-events:auto;cursor:cell}
+/* the cursor ring matches ERASE_R in the script, so you can see what you are rubbing out */
+.wb-board.erase .wb-overlay{pointer-events:auto;
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='16' cy='16' r='14' fill='rgba(255,255,255,.35)' stroke='%23333' stroke-width='1.5'/></svg>") 16 16, cell}
 
 /* board themes */
 .wb-theme-white{background:#ffffff;color:#141414}
@@ -297,7 +299,7 @@ function toggleNav() {
     </div>
     <div class="wb-group">
       <button class="wb-btn" id="wbExample">Example</button>
-      <button class="wb-btn" id="wbClear">Clear text</button>
+      <button class="wb-btn" id="wbClear" title="Wipe the board — both the typed text and the pen drawings">Clear board</button>
       <button class="wb-btn primary" id="wbPdf" title="Save the whole board as a PDF">⭳ Save PDF</button>
     </div>
   </div>
@@ -805,7 +807,9 @@ function sizeOverlay(){
 }
 function redrawInk(){
   const cx=overlay.getContext('2d');
-  cx.clearRect(0,0,overlay.width,overlay.height);
+  const dpr=window.devicePixelRatio||1;
+  // the context is scaled by dpr, so clear in CSS pixels
+  cx.clearRect(0,0,overlay.width/dpr,overlay.height/dpr);
   cx.lineCap='round'; cx.lineJoin='round';
   for(const st of ink){
     if(!st.pts.length) continue;
@@ -817,33 +821,104 @@ function redrawInk(){
   }
 }
 let penMode=false, eraseMode=false, drawing=false, cur=null;
+const ERASE_R=14;                 // eraser radius in CSS pixels
+let lastErase=null, erasedSomething=false;
 function ptFromEvent(e){ const r=overlay.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; }
 overlay.addEventListener('pointerdown', e=>{
   if(!penMode && !eraseMode) return;
   try{ overlay.setPointerCapture(e.pointerId); }catch(err){}
   drawing=true;
   const p=ptFromEvent(e);
-  if(eraseMode){ eraseAt(p); return; }
+  if(eraseMode){ lastErase=null; erasedSomething=false; eraseAlong(p); return; }
   cur={ c:$('wbInk').value, w:parseInt($('wbInkW').value,10), pts:[p] };
   ink.push(cur); redrawInk();
 });
 overlay.addEventListener('pointermove', e=>{
   if(!drawing) return;
   const p=ptFromEvent(e);
-  if(eraseMode){ eraseAt(p); return; }
+  if(eraseMode){ eraseAlong(p); return; }
   cur.pts.push(p);
   const cx=overlay.getContext('2d'); cx.strokeStyle=cur.c; cx.lineWidth=cur.w; cx.lineCap='round';
   const n=cur.pts.length; cx.beginPath(); cx.moveTo(cur.pts[n-2][0],cur.pts[n-2][1]); cx.lineTo(p[0],p[1]); cx.stroke();
 });
-function endStroke(){ if(!drawing) return; drawing=false; cur=null; save('wb.ink', ink); pushInk(); }
+function endStroke(){
+  if(!drawing) return;
+  drawing=false; cur=null; lastErase=null;
+  if(eraseMode && !erasedSomething) return;   // a rub that hit nothing: no need to sync
+  erasedSomething=false;
+  save('wb.ink', ink); pushInk();
+}
 overlay.addEventListener('pointerup', endStroke);
 overlay.addEventListener('pointercancel', endStroke);
+
+/* Which part of the segment a-b falls inside the eraser circle (p,r)?
+   Returns [t0,t1] along the segment, or null if it misses. Pointer events are
+   sampled sparsely, so a fast stroke stores points that are far apart —
+   testing only the stored vertices misses the whole line drawn between them,
+   which is why rubbing the middle of a quick stroke used to do nothing. */
+function circleSegmentRange(a,b,p,r){
+  const vx=b[0]-a[0], vy=b[1]-a[1];
+  const fx=a[0]-p[0],  fy=a[1]-p[1];
+  const A=vx*vx+vy*vy;
+  if(A===0) return (fx*fx+fy*fy<=r*r) ? [0,1] : null;
+  const B=2*(fx*vx+fy*vy), C=fx*fx+fy*fy-r*r;
+  const disc=B*B-4*A*C;
+  if(disc<0) return null;
+  const s=Math.sqrt(disc);
+  const t0=(-B-s)/(2*A), t1=(-B+s)/(2*A);
+  if(t1<0 || t0>1) return null;
+  return [Math.max(0,t0), Math.min(1,t1)];
+}
+/* Rub out everything within the eraser at p. Strokes are cut at the edge of
+   the eraser so only the bit you actually rubbed disappears, rather than the
+   whole stroke vanishing the moment you touch it. */
 function eraseAt(p){
-  const r=12; let changed=false;
-  for(let i=ink.length-1;i>=0;i--){
-    if(ink[i].pts.some(q=>Math.hypot(q[0]-p[0],q[1]-p[1])<r)){ ink.splice(i,1); changed=true; }
+  const out=[]; let changed=false;
+  for(const st of ink){
+    const r=ERASE_R + (st.w||3)/2, pts=st.pts;
+    if(pts.length===1){
+      if(Math.hypot(pts[0][0]-p[0], pts[0][1]-p[1])<=r) changed=true;
+      else out.push(st);
+      continue;
+    }
+    const runs=[]; let run=[], hit=false;
+    if(Math.hypot(pts[0][0]-p[0], pts[0][1]-p[1])>r) run.push(pts[0]); else hit=true;
+    for(let i=1;i<pts.length;i++){
+      const a=pts[i-1], b=pts[i];
+      const rng=circleSegmentRange(a,b,p,r);
+      if(!rng){ run.push(b); continue; }
+      hit=true;                       // note the touch: a trim can leave the
+      const lerp=t=>[a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t];  // point count
+      if(rng[0]>0){ if(!run.length) run.push(a); run.push(lerp(rng[0])); }      // unchanged
+      if(run.length) runs.push(run);
+      run=[];
+      if(rng[1]<1){ run.push(lerp(rng[1])); run.push(b); }
+    }
+    if(run.length) runs.push(run);
+    if(!hit){ out.push(st); continue; }
+    changed=true;
+    for(const s of runs) if(s.length>=2) out.push({c:st.c, w:st.w, pts:s});
   }
-  if(changed){ redrawInk(); save('wb.ink', ink); pushInk(); }
+  if(!changed) return false;
+  ink=out;
+  return true;
+}
+/* Erase along the path travelled since the last pointer sample, so dragging
+   the eraser quickly cannot skip over strokes between two sampled positions. */
+function eraseAlong(p){
+  let changed=false;
+  if(lastErase){
+    const d=Math.hypot(p[0]-lastErase[0], p[1]-lastErase[1]);
+    const steps=Math.ceil(d/(ERASE_R*0.6));
+    for(let i=1;i<steps;i++){
+      const t=i/steps;
+      if(eraseAt([lastErase[0]+(p[0]-lastErase[0])*t, lastErase[1]+(p[1]-lastErase[1])*t])) changed=true;
+    }
+  }
+  if(eraseAt(p)) changed=true;
+  lastErase=p;
+  // redraw live, but only sync/persist once the rub finishes (see endStroke)
+  if(changed){ erasedSomething=true; redrawInk(); }
 }
 function setPen(on){ penMode=on; if(on) eraseMode=false; syncPenUI(); }
 function setErase(on){ eraseMode=on; if(on) penMode=false; syncPenUI(); }
@@ -990,6 +1065,8 @@ function downloadCanvas(canvas, name){
    8. EXPORT: whole board -> PDF (lazy-load html2canvas + jsPDF)
    ========================================================================= */
 const libP={};
+const PDF_MATH_SCALE=0.8;   // how much smaller equations are printed than shown
+const PDF_JPEG_Q=0.92;      // page images are JPEG: a PNG board ran to ~90MB
 function ensureLib(url, ready){
   if(ready()) return Promise.resolve();
   if(libP[url]) return libP[url];
@@ -997,31 +1074,115 @@ function ensureLib(url, ready){
     s.src=url; s.onload=()=>res(); s.onerror=()=>rej(new Error('Could not load '+url)); document.head.appendChild(s); });
   return libP[url];
 }
+/* The board is always at least as tall as its viewport and usually ends in
+   blank space, which used to print as an empty final page. Find the last row
+   that isn't bare paper, scanning bottom-up in bands so we normally read only
+   the tail of the canvas. */
+function lastUsedRow(cv, paper){
+  const m=/^#(\w{2})(\w{2})(\w{2})$/.exec(paper);
+  if(!m) return cv.height;
+  const R=parseInt(m[1],16), G=parseInt(m[2],16), B=parseInt(m[3],16), TOL=8;
+  const cx=cv.getContext('2d'), band=256;
+  for(let y=cv.height; y>0; y-=band){
+    const h=Math.min(band,y);
+    let d;
+    try{ d=cx.getImageData(0,y-h,cv.width,h).data; }catch(e){ return cv.height; }
+    for(let row=h-1; row>=0; row--){
+      const off=row*cv.width*4;
+      for(let x=0;x<cv.width;x++){
+        const i=off+x*4;
+        if(d[i+3]>8 && (Math.abs(d[i]-R)>TOL || Math.abs(d[i+1]-G)>TOL || Math.abs(d[i+2]-B)>TOL))
+          return y-h+row+1;
+      }
+    }
+  }
+  return 1;
+}
 async function savePDF(){
   setStatus('Building PDF… (loads a library on first use)');
   try{
     await ensureLib('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', ()=>window.html2canvas);
     await ensureLib('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', ()=>window.jspdf);
     const paper = theme==='wb-theme-white' ? '#ffffff' : theme==='wb-theme-slate' ? '#1e293b' : '#0f3d2e';
-    const shot=await window.html2canvas(content, {backgroundColor:paper, scale:2, useCORS:true,
-      windowWidth:content.scrollWidth, height:content.scrollHeight});
-    // composite the pen overlay on top, scaled to match
-    const full=document.createElement('canvas'); full.width=shot.width; full.height=shot.height;
-    const fx=full.getContext('2d'); fx.drawImage(shot,0,0);
-    if(overlay.width && overlay.height)
-      fx.drawImage(overlay, 0,0, overlay.width, overlay.height, 0,0, full.width, full.height);
+    /* Equations print smaller than they appear on the board. Two reasons:
+       screen size is chosen for reading across the room, and html2canvas lays
+       the maths out slightly wider than the live DOM, so a full-size equation
+       runs past the edge and gets sliced off. Scaling from the left keeps the
+       widest ones inside the page. A transform doesn't reflow anything, so
+       pen annotations still line up with what they were drawn over. */
+    const shrunk=[];
+    for(const el of content.querySelectorAll('.wb-math')){
+      if(!el.clientWidth) continue;
+      // KaTeX puts the sideways scroll on its own .katex-display wrapper, and
+      // that clipping happens at layout — before any transform is painted — so
+      // the overflow has to be released or the tail is lost whatever the scale.
+      const inner=el.querySelector('.katex-display');
+      const natural=Math.max(el.scrollWidth, inner?inner.scrollWidth:0);
+      const fit = natural>el.clientWidth ? el.clientWidth/natural : 1;
+      const k = Math.max(0.5, PDF_MATH_SCALE*fit);
+      shrunk.push([el, el.style.cssText, inner, inner&&inner.style.cssText]);
+      if(inner) inner.style.overflow='visible';
+      el.style.overflow='visible';
+      el.style.transform='scale('+k.toFixed(4)+')';
+      el.style.transformOrigin='left top';
+    }
+    let shot;
+    try{
+      // No windowWidth/height override: forcing them made html2canvas lay the
+      // clone out narrower than the real board, clipping wide equations too.
+      shot=await window.html2canvas(content, {backgroundColor:paper, scale:2, useCORS:true});
+    } finally {
+      for(const [el,css,inner,icss] of shrunk){
+        el.style.cssText=css;
+        if(inner) inner.style.cssText=icss;
+      }
+    }
+
+    /* Composite the pen overlay on top. The overlay is measured in CSS pixels
+       and can be taller than the text (you can draw in the blank space below
+       it), so map it through the shot's px-per-CSS-px rather than stretching
+       it to fit — stretching moved annotations off the thing they annotate. */
+    const pxPerCss = shot.width / Math.max(1, content.offsetWidth);
+    const inkW = (parseFloat(overlay.style.width)  || 0) * pxPerCss;
+    const inkH = (parseFloat(overlay.style.height) || 0) * pxPerCss;
+    /* Extend the page past the text only as far as the lowest stroke actually
+       reaches. The overlay itself runs to the full height of the board, so
+       sizing to that emitted trailing blank pages. */
+    let inkBottom=0;
+    for(const st of ink)
+      for(const q of st.pts)
+        inkBottom=Math.max(inkBottom, q[1]+(st.w||3));
+    const full=document.createElement('canvas');
+    full.width = shot.width;
+    full.height = Math.max(shot.height, Math.ceil(inkBottom*pxPerCss));
+    const fx=full.getContext('2d');
+    fx.fillStyle=paper; fx.fillRect(0,0,full.width,full.height);
+    fx.drawImage(shot,0,0);
+    if(overlay.width && overlay.height && inkW && inkH)
+      fx.drawImage(overlay, 0, 0, Math.round(inkW), Math.round(inkH));
+
     const { jsPDF } = window.jspdf;
     const pdf=new jsPDF('p','pt','a4');
     const pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
-    const stripPx=Math.floor(full.width*ph/pw);
+    // Page margins: the board used to be blown up edge to edge, which is what
+    // made the equations look oversized. Inset it to normal document margins.
+    const M=54;                                   // 0.75in
+    const availW=pw-2*M, availH=ph-2*M;
+    const stripPx=Math.floor(full.width*availH/availW);
+    // stop at the last row with something on it, so trailing blank board space
+    // doesn't become an empty final page
+    const bottom=Math.min(full.height, lastUsedRow(full, paper)+Math.round(8*pxPerCss));
     let sY=0, first=true;
-    while(sY<full.height){
-      const sH=Math.min(stripPx, full.height-sY);
+    while(sY<bottom){
+      const sH=Math.min(stripPx, bottom-sY);
       const pc=document.createElement('canvas'); pc.width=full.width; pc.height=sH;
-      pc.getContext('2d').drawImage(full,0,sY,full.width,sH,0,0,full.width,sH);
-      const hOnPage=sH*pw/full.width;
+      const px=pc.getContext('2d');
+      px.fillStyle=paper; px.fillRect(0,0,pc.width,pc.height);   // JPEG has no alpha
+      px.drawImage(full,0,sY,full.width,sH,0,0,full.width,sH);
+      const hOnPage=sH*availW/full.width;
       if(!first) pdf.addPage();
-      pdf.addImage(pc.toDataURL('image/png'),'PNG',0,0,pw,hOnPage);
+      if(theme!=='wb-theme-white'){ pdf.setFillColor(paper); pdf.rect(0,0,pw,ph,'F'); }
+      pdf.addImage(pc.toDataURL('image/jpeg',PDF_JPEG_Q),'JPEG',M,M,availW,hOnPage);
       first=false; sY+=sH;
     }
     pdf.save('whiteboard.pdf');
@@ -1171,7 +1332,8 @@ $('wbTheme').addEventListener('change', e=>{ theme=e.target.value; render(); });
 $('wbSize').addEventListener('input', e=>{ fontScale=parseFloat(e.target.value); render(); });
 $('wbPen').addEventListener('click', ()=>setPen(!penMode));
 $('wbErase').addEventListener('click', ()=>setErase(!eraseMode));
-$('wbClearInk').addEventListener('click', ()=>{ ink=[]; save('wb.ink',ink); redrawInk(); pushInk(); setStatus('Ink cleared.'); });
+function clearInk(){ ink=[]; save('wb.ink', ink); redrawInk(); pushInk(); }
+$('wbClearInk').addEventListener('click', ()=>{ clearInk(); setStatus('Ink cleared.'); });
 $('wbHost').addEventListener('click', hostBoard);
 $('wbJoin').addEventListener('click', joinBoard);
 $('wbLeave').addEventListener('click', leaveBoard);
@@ -1183,7 +1345,11 @@ $('wbPasteBtn').addEventListener('click', pasteFromClipboard);
 $('wbImgBtn').addEventListener('click', ()=>$('wbImgFile').click());
 $('wbImgFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) fileToScaledDataURL(f, addImageData); e.target.value=''; });
 $('wbPdf').addEventListener('click', savePDF);
-$('wbClear').addEventListener('click', ()=>{ src.value=''; render(); pushSrcNow(); src.focus(); });
+$('wbClear').addEventListener('click', ()=>{
+  src.value=''; render(); pushSrcNow();
+  clearInk();                       // the pen overlay is separate from the text — wipe it too
+  setStatus('Board cleared.'); src.focus();
+});
 $('wbExample').addEventListener('click', ()=>{ src.value=EXAMPLE; render(); pushSrcNow(); });
 board.addEventListener('scroll', ()=>{}, {passive:true});
 window.addEventListener('resize', ()=>{ clearTimeout(timer); timer=setTimeout(sizeOverlay,120); });
