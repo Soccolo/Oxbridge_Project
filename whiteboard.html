@@ -130,8 +130,14 @@ function toggleNav() {
   border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
 .wb-board{position:relative;flex:1;overflow-y:auto;overflow-x:hidden;outline:none}
 .wb-board:focus-visible{box-shadow:inset 0 0 0 2px var(--accent-line)}
-.wb-content{position:relative;z-index:1;padding:2rem 2.2rem;min-height:100%;
-  min-width:0;max-width:100%;box-sizing:border-box;overflow-wrap:anywhere;
+/* The board is laid out at one fixed logical width on every machine and then
+   scaled to fit the pane. Everyone therefore gets an identical layout, so a
+   pen stroke recorded at a given point lands on the same equation for the
+   teacher and for every student, whatever their screen size. */
+.wb-sizer{position:relative;z-index:1;width:100%;min-height:100%;overflow:hidden}
+.wb-content{position:absolute;top:0;left:0;padding:2rem 2.2rem;
+  width:900px;max-width:none;transform-origin:top left;
+  min-width:0;box-sizing:border-box;overflow-wrap:anywhere;
   line-height:1.4;transition:background .2s,color .2s}
 .wb-overlay{position:absolute;top:0;left:0;z-index:2;pointer-events:none;touch-action:none}
 .wb-board.pen .wb-overlay{pointer-events:auto;cursor:crosshair}
@@ -311,7 +317,9 @@ function toggleNav() {
     </div>
     <div class="wb-boardwrap">
       <div class="wb-board" id="wbBoard" tabindex="0" aria-label="Whiteboard — click here and press Ctrl+V to paste a screenshot">
-        <div class="wb-content wb-theme-white" id="wbContent"></div>
+        <div class="wb-sizer" id="wbSizer">
+          <div class="wb-content wb-theme-white" id="wbContent"></div>
+        </div>
         <canvas class="wb-overlay" id="wbOverlay"></canvas>
       </div>
     </div>
@@ -701,7 +709,12 @@ function drawGraph(spec, parser, theme){
    ========================================================================= */
 const $ = id => document.getElementById(id);
 const board=$('wbBoard'), content=$('wbContent'), overlay=$('wbOverlay'),
-      src=$('wbSrc'), status=$('wbStatus');
+      sizer=$('wbSizer'), src=$('wbSrc'), status=$('wbStatus');
+/* Every participant lays the board out at this width and stores pen strokes in
+   these units, so an annotation lands on the same equation on every screen.
+   Only the display scale differs from machine to machine. */
+const BOARD_W=900;
+let boardScale=1;
 let fontScale=1.5, theme='wb-theme-white';
 let images = load('wb.images', {});
 let ink    = load('wb.ink', []);      // array of strokes {c,w,pts:[[x,y]...]}
@@ -799,17 +812,21 @@ function render(){
    ========================================================================= */
 function sizeOverlay(){
   const dpr=window.devicePixelRatio||1;
-  const w=content.offsetWidth, h=Math.max(content.offsetHeight, board.clientHeight);
-  overlay.style.width=w+'px'; overlay.style.height=h+'px';
-  overlay.width=Math.round(w*dpr); overlay.height=Math.round(h*dpr);
-  const cx=overlay.getContext('2d'); cx.setTransform(dpr,0,0,dpr,0,0);
+  const avail=board.clientWidth||BOARD_W;
+  const s=avail/BOARD_W;
+  boardScale=s;
+  // lay the content out at the shared logical width, then scale it to the pane
+  content.style.transform='scale('+s+')';
+  content.style.minHeight=Math.ceil(board.clientHeight/s)+'px';
+  const hLogical=content.offsetHeight;
+  sizer.style.height=Math.ceil(hLogical*s)+'px';
+  overlay.style.width=avail+'px'; overlay.style.height=(hLogical*s)+'px';
+  overlay.width=Math.round(avail*dpr); overlay.height=Math.round(hLogical*s*dpr);
+  // draw in logical board units: identical numbers mean identical places
+  overlay.getContext('2d').setTransform(dpr*s,0,0,dpr*s,0,0);
   redrawInk();
 }
-function redrawInk(){
-  const cx=overlay.getContext('2d');
-  const dpr=window.devicePixelRatio||1;
-  // the context is scaled by dpr, so clear in CSS pixels
-  cx.clearRect(0,0,overlay.width/dpr,overlay.height/dpr);
+function strokeInk(cx){
   cx.lineCap='round'; cx.lineJoin='round';
   for(const st of ink){
     if(!st.pts.length) continue;
@@ -820,10 +837,20 @@ function redrawInk(){
     cx.stroke();
   }
 }
+function redrawInk(){
+  const cx=overlay.getContext('2d');
+  cx.save();
+  cx.setTransform(1,0,0,1,0,0);          // clear in device pixels, whatever the scale
+  cx.clearRect(0,0,overlay.width,overlay.height);
+  cx.restore();
+  strokeInk(cx);
+}
 let penMode=false, eraseMode=false, drawing=false, cur=null;
 const ERASE_R=14;                 // eraser radius in CSS pixels
 let lastErase=null, erasedSomething=false;
-function ptFromEvent(e){ const r=overlay.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; }
+// screen pixels -> shared logical board units
+function ptFromEvent(e){ const r=overlay.getBoundingClientRect();
+  return [(e.clientX-r.left)/boardScale, (e.clientY-r.top)/boardScale]; }
 overlay.addEventListener('pointerdown', e=>{
   if(!penMode && !eraseMode) return;
   try{ overlay.setPointerCapture(e.pointerId); }catch(err){}
@@ -1065,7 +1092,7 @@ function downloadCanvas(canvas, name){
    8. EXPORT: whole board -> PDF (lazy-load html2canvas + jsPDF)
    ========================================================================= */
 const libP={};
-const PDF_MATH_SCALE=0.8;   // how much smaller equations are printed than shown
+const PDF_MATH_SCALE=0.98;  // headroom when an over-wide equation is fitted to the page
 const PDF_JPEG_Q=0.92;      // page images are JPEG: a PNG board ran to ~90MB
 function ensureLib(url, ready){
   if(ready()) return Promise.resolve();
@@ -1104,12 +1131,11 @@ async function savePDF(){
     await ensureLib('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', ()=>window.html2canvas);
     await ensureLib('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', ()=>window.jspdf);
     const paper = theme==='wb-theme-white' ? '#ffffff' : theme==='wb-theme-slate' ? '#1e293b' : '#0f3d2e';
-    /* Equations print smaller than they appear on the board. Two reasons:
-       screen size is chosen for reading across the room, and html2canvas lays
-       the maths out slightly wider than the live DOM, so a full-size equation
-       runs past the edge and gets sliced off. Scaling from the left keeps the
-       widest ones inside the page. A transform doesn't reflow anything, so
-       pen annotations still line up with what they were drawn over. */
+    /* Equations already print far smaller than they look on the board: the
+       whole logical board is scaled down onto the page. So only touch an
+       equation that would otherwise be sliced off at the edge — shrinking one
+       moves it inside its own box, which would pull it out from under any pen
+       annotation drawn around it. */
     const shrunk=[];
     for(const el of content.querySelectorAll('.wb-math')){
       if(!el.clientWidth) continue;
@@ -1118,8 +1144,8 @@ async function savePDF(){
       // the overflow has to be released or the tail is lost whatever the scale.
       const inner=el.querySelector('.katex-display');
       const natural=Math.max(el.scrollWidth, inner?inner.scrollWidth:0);
-      const fit = natural>el.clientWidth ? el.clientWidth/natural : 1;
-      const k = Math.max(0.5, PDF_MATH_SCALE*fit);
+      if(natural<=el.clientWidth+1) continue;             // fits: leave it alone
+      const k=Math.max(0.5, (el.clientWidth/natural)*PDF_MATH_SCALE);
       shrunk.push([el, el.style.cssText, inner, inner&&inner.style.cssText]);
       if(inner) inner.style.overflow='visible';
       el.style.overflow='visible';
@@ -1127,27 +1153,28 @@ async function savePDF(){
       el.style.transformOrigin='left top';
     }
     let shot;
+    const fitTransform=content.style.transform;
     try{
+      // Capture at the logical board width, unscaled, so the page is the same
+      // whatever size window this happens to be exported from.
+      content.style.transform='none';
       // No windowWidth/height override: forcing them made html2canvas lay the
       // clone out narrower than the real board, clipping wide equations too.
       shot=await window.html2canvas(content, {backgroundColor:paper, scale:2, useCORS:true});
     } finally {
+      content.style.transform=fitTransform;
       for(const [el,css,inner,icss] of shrunk){
         el.style.cssText=css;
         if(inner) inner.style.cssText=icss;
       }
     }
 
-    /* Composite the pen overlay on top. The overlay is measured in CSS pixels
-       and can be taller than the text (you can draw in the blank space below
-       it), so map it through the shot's px-per-CSS-px rather than stretching
-       it to fit — stretching moved annotations off the thing they annotate. */
+    /* Redraw the strokes straight into the page rather than rescaling the
+       overlay canvas: ink is stored in logical board units and the capture is
+       a known multiple of those, so this lands exactly on what was annotated. */
     const pxPerCss = shot.width / Math.max(1, content.offsetWidth);
-    const inkW = (parseFloat(overlay.style.width)  || 0) * pxPerCss;
-    const inkH = (parseFloat(overlay.style.height) || 0) * pxPerCss;
     /* Extend the page past the text only as far as the lowest stroke actually
-       reaches. The overlay itself runs to the full height of the board, so
-       sizing to that emitted trailing blank pages. */
+       reaches, or trailing blank board space becomes empty pages. */
     let inkBottom=0;
     for(const st of ink)
       for(const q of st.pts)
@@ -1158,8 +1185,7 @@ async function savePDF(){
     const fx=full.getContext('2d');
     fx.fillStyle=paper; fx.fillRect(0,0,full.width,full.height);
     fx.drawImage(shot,0,0);
-    if(overlay.width && overlay.height && inkW && inkH)
-      fx.drawImage(overlay, 0, 0, Math.round(inkW), Math.round(inkH));
+    fx.save(); fx.scale(pxPerCss, pxPerCss); strokeInk(fx); fx.restore();
 
     const { jsPDF } = window.jspdf;
     const pdf=new jsPDF('p','pt','a4');
@@ -1238,6 +1264,8 @@ function makeCode(){
 function pushSrcNow(){ if(roomRef && !applyingRemote) roomRef.child('src').set({v:src.value, by:clientId}); }
 function pushSrcSoon(){ if(!roomRef || applyingRemote) return; clearTimeout(srcPushT); srcPushT=setTimeout(pushSrcNow,250); }
 function pushInk(){ if(roomRef && !applyingRemote) roomRef.child('ink').set({v:JSON.stringify(ink), by:clientId}); }
+// equation size changes the layout, so it has to be shared or strokes drift
+function pushView(){ if(roomRef && !applyingRemote) roomRef.child('view').set({size:fontScale, by:clientId}); }
 function pushImages(){ if(roomRef && !applyingRemote) roomRef.child('images').set(Object.keys(images).length?images:null); }
 
 function hostBoard(){
@@ -1258,6 +1286,7 @@ async function connectRoom(code, seed){
     if(seed){
       await ref.set({ src:{v:src.value, by:clientId},
                       ink:{v:JSON.stringify(ink), by:clientId},
+                      view:{size:fontScale, by:clientId},
                       images:Object.keys(images).length?images:null });
     }else{
       const snap=await ref.once('value');
@@ -1276,6 +1305,12 @@ async function connectRoom(code, seed){
       const d=s.val(); if(!d || d.by===clientId) return;
       try{ ink=JSON.parse(d.v)||[]; }catch(e){ return; }
       save('wb.ink', ink); redrawInk();
+    });
+    ref.child('view').on('value', s=>{
+      const d=s.val(); if(!d || d.by===clientId) return;
+      if(typeof d.size!=='number' || d.size===fontScale) return;
+      fontScale=d.size; $('wbSize').value=String(fontScale);
+      applyingRemote=true; render(); applyingRemote=false;
     });
     ref.child('images').on('value', s=>{
       const v=s.val()||{};
@@ -1329,7 +1364,7 @@ function syncLiveUI(){
 let timer=null;
 src.addEventListener('input', ()=>{ clearTimeout(timer); timer=setTimeout(render,150); pushSrcSoon(); });
 $('wbTheme').addEventListener('change', e=>{ theme=e.target.value; render(); });
-$('wbSize').addEventListener('input', e=>{ fontScale=parseFloat(e.target.value); render(); });
+$('wbSize').addEventListener('input', e=>{ fontScale=parseFloat(e.target.value); render(); pushView(); });
 $('wbPen').addEventListener('click', ()=>setPen(!penMode));
 $('wbErase').addEventListener('click', ()=>setErase(!eraseMode));
 function clearInk(){ ink=[]; save('wb.ink', ink); redrawInk(); pushInk(); }
