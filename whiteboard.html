@@ -165,12 +165,23 @@ function toggleNav() {
 .wb-content figure{margin:1.2rem 0;position:relative}
 .wb-content figure canvas.wb-graph{max-width:100%;border-radius:10px;border:1px solid rgba(128,128,128,.25)}
 .wb-content figcaption{font-family:var(--mono);font-size:.72rem;opacity:.7;margin-top:.4rem}
-.wb-content .wb-img{max-width:100%;max-height:420px;border-radius:10px;border:1px solid rgba(128,128,128,.3);
-  background:#fff;padding:6px;display:inline-block}
+/* Images sit in a wrapper whose width is the thing being resized. The width is
+   stored on the "@img:" line as a percentage of the board's logical width, so
+   every student sees the same size and pen strokes stay where they were drawn. */
+.wb-content .wb-imgwrap{position:relative;display:inline-block;max-width:100%;vertical-align:top}
+.wb-content .wb-img{display:block;max-width:100%;height:auto;border-radius:10px;
+  border:1px solid rgba(128,128,128,.3);background:#fff;padding:6px;box-sizing:border-box}
+/* drag handle in the bottom-right corner of the picture */
+.wb-content .wb-resize{position:absolute;right:-7px;bottom:-7px;width:18px;height:18px;z-index:4;
+  border:1px solid var(--line);border-radius:5px;background:#fff;cursor:nwse-resize;
+  opacity:0;transition:opacity .12s;touch-action:none;padding:0;
+  background-image:linear-gradient(135deg,transparent 42%,rgba(0,0,0,.45) 42%,rgba(0,0,0,.45) 58%,transparent 58%)}
+.wb-content .wb-imgwrap:hover .wb-resize,.wb-content .wb-resize:focus-visible{opacity:1}
+.wb-content .wb-imgwrap.resizing .wb-resize{opacity:1}
 
-/* per-item hover buttons (export PNG / remove) */
+/* per-item hover buttons (export PNG / resize / remove) */
 .wb-tool{position:absolute;top:2px;right:2px;display:flex;gap:4px;opacity:0;transition:opacity .12s;z-index:3}
-.wb-math:hover .wb-tool,.wb-content figure:hover .wb-tool{opacity:1}
+.wb-math:hover .wb-tool,.wb-content figure:hover .wb-tool,.wb-content .wb-imgwrap:hover .wb-tool{opacity:1}
 .wb-mini{font-family:var(--mono);font-size:.6rem;font-weight:600;cursor:pointer;
   border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:6px;padding:.2rem .45rem;
   letter-spacing:.03em}
@@ -219,7 +230,7 @@ function toggleNav() {
 /* ---- print: Save as PDF prints only the board ---- */
 @media print{
   .sidebar,.wb-toolbar,.wb-quickstart,.wb-connect,.wb-editor,.wb-cheat,.wb .crumb,.wb .lede,.wb h1,
-  .wb-status,footer,.menu-toggle,.wb-tool{display:none !important}
+  .wb-status,footer,.menu-toggle,.wb-tool,.wb-resize{display:none !important}
   .shell{display:block}
   main{padding:0}
   .wb{padding:0}
@@ -236,7 +247,8 @@ function toggleNav() {
   <h1>Maths Whiteboard</h1>
   <p class="lede">Type formulae in plain text on the left — <code>int_a^b f(x) dx</code> — and watch them become
   proper notation on the board. Write <code>draw f(x)</code> to plot a function. Annotate with the pen, paste or drop
-  images, export any single equation as a PNG, or save the whole board as a PDF for your students.
+  images — hover a picture and drag its corner (or use − / + / fit) to resize it so the back row can read it —
+  export any single equation as a PNG, or save the whole board as a PDF for your students.
   Teachers can share a new board below; students use the highlighted join box and their teacher's 5-character code.</p>
 
   <section class="wb-quickstart" aria-label="Whiteboard typing instructions">
@@ -365,6 +377,8 @@ function toggleNav() {
           <tr><td class="k">draw f(x)</td><td>plots the function</td></tr>
           <tr><td class="k">draw sin(x), cos(x)</td><td>multiple curves</td></tr>
           <tr><td class="k">draw x^2, [-4, 6]</td><td>custom x-range</td></tr>
+          <tr><td class="k">@img:ID</td><td>a pasted picture (written for you)</td></tr>
+          <tr><td class="k">@img:ID w=60</td><td>picture at 60% of the board width — or drag its corner</td></tr>
         </table>
       </div>
     </div>
@@ -737,17 +751,51 @@ function render(){
     const line=raw.replace(/\s+$/,'');
     if(line.trim()===''){ const s=document.createElement('div'); s.className='wb-spacer'; content.appendChild(s); continue; }
 
-    // image line
-    const im=line.trim().match(/^@img:(\w+)$/);
+    // image line — "@img:ID" or "@img:ID w=60" (width as % of the board)
+    const im=line.trim().match(IMG_LINE);
     if(im){
       const id=im[1], data=images[id];
       const fig=document.createElement('figure');
-      if(data){ const img=document.createElement('img'); img.className='wb-img'; img.src=data; fig.appendChild(img); }
-      else { const d=document.createElement('div'); d.className='wb-err'; d.textContent='[missing image]'; fig.appendChild(d); }
+      if(!data){
+        const d=document.createElement('div'); d.className='wb-err'; d.textContent='[missing image]';
+        fig.appendChild(d); content.appendChild(fig); continue;
+      }
+      const wrap=document.createElement('div'); wrap.className='wb-imgwrap';
+      const img=document.createElement('img'); img.className='wb-img'; img.src=data;
+      img.alt='Picture on the board';
+      const pct=im[2]!==undefined ? clampPct(parseFloat(im[2])) : null;
+      if(pct!==null){ wrap.style.width=pct+'%'; img.style.width='100%'; }
+      // a picture only gets its height once it has decoded, and the pen overlay
+      // is sized from the board height — so re-measure when it lands
+      img.addEventListener('load', sizeOverlay);
+      wrap.appendChild(img);
+
       const tool=document.createElement('div'); tool.className='wb-tool';
-      const rm=document.createElement('button'); rm.className='wb-mini rm'; rm.textContent='remove';
-      rm.onclick=()=>removeImageLine(id); tool.appendChild(rm);
-      fig.appendChild(tool); content.appendChild(fig); continue;
+      const smaller=document.createElement('button'); smaller.className='wb-mini';
+      smaller.textContent='−'; smaller.title='Make this picture smaller';
+      smaller.onclick=()=>stepImageWidth(id, wrap, -10);
+      const bigger=document.createElement('button'); bigger.className='wb-mini';
+      bigger.textContent='+'; bigger.title='Make this picture bigger';
+      bigger.onclick=()=>stepImageWidth(id, wrap, +10);
+      const full=document.createElement('button'); full.className='wb-mini';
+      full.textContent='fit'; full.title='Fill the width of the board';
+      full.onclick=()=>setImageWidth(id, 100);
+      const reset=document.createElement('button'); reset.className='wb-mini';
+      reset.textContent='reset'; reset.title='Back to the picture’s own size';
+      reset.onclick=()=>setImageWidth(id, null);
+      const rm=document.createElement('button'); rm.className='wb-mini rm';
+      rm.textContent='remove'; rm.title='Take this picture off the board';
+      rm.onclick=()=>removeImageLine(id);
+      tool.append(smaller, bigger, full, reset, rm);
+      wrap.appendChild(tool);
+
+      const grip=document.createElement('button'); grip.className='wb-resize';
+      grip.title='Drag to resize this picture';
+      grip.setAttribute('aria-label','Resize this picture');
+      startResizeOn(grip, id, wrap);
+      wrap.appendChild(grip);
+
+      fig.appendChild(wrap); content.appendChild(fig); continue;
     }
 
     // heading
@@ -959,7 +1007,71 @@ function syncPenUI(){
 /* =========================================================================
    6. IMAGES  (paste / drop / pick  ->  @img:ID line in the text)
    ========================================================================= */
+/* An image is a line of the typed text: "@img:ID", optionally followed by
+   "w=60" — the width as a percentage of the board's logical width. Keeping the
+   size in the text (rather than in a separate table) means it is autosaved,
+   shared live and printed to PDF by the machinery that already handles the
+   text, and an old board with no w= still opens. */
+const IMG_LINE=/^@img:(\w+)(?:\s+w=(\d+(?:\.\d+)?))?$/;
+const IMG_MIN=8, IMG_MAX=100;
+function clampPct(p){ return Math.min(IMG_MAX, Math.max(IMG_MIN, Math.round(p))); }
+
 function persistImages(){ save('wb.images', images); pushImages(); }
+/* Rewrite the "@img:" line for this picture. pct===null restores its own size. */
+function setImageWidth(id, pct){
+  const lines=src.value.split('\n');
+  let changed=false;
+  for(let i=0;i<lines.length;i++){
+    const m=lines[i].trim().match(IMG_LINE);
+    if(!m || m[1]!==id) continue;
+    lines[i] = pct===null ? '@img:'+id : '@img:'+id+' w='+clampPct(pct);
+    changed=true;
+  }
+  if(!changed) return;
+  src.value=lines.join('\n');
+  render(); pushSrcNow();
+}
+/* What percentage of the board is this picture using right now? Needed because
+   a picture with no w= is at its own size, which only the layout knows. */
+function currentPct(wrap){
+  const box=wrap.parentNode ? wrap.parentNode.clientWidth : 0;   // the <figure>
+  if(!box) return IMG_MAX;
+  return clampPct(wrap.offsetWidth/box*100);
+}
+function stepImageWidth(id, wrap, delta){ setImageWidth(id, currentPct(wrap)+delta); }
+
+/* Drag the corner grip. The board is laid out at BOARD_W and then scaled to the
+   pane, so the pointer movement is divided by that scale to get logical units —
+   otherwise the picture would resize at a different rate on each screen. */
+function startResizeOn(grip, id, wrap){
+  grip.addEventListener('pointerdown', e=>{
+    e.preventDefault(); e.stopPropagation();
+    const box=wrap.parentNode ? wrap.parentNode.clientWidth : 0;
+    if(!box) return;
+    const startX=e.clientX, startW=wrap.offsetWidth;
+    let pct=currentPct(wrap);
+    try{ grip.setPointerCapture(e.pointerId); }catch(err){}
+    wrap.classList.add('resizing');
+    const move=ev=>{
+      const w=startW+(ev.clientX-startX)/(boardScale||1);
+      pct=clampPct(w/box*100);
+      wrap.style.width=pct+'%';                 // live preview, no re-render
+      wrap.firstChild.style.width='100%';
+      sizeOverlay();
+    };
+    const up=()=>{
+      grip.removeEventListener('pointermove', move);
+      grip.removeEventListener('pointerup', up);
+      grip.removeEventListener('pointercancel', up);
+      wrap.classList.remove('resizing');
+      setImageWidth(id, pct);                   // now write it into the text
+      setStatus('Picture resized to '+pct+'% of the board width.');
+    };
+    grip.addEventListener('pointermove', move);
+    grip.addEventListener('pointerup', up);
+    grip.addEventListener('pointercancel', up);
+  });
+}
 function addImageData(dataURL){
   const id='i'+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36);
   images[id]=dataURL; persistImages();
@@ -979,7 +1091,10 @@ function insertAtCursor(text){
   const pos=a+text.length; src.selectionStart=src.selectionEnd=pos;
 }
 function removeImageLine(id){
-  src.value=src.value.split('\n').filter(l=>l.trim()!=='@img:'+id).join('\n');
+  src.value=src.value.split('\n').filter(l=>{
+    const m=l.trim().match(IMG_LINE);          // the line may carry a w=, so match it
+    return !(m && m[1]===id);
+  }).join('\n');
   delete images[id]; persistImages(); render(); pushSrcNow();
 }
 function fileToScaledDataURL(file, cb){
@@ -1409,7 +1524,7 @@ draw f(x), [-4, 6]
 
 draw sin(x), cos(x) from -2*pi to 2*pi`;
 
-const WB_BUILD='2026-07-build5 (plain text, protected text commands and clearer live joining)';
+const WB_BUILD='2026-07-build6 (resizable pictures)';
 function boot(){
   console.log('[whiteboard] '+WB_BUILD+' · live sharing '+
     (fbReady() ? 'ON — Firebase config detected' : 'OFF — no Firebase config in this file'));
