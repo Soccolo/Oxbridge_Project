@@ -75,6 +75,7 @@ function toggleNav() {
 <div class="box warn"><span class="bt">Instructions — read before you start</span>
 <ul>
 <li><strong>Time:</strong> 75 minutes for 20 questions — an average of 3 minutes 45 seconds each, but the early questions should take far less, buying you time for the last five.</li>
+<li><strong>Most questions have five options; four have six.</strong> The real test varies the count too, and the longer lists mark the harder questions — Questions 11, 18, 19 and 20 are pitched at the level of the <a href="https://jzmaths.com/papers" target="_blank" rel="noopener">JZ Maths mocks</a>, which are deliberately harder than the real TMUA. Do not be discouraged by them.</li>
 <li><strong>No calculator</strong> and no formula sheet. Answers on paper first; only then open the solutions.</li>
 <li><strong>One mark per question, no negative marking</strong> — so never leave a question blank. If you are down to two options, guess and move on.</li>
 <li>Mark yourself against the <a href="#key">answer key</a> at the bottom, then read <em>every</em> solution, including for the questions you got right — the fast route is often not the one you took.</li>
@@ -149,7 +150,7 @@ since \(\binom{5}{1}(-2)=-10\) and \(\binom{5}{2}(-2)^2=10\cdot 4=40\). An \(x^2
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill tmua">Sequences &amp; series</span></div>
-<p>The sum of the first \(n\) terms of a sequence is \(S_n=2n^2-3n\). What is the tenth term?</p>
+<p>A sequence \(a_1,a_2,a_3,\dots\) is such that \(a_1+a_2+\cdots+a_n=2n^2-3n\) for <em>every</em> positive integer \(n\). What is \(a_{10}\)?</p>
 <ol class="mcq">
 <li data-o="A">\(37\)</li>
 <li data-o="B">\(170\)</li>
@@ -159,9 +160,10 @@ since \(\binom{5}{1}(-2)=-10\) and \(\binom{5}{2}(-2)^2=10\cdot 4=40\). An \(x^2
 </ol>
 <details class="sol"><summary>Show solution</summary>
 <p><span class="ans">Answer: D</span></p>
-<p>The single most useful identity about partial sums: \(a_n=S_n-S_{n-1}\). So
+<p>Notice first that you are told nothing about what <em>kind</em> of sequence this is — and you need nothing. Writing \(S_n\) for the sum of the first \(n\) terms, the given formula holds for <em>every</em> \(n\), and that alone pins down every term, through the single most useful identity about partial sums, \(a_n=S_n-S_{n-1}\):
 \[a_{10}=S_{10}-S_9=(200-30)-(162-27)=170-135=35.\]
-Option B is \(S_{10}\) itself — read the question. (In general \(a_n=4n-5\), an arithmetic sequence with common difference \(4\); a quadratic \(S_n\) always signals an arithmetic sequence.)</p>
+Option B is \(S_{10}\) itself — read the question.</p>
+<p>Having found the answer, you can check the structure out of interest: \(a_n=S_n-S_{n-1}=4n-5\) for \(n\ge 2\), and \(a_1=S_1=-1\) fits the same formula, so the sequence turns out to be arithmetic with common difference \(4\). A quadratic \(S_n\) always produces an arithmetic sequence — but here that is a <em>consequence</em>, not something you were given or needed.</p>
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill tmua">Geometric series</span></div>
@@ -251,20 +253,27 @@ Option A is \(\cos 15^\circ\) itself (a tempting sight, since \(\left(\frac{\sqr
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 11</span><span class="pill tmua">Logarithms</span></div>
-<p>Solve \(\log_3 x+\log_9 x=6\).</p>
+<p>The positive real numbers \(x\) and \(y\) satisfy
+\[\log_2\!\left(xy^2\right)=5,\qquad \left(\log_2 x\right)\left(\log_2 y\right)=2.\]
+What is the sum of all possible values of \(\log_2\!\left(\dfrac{x}{y}\right)\)?</p>
 <ol class="mcq">
-<li data-o="A">\(81\)</li>
-<li data-o="B">\(27\)</li>
-<li data-o="C">\(243\)</li>
-<li data-o="D">\(9\)</li>
-<li data-o="E">\(729\)</li>
+<li data-o="A">\(\tfrac52\)</li>
+<li data-o="B">\(\tfrac72\)</li>
+<li data-o="C">\(-1\)</li>
+<li data-o="D">\(3\)</li>
+<li data-o="E">\(\tfrac92\)</li>
+<li data-o="F">\(5\)</li>
 </ol>
 <details class="sol"><summary>Show solution</summary>
 <p><span class="ans">Answer: A</span></p>
-<p>Put both logarithms in the same base. Since \(9=3^2\),
-\[\log_9 x=\frac{\log_3 x}{\log_3 9}=\frac{\log_3 x}{2}.\]
-Writing \(u=\log_3 x\), the equation becomes \(u+\frac{u}{2}=6\), so \(u=4\) and \(x=3^4=81\).</p>
-<p>Option E is the answer to \(\log_3 x=6\) — that is, what you get by treating the two logarithms as though they were equal.</p>
+<p><strong>Substitute before you do anything else.</strong> Put \(a=\log_2 x\) and \(b=\log_2 y\); the logarithm laws turn both conditions into ordinary algebra:
+\[a+2b=5,\qquad ab=2,\]
+and the quantity wanted is simply \(\log_2(x/y)=a-b\).</p>
+<p>Eliminating \(a=5-2b\) gives \((5-2b)b=2\), i.e. \(2b^2-5b+2=0\), so \((2b-1)(b-2)=0\) and \(b=2\) or \(b=\tfrac12\). The two solutions are
+\[(a,b)=(1,2)\quad\text{and}\quad (a,b)=\left(4,\tfrac12\right),\]
+both legitimate, since \(x=2^a\) and \(y=2^b\) are positive for any real \(a,b\) — there is nothing to reject.</p>
+<p>Hence \(a-b=-1\) or \(a-b=\tfrac72\), and the sum is \(-1+\tfrac72=\tfrac52\).</p>
+<p>Options C and B are the two individual values: whenever a question asks for the sum of <em>all</em> possible values, the examiner has already anticipated that you will find one root and stop. Solving a quadratic and using only one root is the most expensive habit on this paper.</p>
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 12</span><span class="pill tmua">Logarithms</span></div>
@@ -369,52 +378,65 @@ using \(\ln 4=2\ln 2\).</p>
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 18</span><span class="pill tmua">Counting</span></div>
-<p>How many four-digit even numbers can be formed using the digits \(1,2,3,4,5,6\) if no digit may be repeated?</p>
+<p>How many four-digit numbers greater than \(4000\) can be formed using the digits \(1,2,3,4,5,6\), with no digit repeated, if the number must be even?</p>
 <ol class="mcq">
-<li data-o="A">\(180\)</li>
-<li data-o="B">\(360\)</li>
-<li data-o="C">\(120\)</li>
-<li data-o="D">\(60\)</li>
+<li data-o="A">\(60\)</li>
+<li data-o="B">\(72\)</li>
+<li data-o="C">\(90\)</li>
+<li data-o="D">\(96\)</li>
 <li data-o="E">\(108\)</li>
+<li data-o="F">\(84\)</li>
 </ol>
 <details class="sol"><summary>Show solution</summary>
-<p><span class="ans">Answer: A</span></p>
-<p><strong>Deal with the constraint first.</strong> The units digit must be \(2\), \(4\) or \(6\): \(3\) choices. The remaining three positions are filled from the \(5\) unused digits in \(5\times 4\times 3=60\) ways. Total: \(3\times 60=180\).</p>
-<p>Option B counts all four-digit numbers with no repeats (\(6\times5\times4\times3=360\)) — exactly twice the answer, since half of all such numbers are even. That coincidence is a useful check, not a coincidence to rely on in general.</p>
+<p><span class="ans">Answer: F</span></p>
+<p>Two constraints act on two <em>different</em> positions, and they interfere — so handle the pair of constrained positions together, and only then fill the rest.</p>
+<p>The last digit must be even: \(d_4\in\{2,4,6\}\). The first digit must satisfy \(d_1\ge4\) (any such number automatically exceeds \(4000\), since the smallest is \(4123\)), so \(d_1\in\{4,5,6\}\). That looks like \(3\times3=9\) pairs, but \(d_1\ne d_4\), and the two sets share the digits \(4\) and \(6\) — so two pairs are illegal, leaving \(9-2=7\).</p>
+<p>Whatever that pair is, the middle two positions are filled from the remaining \(4\) digits in \(4\times3=12\) ways. Total:
+\[7\times12=84.\]</p>
+<p><strong>The trap is option D.</strong> Treating the constraints as independent gives \(3\times3\times12=108\) (option E), and "fixing" it by subtracting a whole digit's worth of cases rather than exactly the two overlapping pairs gives \(96\). When two constraints compete for the same digits, count the constrained positions <em>jointly</em>; the alternative is a case split on whether \(d_4=4\) or \(6\) (then \(d_1\) has 2 choices) or \(d_4=2\) (then \(d_1\) has 3), giving \(2\times2\times12+1\times3\times12=48+36=84\). Same answer, and a good check.</p>
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 19</span><span class="pill tmua">Probability</span></div>
-<p>Two fair six-sided dice are rolled. Given that the total is \(8\), what is the probability that at least one die shows a \(5\)?</p>
+<p>Two fair six-sided dice are rolled repeatedly until the total is either \(7\) or \(8\), at which point the game stops. What is the probability that the game stops on a total of \(7\)?</p>
 <ol class="mcq">
-<li data-o="A">\(\tfrac15\)</li>
-<li data-o="B">\(\tfrac13\)</li>
-<li data-o="C">\(\tfrac25\)</li>
-<li data-o="D">\(\tfrac{11}{36}\)</li>
-<li data-o="E">\(\tfrac12\)</li>
+<li data-o="A">\(\tfrac12\)</li>
+<li data-o="B">\(\tfrac{6}{11}\)</li>
+<li data-o="C">\(\tfrac16\)</li>
+<li data-o="D">\(\tfrac{5}{11}\)</li>
+<li data-o="E">\(\tfrac{11}{36}\)</li>
+<li data-o="F">\(\tfrac{6}{36}\)</li>
 </ol>
 <details class="sol"><summary>Show solution</summary>
-<p><span class="ans">Answer: C</span></p>
-<p>Conditioning replaces the sample space. The <em>ordered</em> outcomes totalling \(8\) are
-\[(2,6),\ (3,5),\ (4,4),\ (5,3),\ (6,2),\]
-five equally likely cases. Of these, \((3,5)\) and \((5,3)\) contain a \(5\), so the probability is \(\frac25\).</p>
-<p>Two traps: option D is the unconditional probability of at least one \(5\), ignoring the given information; and option A comes from treating \((3,5)\) and \((5,3)\) as a single outcome while still counting \((2,6)\) and \((6,2)\) separately. Be consistent — either everything is ordered or nothing is.</p>
+<p><span class="ans">Answer: B</span></p>
+<p>There are \(6\) ordered ways to total \(7\) and \(5\) ways to total \(8\), out of \(36\). Every roll that gives neither simply repeats the situation unchanged, so <em>conditioning on the game ending on a given roll</em>, the probability that it ended on a \(7\) is
+\[\frac{6/36}{6/36+5/36}=\frac{6}{11}.\]</p>
+<p><strong>Why you may ignore the waiting.</strong> Summing the series confirms it. With \(p=\frac{6}{36}\), \(q=\frac{5}{36}\) and \(r=1-p-q\) the probability of no decision on a roll,
+\[\sum_{n=0}^{\infty}r^n p=\frac{p}{1-r}=\frac{p}{p+q}=\frac{6}{11},\]
+so the geometric series collapses to exactly the ratio above. Recognising that structure — <em>irrelevant outcomes rescale nothing</em> — turns a page of algebra into one line, and it is the whole point of the question.</p>
+<p>Option F is \(\frac{6}{36}\), the chance of a \(7\) on the first roll alone; option A assumes the two totals are equally likely, which they are not (\(7\) is the most likely total of two dice, \(8\) is not); option D is the answer to the complementary question.</p>
 </details></div>
 
-<div class="q"><div class="qhead"><span class="qn">Question 20</span><span class="pill tmua">Graphs</span></div>
-<p>For which values of the constant \(c\) does the line \(y=c\) meet the curve \(y=x^3-3x\) at three distinct points?</p>
+<div class="q"><div class="qhead"><span class="qn">Question 20</span><span class="pill tmua">Modulus graphs &amp; areas</span></div>
+<p>What is the area of the finite region enclosed between the curve \(y=\left|x^2-4\right|\) and the line \(y=5\)?</p>
 <ol class="mcq">
-<li data-o="A">\(c&gt;2\)</li>
-<li data-o="B">\(c&lt;-2\) or \(c&gt;2\)</li>
-<li data-o="C">\(-1&lt;c&lt;1\)</li>
-<li data-o="D">\(-2&lt;c&lt;2\)</li>
-<li data-o="E">every real \(c\)</li>
+<li data-o="A">\(\tfrac{28}{3}\)</li>
+<li data-o="B">\(36\)</li>
+<li data-o="C">\(\tfrac{16}{3}\)</li>
+<li data-o="D">\(\tfrac{44}{3}\)</li>
+<li data-o="E">\(\tfrac{52}{3}\)</li>
+<li data-o="F">\(18\)</li>
 </ol>
 <details class="sol"><summary>Show solution</summary>
 <p><span class="ans">Answer: D</span></p>
-<p>A horizontal line cuts a cubic three times exactly when it passes strictly between the two turning values. Differentiating, \(y'=3x^2-3=3(x-1)(x+1)\), so the turning points are at \(x=-1\) and \(x=1\), with
-\[y(-1)=-1+3=2\ \ (\text{local maximum}),\qquad y(1)=1-3=-2\ \ (\text{local minimum}).\]
-So three distinct intersections occur precisely when \(-2&lt;c&lt;2\).</p>
-<p>The inequalities must be strict: at \(c=\pm2\) the line is tangent at a turning point and there are only <em>two</em> distinct intersection points. Option C is the \(x\)-coordinates of the turning points mistaken for the \(y\)-values — always finish the substitution.</p>
+<p><strong>Sketch it.</strong> The parabola \(y=x^2-4\) has its portion between \(x=-2\) and \(x=2\) reflected upwards, producing a "W" with zeros at \(x=\pm2\) and a local maximum of \(4\) at the origin. The line \(y=5\) sits above that hump, so the region is a single connected piece.</p>
+<p>The boundaries meet where \(\left|x^2-4\right|=5\). Only \(x^2-4=5\) is possible (\(x^2-4=-5\) would need \(x^2=-1\)), so \(x=\pm3\).</p>
+<p>Now split at \(x=\pm2\), where the modulus changes definition — this is the step the question is really testing:
+\[A=\int_{-3}^{3}\left(5-\left|x^2-4\right|\right)dx=2\left[\int_0^2\left(5-(4-x^2)\right)dx+\int_2^3\left(5-(x^2-4)\right)dx\right]\]
+by symmetry. The two pieces are
+\[\int_0^2\left(1+x^2\right)dx=2+\frac83=\frac{14}{3},\qquad \int_2^3\left(9-x^2\right)dx=\left[9x-\frac{x^3}{3}\right]_2^3=18-\frac{46}{3}=\frac83,\]
+so \(A=2\left(\frac{14}{3}+\frac83\right)=\frac{44}{3}\).</p>
+<p><strong>Every wrong option is a specific failure to split.</strong> Option B, \(36\), ignores the modulus altogether and integrates \(5-(x^2-4)\) across the whole of \([-3,3]\) — the area under the <em>unreflected</em> parabola, which is exactly the parabola-and-line formula \(\frac{|a|(q-p)^3}{6}=\frac{6^3}{6}=36\) from Question 15. Option A, \(\frac{28}{3}\), keeps only the middle piece over \([-2,2]\); option C, \(\frac{16}{3}\), keeps only the two outer wings. The discipline is always the same: a modulus sign means the integral splits wherever the inside changes sign, and a sketch tells you where.</p>
+<p><strong>Estimate to check:</strong> the region sits inside the rectangle \(-3\le x\le3\), \(0\le y\le5\) of area \(30\), and clearly occupies about half of it. \(\frac{44}{3}\approx14.7\). Good.</p>
 </details></div>
 
 <h2 id="key">Answer key</h2>
@@ -422,7 +444,7 @@ So three distinct intersections occur precisely when \(-2&lt;c&lt;2\).</p>
 <tr><th>Q</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
 <tr><td><b>Ans</b></td><td>C</td><td>C</td><td>E</td><td>B</td><td>D</td><td>E</td><td>C</td><td>A</td><td>B</td><td>D</td></tr>
 <tr><th>Q</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th></tr>
-<tr><td><b>Ans</b></td><td>A</td><td>A</td><td>E</td><td>B</td><td>C</td><td>D</td><td>E</td><td>A</td><td>C</td><td>D</td></tr>
+<tr><td><b>Ans</b></td><td>A</td><td>A</td><td>E</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>B</td><td>D</td></tr>
 </table></div>
 
 <div class="box"><span class="bt">Interpreting your score</span>

@@ -36,7 +36,7 @@ body{
   background-size:26px 26px;
 }
 /* ---------- layout ---------- */
-.shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+.shell{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:100vh}
 .sidebar{
   background:var(--ink);color:#cdd6e4;padding:2rem 1.5rem 3rem;
   position:sticky;top:0;height:100vh;overflow-y:auto;

@@ -75,6 +75,7 @@ function toggleNav() {
 <div class="box warn"><span class="bt">Instructions — read before you start</span>
 <ul>
 <li><strong>Time:</strong> 75 minutes for 20 questions. Paper 2 rewards slow, careful reading far more than Paper 1 does; misreading a quantifier costs the whole mark.</li>
+<li><strong>The option count varies</strong> — five, six or seven. The longer lists mark the harder questions: Questions 8, 14, 17 and 19 are pitched at the level of the <a href="https://jzmaths.com/papers" target="_blank" rel="noopener">JZ Maths mocks</a>, which are deliberately harder than the real TMUA. Expect them to take longer than the rest put together.</li>
 <li><strong>No calculator.</strong> You will barely need arithmetic.</li>
 <li><strong>One mark per question, no negative marking</strong> — never leave a blank.</li>
 <li>Before answering any question about an argument, ask yourself the two questions that decide almost every Paper 2 mark: <em>what exactly is being claimed?</em> and <em>what exactly has been shown?</em></li>
@@ -203,19 +204,31 @@ function toggleNav() {
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill tmua">Logical equivalence</span></div>
-<p>Which statement is logically equivalent to "not (\(P\) and \(Q\))"?</p>
+<p>Let \(P\), \(Q\) and \(R\) be statements. Which of the following are logically equivalent to
+\[\lnot\bigl(P\land(Q\lor R)\bigr)\ ?\]</p>
+<div class="box">
+<p><strong>I.</strong>&nbsp;&nbsp;\(\lnot P\lor(\lnot Q\land\lnot R)\)</p>
+<p><strong>II.</strong>&nbsp;&nbsp;\(\lnot P\lor\lnot Q\lor\lnot R\)</p>
+<p><strong>III.</strong>&nbsp;&nbsp;\(P\Rightarrow\lnot(Q\lor R)\)</p>
+<p><strong>IV.</strong>&nbsp;&nbsp;\((\lnot P\land\lnot Q)\lor(\lnot P\land\lnot R)\)</p>
+</div>
 <ol class="mcq">
-<li data-o="A">(not \(P\)) and (not \(Q\))</li>
-<li data-o="B">(not \(P\)) or (not \(Q\))</li>
-<li data-o="C">\(P\) or \(Q\)</li>
-<li data-o="D">not (\(P\) or \(Q\))</li>
-<li data-o="E">\(P\) and (not \(Q\))</li>
+<li data-o="A">none of them</li>
+<li data-o="B">I only</li>
+<li data-o="C">III only</li>
+<li data-o="D">I and II only</li>
+<li data-o="E">I and III only</li>
+<li data-o="F">II and IV only</li>
+<li data-o="G">I, II, III and IV</li>
 </ol>
 <details class="sol"><summary>Show solution</summary>
-<p><span class="ans">Answer: B</span></p>
-<p>This is De Morgan's law: negation swaps "and" with "or".
-\[\lnot(P\land Q)\equiv \lnot P\lor\lnot Q,\qquad \lnot(P\lor Q)\equiv\lnot P\land\lnot Q.\]</p>
-<p>The intuition is worth carrying: for "\(P\) and \(Q\)" to fail, <em>at least one</em> of them must fail — not necessarily both. Option A says both fail, which is strictly stronger and is in fact the negation of "\(P\) or \(Q\)" (option D's content). Mixing these two up is a reliable way to lose marks throughout Paper 2.</p>
+<p><span class="ans">Answer: E</span></p>
+<p>Apply De Morgan twice to the target:
+\[\lnot\bigl(P\land(Q\lor R)\bigr)\equiv\lnot P\lor\lnot(Q\lor R)\equiv\lnot P\lor(\lnot Q\land\lnot R).\]
+That is exactly <strong>I</strong>. And since \(A\Rightarrow B\) is equivalent to \(\lnot A\lor B\), statement <strong>III</strong> unpacks to \(\lnot P\lor\lnot(Q\lor R)\) — the same thing one line earlier. So I and III are both equivalent.</p>
+<p><strong>II fails.</strong> Take \(P\) true, \(Q\) true, \(R\) false. Then \(Q\lor R\) is true, so \(P\land(Q\lor R)\) is true and the target is <em>false</em>; but \(\lnot R\) is true, so II is true. The error is distributing the negation across \(\land\) and \(\lor\) indiscriminately, without respecting the bracketing — De Morgan is not a licence to negate every letter and swap every connective at once.</p>
+<p><strong>IV fails.</strong> Factorising gives \(\lnot P\land(\lnot Q\lor\lnot R)\) — an <em>and</em> where the target has an <em>or</em>. Take \(P\) false, \(Q\) true, \(R\) true: the target is true (since \(P\land\cdots\) is false), but IV requires \(\lnot Q\lor\lnot R\), which is false.</p>
+<p><strong>Method.</strong> With three letters there are only eight rows; if the algebra is not instantly clear, a truth table is a guaranteed 90-second answer. But the fastest route on the day is the one used above — reduce the target to a canonical form once, then compare each candidate against <em>that</em> rather than against the original.</p>
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill tmua">Claims &amp; counterexamples</span></div>
@@ -312,19 +325,23 @@ but not the reverse, since \(a=b\) and \(a=-b\) both square to \(a^2=b^2\). So s
 </ul>
 </details></div>
 
-<div class="q"><div class="qhead"><span class="qn">Question 14</span><span class="pill tmua">Deduction</span></div>
-<p>You are told: "If it rains, the match is cancelled." You then learn that the match was <em>not</em> cancelled. What follows?</p>
+<div class="q"><div class="qhead"><span class="qn">Question 14</span><span class="pill tmua">Necessary &amp; sufficient</span></div>
+<p>Consider the equation \(x^2+bx+9=0\), where \(b\) is a real parameter. Which of the following is a <strong>sufficient</strong> but <strong>not necessary</strong> condition on \(b\) for this equation to have two distinct real roots?</p>
 <ol class="mcq">
-<li data-o="A">It rained.</li>
-<li data-o="B">It may or may not have rained; nothing can be concluded.</li>
-<li data-o="C">It did not rain.</li>
-<li data-o="D">The match was cancelled after all.</li>
-<li data-o="E">Nothing follows unless we also know that rain is the only reason for cancellation.</li>
+<li data-o="A">\(|b|&gt;6\)</li>
+<li data-o="B">\(b&gt;7\)</li>
+<li data-o="C">\(b&gt;5\)</li>
+<li data-o="D">\(b^2&gt;36\)</li>
+<li data-o="E">\(|b|\ge 6\)</li>
+<li data-o="F">\(b\ne 0\)</li>
 </ol>
 <details class="sol"><summary>Show solution</summary>
-<p><span class="ans">Answer: C</span></p>
-<p>This is <em>modus tollens</em>: from \(P\Rightarrow Q\) and \(\lnot Q\), conclude \(\lnot P\). If rain guarantees cancellation, then no cancellation guarantees no rain.</p>
-<p>Option E inverts the logic. The extra premise it demands — that rain is the <em>only</em> cause of cancellation — would be needed to argue in the other direction, from "the match was cancelled" to "it rained". That argument is the fallacy of affirming the consequent, and it is exactly the one the question is inviting you to confuse this with.</p>
+<p><span class="ans">Answer: B</span></p>
+<p>Establish the exact criterion first, then test each option against it. Two distinct real roots means a strictly positive discriminant:
+\[b^2-36&gt;0\iff |b|&gt;6\iff b&gt;6\ \text{ or }\ b&lt;-6.\]</p>
+<p>Now classify. A and D <em>are</em> that criterion restated, so both are necessary <em>and</em> sufficient — and therefore not the answer, because the question demands "not necessary". E is necessary but not sufficient: \(b=6\) gives the repeated root \(x=-3\). F is necessary but not sufficient for the same reason at a coarser level (\(b=1\) satisfies it and gives no real roots). C is neither: \(b=5.5\) satisfies it without giving real roots, and \(b=-7\) gives real roots without satisfying it.</p>
+<p>That leaves <strong>B</strong>: every \(b&gt;7\) certainly satisfies \(|b|&gt;6\), so it is sufficient; but \(b=-8\) has two distinct real roots without satisfying \(b&gt;7\), so it is not necessary.</p>
+<p><strong>The picture to carry.</strong> A sufficient condition is a <em>subset</em> of the true condition; a necessary one is a <em>superset</em>. "Sufficient but not necessary" therefore means a strict subset — and the examiner's favourite disguise for it, used here, is an option that quietly discards the entire negative branch.</p>
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 15</span><span class="pill tmua">Constructing a proof</span></div>
@@ -358,21 +375,29 @@ but not the reverse, since \(a=b\) and \(a=-b\) both square to \(a^2=b^2\). So s
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 17</span><span class="pill tmua">Quantifiers</span></div>
-<p>Which of the following statements about real numbers is true?</p>
+<p>Let \(f\) be <em>any</em> function from the positive integers to the positive integers. Which of the following statements must be true for every such \(f\)?</p>
+<div class="box">
+<p><strong>I.</strong>&nbsp;&nbsp;For every \(n\) there exists \(m\) with \(f(m)&gt;n\).</p>
+<p><strong>II.</strong>&nbsp;&nbsp;There exists \(m\) such that for every \(n\), \(f(m)&gt;n\).</p>
+<p><strong>III.</strong>&nbsp;&nbsp;For every \(m\) there exists \(n\) with \(f(n)&gt;f(m)\).</p>
+<p><strong>IV.</strong>&nbsp;&nbsp;There exists \(n\) such that for every \(m\), \(f(n)\le f(m)\).</p>
+</div>
 <ol class="mcq">
-<li data-o="A">For every \(x\) there exists \(y\) with \(y&gt;x\).</li>
-<li data-o="B">There exists \(y\) such that for every \(x\), \(y&gt;x\).</li>
-<li data-o="C">There exists \(y\) such that for every \(x\), \(y\le x\).</li>
-<li data-o="D">For every \(y\) there exists \(x\) with \(x&gt;y\) and \(x&lt;y\).</li>
-<li data-o="E">Both A and B are true.</li>
+<li data-o="A">none of them</li>
+<li data-o="B">I only</li>
+<li data-o="C">IV only</li>
+<li data-o="D">I and III only</li>
+<li data-o="E">II and IV only</li>
+<li data-o="F">I, III and IV only</li>
+<li data-o="G">I, II, III and IV</li>
 </ol>
 <details class="sol"><summary>Show solution</summary>
-<p><span class="ans">Answer: A</span></p>
-<p>The order of quantifiers changes the meaning completely, and this pair is the standard illustration.</p>
-<p><strong>A is true:</strong> given any \(x\), take \(y=x+1\). The \(y\) is allowed to depend on \(x\), and it does.</p>
-<p><strong>B is false:</strong> it demands a <em>single</em> \(y\) exceeding every real number — a largest real number, which does not exist (\(y+1&gt;y\)). Since B is false, E is too.</p>
-<p>C asserts a smallest real number, equally non-existent; D asks for an \(x\) both greater and less than \(y\), a flat contradiction.</p>
-<p><strong>The rule to internalise:</strong> in \(\forall x\,\exists y\), the \(y\) may depend on \(x\); in \(\exists y\,\forall x\), one \(y\) must work for all \(x\) at once. The second is almost always the stronger — and the one worth doubting.</p>
+<p><span class="ans">Answer: C</span></p>
+<p>The word doing the work is <em>any</em>: a statement "must be true" only if it survives every function, so a single badly-behaved \(f\) kills it.</p>
+<p><strong>I and III fail together.</strong> Take the constant function \(f(m)=1\). For I, no value exceeds \(n=1\); for III, no value exceeds \(f(m)=1\). I says \(f\) is unbounded and III says \(f\) has no maximum — neither is forced.</p>
+<p><strong>II is never true, for any \(f\) at all.</strong> It demands a single \(m\) whose value \(f(m)\) exceeds <em>every</em> positive integer. But \(f(m)\) is one fixed positive integer, so taking \(n=f(m)\) requires \(f(m)&gt;f(m)\). Note how much stronger II is than I purely from the order of the quantifiers — this is the same \(\forall\exists\) versus \(\exists\forall\) distinction, and here it upgrades "not always true" to "impossible".</p>
+<p><strong>IV is always true.</strong> The set of values \(\{f(n):n\ge1\}\) is a non-empty set of positive integers, and every non-empty set of positive integers has a least element — the well-ordering principle. Choose \(n\) attaining that least value; then \(f(n)\le f(m)\) for all \(m\).</p>
+<p>So IV only. The asymmetry is the lesson: a function into the positive integers must attain a minimum, but need not attain a maximum, and need not be unbounded either. Well-ordering is the tool the TMUA expects you to reach for whenever a question asks for the existence of a <em>smallest</em> something.</p>
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 18</span><span class="pill tmua">Finding the error</span></div>
@@ -396,20 +421,30 @@ but not the reverse, since \(a=b\) and \(a=-b\) both square to \(a^2=b^2\). So s
 <p><strong>The general lesson:</strong> an inductive step that quietly requires \(k\ge 2\) needs \(n=2\) verified as a base case as well. When you write an induction, always ask which values of \(k\) your step actually works for — this failure is invisible if you only check that the algebra is right.</p>
 </details></div>
 
-<div class="q"><div class="qhead"><span class="qn">Question 19</span><span class="pill tmua">Deduction</span></div>
-<p>You know that the implication "\(P\Rightarrow Q\)" is true, and you also know that \(Q\) is true. What can you conclude about \(P\)?</p>
+<div class="q"><div class="qhead"><span class="qn">Question 19</span><span class="pill tmua">Finding the error</span></div>
+<p>A student attempts to prove the following <strong>claim</strong>: "for all real numbers \(x\) and \(y\), if \(x&gt;y\) then \(x^2&gt;y^2\)." The argument is given line by line below.</p>
+<div class="box"><span class="bt">The argument</span>
+<p><strong>I.</strong>&nbsp;&nbsp;Suppose \(x&gt;y\).</p>
+<p><strong>II.</strong>&nbsp;&nbsp;Multiplying both sides of \(x&gt;y\) by \(x\) gives \(x^2&gt;xy\).</p>
+<p><strong>III.</strong>&nbsp;&nbsp;Multiplying both sides of \(x&gt;y\) by \(y\) gives \(xy&gt;y^2\).</p>
+<p><strong>IV.</strong>&nbsp;&nbsp;Combining, \(x^2&gt;xy&gt;y^2\).</p>
+<p><strong>V.</strong>&nbsp;&nbsp;Hence \(x^2&gt;y^2\), as claimed.</p>
+</div>
+<p>Which one of the following statements about the argument is correct?</p>
 <ol class="mcq">
-<li data-o="A">\(P\) is true.</li>
-<li data-o="B">\(P\) is false.</li>
-<li data-o="C">Nothing: \(P\) may be true or false.</li>
-<li data-o="D">\(P\) is true if and only if \(Q\) is true.</li>
-<li data-o="E">\(P\) is false whenever \(Q\) is true.</li>
+<li data-o="A">The argument is completely correct.</li>
+<li data-o="B">The first error in the argument is on line I.</li>
+<li data-o="C">The first error in the argument is on line II.</li>
+<li data-o="D">The first error in the argument is on line III.</li>
+<li data-o="E">The first error in the argument is on line IV.</li>
+<li data-o="F">The first error in the argument is on line V.</li>
 </ol>
 <details class="sol"><summary>Show solution</summary>
 <p><span class="ans">Answer: C</span></p>
-<p>An implication with a true conclusion is true regardless of its hypothesis, so learning that \(Q\) holds tells you nothing whatsoever about \(P\).</p>
-<p>Both possibilities really do occur. Take \(P\): "\(n=2\)" and \(Q\): "\(n\) is even". The implication is true and \(Q\) is true for \(n=2\) (where \(P\) holds) and for \(n=4\) (where it does not).</p>
-<p>Concluding A here is affirming the consequent again — the same error as in Question 5, dressed in symbols instead of words. Paper 2 will keep asking it, because it is the mistake that most reliably separates candidates.</p>
+<p>Start by testing the <em>claim</em>, not the proof: \(x=1\), \(y=-2\) gives \(x&gt;y\) but \(x^2=1&lt;4=y^2\). The claim is false, so there must be an error somewhere — the only question is where it appears first.</p>
+<p>Line I is just the hypothesis, so it cannot be wrong. Line II multiplies an inequality by \(x\), which preserves the direction only when \(x&gt;0\); nothing in the argument establishes that. With \(x=1\), \(y=-2\) the line happens to survive, but with \(x=-1\), \(y=-2\) it asserts \(1&gt;2\). So <strong>II is the first error</strong>.</p>
+<p>Line III is wrong too, for the mirror-image reason (it needs \(y&gt;0\)), but the question asks for the <em>first</em> error, and III is not it. Lines IV and V are valid deductions from what precedes them — transitivity of \(&gt;\) is sound; it is the material they are fed that is defective.</p>
+<p><strong>Two habits this question rewards.</strong> First: when asked to audit an argument, check whether its conclusion is even true — a counterexample tells you an error exists before you have read a single line. Second: multiplying an inequality by a letter is only safe once you know that letter's sign, and it is the single most common way a plausible-looking proof goes wrong. (The claim <em>is</em> true if you add the hypothesis \(y\ge0\) — which is exactly what lines II and III were silently assuming.)</p>
 </details></div>
 
 <div class="q"><div class="qhead"><span class="qn">Question 20</span><span class="pill tmua">Converses</span></div>
@@ -435,17 +470,17 @@ which is not. So \(n=11\) is the smallest such prime.</p>
 <h2 id="key">Answer key</h2>
 <div class="tscroll"><table>
 <tr><th>Q</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
-<tr><td><b>Ans</b></td><td>B</td><td>D</td><td>A</td><td>C</td><td>E</td><td>A</td><td>D</td><td>B</td><td>C</td><td>E</td></tr>
+<tr><td><b>Ans</b></td><td>B</td><td>D</td><td>A</td><td>C</td><td>E</td><td>A</td><td>D</td><td>E</td><td>C</td><td>E</td></tr>
 <tr><th>Q</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th></tr>
-<tr><td><b>Ans</b></td><td>D</td><td>B</td><td>A</td><td>C</td><td>E</td><td>B</td><td>A</td><td>D</td><td>C</td><td>E</td></tr>
+<tr><td><b>Ans</b></td><td>D</td><td>B</td><td>A</td><td>B</td><td>E</td><td>B</td><td>C</td><td>D</td><td>C</td><td>E</td></tr>
 </table></div>
 
 <div class="box"><span class="bt">What your errors are telling you</span>
 <p>Paper 2 mistakes fall into a small number of families, and each has a cure. Sort your dropped marks:</p>
 <ul>
-<li><strong>Quantifiers</strong> (Q1, Q16, Q17) — negation, order, and vacuous truth. Rewrite each statement in symbols before answering; the errors become visible.</li>
-<li><strong>Direction of implication</strong> (Q2, Q3, Q5, Q13, Q14, Q19, Q20) — converse, contrapositive, necessary versus sufficient. Over half the paper. If this is your weak family, it is also your biggest available gain.</li>
-<li><strong>Reversibility and hidden cases</strong> (Q4, Q12) — dividing by something that might be zero, squaring, and other one-way steps.</li>
+<li><strong>Quantifiers and connectives</strong> (Q1, Q8, Q16, Q17) — negation, quantifier order, De Morgan, and vacuous truth. Rewrite each statement in symbols before answering; the errors become visible.</li>
+<li><strong>Direction of implication</strong> (Q2, Q3, Q5, Q13, Q14, Q20) — converse, contrapositive, necessary versus sufficient. If this is your weak family, it is also your biggest available gain.</li>
+<li><strong>Reversibility and hidden cases</strong> (Q4, Q12, Q19) — dividing by something that might be zero, squaring, multiplying an inequality by a letter of unknown sign.</li>
 <li><strong>What a proof establishes</strong> (Q6, Q7, Q9, Q10, Q11, Q15, Q18) — counterexamples, base cases, and the gap between "I checked several cases" and "I proved it".</li>
 </ul>
 <p>The theory behind every one of these is on the <a href="logic.html">Mathematical Logic and Proof</a> page; re-read the section matching your weakest family before attempting another Paper 2.</p>
