@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mock Paper 1 — Applications of Mathematical Knowledge (TMUA)</title>
+<meta name="description" content="An original 20-question TMUA-style Paper 1 mock, with full worked solutions — from Advanced Mathematics for High School: Preparing for Oxbridge.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <ul class="nav">
+    <li><a href="about.html"><span class="n">▸</span> About your tutor</a></li>
+  </ul>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Functions</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differential Calculus</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integrals</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Mathematical Logic</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="mock-paper-1.html" class="active"><span class="n">▸</span> Mock Paper 1</a></li>
+    <li><a href="mock-paper-2.html"><span class="n">▸</span> Mock Paper 2</a></li>
+    <li><a href="practice.html"><span class="n">▸</span> Practice Arena</a></li>
+    <li><a href="whiteboard.html"><span class="n">▸</span> Maths Whiteboard</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<div class="page">
+<p class="crumb"><b>Resources</b> · Mock papers · Paper 1</p>
+<h1>Mock Paper 1 — Applications of Mathematical Knowledge</h1>
+<p class="lede">Twenty multiple-choice questions in 75 minutes, no calculator. This is an original paper written for this site: the topic mix, the difficulty curve and the style of the wrong answers all follow the real TMUA Paper 1 specification.</p>
+
+<div class="box warn"><span class="bt">Instructions — read before you start</span>
+<ul>
+<li><strong>Time:</strong> 75 minutes for 20 questions — an average of 3 minutes 45 seconds each, but the early questions should take far less, buying you time for the last five.</li>
+<li><strong>No calculator</strong> and no formula sheet. Answers on paper first; only then open the solutions.</li>
+<li><strong>One mark per question, no negative marking</strong> — so never leave a question blank. If you are down to two options, guess and move on.</li>
+<li>Mark yourself against the <a href="#key">answer key</a> at the bottom, then read <em>every</em> solution, including for the questions you got right — the fast route is often not the one you took.</li>
+</ul></div>
+
+<h2>Section A — Questions 1 to 20</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill tmua">Indices &amp; logarithms</span></div>
+<p>Given that \(2^{x}=5\) and \(2^{y}=3\), what is \(\log_2\left(\dfrac{45}{8}\right)\) in terms of \(x\) and \(y\)?</p>
+<ol class="mcq">
+<li data-o="A">\(2x+y-3\)</li>
+<li data-o="B">\(xy-3\)</li>
+<li data-o="C">\(x+2y-3\)</li>
+<li data-o="D">\(x+2y+3\)</li>
+<li data-o="E">\(2(x+y)-3\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: C</span></p>
+<p>Read the hypotheses as logarithms: \(x=\log_2 5\) and \(y=\log_2 3\). Then
+\[\log_2\frac{45}{8}=\log_2\frac{5\cdot 3^2}{2^3}=\log_2 5+2\log_2 3-3=x+2y-3.\]
+The trap is A, which comes from factorising \(45\) as \(5^2\cdot 3\) instead of \(5\cdot 3^2\). Always factorise the number <em>on paper</em> before converting.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill tmua">Quadratics</span></div>
+<p>The equation \(x^2+(k+2)x+(2k+1)=0\) has equal roots. What is the sum of the possible values of \(k\)?</p>
+<ol class="mcq">
+<li data-o="A">\(0\)</li>
+<li data-o="B">\(2\)</li>
+<li data-o="C">\(4\)</li>
+<li data-o="D">\(6\)</li>
+<li data-o="E">\(-4\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: C</span></p>
+<p>Equal roots means the discriminant vanishes:
+\[(k+2)^2-4(2k+1)=k^2+4k+4-8k-4=k^2-4k=0,\]
+so \(k(k-4)=0\) and \(k=0\) or \(k=4\); the sum is \(4\).</p>
+<p><strong>Faster:</strong> you never needed the roots. The sum of the solutions of \(k^2-4k=0\) is \(-\frac{b}{a}=4\) by Vieta — worth a second's thought whenever a question asks for a <em>sum</em> of parameter values.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill tmua">Polynomials</span></div>
+<p>The cubic \(f(x)=x^3+ax^2+bx-6\) is divisible by both \((x-1)\) and \((x+2)\). What is its third root?</p>
+<ol class="mcq">
+<li data-o="A">\(3\)</li>
+<li data-o="B">\(-1\)</li>
+<li data-o="C">\(6\)</li>
+<li data-o="D">\(-6\)</li>
+<li data-o="E">\(-3\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: E</span></p>
+<p>Do <em>not</em> find \(a\) and \(b\). For a monic cubic \(x^3+ax^2+bx+c\) the product of the roots is \(-c\), here \(-(-6)=6\). Two of the roots are \(1\) and \(-2\), so if the third is \(r\),
+\[1\cdot(-2)\cdot r=6\quad\Longrightarrow\quad r=-3.\]
+(If you did solve for the coefficients you would get \(a=4\), \(b=1\), and \(x^3+4x^2+x-6=(x-1)(x+2)(x+3)\) — same answer, three times the work.)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill tmua">Binomial theorem</span></div>
+<p>What is the coefficient of \(x^2\) in the expansion of \((1+x)(1-2x)^5\)?</p>
+<ol class="mcq">
+<li data-o="A">\(40\)</li>
+<li data-o="B">\(30\)</li>
+<li data-o="C">\(50\)</li>
+<li data-o="D">\(-30\)</li>
+<li data-o="E">\(20\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: B</span></p>
+<p>Expand only as far as you need:
+\[(1-2x)^5=1-10x+40x^2-\cdots\]
+since \(\binom{5}{1}(-2)=-10\) and \(\binom{5}{2}(-2)^2=10\cdot 4=40\). An \(x^2\) term in the product comes either from \(1\times 40x^2\) or from \(x\times(-10x)\), giving \(40-10=30\).</p>
+<p>Option A is what you get by forgetting the \((1+x)\) factor altogether — a very common slip when the bracket sits in front.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill tmua">Sequences &amp; series</span></div>
+<p>The sum of the first \(n\) terms of a sequence is \(S_n=2n^2-3n\). What is the tenth term?</p>
+<ol class="mcq">
+<li data-o="A">\(37\)</li>
+<li data-o="B">\(170\)</li>
+<li data-o="C">\(17\)</li>
+<li data-o="D">\(35\)</li>
+<li data-o="E">\(33\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: D</span></p>
+<p>The single most useful identity about partial sums: \(a_n=S_n-S_{n-1}\). So
+\[a_{10}=S_{10}-S_9=(200-30)-(162-27)=170-135=35.\]
+Option B is \(S_{10}\) itself — read the question. (In general \(a_n=4n-5\), an arithmetic sequence with common difference \(4\); a quadratic \(S_n\) always signals an arithmetic sequence.)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill tmua">Geometric series</span></div>
+<p>A geometric series has sum to infinity \(27\), and the sum of its first two terms is \(15\). What is the sum of the possible values of its first term?</p>
+<ol class="mcq">
+<li data-o="A">\(9\)</li>
+<li data-o="B">\(27\)</li>
+<li data-o="C">\(45\)</li>
+<li data-o="D">\(36\)</li>
+<li data-o="E">\(54\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: E</span></p>
+<p>With first term \(a\) and ratio \(r\) (where \(|r|&lt;1\)):
+\[\frac{a}{1-r}=27,\qquad a(1+r)=15.\]
+Substituting \(a=27(1-r)\) into the second gives \(27(1-r)(1+r)=15\), so \(1-r^2=\frac59\) and \(r=\pm\frac23\) — both admissible, since both have modulus less than \(1\).</p>
+<p>Then \(a=27\left(1-\frac23\right)=9\) or \(a=27\left(1+\frac23\right)=45\), and the sum is \(54\).</p>
+<p>The difference between a good and a great mark on this question is noticing the <em>second</em> root: \(r^2=\frac49\) has two solutions and nothing in the question rules either out. Options A and C are each half of the answer.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill tmua">Circles</span></div>
+<p>What is the length of the tangent from the point \((8,6)\) to the circle \(x^2+y^2-6x+4y-12=0\)?</p>
+<ol class="mcq">
+<li data-o="A">\(\sqrt{89}\)</li>
+<li data-o="B">\(5\)</li>
+<li data-o="C">\(8\)</li>
+<li data-o="D">\(13\)</li>
+<li data-o="E">\(10\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: C</span></p>
+<p>Complete the square: \((x-3)^2+(y+2)^2=12+9+4=25\), so the centre is \(C=(3,-2)\) and the radius is \(5\).</p>
+<p>The tangent, the radius to the point of contact and the line to the centre form a right-angled triangle, so with \(d=|PC|\) the tangent length \(t\) satisfies \(t^2=d^2-r^2\):
+\[d^2=(8-3)^2+(6+2)^2=25+64=89,\qquad t=\sqrt{89-25}=\sqrt{64}=8.\]
+Option A is \(d\) itself; option B is the radius.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill tmua">Lines and circles</span></div>
+<p>The line \(y=2x+c\) is a tangent to the circle \(x^2+y^2=5\). What is the value of \(c^2\)?</p>
+<ol class="mcq">
+<li data-o="A">\(25\)</li>
+<li data-o="B">\(5\)</li>
+<li data-o="C">\(20\)</li>
+<li data-o="D">\(45\)</li>
+<li data-o="E">\(1\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: A</span></p>
+<p>Tangency means the perpendicular distance from the centre \((0,0)\) to \(2x-y+c=0\) equals the radius \(\sqrt5\):
+\[\frac{|c|}{\sqrt{2^2+(-1)^2}}=\sqrt5\ \Longrightarrow\ \frac{|c|}{\sqrt5}=\sqrt5\ \Longrightarrow\ |c|=5.\]
+So \(c^2=25\).</p>
+<p><strong>The discriminant route,</strong> if you prefer it: substituting gives \(5x^2+4cx+c^2-5=0\), and \(16c^2-20(c^2-5)=0\) gives \(c^2=25\) again. The distance formula is quicker whenever the circle is centred conveniently — learn to spot which of the two is cheaper.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill tmua">Trigonometric equations</span></div>
+<p>What is the sum of all solutions of \(2\sin^2 x=3\cos x\) in the interval \(0\le x\le 2\pi\)?</p>
+<ol class="mcq">
+<li data-o="A">\(\pi\)</li>
+<li data-o="B">\(2\pi\)</li>
+<li data-o="C">\(\tfrac{4\pi}{3}\)</li>
+<li data-o="D">\(\tfrac{5\pi}{3}\)</li>
+<li data-o="E">\(\tfrac{\pi}{3}\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: B</span></p>
+<p>Convert to a single function using \(\sin^2x=1-\cos^2x\):
+\[2(1-\cos^2x)=3\cos x\ \Longrightarrow\ 2\cos^2x+3\cos x-2=0\ \Longrightarrow\ (2\cos x-1)(\cos x+2)=0.\]
+The factor \(\cos x=-2\) is impossible, so \(\cos x=\frac12\), giving \(x=\frac{\pi}{3}\) and \(x=\frac{5\pi}{3}\) in the interval. Their sum is \(2\pi\).</p>
+<p>Discarding the impossible root is the whole point of the question: the examiner wants to see whether you check that \(|\cos x|\le 1\) rather than reaching for a calculator that isn't there.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 10</span><span class="pill tmua">Trigonometry</span></div>
+<p>What is the exact value of \(\sin 75^\circ\cos 15^\circ\)?</p>
+<ol class="mcq">
+<li data-o="A">\(\dfrac{\sqrt6+\sqrt2}{4}\)</li>
+<li data-o="B">\(\dfrac{2-\sqrt3}{4}\)</li>
+<li data-o="C">\(\dfrac12\)</li>
+<li data-o="D">\(\dfrac{2+\sqrt3}{4}\)</li>
+<li data-o="E">\(\dfrac{1+\sqrt3}{4}\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: D</span></p>
+<p>Since \(\sin 75^\circ=\cos 15^\circ\), the product is \(\cos^2 15^\circ\), and by the double-angle formula
+\[\cos^2 15^\circ=\frac{1+\cos 30^\circ}{2}=\frac{1+\frac{\sqrt3}{2}}{2}=\frac{2+\sqrt3}{4}.\]
+Option A is \(\cos 15^\circ\) itself (a tempting sight, since \(\left(\frac{\sqrt6+\sqrt2}{4}\right)^2\) does equal the answer — squaring it is the slower route to the same place).</p>
+<p><strong>Sanity check:</strong> \(\cos 15^\circ\) is a little under \(1\), so its square should be a little under \(1\); \(\frac{2+\sqrt3}{4}\approx 0.93\). Good. A three-second numerical check like this catches most sign and factor errors.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 11</span><span class="pill tmua">Logarithms</span></div>
+<p>Solve \(\log_3 x+\log_9 x=6\).</p>
+<ol class="mcq">
+<li data-o="A">\(81\)</li>
+<li data-o="B">\(27\)</li>
+<li data-o="C">\(243\)</li>
+<li data-o="D">\(9\)</li>
+<li data-o="E">\(729\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: A</span></p>
+<p>Put both logarithms in the same base. Since \(9=3^2\),
+\[\log_9 x=\frac{\log_3 x}{\log_3 9}=\frac{\log_3 x}{2}.\]
+Writing \(u=\log_3 x\), the equation becomes \(u+\frac{u}{2}=6\), so \(u=4\) and \(x=3^4=81\).</p>
+<p>Option E is the answer to \(\log_3 x=6\) — that is, what you get by treating the two logarithms as though they were equal.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 12</span><span class="pill tmua">Logarithms</span></div>
+<p>Given that \(\log_{10}2=0.3010\) to four decimal places, how many digits does \(2^{100}\) have?</p>
+<ol class="mcq">
+<li data-o="A">\(31\)</li>
+<li data-o="B">\(30\)</li>
+<li data-o="C">\(60\)</li>
+<li data-o="D">\(100\)</li>
+<li data-o="E">\(32\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: A</span></p>
+<p>A positive integer \(N\) has \(\lfloor\log_{10}N\rfloor+1\) digits — because \(N\) has \(d\) digits exactly when \(10^{d-1}\le N&lt;10^{d}\).</p>
+<p>Here \(\log_{10}2^{100}=100\times 0.3010=30.10\), so \(\lfloor\log_{10}2^{100}\rfloor=30\) and \(2^{100}\) has \(31\) digits. (Indeed \(2^{100}\approx 1.27\times 10^{30}\).)</p>
+<p>Option B is the classic off-by-one: the exponent counts the powers of ten, not the digits.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 13</span><span class="pill tmua">Differentiation</span></div>
+<p>The curve \(y=x^3-3x^2-9x+5\) has a local maximum and a local minimum. What is the difference between the two corresponding \(y\)-values?</p>
+<ol class="mcq">
+<li data-o="A">\(12\)</li>
+<li data-o="B">\(22\)</li>
+<li data-o="C">\(10\)</li>
+<li data-o="D">\(4\)</li>
+<li data-o="E">\(32\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: E</span></p>
+<p>Differentiate: \(\dfrac{dy}{dx}=3x^2-6x-9=3(x-3)(x+1)\), so the stationary points are at \(x=-1\) and \(x=3\).</p>
+<p>Substituting back: at \(x=-1\), \(y=-1-3+9+5=10\); at \(x=3\), \(y=27-27-27+5=-22\). Since the cubic has a positive leading coefficient, the left stationary point is the maximum. The difference is \(10-(-22)=32\).</p>
+<p>Option A is \(x=3\) minus \(x=-1\) — the horizontal gap, not the vertical one. Option B forgets the sign of the minimum.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 14</span><span class="pill tmua">Tangents</span></div>
+<p>Two tangents to the parabola \(y=x^2\) pass through the point \((0,-4)\). What is the distance between their two points of contact?</p>
+<ol class="mcq">
+<li data-o="A">\(2\)</li>
+<li data-o="B">\(4\)</li>
+<li data-o="C">\(8\)</li>
+<li data-o="D">\(2\sqrt2\)</li>
+<li data-o="E">\(4\sqrt2\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: B</span></p>
+<p>Work with a general point of contact \((a,a^2)\). Since \(y'=2x\), the tangent there is
+\[y-a^2=2a(x-a)\quad\Longleftrightarrow\quad y=2ax-a^2.\]
+It passes through \((0,-4)\) precisely when \(-a^2=-4\), i.e. \(a=\pm2\).</p>
+<p>The points of contact are therefore \((2,4)\) and \((-2,4)\) — at the same height, so the distance is simply \(4\).</p>
+<p>Option E comes from computing \(\sqrt{4^2+4^2}\), i.e. forgetting that both contact points share the \(y\)-value \(4\). Sketching the parabola with its axis of symmetry makes this instant.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 15</span><span class="pill tmua">Areas</span></div>
+<p>What is the area of the region enclosed between the curve \(y=x^2\) and the line \(y=2x+3\)?</p>
+<ol class="mcq">
+<li data-o="A">\(\tfrac{16}{3}\)</li>
+<li data-o="B">\(8\)</li>
+<li data-o="C">\(\tfrac{32}{3}\)</li>
+<li data-o="D">\(\tfrac{64}{3}\)</li>
+<li data-o="E">\(10\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: C</span></p>
+<p>They meet where \(x^2=2x+3\), i.e. \(x^2-2x-3=(x-3)(x+1)=0\), so \(x=-1\) and \(x=3\). Between them the line is above the parabola, so
+\[A=\int_{-1}^{3}\left(2x+3-x^2\right)dx=\left[x^2+3x-\frac{x^3}{3}\right]_{-1}^{3}=(9+9-9)-\left(1-3+\frac13\right)=9+\frac53=\frac{32}{3}.\]</p>
+<p><strong>Worth memorising:</strong> for any line meeting any parabola \(y=ax^2+\cdots\) at \(x=p\) and \(x=q\), the enclosed area is \(\frac{|a|(q-p)^3}{6}\). Here that is \(\frac{1\cdot 4^3}{6}=\frac{32}{3}\) — a five-second answer, and the formula is easy to derive once and reuse forever.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 16</span><span class="pill tmua">Integration</span></div>
+<p>Evaluate \(\displaystyle\int_1^4\frac{\left(\sqrt x+1\right)^2}{x}\,dx\).</p>
+<ol class="mcq">
+<li data-o="A">\(7+\ln 2\)</li>
+<li data-o="B">\(12+2\ln 2\)</li>
+<li data-o="C">\(3+4\ln 2\)</li>
+<li data-o="D">\(7+2\ln 2\)</li>
+<li data-o="E">\(7\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: D</span></p>
+<p>Expand first — there is no integration technique to reach for here, only algebra:
+\[\frac{(\sqrt x+1)^2}{x}=\frac{x+2\sqrt x+1}{x}=1+\frac{2}{\sqrt x}+\frac1x.\]
+Hence
+\[\int_1^4\left(1+2x^{-1/2}+x^{-1}\right)dx=\Big[x+4\sqrt x+\ln x\Big]_1^4=(4+8+\ln 4)-(1+4+0)=7+2\ln 2,\]
+using \(\ln 4=2\ln 2\).</p>
+<p>Option A keeps \(\ln 4\) unsimplified as \(\ln 2\) — check what the options are asking for before you stop simplifying.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 17</span><span class="pill tmua">Solids of revolution</span></div>
+<p>The region enclosed between \(y=x\) and \(y=x^2\) for \(0\le x\le 1\) is rotated through \(2\pi\) about the \(x\)-axis. What is the volume of the solid formed?</p>
+<ol class="mcq">
+<li data-o="A">\(\tfrac{\pi}{15}\)</li>
+<li data-o="B">\(\tfrac{\pi}{6}\)</li>
+<li data-o="C">\(\tfrac{8\pi}{15}\)</li>
+<li data-o="D">\(\tfrac{\pi}{30}\)</li>
+<li data-o="E">\(\tfrac{2\pi}{15}\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: E</span></p>
+<p>Rotating a region between two curves gives a washer, so you subtract the <em>squares</em>, not the curves:
+\[V=\pi\int_0^1\left(x^2-\left(x^2\right)^2\right)dx=\pi\int_0^1\left(x^2-x^4\right)dx=\pi\left[\frac{x^3}{3}-\frac{x^5}{5}\right]_0^1=\pi\left(\frac13-\frac15\right)=\frac{2\pi}{15}.\]</p>
+<p>Option B is \(\pi\int_0^1(x-x^2)^2dx\) — squaring the difference instead of differencing the squares. These are genuinely different, and the examiners know it.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 18</span><span class="pill tmua">Counting</span></div>
+<p>How many four-digit even numbers can be formed using the digits \(1,2,3,4,5,6\) if no digit may be repeated?</p>
+<ol class="mcq">
+<li data-o="A">\(180\)</li>
+<li data-o="B">\(360\)</li>
+<li data-o="C">\(120\)</li>
+<li data-o="D">\(60\)</li>
+<li data-o="E">\(108\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: A</span></p>
+<p><strong>Deal with the constraint first.</strong> The units digit must be \(2\), \(4\) or \(6\): \(3\) choices. The remaining three positions are filled from the \(5\) unused digits in \(5\times 4\times 3=60\) ways. Total: \(3\times 60=180\).</p>
+<p>Option B counts all four-digit numbers with no repeats (\(6\times5\times4\times3=360\)) — exactly twice the answer, since half of all such numbers are even. That coincidence is a useful check, not a coincidence to rely on in general.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 19</span><span class="pill tmua">Probability</span></div>
+<p>Two fair six-sided dice are rolled. Given that the total is \(8\), what is the probability that at least one die shows a \(5\)?</p>
+<ol class="mcq">
+<li data-o="A">\(\tfrac15\)</li>
+<li data-o="B">\(\tfrac13\)</li>
+<li data-o="C">\(\tfrac25\)</li>
+<li data-o="D">\(\tfrac{11}{36}\)</li>
+<li data-o="E">\(\tfrac12\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: C</span></p>
+<p>Conditioning replaces the sample space. The <em>ordered</em> outcomes totalling \(8\) are
+\[(2,6),\ (3,5),\ (4,4),\ (5,3),\ (6,2),\]
+five equally likely cases. Of these, \((3,5)\) and \((5,3)\) contain a \(5\), so the probability is \(\frac25\).</p>
+<p>Two traps: option D is the unconditional probability of at least one \(5\), ignoring the given information; and option A comes from treating \((3,5)\) and \((5,3)\) as a single outcome while still counting \((2,6)\) and \((6,2)\) separately. Be consistent — either everything is ordered or nothing is.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 20</span><span class="pill tmua">Graphs</span></div>
+<p>For which values of the constant \(c\) does the line \(y=c\) meet the curve \(y=x^3-3x\) at three distinct points?</p>
+<ol class="mcq">
+<li data-o="A">\(c&gt;2\)</li>
+<li data-o="B">\(c&lt;-2\) or \(c&gt;2\)</li>
+<li data-o="C">\(-1&lt;c&lt;1\)</li>
+<li data-o="D">\(-2&lt;c&lt;2\)</li>
+<li data-o="E">every real \(c\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: D</span></p>
+<p>A horizontal line cuts a cubic three times exactly when it passes strictly between the two turning values. Differentiating, \(y'=3x^2-3=3(x-1)(x+1)\), so the turning points are at \(x=-1\) and \(x=1\), with
+\[y(-1)=-1+3=2\ \ (\text{local maximum}),\qquad y(1)=1-3=-2\ \ (\text{local minimum}).\]
+So three distinct intersections occur precisely when \(-2&lt;c&lt;2\).</p>
+<p>The inequalities must be strict: at \(c=\pm2\) the line is tangent at a turning point and there are only <em>two</em> distinct intersection points. Option C is the \(x\)-coordinates of the turning points mistaken for the \(y\)-values — always finish the substitution.</p>
+</details></div>
+
+<h2 id="key">Answer key</h2>
+<div class="tscroll"><table>
+<tr><th>Q</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+<tr><td><b>Ans</b></td><td>C</td><td>C</td><td>E</td><td>B</td><td>D</td><td>E</td><td>C</td><td>A</td><td>B</td><td>D</td></tr>
+<tr><th>Q</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th></tr>
+<tr><td><b>Ans</b></td><td>A</td><td>A</td><td>E</td><td>B</td><td>C</td><td>D</td><td>E</td><td>A</td><td>C</td><td>D</td></tr>
+</table></div>
+
+<div class="box"><span class="bt">Interpreting your score</span>
+<p>On the real TMUA the raw mark is scaled to a score out of 9.0, and the scaling shifts year to year — so treat the bands below as rough guidance rather than a prediction.</p>
+<ul>
+<li><strong>16–20:</strong> comfortably competitive for Cambridge and Imperial. Your remaining gains are in speed, not knowledge.</li>
+<li><strong>12–15:</strong> a solid base. Sort your dropped marks into knowledge / technique / logic as described on the <a href="exam-papers.html">exam papers page</a> and work the weakest topic.</li>
+<li><strong>8–11:</strong> the mathematics is mostly there but not yet automatic. Go back through the topic pages and redo every question you missed from scratch a week later.</li>
+<li><strong>Below 8:</strong> don't be discouraged, and don't move on to more papers yet — papers diagnose, topics cure. Start with the topic that produced most of your errors.</li>
+</ul></div>
+
+<p>When you have marked this paper, do <a href="mock-paper-2.html">Mock Paper 2</a> — the reasoning paper — under the same conditions, and then move on to the real past papers and the other free mock papers listed on the <a href="exam-papers.html">TMUA exam papers</a> page.</p>
+
+<div class="pn"><a href="exam-papers.html">← TMUA Exam Papers</a><a href="mock-paper-2.html">Mock Paper 2 →</a></div>
+</div>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+This mock paper consists of original questions written for this site; it is not affiliated with, endorsed by, or reproduced from Cambridge Assessment Admissions Testing or Pearson VUE. "TMUA" is used only to describe the examination the paper is modelled on.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>

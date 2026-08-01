@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mock Paper 2 — Mathematical Reasoning (TMUA)</title>
+<meta name="description" content="An original 20-question TMUA-style Paper 2 mock on logic, proof and identifying errors, with full worked solutions — from Advanced Mathematics for High School: Preparing for Oxbridge.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <ul class="nav">
+    <li><a href="about.html"><span class="n">▸</span> About your tutor</a></li>
+  </ul>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Functions</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differential Calculus</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integrals</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Mathematical Logic</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="mock-paper-1.html"><span class="n">▸</span> Mock Paper 1</a></li>
+    <li><a href="mock-paper-2.html" class="active"><span class="n">▸</span> Mock Paper 2</a></li>
+    <li><a href="practice.html"><span class="n">▸</span> Practice Arena</a></li>
+    <li><a href="whiteboard.html"><span class="n">▸</span> Maths Whiteboard</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<div class="page">
+<p class="crumb"><b>Resources</b> · Mock papers · Paper 2</p>
+<h1>Mock Paper 2 — Mathematical Reasoning</h1>
+<p class="lede">Twenty multiple-choice questions in 75 minutes, no calculator. Paper 2 asks a different question from Paper 1: not "can you do the mathematics?" but "do you know what a proof actually establishes?" The mathematical content is deliberately light — the difficulty is entirely in the reasoning.</p>
+
+<div class="box warn"><span class="bt">Instructions — read before you start</span>
+<ul>
+<li><strong>Time:</strong> 75 minutes for 20 questions. Paper 2 rewards slow, careful reading far more than Paper 1 does; misreading a quantifier costs the whole mark.</li>
+<li><strong>No calculator.</strong> You will barely need arithmetic.</li>
+<li><strong>One mark per question, no negative marking</strong> — never leave a blank.</li>
+<li>Before answering any question about an argument, ask yourself the two questions that decide almost every Paper 2 mark: <em>what exactly is being claimed?</em> and <em>what exactly has been shown?</em></li>
+<li>Full solutions and the <a href="#key">answer key</a> are at the bottom. The supporting theory is on the <a href="logic.html">Mathematical Logic</a> page.</li>
+</ul></div>
+
+<h2>Section A — Questions 1 to 20</h2>
+
+<div class="q"><div class="qhead"><span class="qn">Question 1</span><span class="pill tmua">Negation</span></div>
+<p>Consider the statement: "For every real number \(x\), \(x^2+bx+c&gt;0\)." Which of the following is its negation?</p>
+<ol class="mcq">
+<li data-o="A">For every real number \(x\), \(x^2+bx+c\le 0\).</li>
+<li data-o="B">There is a real number \(x\) with \(x^2+bx+c\le 0\).</li>
+<li data-o="C">There is a real number \(x\) with \(x^2+bx+c&lt;0\).</li>
+<li data-o="D">For every real number \(x\), \(x^2+bx+c&lt;0\).</li>
+<li data-o="E">There is no real number \(x\) with \(x^2+bx+c&gt;0\).</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: B</span></p>
+<p>Negating a universal statement does two things at once, and both must happen: <strong>"for every" becomes "there exists"</strong>, and the <strong>inner statement is negated</strong>. The negation of \(x^2+bx+c&gt;0\) is \(x^2+bx+c\le 0\) — not \(&lt;0\), because equality is a perfectly good way for "\(&gt;0\)" to fail.</p>
+<p>Option C is the near-miss that catches most candidates: it forgets the boundary case. Options A and D keep the quantifier unchanged, which is the other standard error — the opposite of "always positive" is not "always non-positive", it is "not always positive".</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 2</span><span class="pill tmua">Contrapositive</span></div>
+<p>Let \(n\) be an integer. Which statement is the <em>contrapositive</em> of "if \(n^2\) is even then \(n\) is even"?</p>
+<ol class="mcq">
+<li data-o="A">If \(n\) is even then \(n^2\) is even.</li>
+<li data-o="B">If \(n^2\) is odd then \(n\) is odd.</li>
+<li data-o="C">If \(n^2\) is even then \(n\) is odd.</li>
+<li data-o="D">If \(n\) is odd then \(n^2\) is odd.</li>
+<li data-o="E">If \(n\) is not odd then \(n^2\) is not odd.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: D</span></p>
+<p>The contrapositive of \(P\Rightarrow Q\) is \(\lnot Q\Rightarrow\lnot P\). Here \(P\) is "\(n^2\) is even" and \(Q\) is "\(n\) is even", so the contrapositive is "if \(n\) is <em>not</em> even then \(n^2\) is <em>not</em> even" — that is, "if \(n\) is odd then \(n^2\) is odd".</p>
+<p>The subtlety that makes this question hard is that options A, B and D are all <em>true</em> statements about integers. Only D is logically equivalent to the original by form alone. Option A is the converse and option B is the inverse; those two are equivalent to each other, but not to the original — the fact that they happen to be true here is a property of the integers, not of the logic. On Paper 2, always answer the question that was asked about <em>structure</em>, not about truth.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 3</span><span class="pill tmua">Necessary &amp; sufficient</span></div>
+<p>Let \(x\) be a real number. What is the relationship of the condition "\(x&gt;2\)" to the condition "\(x^2&gt;4\)"?</p>
+<ol class="mcq">
+<li data-o="A">Sufficient but not necessary.</li>
+<li data-o="B">Necessary but not sufficient.</li>
+<li data-o="C">Necessary and sufficient.</li>
+<li data-o="D">Neither necessary nor sufficient.</li>
+<li data-o="E">Necessary and sufficient, provided \(x\) is an integer.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: A</span></p>
+<p><strong>Sufficient:</strong> if \(x&gt;2\) then certainly \(x^2&gt;4\). So the condition guarantees the conclusion.</p>
+<p><strong>Not necessary:</strong> \(x=-3\) satisfies \(x^2=9&gt;4\) but not \(x&gt;2\). So the conclusion can hold without the condition.</p>
+<p>Option E is a trap for anyone who thinks restricting to integers repairs the equivalence — it does not: \(x=-3\) is an integer, and it is still a counterexample. The useful mental picture is that "\(x^2&gt;4\)" describes \(x&gt;2\) <em>or</em> \(x&lt;-2\), a strictly larger set than \(x&gt;2\), and the smaller set is always the sufficient one.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 4</span><span class="pill tmua">Finding the error</span></div>
+<p>A student presents the following "proof" that \(2=1\).</p>
+<div class="box"><span class="bt">The argument</span>
+<ol>
+<li>Let \(a=b\), where \(a\) and \(b\) are non-zero.</li>
+<li>Multiplying both sides by \(a\): \(a^2=ab\).</li>
+<li>Subtracting \(b^2\): \(a^2-b^2=ab-b^2\).</li>
+<li>Factorising: \((a-b)(a+b)=b(a-b)\).</li>
+<li>Dividing both sides by \((a-b)\): \(a+b=b\).</li>
+<li>Since \(a=b\), this gives \(2b=b\), and dividing by \(b\) gives \(2=1\).</li>
+</ol></div>
+<p>Which is the <em>first</em> step that is not valid?</p>
+<ol class="mcq">
+<li data-o="A">Step 2</li>
+<li data-o="B">Step 3</li>
+<li data-o="C">Step 5</li>
+<li data-o="D">Step 6</li>
+<li data-o="E">No step is invalid; the conclusion genuinely follows.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: C</span></p>
+<p>Steps 2, 3 and 4 are all legitimate: multiplying, subtracting and factorising are valid whatever the values of \(a\) and \(b\).</p>
+<p>Step 5 divides by \(a-b\). But the very first line asserts \(a=b\), so \(a-b=0\), and division by zero is undefined. Every subsequent line is worthless — including step 6, which is a correct deduction from a statement that was never established.</p>
+<p><strong>The transferable lesson:</strong> whenever an argument cancels a factor, ask whether that factor can be zero. This is the single most common source of manufactured paradoxes, and it is also the most common source of lost marks when solving equations — cancelling \(x\) from \(x^2=x\) loses the solution \(x=0\).</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 5</span><span class="pill tmua">Validity</span></div>
+<p>Consider the argument: "The square of every integer is non-negative. The integer \(n\) is non-negative. Therefore \(n\) is the square of an integer."</p>
+<ol class="mcq">
+<li data-o="A">The argument is valid.</li>
+<li data-o="B">The argument is invalid: it denies the antecedent.</li>
+<li data-o="C">The argument is valid, but only for \(n&gt;0\).</li>
+<li data-o="D">The argument is invalid because its first premise is false.</li>
+<li data-o="E">The argument is invalid: it affirms the consequent.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: E</span></p>
+<p>The first premise says \(P\Rightarrow Q\), where \(P\) is "\(n\) is a square" and \(Q\) is "\(n\) is non-negative". The second premise asserts \(Q\). Concluding \(P\) from \(P\Rightarrow Q\) and \(Q\) is the fallacy of <strong>affirming the consequent</strong>.</p>
+<p>The concrete refutation is immediate: \(n=3\) is non-negative and is not a square. Option D is wrong because the first premise <em>is</em> true — and note that a valid argument can have false premises while an invalid argument can have true ones. Validity is about the shape of the inference, never about the truth of its parts.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 6</span><span class="pill tmua">Counterexamples</span></div>
+<p>Consider the claim: "For all positive integers \(a\), \(b\), \(c\): if \(a\) divides \(bc\), then \(a\) divides \(b\) or \(a\) divides \(c\)." Which choice of \((a,b,c)\) disproves it?</p>
+<ol class="mcq">
+<li data-o="A">\((4,2,2)\)</li>
+<li data-o="B">\((3,2,6)\)</li>
+<li data-o="C">\((5,10,3)\)</li>
+<li data-o="D">\((7,14,2)\)</li>
+<li data-o="E">\((2,4,6)\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: A</span></p>
+<p>A counterexample must make the hypothesis true and the conclusion false — so you need \(a\mid bc\) while \(a\nmid b\) <em>and</em> \(a\nmid c\).</p>
+<p>With \((4,2,2)\): \(bc=4\) and \(4\mid 4\), yet \(4\nmid 2\). Both halves of the conclusion fail, so the claim is disproved.</p>
+<p>Every other option satisfies the hypothesis but <em>also</em> satisfies the conclusion (in B, \(3\mid 6\); in C, \(5\mid 10\); in D, \(7\mid 14\); in E, \(2\mid 4\)), so each is an instance of the claim holding — which proves nothing at all.</p>
+<p><strong>Worth knowing:</strong> the claim <em>is</em> true when \(a\) is prime — that is Euclid's lemma, and it is exactly why the primes behave as the multiplicative atoms of the integers. The failure at \(a=4\) is not an accident but the whole point.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 7</span><span class="pill tmua">Proof by contradiction</span></div>
+<p>In the standard proof that \(\sqrt2\) is irrational, what is assumed at the start?</p>
+<ol class="mcq">
+<li data-o="A">That \(\sqrt2\) is irrational.</li>
+<li data-o="B">That \(p^2=2q^2\) has a solution in positive integers.</li>
+<li data-o="C">That every rational number can be written as \(p/q\).</li>
+<li data-o="D">That \(\sqrt2=p/q\) for some integers \(p,q\) with \(q\ne 0\) and no common factor greater than 1.</li>
+<li data-o="E">That \(p\) and \(q\) are both even.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: D</span></p>
+<p>A proof by contradiction assumes the <em>negation</em> of what it wants to prove — so it assumes \(\sqrt2\) is rational, i.e. expressible as \(p/q\). The extra stipulation that the fraction is in lowest terms is not idle: it is the assumption that the argument eventually contradicts, when \(p\) and \(q\) are both shown to be even.</p>
+<p>Option E states the <em>conclusion</em> that is derived, not the assumption — mistaking the two is precisely the confusion the question is testing. Option A assumes what is to be proved, which would make the proof circular rather than a contradiction.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 8</span><span class="pill tmua">Logical equivalence</span></div>
+<p>Which statement is logically equivalent to "not (\(P\) and \(Q\))"?</p>
+<ol class="mcq">
+<li data-o="A">(not \(P\)) and (not \(Q\))</li>
+<li data-o="B">(not \(P\)) or (not \(Q\))</li>
+<li data-o="C">\(P\) or \(Q\)</li>
+<li data-o="D">not (\(P\) or \(Q\))</li>
+<li data-o="E">\(P\) and (not \(Q\))</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: B</span></p>
+<p>This is De Morgan's law: negation swaps "and" with "or".
+\[\lnot(P\land Q)\equiv \lnot P\lor\lnot Q,\qquad \lnot(P\lor Q)\equiv\lnot P\land\lnot Q.\]</p>
+<p>The intuition is worth carrying: for "\(P\) and \(Q\)" to fail, <em>at least one</em> of them must fail — not necessarily both. Option A says both fail, which is strictly stronger and is in fact the negation of "\(P\) or \(Q\)" (option D's content). Mixing these two up is a reliable way to lose marks throughout Paper 2.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 9</span><span class="pill tmua">Claims &amp; counterexamples</span></div>
+<p>Consider the claim: "\(n^2+n+41\) is prime for every integer \(n\ge 0\)." Which statement is correct?</p>
+<ol class="mcq">
+<li data-o="A">The claim is true.</li>
+<li data-o="B">The claim is false; the smallest counterexample is \(n=41\).</li>
+<li data-o="C">The claim is false; the smallest counterexample is \(n=40\).</li>
+<li data-o="D">The claim is false; the smallest counterexample is \(n=1\).</li>
+<li data-o="E">The claim can be neither proved nor disproved.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: C</span></p>
+<p>This is Euler's celebrated polynomial, and it does produce primes for \(n=0,1,2,\dots,39\) — which is exactly why it is dangerous. Checking a few dozen cases is not a proof.</p>
+<p>At \(n=40\):
+\[40^2+40+41=1600+81=1681=41^2,\]
+which is not prime. So \(n=40\) is a counterexample, and it is the smallest one.</p>
+<p>Option B is the trap for candidates who spot the slicker factorisation \(41^2+41+41=41(41+1+1)=41\cdot 43\) and stop there. That is a genuine counterexample — but not the <em>smallest</em>, and the question asked for the smallest. Read the question twice.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 10</span><span class="pill tmua">Induction</span></div>
+<p>A student claims that for every integer \(n\ge 1\),
+\[1+2+\cdots+n=\frac{n(n+1)}{2}+5,\]
+and argues: "Assume it holds for \(n=k\). Then
+\[1+2+\cdots+k+(k+1)=\frac{k(k+1)}{2}+5+(k+1)=\frac{(k+1)(k+2)}{2}+5,\]
+which is the statement for \(n=k+1\). Hence it holds for all \(n\ge 1\)."</p>
+<p>Which statement about this argument is correct?</p>
+<ol class="mcq">
+<li data-o="A">The inductive step contains an algebraic error.</li>
+<li data-o="B">The claim is true.</li>
+<li data-o="C">Induction cannot legitimately be applied to sums of this kind.</li>
+<li data-o="D">The argument fails because the inductive step assumes what it sets out to prove.</li>
+<li data-o="E">The inductive step is correct, but no base case is ever established — and none holds — so nothing is proved.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: E</span></p>
+<p>Check the algebra: \(\frac{k(k+1)}{2}+(k+1)=\frac{(k+1)(k+2)}{2}\), so the inductive step really is correct. The implication "true for \(k\)" \(\Rightarrow\) "true for \(k+1\)" holds for every \(k\).</p>
+<p>But an induction is a ladder, and this one has no bottom rung: at \(n=1\) the left side is \(1\) and the right side is \(1+5=6\). The statement is false for \(n=1\), and indeed for every \(n\) — the claimed formula always overshoots by exactly 5.</p>
+<p>Option D describes circular reasoning, which is a different thing altogether: <em>assuming</em> the statement for \(n=k\) in order to derive the case \(n=k+1\) is not circular, it is what induction <em>is</em>. The flaw here is entirely the missing (and unobtainable) base case.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 11</span><span class="pill tmua">Validity</span></div>
+<p>"All \(A\) are \(B\). Some \(B\) are \(C\). Therefore some \(A\) are \(C\)." Which statement about this argument is correct?</p>
+<ol class="mcq">
+<li data-o="A">It is valid.</li>
+<li data-o="B">It is valid provided \(A\) is non-empty.</li>
+<li data-o="C">It is valid provided \(C\) is non-empty.</li>
+<li data-o="D">It is invalid: the conclusion does not follow from the premises.</li>
+<li data-o="E">It is invalid, but the correct conclusion is "some \(C\) are \(A\)".</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: D</span></p>
+<p>The premises say nothing about <em>which</em> \(B\)s are \(C\)s, and there is no reason those should be the ones that came from \(A\).</p>
+<p>A concrete counter-model settles it. Let \(A\) be the squares, \(B\) the integers and \(C\) the negative integers. All squares are integers; some integers are negative; but no square is negative. Both premises hold and the conclusion fails, so the argument is invalid — and adding non-emptiness conditions does not save it, since in this model \(A\) and \(C\) are both non-empty.</p>
+<p>Option E is worth a second's thought: "some \(C\) are \(A\)" says exactly the same thing as "some \(A\) are \(C\)", so it fails for exactly the same reason.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 12</span><span class="pill tmua">Reversible steps</span></div>
+<p>To solve \(\sqrt{x+2}=x\), a student squares both sides to get \(x+2=x^2\), hence \(x^2-x-2=0\), hence \(x=2\) or \(x=-1\). Which statement is correct?</p>
+<ol class="mcq">
+<li data-o="A">Both \(x=2\) and \(x=-1\) are solutions of the original equation.</li>
+<li data-o="B">Only \(x=2\) is a solution: squaring is not a reversible step and can introduce values that fail the original equation.</li>
+<li data-o="C">Only \(x=-1\) is a solution.</li>
+<li data-o="D">The original equation has no solutions.</li>
+<li data-o="E">Both are solutions, because squaring both sides of an equation is always reversible.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: B</span></p>
+<p>Substituting \(x=-1\) into the original equation gives \(\sqrt{1}=1\) on the left and \(-1\) on the right. It fails, because \(\sqrt{\ }\) denotes the non-negative root.</p>
+<p>The structural reason: squaring gives an implication in one direction only,
+\[\sqrt{x+2}=x\ \Longrightarrow\ x+2=x^2,\]
+but not the reverse, since \(a=b\) and \(a=-b\) both square to \(a^2=b^2\). So squaring produces a list of <em>candidates</em>, and every candidate must be checked against the original equation.</p>
+<p>This is the single most examinable idea on Paper 2: keep track of whether each step of your working is an implication (\(\Rightarrow\)) or an equivalence (\(\Leftrightarrow\)). Squaring, multiplying by an expression that might vanish, and taking logarithms of things that might be non-positive are the three usual offenders.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 13</span><span class="pill tmua">Necessary &amp; sufficient</span></div>
+<p>Let \(a\), \(b\), \(c\) be real with \(a\ne 0\). Which condition is <em>necessary and sufficient</em> for \(ax^2+bx+c=0\) to have two distinct real roots?</p>
+<ol class="mcq">
+<li data-o="A">\(b^2&gt;4ac\)</li>
+<li data-o="B">\(b^2\ge 4ac\)</li>
+<li data-o="C">\(b^2&gt;4ac\) and \(a&gt;0\)</li>
+<li data-o="D">\(ac&lt;0\)</li>
+<li data-o="E">\(b^2&gt;4|ac|\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: A</span></p>
+<p>The roots are \(\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}\), and they are real and distinct exactly when the quantity under the root is strictly positive: \(b^2-4ac&gt;0\).</p>
+<p>Each of the others fails in one direction, and knowing <em>which</em> direction is the skill being tested:</p>
+<ul>
+<li><strong>B</strong> is necessary but not sufficient: equality gives a repeated root, not two distinct ones.</li>
+<li><strong>C</strong> is sufficient but not necessary: the sign of \(a\) is irrelevant — \(-x^2+1=0\) has roots \(\pm1\).</li>
+<li><strong>D</strong> is sufficient but not necessary: if \(ac&lt;0\) then \(b^2-4ac\ge-4ac&gt;0\), but \(x^2-3x+1=0\) has \(ac=1&gt;0\) and still has two distinct real roots.</li>
+<li><strong>E</strong> is sufficient but not necessary, for the same reason as D when \(ac&lt;0\).</li>
+</ul>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 14</span><span class="pill tmua">Deduction</span></div>
+<p>You are told: "If it rains, the match is cancelled." You then learn that the match was <em>not</em> cancelled. What follows?</p>
+<ol class="mcq">
+<li data-o="A">It rained.</li>
+<li data-o="B">It may or may not have rained; nothing can be concluded.</li>
+<li data-o="C">It did not rain.</li>
+<li data-o="D">The match was cancelled after all.</li>
+<li data-o="E">Nothing follows unless we also know that rain is the only reason for cancellation.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: C</span></p>
+<p>This is <em>modus tollens</em>: from \(P\Rightarrow Q\) and \(\lnot Q\), conclude \(\lnot P\). If rain guarantees cancellation, then no cancellation guarantees no rain.</p>
+<p>Option E inverts the logic. The extra premise it demands — that rain is the <em>only</em> cause of cancellation — would be needed to argue in the other direction, from "the match was cancelled" to "it rained". That argument is the fallacy of affirming the consequent, and it is exactly the one the question is inviting you to confuse this with.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 15</span><span class="pill tmua">Constructing a proof</span></div>
+<p>Which single observation completes a proof that \(n^3-n\) is divisible by 6 for every integer \(n\)?</p>
+<ol class="mcq">
+<li data-o="A">\(n^3-n\) is even.</li>
+<li data-o="B">If \(n\) is a multiple of 6 then so is \(n^3-n\).</li>
+<li data-o="C">\(n^3\) and \(n\) always have the same parity.</li>
+<li data-o="D">\(n^3-n=n(n^2-1)\), and \(n^2-1\) is always divisible by 3.</li>
+<li data-o="E">\(n^3-n=(n-1)n(n+1)\), a product of three consecutive integers, so it is divisible by both 2 and 3.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: E</span></p>
+<p>Among any three consecutive integers, at least one is even and exactly one is a multiple of 3. So \((n-1)n(n+1)\) is divisible by 2 and by 3, and since \(\gcd(2,3)=1\), it is divisible by 6.</p>
+<p>Options A and C are true but only deliver the factor 2 — half a proof. Option B proves the claim for a vanishing fraction of the integers. Option D is the interesting distractor: it is <em>false</em>. When \(n=3\), \(n^2-1=8\), which is not divisible by 3. (It is true when \(3\nmid n\), which is precisely the case the factorisation in E handles automatically.)</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 16</span><span class="pill tmua">Vacuous truth</span></div>
+<p>Is the following statement true or false? "For every real number \(x\) such that \(x^2&lt;0\), we have \(x=7\)."</p>
+<ol class="mcq">
+<li data-o="A">False, since no such \(x\) exists.</li>
+<li data-o="B">True, vacuously: there is no real \(x\) with \(x^2&lt;0\), so the statement has no counterexample.</li>
+<li data-o="C">False, since \(7^2&gt;0\).</li>
+<li data-o="D">Neither true nor false.</li>
+<li data-o="E">True only if complex values of \(x\) are permitted.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: B</span></p>
+<p>A statement of the form "for every \(x\) with property \(P\), \(Q\) holds" is false exactly when some \(x\) has \(P\) but not \(Q\). Here nothing has \(P\), so no counterexample can exist, and the statement is true by default — <em>vacuously</em> true.</p>
+<p>Option A is the intuitive answer and the wrong one: emptiness makes such a statement true, not false. Notice that "for every real \(x\) with \(x^2&lt;0\), \(x=8\)" is equally true — vacuous statements come in mutually contradictory-looking pairs, which is disconcerting the first time and standard thereafter. The convention exists because it is the only one under which \(P\Rightarrow Q\) behaves consistently.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 17</span><span class="pill tmua">Quantifiers</span></div>
+<p>Which of the following statements about real numbers is true?</p>
+<ol class="mcq">
+<li data-o="A">For every \(x\) there exists \(y\) with \(y&gt;x\).</li>
+<li data-o="B">There exists \(y\) such that for every \(x\), \(y&gt;x\).</li>
+<li data-o="C">There exists \(y\) such that for every \(x\), \(y\le x\).</li>
+<li data-o="D">For every \(y\) there exists \(x\) with \(x&gt;y\) and \(x&lt;y\).</li>
+<li data-o="E">Both A and B are true.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: A</span></p>
+<p>The order of quantifiers changes the meaning completely, and this pair is the standard illustration.</p>
+<p><strong>A is true:</strong> given any \(x\), take \(y=x+1\). The \(y\) is allowed to depend on \(x\), and it does.</p>
+<p><strong>B is false:</strong> it demands a <em>single</em> \(y\) exceeding every real number — a largest real number, which does not exist (\(y+1&gt;y\)). Since B is false, E is too.</p>
+<p>C asserts a smallest real number, equally non-existent; D asks for an \(x\) both greater and less than \(y\), a flat contradiction.</p>
+<p><strong>The rule to internalise:</strong> in \(\forall x\,\exists y\), the \(y\) may depend on \(x\); in \(\exists y\,\forall x\), one \(y\) must work for all \(x\) at once. The second is almost always the stronger — and the one worth doubting.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 18</span><span class="pill tmua">Finding the error</span></div>
+<p>Here is the classic "proof" that all horses in any group are the same colour, by induction on the size \(n\) of the group.</p>
+<div class="box"><span class="bt">The argument</span>
+<p><strong>Base case:</strong> in a group of 1 horse, all horses are trivially the same colour.</p>
+<p><strong>Inductive step:</strong> suppose the claim holds for groups of \(k\) horses, and take a group of \(k+1\). Remove the last horse: the first \(k\) are all the same colour. Now put it back and remove the first horse instead: those \(k\) are all the same colour too. The two sub-groups overlap, so all \(k+1\) horses share that colour.</p>
+</div>
+<p>Where does the argument break down?</p>
+<ol class="mcq">
+<li data-o="A">The base case is false.</li>
+<li data-o="B">Induction cannot be used to prove statements about finite sets.</li>
+<li data-o="C">The inductive hypothesis is too weak and should assume the result for all sizes up to \(k\).</li>
+<li data-o="D">The step from \(k=1\) to \(k+1=2\) fails: there the two sub-groups have no horse in common, so the overlap argument is unavailable.</li>
+<li data-o="E">The conclusion is correct but the proof is unnecessarily complicated.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: D</span></p>
+<p>The inductive step is fine for every \(k\ge 2\) — and completely empty when \(k=1\). A group of 2 horses splits into the first horse and the second horse, two sub-groups of size 1 that share no member, so there is nothing to force their colours to agree.</p>
+<p>The ladder therefore has a bottom rung and an unbroken sequence of rungs from the second upwards, but the rung joining the first to the second is missing, and the whole thing never gets off the ground.</p>
+<p><strong>The general lesson:</strong> an inductive step that quietly requires \(k\ge 2\) needs \(n=2\) verified as a base case as well. When you write an induction, always ask which values of \(k\) your step actually works for — this failure is invisible if you only check that the algebra is right.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 19</span><span class="pill tmua">Deduction</span></div>
+<p>You know that the implication "\(P\Rightarrow Q\)" is true, and you also know that \(Q\) is true. What can you conclude about \(P\)?</p>
+<ol class="mcq">
+<li data-o="A">\(P\) is true.</li>
+<li data-o="B">\(P\) is false.</li>
+<li data-o="C">Nothing: \(P\) may be true or false.</li>
+<li data-o="D">\(P\) is true if and only if \(Q\) is true.</li>
+<li data-o="E">\(P\) is false whenever \(Q\) is true.</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: C</span></p>
+<p>An implication with a true conclusion is true regardless of its hypothesis, so learning that \(Q\) holds tells you nothing whatsoever about \(P\).</p>
+<p>Both possibilities really do occur. Take \(P\): "\(n=2\)" and \(Q\): "\(n\) is even". The implication is true and \(Q\) is true for \(n=2\) (where \(P\) holds) and for \(n=4\) (where it does not).</p>
+<p>Concluding A here is affirming the consequent again — the same error as in Question 5, dressed in symbols instead of words. Paper 2 will keep asking it, because it is the mistake that most reliably separates candidates.</p>
+</details></div>
+
+<div class="q"><div class="qhead"><span class="qn">Question 20</span><span class="pill tmua">Converses</span></div>
+<p>It is a theorem that if \(2^n-1\) is prime then \(n\) is prime. The converse is false. What is the smallest prime \(n\) for which \(2^n-1\) is <em>not</em> prime?</p>
+<ol class="mcq">
+<li data-o="A">\(2\)</li>
+<li data-o="B">\(3\)</li>
+<li data-o="C">\(7\)</li>
+<li data-o="D">\(9\)</li>
+<li data-o="E">\(11\)</li>
+</ol>
+<details class="sol"><summary>Show solution</summary>
+<p><span class="ans">Answer: E</span></p>
+<p>Work through the primes in order:
+\[2^2-1=3,\quad 2^3-1=7,\quad 2^5-1=31,\quad 2^7-1=127,\]
+all prime. The next prime is \(11\), and
+\[2^{11}-1=2047=23\times 89,\]
+which is not. So \(n=11\) is the smallest such prime.</p>
+<p>Option D is the trap: \(2^9-1=511=7\times 73\) is indeed not prime, but \(9\) is not a prime, so it is not an answer to the question asked — and it is not a counterexample to the converse either, since the converse only makes a claim about prime \(n\).</p>
+<p><strong>The moral of the paper, in one line:</strong> a true theorem tells you nothing about its converse, and checking four cases is not a proof. Both halves of Paper 2 live in that sentence.</p>
+</details></div>
+
+<h2 id="key">Answer key</h2>
+<div class="tscroll"><table>
+<tr><th>Q</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+<tr><td><b>Ans</b></td><td>B</td><td>D</td><td>A</td><td>C</td><td>E</td><td>A</td><td>D</td><td>B</td><td>C</td><td>E</td></tr>
+<tr><th>Q</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th></tr>
+<tr><td><b>Ans</b></td><td>D</td><td>B</td><td>A</td><td>C</td><td>E</td><td>B</td><td>A</td><td>D</td><td>C</td><td>E</td></tr>
+</table></div>
+
+<div class="box"><span class="bt">What your errors are telling you</span>
+<p>Paper 2 mistakes fall into a small number of families, and each has a cure. Sort your dropped marks:</p>
+<ul>
+<li><strong>Quantifiers</strong> (Q1, Q16, Q17) — negation, order, and vacuous truth. Rewrite each statement in symbols before answering; the errors become visible.</li>
+<li><strong>Direction of implication</strong> (Q2, Q3, Q5, Q13, Q14, Q19, Q20) — converse, contrapositive, necessary versus sufficient. Over half the paper. If this is your weak family, it is also your biggest available gain.</li>
+<li><strong>Reversibility and hidden cases</strong> (Q4, Q12) — dividing by something that might be zero, squaring, and other one-way steps.</li>
+<li><strong>What a proof establishes</strong> (Q6, Q7, Q9, Q10, Q11, Q15, Q18) — counterexamples, base cases, and the gap between "I checked several cases" and "I proved it".</li>
+</ul>
+<p>The theory behind every one of these is on the <a href="logic.html">Mathematical Logic and Proof</a> page; re-read the section matching your weakest family before attempting another Paper 2.</p>
+</div>
+
+<p>If you have not yet done <a href="mock-paper-1.html">Mock Paper 1</a>, do it under timed conditions too — and then work through the real past papers and the other free mocks listed on the <a href="exam-papers.html">TMUA exam papers</a> page.</p>
+
+<div class="pn"><a href="mock-paper-1.html">← Mock Paper 1</a><a href="practice.html">Practice Arena →</a></div>
+</div>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+This mock paper consists of original questions written for this site; it is not affiliated with, endorsed by, or reproduced from Cambridge Assessment Admissions Testing or Pearson VUE. "TMUA" is used only to describe the examination the paper is modelled on.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>
