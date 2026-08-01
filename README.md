@@ -20,6 +20,8 @@ HTML + one shared stylesheet; mathematics renders in the browser via KaTeX
 - mechanics.html        — Extension, STEP (NEW chapter)
 - statistics.html       — Extension, STEP (NEW chapter)
 - exam-papers.html      — past-paper links and study method
+- mock-paper-1.html     — original mock, TMUA Paper 1 (applications), 20 Q + solutions
+- mock-paper-2.html     — original mock, TMUA Paper 2 (reasoning), 20 Q + solutions
 - styles.css
 
 ## Deploying (pick one — all free)
