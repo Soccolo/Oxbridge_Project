@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAT Questions Database</title>
+<meta name="description" content="Every published Oxford MAT question from 2007 to 2025, searchable by topic, year and degree stream, with the official solutions.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+function toggleNav() {
+  document.getElementById("sidenav").classList.toggle("open");
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="t1">Advanced Mathematics<br>for High School</span>
+    <span class="t2">Preparing for Oxbridge · Free edition</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="sidenav">Topic menu ▾</button>
+  <div id="sidenav">
+  <hr>
+  <ul class="nav">
+    <li><a href="about.html"><span class="n">▸</span> About your tutor</a></li>
+  </ul>
+  <p class="menu-label">TMUA topic menu</p>
+  <ul class="nav">
+    <li><a href="numbers.html"><span class="n">1</span> Numbers</a></li>
+    <li><a href="algebra.html"><span class="n">2</span> Algebra</a></li>
+    <li><a href="sequences.html"><span class="n">3</span> Sequences</a></li>
+    <li><a href="functions.html"><span class="n">4</span> Functions</a></li>
+    <li><a href="geometry.html"><span class="n">5</span> Geometry and Trigonometry</a></li>
+    <li><a href="differentiation.html"><span class="n">6</span> Differential Calculus</a></li>
+    <li><a href="integration.html"><span class="n">7</span> Integrals</a></li>
+    <li><a href="counting.html"><span class="n">8</span> Counting &amp; Probability</a></li>
+    <li><a href="logic.html"><span class="n">9</span> Mathematical Logic</a></li>
+    <li><a href="complex.html"><span class="n">10</span> Complex Numbers</a></li>
+    <li><a href="mechanics.html"><span class="n">11</span> Mechanics (STEP)</a></li>
+    <li><a href="statistics.html"><span class="n">12</span> Statistics (STEP)</a></li>
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><a href="exam-papers.html"><span class="n">▸</span> TMUA Exam Papers</a></li>
+    <li><a href="mat-database.html" class="active"><span class="n">&#9656;</span> MAT Database</a></li>
+    <li><a href="mock-paper-1.html"><span class="n">▸</span> Mock Paper 1</a></li>
+    <li><a href="mock-paper-2.html"><span class="n">▸</span> Mock Paper 2</a></li>
+    <li><a href="practice.html"><span class="n">▸</span> Practice Arena</a></li>
+    <li><a href="whiteboard.html"><span class="n">▸</span> Maths Whiteboard</a></li>
+    <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
+  </ul>
+  </div>
+</aside>
+<main>
+<style>
+/* ---------- MAT database: wider column than the reading pages ---------- */
+.dbpage{max-width:74rem;margin:0 auto;padding:2.6rem 2rem 0}
+.dbtools{position:sticky;top:0;z-index:6;background:var(--paper);
+  border-bottom:1px solid var(--line);padding:.9rem 0 1rem;margin-bottom:1.4rem}
+.dbsearch{display:flex;gap:.6rem;align-items:center}
+.dbsearch input{
+  flex:1;font-family:var(--sans);font-size:1rem;padding:.7rem .95rem;
+  border:1.5px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink)}
+.dbsearch input:focus{outline:none;border-color:var(--accent)}
+.btn{font-family:var(--display);font-weight:600;font-size:.82rem;cursor:pointer;
+  background:var(--card);border:1.5px solid var(--line);color:var(--ink-soft);
+  border-radius:8px;padding:.6rem .9rem}
+.btn:hover{border-color:var(--accent);color:var(--accent-ink)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#1f49e6;color:#fff}
+.btn.small{padding:.3rem .6rem;font-size:.72rem}
+.facet{display:flex;gap:.45rem;align-items:baseline;flex-wrap:wrap;margin-top:.7rem}
+.facet>.fl{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;
+  letter-spacing:.13em;color:var(--ink-soft);min-width:5.2rem}
+.chip{font-family:var(--mono);font-size:.7rem;cursor:pointer;background:var(--card);
+  border:1px solid var(--line);color:var(--ink-soft);border-radius:20px;
+  padding:.2rem .62rem;transition:background .12s,color .12s,border-color .12s}
+.chip:hover{border-color:var(--accent-line);color:var(--accent-ink)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+details.more{margin-top:.55rem}
+details.more>summary{cursor:pointer;font-family:var(--mono);font-size:.66rem;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--accent-ink);list-style:none}
+details.more>summary::before{content:"▸ "}
+details.more[open]>summary::before{content:"▾ "}
+.dbcount{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);
+  margin:.9rem 0 0;display:flex;gap:.9rem;align-items:center;flex-wrap:wrap}
+.dbcount b{color:var(--accent-ink)}
+.dbcount .spacer{flex:1}
+/* ---------- result cards ---------- */
+.qcard{margin:1.3rem 0;padding:1rem 1.15rem;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;scroll-margin-top:11rem}
+.qcard:target{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.qcard.dirty{border-color:var(--bad);box-shadow:0 0 0 3px var(--bad-soft)}
+.qhead{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin-bottom:.7rem}
+.qcode{font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:-.01em}
+.qcode a{color:var(--ink);text-decoration:none}
+.qcode a:hover{color:var(--accent-ink)}
+.tag{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;
+  border-radius:5px;padding:.16rem .5rem;background:var(--accent-soft);color:var(--accent-ink);
+  text-decoration:none;border:1px solid transparent}
+.tag:hover{border-color:var(--accent-line)}
+.tag.meta{background:var(--line-soft);color:var(--ink-soft)}
+.tag.warn{background:var(--bad-soft);color:var(--bad)}
+.qimg{display:block;max-width:100%;height:auto;border-radius:6px}
+.qcard details{margin-top:.8rem;border-top:1px solid var(--line-soft);padding-top:.6rem}
+.qcard details summary{cursor:pointer;font-family:var(--mono);font-size:.76rem;
+  font-weight:600;color:var(--accent-ink);list-style:none}
+.qcard details summary::before{content:"▸ ";color:var(--accent)}
+.qcard details[open] summary::before{content:"▾ "}
+.qlinks{margin-top:.75rem;display:flex;gap:.9rem;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.7rem}
+.qlinks a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line)}
+.qlinks a:hover{color:var(--accent-ink);border-color:var(--accent-line)}
+.empty{text-align:center;color:var(--ink-soft);padding:3rem 1rem;font-size:1.02rem}
+mark{background:var(--accent-soft);color:var(--accent-ink);padding:0 .1em}
+/* ---------- tag editor ---------- */
+.editpanel{margin-top:.8rem;padding:.7rem .85rem;border:1px dashed var(--accent-line);
+  border-radius:9px;background:var(--accent-soft)}
+.editpanel .facet{margin-top:0}
+.editpanel .row{display:flex;gap:.5rem;align-items:center;margin-top:.6rem;flex-wrap:wrap}
+.editbar{margin-top:.8rem;padding:.75rem .9rem;border:1.5px solid var(--accent);
+  border-radius:10px;background:var(--card);display:flex;gap:.7rem;align-items:center;
+  flex-wrap:wrap;font-family:var(--mono);font-size:.74rem}
+.editbar.hidden,.gatebox.hidden{display:none}
+.editbar .spacer{flex:1}
+.gatebox{margin-top:.8rem;padding:.75rem .9rem;border:1px solid var(--line);
+  border-radius:10px;background:var(--card);display:flex;gap:.6rem;align-items:center;
+  flex-wrap:wrap}
+.gatebox input{font-family:var(--sans);font-size:.9rem;padding:.5rem .7rem;
+  border:1.5px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.gatebox input:focus{outline:none;border-color:var(--accent)}
+.gatebox label{font-family:var(--mono);font-size:.7rem;color:var(--ink-soft)}
+.note{font-family:var(--mono);font-size:.7rem;color:var(--ink-soft);margin:.4rem 0 0;
+  flex-basis:100%;word-break:break-word}
+.note.err{color:var(--bad)}
+.note.ok{color:var(--ok)}
+@media (max-width:820px){
+  .dbpage{padding:1.6rem 1rem 0}
+  .facet>.fl{min-width:100%}
+  .dbtools{position:static}
+}
+</style>
+
+<div class="dbpage">
+<p class="crumb"><b>Resources</b> · Oxford MAT · Searchable database</p>
+<h1>MAT Questions Database</h1>
+<p class="lede">Every question from every published Oxford Mathematics Admissions Test —
+2007 to 2025, plus the two specimen papers and the Extra papers — indexed by topic,
+year and degree stream, with the official solution beside each one.</p>
+
+<div class="dbtools">
+  <div class="dbsearch">
+    <input id="q" type="search" autocomplete="off"
+           placeholder="Search — try &ldquo;induction&rdquo;, &ldquo;tangent circle&rdquo;, &ldquo;2019 Q3&rdquo;, &ldquo;how many ways&rdquo;">
+    <button class="btn" id="reset" type="button">Clear</button>
+  </div>
+  <div class="facet" id="f-kind"><span class="fl">Type</span></div>
+  <div class="facet" id="f-series"><span class="fl">Series</span></div>
+  <div class="facet" id="f-stream"><span class="fl">Degree</span></div>
+  <details class="more"><summary>Filter by year</summary>
+    <div class="facet" id="f-year"><span class="fl">Year</span></div>
+  </details>
+  <details class="more"><summary>Filter by topic</summary>
+    <div class="facet" id="f-topic"><span class="fl">Topic</span></div>
+  </details>
+  <p class="dbcount"><span id="count">Loading&hellip;</span>
+    <button class="btn" id="expandall" type="button">Show all solutions</button>
+    <span class="spacer"></span>
+    <button class="btn" id="editorbtn" type="button">Editor</button></p>
+
+  <div class="gatebox hidden" id="gate">
+    <label for="pw">Editor password</label>
+    <input id="pw" type="password" autocomplete="current-password" placeholder="Password">
+    <button class="btn primary" id="unlock" type="button">Unlock</button>
+    <button class="btn" id="gatecancel" type="button">Cancel</button>
+    <p class="note" id="gatenote">Unlocking only reveals the tag-editing controls in this
+      browser. Publishing a change is authorised separately by your GitHub token.</p>
+  </div>
+
+  <div class="editbar hidden" id="editbar">
+    <span id="editstatus">Editing tags</span>
+    <span class="spacer"></span>
+    <button class="btn small primary" id="publish" type="button">Publish to GitHub</button>
+    <button class="btn small" id="download" type="button">Download overrides.json</button>
+    <button class="btn small" id="discard" type="button">Discard changes</button>
+    <button class="btn small" id="lock" type="button">Lock</button>
+    <p class="note" id="editnote"></p>
+  </div>
+</div>
+
+<div id="results"></div>
+</div>
+
+<script src="mat/data/questions.js"></script>
+<script>
+(function () {
+  "use strict";
+  var DB = window.MAT_DB;
+  var results = document.getElementById("results");
+  if (!DB) {
+    results.innerHTML = '<p class="empty">Could not load the question data. ' +
+      'Make sure <code>mat/data/questions.js</code> sits next to this page.</p>';
+    return;
+  }
+
+  /* ---------- where published tag edits are committed ---------- */
+  var REPO = {owner: "Soccolo", name: "Oxbridge_Project", branch: "main",
+              path: "mat/data/overrides.json"};
+
+  // The editor password is held as a digest so the plaintext is not sitting in a
+  // public repository. This is obfuscation, not security: the check runs in the
+  // browser and can be bypassed by anyone who reads this file. That is acceptable
+  // because unlocking on its own changes nothing anyone else can see - publishing
+  // is authorised by a GitHub token, which is never stored in the repository.
+  var PW_SEED = 20260826, PW_DIGEST = 2105009371515380;
+
+  var LS_EDITS = "mat-tag-edits", LS_TOKEN = "mat-gh-token";
+
+  var TOPIC = {};
+  DB.topics.forEach(function (t) { TOPIC[t.id] = t; });
+  var TOPIC_ORDER = {};
+  DB.topics.forEach(function (t, i) { TOPIC_ORDER[t.id] = i; });
+  var STREAMS = [["maths", "Maths"], ["mathscs", "Maths &amp; CS"], ["cs", "Computer Science"]];
+  var PAGE = 30;
+
+  var state = {q: "", kind: "", series: "", stream: "", years: [], topics: [], shown: PAGE};
+  var byId = {}, order = {};
+  DB.questions.forEach(function (r, i) { byId[r.id] = r; order[r.id] = i; });
+
+  /* ---------- editing state ---------- */
+  var editing = false;
+  var edits = {};               // id -> [topics], or null meaning "drop the override"
+  var published = {};           // overrides.json as last read from the deployed site
+  var openPickers = {};
+
+  function has(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
+
+  function loadDrafts() {
+    try {
+      var raw = localStorage.getItem(LS_EDITS);
+      if (raw) edits = JSON.parse(raw) || {};
+    } catch (e) { edits = {}; }
+  }
+  function saveDrafts() {
+    try { localStorage.setItem(LS_EDITS, JSON.stringify(edits)); } catch (e) {}
+  }
+  function dirtyCount() { return Object.keys(edits).length; }
+
+  /* ---------- shown tags = baked tags, then published, then local drafts ---------- */
+  function effectiveTopics(r) {
+    if (has(edits, r.id)) return edits[r.id] === null ? (r._auto || []) : edits[r.id];
+    if (has(published, r.id)) return published[r.id];
+    return r.topics;
+  }
+
+  function buildHaystacks() {
+    DB.questions.forEach(function (r) {
+      var p = DB.papers[r.paper];
+      r._hay = (r.paper + " " + r.code + " " + p.label + " " + p.year + " " +
+                effectiveTopics(r).map(function (t) {
+                  return TOPIC[t] ? TOPIC[t].label : t;
+                }).join(" ") + " " + r.text + " " + (r.stext || ""))
+               .toLowerCase().replace(/&amp;/g, "&");
+      r._year = p.year;
+      r._series = p.series;
+    });
+  }
+
+  /* ---------- URL state so a filtered view can be shared ---------- */
+  var ID_RE = /^[A-Za-z0-9]+-Q[A-Za-z0-9]+$/;
+  var pendingFocus = null;
+
+  function readHash() {
+    var h = location.hash.replace(/^#/, "");
+    if (!h || ID_RE.test(h)) return;
+    h.split("&").forEach(function (pair) {
+      var i = pair.indexOf("="), k = pair.slice(0, i), v = decodeURIComponent(pair.slice(i + 1));
+      if (k === "q") state.q = v;
+      else if (k === "kind") state.kind = v;
+      else if (k === "series") state.series = v;
+      else if (k === "stream") state.stream = v;
+      else if (k === "years") state.years = v ? v.split(",") : [];
+      else if (k === "topics") state.topics = v ? v.split(",") : [];
+    });
+  }
+  function writeHash() {
+    if (pendingFocus) return;
+    var parts = [];
+    if (state.q) parts.push("q=" + encodeURIComponent(state.q));
+    if (state.kind) parts.push("kind=" + state.kind);
+    if (state.series) parts.push("series=" + state.series);
+    if (state.stream) parts.push("stream=" + state.stream);
+    if (state.years.length) parts.push("years=" + state.years.join(","));
+    if (state.topics.length) parts.push("topics=" + state.topics.join(","));
+    var h = parts.join("&");
+    history.replaceState(null, "", h ? "#" + h : location.pathname);
+  }
+
+  /* ---------- filtering ---------- */
+  function tokens(s) {
+    return s.toLowerCase().replace(/&amp;/g, "&").split(/\s+/).filter(Boolean);
+  }
+  function matches(r, toks) {
+    if (state.kind && r.kind !== state.kind) return false;
+    if (state.series && r._series !== state.series) return false;
+    if (state.stream && r.streams.indexOf(state.stream) < 0) return false;
+    if (state.years.length && state.years.indexOf(String(r._year)) < 0) return false;
+    if (state.topics.length) {
+      var eff = effectiveTopics(r);
+      if (!state.topics.some(function (t) { return eff.indexOf(t) >= 0; })) return false;
+    }
+    for (var i = 0; i < toks.length; i++) {
+      if (r._hay.indexOf(toks[i]) < 0) return false;
+    }
+    return true;
+  }
+
+  function esc(s) {
+    return String(s).replace(/&(?!(amp|lt|gt|quot|#\d+);)/g, "&amp;")
+                    .replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  /* ---------- rendering ---------- */
+  function snippet(r, toks) {
+    if (!toks.length || !r.text) return "";
+    var low = r.text.toLowerCase(), at = -1, tok = "";
+    for (var i = 0; i < toks.length; i++) {
+      var p = low.indexOf(toks[i]);
+      if (p >= 0 && (at < 0 || p < at)) { at = p; tok = toks[i]; }
+    }
+    if (at < 0) return "";
+    var from = Math.max(0, at - 60), text = r.text.slice(from, from + 190);
+    var out = esc(text).replace(new RegExp("(" + tok.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "ig"),
+                                "<mark>$1</mark>");
+    return '<p class="qlinks" style="display:block;color:var(--ink-soft)">' +
+           (from ? "&hellip;" : "") + out + "&hellip;</p>";
+  }
+
+  function picker(r) {
+    var eff = effectiveTopics(r);
+    var bits = ['<div class="editpanel"><div class="facet">'];
+    DB.topics.forEach(function (t) {
+      bits.push('<button type="button" class="chip" data-act="topic" data-id="' + r.id +
+                '" data-topic="' + t.id + '" aria-pressed="' +
+                (eff.indexOf(t.id) >= 0 ? "true" : "false") + '">' + t.label + "</button>");
+    });
+    bits.push('</div><div class="row">');
+    bits.push('<button type="button" class="btn small" data-act="auto" data-id="' + r.id +
+              '">Reset to automatic</button>');
+    if (has(edits, r.id)) {
+      bits.push('<button type="button" class="btn small" data-act="revert" data-id="' + r.id +
+                '">Undo unpublished change</button>');
+    }
+    bits.push('<span class="note" style="flex-basis:auto">Confidence: ' +
+              esc(r.confidence) + "</span>");
+    bits.push("</div></div>");
+    return bits.join("");
+  }
+
+  function card(r, toks) {
+    var p = DB.papers[r.paper];
+    var dirty = has(edits, r.id);
+    var bits = ['<article class="qcard' + (dirty ? " dirty" : "") + '" id="' + r.id + '">'];
+    bits.push('<div class="qhead"><span class="qcode"><a href="#' + r.id + '">' +
+              p.label + " &middot; " + r.code + "</a></span>");
+    bits.push('<span class="tag meta">' +
+              (r.kind === "mc" ? "Multiple choice" : "Long question") + "</span>");
+    if (r.marks) bits.push('<span class="tag meta">' + r.marks + " marks</span>");
+    if (p.series !== "Main") bits.push('<span class="tag meta">' + p.series + "</span>");
+    effectiveTopics(r).forEach(function (t) {
+      var info = TOPIC[t];
+      if (info) bits.push('<a class="tag" href="' + info.chapter + '">' + info.label + "</a>");
+    });
+    if (!dirty && !has(published, r.id) &&
+        (r.confidence === "low" || r.confidence === "none")) {
+      bits.push('<span class="tag warn" title="Topic assigned automatically and not yet confirmed">tag unreviewed</span>');
+    }
+    if (dirty) bits.push('<span class="tag warn">unpublished edit</span>');
+    if (editing) {
+      bits.push('<button type="button" class="btn small" data-act="edit" data-id="' + r.id +
+                '">' + (openPickers[r.id] ? "Close tags" : "Edit tags") + "</button>");
+    }
+    bits.push("</div>");
+    if (editing && openPickers[r.id]) bits.push(picker(r));
+    if (r.img) {
+      bits.push('<img class="qimg" loading="lazy" src="' + r.img + '" alt="' +
+                p.label + " question " + r.code + '"' +
+                (r.iw ? ' width="' + r.iw + '" height="' + r.ih + '"' : "") + ">");
+    }
+    bits.push(snippet(r, toks));
+    if (r.sol) {
+      bits.push("<details><summary>Show official solution</summary>" +
+                '<img class="qimg" loading="lazy" src="' + r.sol + '" alt="Solution to ' +
+                r.code + '"' + (r.sw ? ' width="' + r.sw + '" height="' + r.sh + '"' : "") +
+                "></details>");
+    }
+    bits.push('<div class="qlinks">');
+    bits.push('<a href="' + p.paper + "#page=" + (r.ppage || 1) + '">Question paper (p' +
+              (r.ppage || 1) + ")</a>");
+    bits.push('<a href="' + p.solutions + "#page=" + (r.spage || 1) + '">Solutions (p' +
+              (r.spage || 1) + ")</a>");
+    if (p.feedback) bits.push('<a href="' + p.feedback + '">Examiner report</a>');
+    bits.push("</div></article>");
+    return bits.join("");
+  }
+
+  var current = [];
+  function render() {
+    var toks = tokens(state.q);
+    current = DB.questions.filter(function (r) { return matches(r, toks); });
+    current.sort(function (a, b) {
+      if (b._year !== a._year) return b._year - a._year;
+      if (a.paper !== b.paper) return a.paper < b.paper ? -1 : 1;
+      return a.code < b.code ? -1 : (a.code > b.code ? 1 : 0);
+    });
+    var slice = current.slice(0, state.shown);
+    results.innerHTML = slice.length
+      ? slice.map(function (r) { return card(r, toks); }).join("")
+      : '<p class="empty">No questions match those filters.</p>';
+    if (current.length > slice.length) {
+      results.insertAdjacentHTML("beforeend",
+        '<p style="text-align:center"><button class="btn" id="more" type="button">Show ' +
+        Math.min(PAGE, current.length - slice.length) + " more of " +
+        (current.length - slice.length) + " remaining</button></p>");
+      document.getElementById("more").addEventListener("click", function () {
+        state.shown += PAGE;
+        render();
+      });
+    }
+    document.getElementById("count").innerHTML =
+      "<b>" + current.length + "</b> of " + DB.questions.length + " questions";
+    updateEditBar();
+    writeHash();
+  }
+
+  /* ---------- facet chips ---------- */
+  function chip(label, value, key, multi) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.innerHTML = label;
+    function active() {
+      return multi ? state[key].indexOf(value) >= 0 : state[key] === value;
+    }
+    b.setAttribute("aria-pressed", active() ? "true" : "false");
+    b.addEventListener("click", function () {
+      if (multi) {
+        var i = state[key].indexOf(value);
+        if (i >= 0) state[key].splice(i, 1); else state[key].push(value);
+      } else {
+        state[key] = state[key] === value ? "" : value;
+      }
+      state.shown = PAGE;
+      syncChips();
+      render();
+    });
+    b._active = active;
+    return b;
+  }
+
+  var allChips = [];
+  function addFacet(id, items, key, multi) {
+    var box = document.getElementById(id);
+    items.forEach(function (it) {
+      var c = chip(it[1], it[0], key, multi);
+      box.appendChild(c);
+      allChips.push(c);
+    });
+  }
+  function syncChips() {
+    allChips.forEach(function (c) {
+      c.setAttribute("aria-pressed", c._active() ? "true" : "false");
+    });
+  }
+
+  /* ---------- editor ---------- */
+  var gate = document.getElementById("gate");
+  var editbar = document.getElementById("editbar");
+  var editnote = document.getElementById("editnote");
+
+  function cyrb53(str, seed) {
+    var h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed, i, ch;
+    for (i = 0; i < str.length; i++) {
+      ch = str.charCodeAt(i);
+      h1 = Math.imul(h1 ^ ch, 2654435761);
+      h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+  }
+
+  function note(msg, cls) {
+    editnote.className = "note" + (cls ? " " + cls : "");
+    editnote.textContent = msg || "";
+  }
+
+  function updateEditBar() {
+    editbar.classList.toggle("hidden", !editing);
+    if (!editing) return;
+    var n = dirtyCount();
+    document.getElementById("editstatus").textContent =
+      n ? n + (n === 1 ? " unpublished tag change" : " unpublished tag changes")
+        : "Editing tags — no unpublished changes";
+    document.getElementById("publish").disabled = !n;
+    document.getElementById("download").disabled = !n;
+    document.getElementById("discard").disabled = !n;
+  }
+
+  document.getElementById("editorbtn").addEventListener("click", function () {
+    if (editing) { gate.classList.add("hidden"); return; }
+    gate.classList.toggle("hidden");
+    if (!gate.classList.contains("hidden")) document.getElementById("pw").focus();
+  });
+  document.getElementById("gatecancel").addEventListener("click", function () {
+    gate.classList.add("hidden");
+  });
+
+  function tryUnlock() {
+    var pw = document.getElementById("pw");
+    var gn = document.getElementById("gatenote");
+    if (cyrb53(pw.value, PW_SEED) !== PW_DIGEST) {
+      gn.className = "note err";
+      gn.textContent = "That password is not correct.";
+      return;
+    }
+    pw.value = "";
+    gate.classList.add("hidden");
+    gn.className = "note";
+    gn.textContent = "Unlocking only reveals the tag-editing controls in this browser. " +
+                     "Publishing a change is authorised separately by your GitHub token.";
+    editing = true;
+    note("Pick topics on any question, then publish. Changes stay in this browser " +
+         "until you publish them.");
+    render();
+  }
+  document.getElementById("unlock").addEventListener("click", tryUnlock);
+  document.getElementById("pw").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") tryUnlock();
+  });
+  document.getElementById("lock").addEventListener("click", function () {
+    editing = false;
+    openPickers = {};
+    render();
+  });
+
+  // Delegated so the handlers survive a re-render.
+  results.addEventListener("click", function (e) {
+    var el = e.target.closest ? e.target.closest("[data-act]") : null;
+    if (!el) return;
+    var act = el.getAttribute("data-act"), id = el.getAttribute("data-id");
+    var r = byId[id];
+    if (!r) return;
+    if (act === "edit") {
+      if (openPickers[id]) delete openPickers[id]; else openPickers[id] = true;
+    } else if (act === "topic") {
+      var t = el.getAttribute("data-topic");
+      var eff = effectiveTopics(r).slice();
+      var i = eff.indexOf(t);
+      if (i >= 0) eff.splice(i, 1); else eff.push(t);
+      eff.sort(function (a, b) { return TOPIC_ORDER[a] - TOPIC_ORDER[b]; });
+      edits[id] = eff;
+      saveDrafts();
+    } else if (act === "auto") {
+      edits[id] = null;                 // publishing this removes the override
+      saveDrafts();
+    } else if (act === "revert") {
+      delete edits[id];
+      saveDrafts();
+    }
+    buildHaystacks();
+    render();
+  });
+
+  document.getElementById("discard").addEventListener("click", function () {
+    if (!window.confirm("Discard all unpublished tag changes?")) return;
+    edits = {};
+    saveDrafts();
+    buildHaystacks();
+    note("Unpublished changes discarded.");
+    render();
+  });
+
+  /* ---------- serialising overrides.json ---------- */
+  function serialize(map) {
+    var keys = Object.keys(map).filter(function (k) { return k.charAt(0) !== "_"; });
+    keys.sort(function (a, b) {
+      var oa = order[a] === undefined ? 1e9 : order[a];
+      var ob = order[b] === undefined ? 1e9 : order[b];
+      return oa - ob;
+    });
+    var lines = ["{"];
+    if (map._comment) {
+      lines.push(' "_comment": ' + JSON.stringify(map._comment) + (keys.length ? "," : ""));
+    }
+    keys.forEach(function (k, i) {
+      lines.push(" " + JSON.stringify(k) + ": " + JSON.stringify(map[k]) +
+                 (i < keys.length - 1 ? "," : ""));
+    });
+    lines.push("}");
+    return lines.join("\n") + "\n";
+  }
+
+  function merged(base) {
+    var out = {};
+    Object.keys(base).forEach(function (k) { out[k] = base[k]; });
+    Object.keys(edits).forEach(function (id) {
+      if (edits[id] === null) delete out[id]; else out[id] = edits[id];
+    });
+    return out;
+  }
+
+  document.getElementById("download").addEventListener("click", function () {
+    var text = serialize(merged(published));
+    var url = URL.createObjectURL(new Blob([text], {type: "application/json"}));
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "overrides.json";
+    a.click();
+    URL.revokeObjectURL(url);
+    note("Downloaded. Replace mat/data/overrides.json with it and commit.", "ok");
+  });
+
+  /* ---------- publishing to GitHub ---------- */
+  function b64(str) {
+    var bytes = new TextEncoder().encode(str), bin = "", i;
+    for (i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin);
+  }
+  function unb64(str) {
+    var bin = atob(String(str).replace(/\s/g, ""));
+    var bytes = new Uint8Array(bin.length), i;
+    for (i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+
+  document.getElementById("publish").addEventListener("click", function () {
+    var token = "";
+    try { token = localStorage.getItem(LS_TOKEN) || ""; } catch (e) {}
+    if (!token) {
+      token = window.prompt(
+        "GitHub personal access token with 'Contents: write' on " +
+        REPO.owner + "/" + REPO.name + ".\n\n" +
+        "It is sent only to api.github.com and is never written into the repository.");
+      if (!token) return;
+      if (window.confirm("Remember this token in this browser?\n\n" +
+                         "Only do this on a device you control.")) {
+        try { localStorage.setItem(LS_TOKEN, token); } catch (e) {}
+      }
+    }
+    publish(token.trim());
+  });
+
+  function publish(token) {
+    var api = "https://api.github.com/repos/" + REPO.owner + "/" + REPO.name +
+              "/contents/" + REPO.path;
+    var head = {Authorization: "Bearer " + token,
+                Accept: "application/vnd.github+json"};
+    var n = dirtyCount();
+    note("Reading current overrides from GitHub…");
+    fetch(api + "?ref=" + REPO.branch, {headers: head, cache: "no-store"})
+      .then(function (res) {
+        if (res.status === 401) throw new Error("GitHub rejected that token (401).");
+        if (res.status === 403) throw new Error("That token lacks write access (403).");
+        if (res.status === 404) throw new Error("File or repository not found (404).");
+        if (!res.ok) throw new Error("GitHub read failed (" + res.status + ").");
+        return res.json();
+      })
+      .then(function (meta) {
+        var base;
+        try { base = JSON.parse(unb64(meta.content)); } catch (e) { base = {}; }
+        var body = {
+          message: "MAT database: update topic tags for " + n +
+                   (n === 1 ? " question" : " questions"),
+          content: b64(serialize(merged(base))),
+          sha: meta.sha,
+          branch: REPO.branch
+        };
+        note("Committing…");
+        return fetch(api, {method: "PUT", headers: head, body: JSON.stringify(body)});
+      })
+      .then(function (res) {
+        return res.json().then(function (j) {
+          if (!res.ok) {
+            throw new Error(j.message || ("GitHub write failed (" + res.status + ")."));
+          }
+          return j;
+        });
+      })
+      .then(function (j) {
+        // Fold published edits into the baseline so they stop counting as dirty.
+        Object.keys(edits).forEach(function (id) {
+          if (edits[id] === null) delete published[id]; else published[id] = edits[id];
+        });
+        edits = {};
+        saveDrafts();
+        buildHaystacks();
+        render();
+        var url = j.commit && j.commit.html_url;
+        note("Published. Everyone sees these tags once the site redeploys." +
+             (url ? " Commit: " + url : ""), "ok");
+      })
+      .catch(function (err) {
+        note(String(err.message || err) +
+             " — your changes are still here; retry, or download the file.", "err");
+      });
+  }
+
+  /* ---------- start ---------- */
+  function init() {
+    DB.questions.forEach(function (r) { r._auto = r.topics; });
+    loadDrafts();
+    buildHaystacks();
+
+    var years = [];
+    Object.keys(DB.papers).forEach(function (pid) {
+      var y = String(DB.papers[pid].year);
+      if (years.indexOf(y) < 0) years.push(y);
+    });
+    years.sort().reverse();
+
+    readHash();
+    addFacet("f-kind", [["mc", "Multiple choice"], ["long", "Long question"]], "kind", false);
+    addFacet("f-series", [["Main", "Main paper"], ["Extra", "Extra paper"],
+                          ["Specimen", "Specimen"]], "series", false);
+    addFacet("f-stream", STREAMS, "stream", false);
+    addFacet("f-year", years.map(function (y) {
+      return [y, y === "2006" ? "Specimen" : y];
+    }), "years", true);
+    addFacet("f-topic", DB.topics.map(function (t) { return [t.id, t.label]; }), "topics", true);
+
+    var input = document.getElementById("q");
+    input.value = state.q;
+    var timer;
+    input.addEventListener("input", function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        state.q = input.value;
+        state.shown = PAGE;
+        render();
+      }, 120);
+    });
+    document.getElementById("reset").addEventListener("click", function () {
+      state = {q: "", kind: "", series: "", stream: "", years: [], topics: [], shown: PAGE};
+      input.value = "";
+      syncChips();
+      render();
+    });
+    document.getElementById("expandall").addEventListener("click", function () {
+      var open = this.dataset.open === "1";
+      results.querySelectorAll("details").forEach(function (d) { d.open = !open; });
+      this.dataset.open = open ? "0" : "1";
+      this.textContent = open ? "Show all solutions" : "Hide all solutions";
+    });
+
+    // A permalink such as #2019-Q1A points at one question rather than a filter.
+    // The card may sit past the first batch, so grow the batch until it exists.
+    var direct = location.hash.replace(/^#/, "");
+    if (ID_RE.test(direct)) pendingFocus = direct;
+    render();
+
+    if (pendingFocus) {
+      var idx = -1;
+      for (var i = 0; i < current.length; i++) {
+        if (current[i].id === pendingFocus) { idx = i; break; }
+      }
+      var target = pendingFocus;
+      pendingFocus = null;
+      if (idx >= 0) {
+        if (idx >= state.shown) { state.shown = idx + 1; render(); }
+        var el = document.getElementById(target);
+        if (el) { el.scrollIntoView(); history.replaceState(null, "", "#" + target); }
+      }
+    }
+  }
+
+  // Published tag corrections live in overrides.json and are layered on at load, so
+  // an edit goes live on the next deploy without re-running the Python pipeline.
+  // Over file:// the fetch is blocked; the tags baked into questions.js still apply.
+  fetch("mat/data/overrides.json?t=" + Date.now(), {cache: "no-store"})
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) {
+      if (j) {
+        Object.keys(j).forEach(function (k) {
+          if (k.charAt(0) !== "_" && byId[k]) published[k] = j[k];
+        });
+      }
+    })
+    .catch(function () {})
+    .then(init, init);
+})();
+</script>
+
+<footer><div class="inner">
+<p><em>Advanced Mathematics for High School: Preparing for Oxbridge</em>, Volume&nbsp;1 — published free online.
+Past-paper questions are credited to their sources (TMUA, MAT, STEP, BMO, Mathematical Kangaroo and others) and remain the property of the respective examination boards; they are reproduced here for educational use.
+</p></div></footer>
+</main>
+</div>
+</body>
+</html>
