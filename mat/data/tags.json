@@ -1,0 +1,2681 @@
+{
+ "2025": {
+  "Q26X": {
+   "topics": [
+    "sequences",
+    "combinatorics"
+   ],
+   "score": 15,
+   "confidence": "medium"
+  },
+  "Q26Y": {
+   "topics": [
+    "logic",
+    "polynomials",
+    "sequences"
+   ],
+   "score": 24,
+   "confidence": "medium"
+  },
+  "Q27X": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 24,
+   "confidence": "medium"
+  },
+  "Q27Y": {
+   "topics": [
+    "combinatorics",
+    "algorithms"
+   ],
+   "score": 10,
+   "confidence": "reviewed"
+  }
+ },
+ "2024": {
+  "Q26": {
+   "topics": [
+    "numbertheory",
+    "vectors"
+   ],
+   "score": 28,
+   "confidence": "medium"
+  },
+  "Q27": {
+   "topics": [
+    "combinatorics",
+    "logic"
+   ],
+   "score": 12,
+   "confidence": "reviewed"
+  }
+ },
+ "2023": {
+  "Q1A": {
+   "topics": [
+    "logexp"
+   ],
+   "score": 27,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 16,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "circles"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "algebra"
+   ],
+   "score": 8,
+   "confidence": "medium"
+  },
+  "Q1E": {
+   "topics": [
+    "sequences",
+    "logexp",
+    "numbertheory"
+   ],
+   "score": 16,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "binomial",
+    "polynomials"
+   ],
+   "score": 4,
+   "confidence": "reviewed"
+  },
+  "Q1G": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 22,
+   "confidence": "high"
+  },
+  "Q1J": {
+   "topics": [
+    "numbertheory",
+    "sequences",
+    "integration"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q2": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 21,
+   "confidence": "medium"
+  },
+  "Q3": {
+   "topics": [
+    "trigonometry",
+    "differentiation"
+   ],
+   "score": 46,
+   "confidence": "high"
+  },
+  "Q4": {
+   "topics": [
+    "coordgeom",
+    "differentiation"
+   ],
+   "score": 11,
+   "confidence": "reviewed"
+  },
+  "Q5": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 29,
+   "confidence": "medium"
+  },
+  "Q6": {
+   "topics": [
+    "sequences",
+    "numbertheory"
+   ],
+   "score": 27,
+   "confidence": "medium"
+  }
+ },
+ "2022": {
+  "Q1A": {
+   "topics": [
+    "algebra"
+   ],
+   "score": 20,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "circles"
+   ],
+   "score": 45,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "logic",
+    "circles"
+   ],
+   "score": 21,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 12,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1F": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 27,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 41,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "algebra",
+    "polynomials"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1I": {
+   "topics": [
+    "probability",
+    "algorithms"
+   ],
+   "score": 33,
+   "confidence": "high"
+  },
+  "Q1J": {
+   "topics": [
+    "polynomials",
+    "circles"
+   ],
+   "score": 17,
+   "confidence": "high"
+  },
+  "Q2": {
+   "topics": [
+    "numbertheory",
+    "logic"
+   ],
+   "score": 14,
+   "confidence": "medium"
+  },
+  "Q3": {
+   "topics": [
+    "integration"
+   ],
+   "score": 39,
+   "confidence": "high"
+  },
+  "Q4": {
+   "topics": [
+    "graphs",
+    "differentiation"
+   ],
+   "score": 48,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "algorithms",
+    "sequences"
+   ],
+   "score": 44,
+   "confidence": "high"
+  },
+  "Q6": {
+   "topics": [
+    "algorithms",
+    "logic"
+   ],
+   "score": 12,
+   "confidence": "reviewed"
+  },
+  "Q7": {
+   "topics": [
+    "numbertheory",
+    "sequences"
+   ],
+   "score": 31,
+   "confidence": "medium"
+  }
+ },
+ "2021": {
+  "Q1A": {
+   "topics": [
+    "circles",
+    "trigonometry"
+   ],
+   "score": 17,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "integration"
+   ],
+   "score": 11,
+   "confidence": "medium"
+  },
+  "Q1C": {
+   "topics": [
+    "differentiation",
+    "logexp"
+   ],
+   "score": 3,
+   "confidence": "reviewed"
+  },
+  "Q1D": {
+   "topics": [
+    "logexp"
+   ],
+   "score": 27,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "vectors",
+    "probability"
+   ],
+   "score": 21,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "differentiation",
+    "polynomials"
+   ],
+   "score": 11,
+   "confidence": "medium"
+  },
+  "Q1G": {
+   "topics": [
+    "trigonometry",
+    "sequences"
+   ],
+   "score": 2,
+   "confidence": "reviewed"
+  },
+  "Q1H": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 15,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "logic"
+   ],
+   "score": 18,
+   "confidence": "high"
+  },
+  "Q2": {
+   "topics": [
+    "logexp",
+    "algebra"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q3": {
+   "topics": [
+    "polynomials",
+    "differentiation",
+    "graphs"
+   ],
+   "score": 31,
+   "confidence": "medium"
+  },
+  "Q4": {
+   "topics": [
+    "algebra"
+   ],
+   "score": 33,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "logic",
+    "numbertheory"
+   ],
+   "score": 23,
+   "confidence": "medium"
+  },
+  "Q6": {
+   "topics": [
+    "algorithms"
+   ],
+   "score": 38,
+   "confidence": "high"
+  },
+  "Q7": {
+   "topics": [
+    "logic",
+    "algorithms"
+   ],
+   "score": 13,
+   "confidence": "reviewed"
+  }
+ },
+ "2020": {
+  "Q1A": {
+   "topics": [
+    "circles",
+    "vectors"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1B": {
+   "topics": [
+    "integration"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1C": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 7,
+   "confidence": "medium"
+  },
+  "Q1D": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 15,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "integration",
+    "circles",
+    "differentiation"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1F": {
+   "topics": [
+    "logexp"
+   ],
+   "score": 27,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "differentiation"
+   ],
+   "score": 11,
+   "confidence": "medium"
+  },
+  "Q1H": {
+   "topics": [
+    "differentiation",
+    "polynomials",
+    "integration"
+   ],
+   "score": 13,
+   "confidence": "medium"
+  },
+  "Q1I": {
+   "topics": [
+    "trigonometry",
+    "sequences"
+   ],
+   "score": 21,
+   "confidence": "high"
+  },
+  "Q1J": {
+   "topics": [
+    "circles"
+   ],
+   "score": 33,
+   "confidence": "high"
+  },
+  "Q2": {
+   "topics": [
+    "algorithms",
+    "numbertheory",
+    "combinatorics"
+   ],
+   "score": 27,
+   "confidence": "medium"
+  },
+  "Q3": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 34,
+   "confidence": "high"
+  },
+  "Q4": {
+   "topics": [
+    "graphs",
+    "differentiation",
+    "trigonometry"
+   ],
+   "score": 29,
+   "confidence": "medium"
+  },
+  "Q5": {
+   "topics": [
+    "combinatorics"
+   ],
+   "score": 15,
+   "confidence": "medium"
+  },
+  "Q6": {
+   "topics": [
+    "combinatorics"
+   ],
+   "score": 15,
+   "confidence": "medium"
+  },
+  "Q7": {
+   "topics": [
+    "algorithms",
+    "sequences"
+   ],
+   "score": 52,
+   "confidence": "high"
+  }
+ },
+ "2019": {
+  "Q1A": {
+   "topics": [
+    "polynomials",
+    "graphs"
+   ],
+   "score": 5,
+   "confidence": "reviewed"
+  },
+  "Q1B": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 18,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 16,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "integration"
+   ],
+   "score": 11,
+   "confidence": "medium"
+  },
+  "Q1E": {
+   "topics": [
+    "trigonometry",
+    "graphs"
+   ],
+   "score": 12,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "trigonometry",
+    "polynomials",
+    "differentiation"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1G": {
+   "topics": [
+    "logexp"
+   ],
+   "score": 4,
+   "confidence": "reviewed"
+  },
+  "Q1H": {
+   "topics": [
+    "trigonometry",
+    "sequences"
+   ],
+   "score": 11,
+   "confidence": "medium"
+  },
+  "Q1I": {
+   "topics": [
+    "logexp",
+    "graphs"
+   ],
+   "score": 0,
+   "confidence": "reviewed"
+  },
+  "Q1J": {
+   "topics": [
+    "coordgeom",
+    "trigonometry",
+    "differentiation"
+   ],
+   "score": 8,
+   "confidence": "medium"
+  },
+  "Q2": {
+   "topics": [
+    "numbertheory",
+    "polynomials"
+   ],
+   "score": 18,
+   "confidence": "medium"
+  },
+  "Q3": {
+   "topics": [
+    "integration",
+    "polynomials",
+    "graphs"
+   ],
+   "score": 18,
+   "confidence": "medium"
+  },
+  "Q4": {
+   "topics": [
+    "coordgeom",
+    "logic"
+   ],
+   "score": 8,
+   "confidence": "reviewed"
+  },
+  "Q5": {
+   "topics": [
+    "combinatorics",
+    "numbertheory"
+   ],
+   "score": 16,
+   "confidence": "medium"
+  },
+  "Q6": {
+   "topics": [
+    "combinatorics",
+    "numbertheory",
+    "algorithms"
+   ],
+   "score": 35,
+   "confidence": "medium"
+  },
+  "Q7": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 30,
+   "confidence": "high"
+  }
+ },
+ "2018": {
+  "Q1A": {
+   "topics": [
+    "integration",
+    "graphs"
+   ],
+   "score": 16,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "differentiation",
+    "polynomials"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1C": {
+   "topics": [
+    "logic"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1D": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 16,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "circles"
+   ],
+   "score": 26,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "algorithms"
+   ],
+   "score": 8,
+   "confidence": "medium"
+  },
+  "Q1G": {
+   "topics": [
+    "differentiation",
+    "graphs"
+   ],
+   "score": 2,
+   "confidence": "reviewed"
+  },
+  "Q1H": {
+   "topics": [
+    "circles"
+   ],
+   "score": 16,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "graphs",
+    "polynomials"
+   ],
+   "score": 0,
+   "confidence": "reviewed"
+  },
+  "Q1J": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 22,
+   "confidence": "high"
+  },
+  "Q2": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 20,
+   "confidence": "medium"
+  },
+  "Q3": {
+   "topics": [
+    "graphs",
+    "differentiation"
+   ],
+   "score": 10,
+   "confidence": "reviewed"
+  },
+  "Q4": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 60,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "combinatorics",
+    "numbertheory"
+   ],
+   "score": 12,
+   "confidence": "reviewed"
+  },
+  "Q6": {
+   "topics": [
+    "sequences",
+    "numbertheory"
+   ],
+   "score": 14,
+   "confidence": "medium"
+  },
+  "Q7": {
+   "topics": [
+    "algorithms",
+    "combinatorics"
+   ],
+   "score": 12,
+   "confidence": "reviewed"
+  }
+ },
+ "2017": {
+  "Q1A": {
+   "topics": [
+    "differentiation"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1B": {
+   "topics": [
+    "trigonometry",
+    "polynomials"
+   ],
+   "score": 2,
+   "confidence": "reviewed"
+  },
+  "Q1C": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 11,
+   "confidence": "medium"
+  },
+  "Q1D": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 20,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "differentiation",
+    "numbertheory"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1F": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 69,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 12,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "integration",
+    "trigonometry"
+   ],
+   "score": 27,
+   "confidence": "high"
+  },
+  "Q2": {
+   "topics": [
+    "sequences",
+    "polynomials"
+   ],
+   "score": 17,
+   "confidence": "medium"
+  },
+  "Q3": {
+   "topics": [
+    "graphs",
+    "integration"
+   ],
+   "score": 12,
+   "confidence": "reviewed"
+  },
+  "Q4": {
+   "topics": [
+    "trigonometry",
+    "circles"
+   ],
+   "score": 30,
+   "confidence": "medium"
+  },
+  "Q5": {
+   "topics": [
+    "circles",
+    "numbertheory"
+   ],
+   "score": 15,
+   "confidence": "medium"
+  },
+  "Q6": {
+   "topics": [
+    "algorithms",
+    "combinatorics"
+   ],
+   "score": 9,
+   "confidence": "reviewed"
+  },
+  "Q7": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 24,
+   "confidence": "medium"
+  }
+ },
+ "2016": {
+  "Q1A": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 24,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "coordgeom",
+    "algebra"
+   ],
+   "score": 2,
+   "confidence": "reviewed"
+  },
+  "Q1C": {
+   "topics": [
+    "circles"
+   ],
+   "score": 13,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "numbertheory",
+    "trigonometry"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "trigonometry",
+    "graphs"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1F": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 12,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 16,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "integration"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "circles",
+    "algebra"
+   ],
+   "score": 4,
+   "confidence": "reviewed"
+  },
+  "Q1J": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 38,
+   "confidence": "high"
+  },
+  "Q2": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 22,
+   "confidence": "medium"
+  },
+  "Q3": {
+   "topics": [
+    "integration"
+   ],
+   "score": 49,
+   "confidence": "high"
+  },
+  "Q4": {
+   "topics": [
+    "circles"
+   ],
+   "score": 53,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 6,
+   "confidence": "reviewed"
+  },
+  "Q6": {
+   "topics": [
+    "combinatorics"
+   ],
+   "score": 39,
+   "confidence": "high"
+  },
+  "Q7": {
+   "topics": [
+    "combinatorics",
+    "algorithms"
+   ],
+   "score": 4,
+   "confidence": "reviewed"
+  }
+ },
+ "2015": {
+  "Q1A": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1C": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 55,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "integration"
+   ],
+   "score": 4,
+   "confidence": "reviewed"
+  },
+  "Q1E": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 24,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "integration"
+   ],
+   "score": 16,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 17,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "algebra",
+    "logexp"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1I": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 5,
+   "confidence": "reviewed"
+  },
+  "Q1J": {
+   "topics": [
+    "logexp",
+    "numbertheory"
+   ],
+   "score": 0,
+   "confidence": "reviewed"
+  },
+  "Q2": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 54,
+   "confidence": "high"
+  },
+  "Q3": {
+   "topics": [
+    "algebra",
+    "graphs"
+   ],
+   "score": 12,
+   "confidence": "reviewed"
+  },
+  "Q4": {
+   "topics": [
+    "circles"
+   ],
+   "score": 47,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 14,
+   "confidence": "medium"
+  },
+  "Q6": {
+   "topics": [
+    "logic",
+    "combinatorics",
+    "numbertheory"
+   ],
+   "score": 14,
+   "confidence": "medium"
+  },
+  "Q7": {
+   "topics": [
+    "algorithms",
+    "combinatorics"
+   ],
+   "score": 9,
+   "confidence": "reviewed"
+  }
+ },
+ "2014": {
+  "Q1A": {
+   "topics": [
+    "algebra"
+   ],
+   "score": 18,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "graphs",
+    "logexp"
+   ],
+   "score": 17,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "differentiation"
+   ],
+   "score": 25,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "vectors",
+    "graphs",
+    "coordgeom"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1E": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 15,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 15,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "binomial"
+   ],
+   "score": 22,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 47,
+   "confidence": "high"
+  },
+  "Q1J": {
+   "topics": [
+    "integration",
+    "graphs"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q2": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 53,
+   "confidence": "high"
+  },
+  "Q3": {
+   "topics": [
+    "integration"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q4": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 43,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "combinatorics",
+    "sequences"
+   ],
+   "score": 4,
+   "confidence": "reviewed"
+  },
+  "Q6": {
+   "topics": [
+    "logic",
+    "algorithms"
+   ],
+   "score": 13,
+   "confidence": "reviewed"
+  },
+  "Q7": {
+   "topics": [
+    "algorithms",
+    "logic"
+   ],
+   "score": 12,
+   "confidence": "reviewed"
+  }
+ },
+ "2013": {
+  "Q1A": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "trigonometry",
+    "graphs"
+   ],
+   "score": 39,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "differentiation"
+   ],
+   "score": 0,
+   "confidence": "reviewed"
+  },
+  "Q1D": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1F": {
+   "topics": [
+    "logexp"
+   ],
+   "score": 1,
+   "confidence": "reviewed"
+  },
+  "Q1G": {
+   "topics": [
+    "numbertheory",
+    "polynomials"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1H": {
+   "topics": [
+    "integration",
+    "trigonometry",
+    "circles"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1I": {
+   "topics": [
+    "sequences",
+    "numbertheory"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "integration",
+    "numbertheory"
+   ],
+   "score": 13,
+   "confidence": "medium"
+  },
+  "Q2": {
+   "topics": [
+    "algebra",
+    "logic"
+   ],
+   "score": 5,
+   "confidence": "reviewed"
+  },
+  "Q3": {
+   "topics": [
+    "graphs",
+    "integration",
+    "polynomials"
+   ],
+   "score": 28,
+   "confidence": "medium"
+  },
+  "Q4": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 43,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q6": {
+   "topics": [
+    "numbertheory",
+    "logic"
+   ],
+   "score": 28,
+   "confidence": "medium"
+  },
+  "Q7": {
+   "topics": [
+    "algorithms",
+    "logic"
+   ],
+   "score": 11,
+   "confidence": "reviewed"
+  }
+ },
+ "2012": {
+  "Q1A": {
+   "topics": [
+    "circles"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 24,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1D": {
+   "topics": [
+    "integration",
+    "graphs"
+   ],
+   "score": 2,
+   "confidence": "reviewed"
+  },
+  "Q1E": {
+   "topics": [
+    "graphs",
+    "polynomials"
+   ],
+   "score": 4,
+   "confidence": "reviewed"
+  },
+  "Q1F": {
+   "topics": [
+    "trigonometry",
+    "integration"
+   ],
+   "score": 33,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "algebra"
+   ],
+   "score": 0,
+   "confidence": "reviewed"
+  },
+  "Q1H": {
+   "topics": [
+    "trigonometry",
+    "integration"
+   ],
+   "score": 21,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "circles",
+    "trigonometry"
+   ],
+   "score": 19,
+   "confidence": "high"
+  },
+  "Q1J": {
+   "topics": [
+    "trigonometry",
+    "circles"
+   ],
+   "score": 33,
+   "confidence": "high"
+  },
+  "Q2": {
+   "topics": [
+    "algorithms",
+    "numbertheory"
+   ],
+   "score": 12,
+   "confidence": "reviewed"
+  },
+  "Q3": {
+   "topics": [
+    "differentiation",
+    "graphs",
+    "polynomials"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q4": {
+   "topics": [
+    "circles"
+   ],
+   "score": 68,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "logexp",
+    "algorithms"
+   ],
+   "score": 27,
+   "confidence": "medium"
+  },
+  "Q6": {
+   "topics": [
+    "logic",
+    "combinatorics"
+   ],
+   "score": 6,
+   "confidence": "reviewed"
+  },
+  "Q7": {
+   "topics": [
+    "algorithms"
+   ],
+   "score": 64,
+   "confidence": "high"
+  }
+ },
+ "2011": {
+  "Q1A": {
+   "topics": [
+    "graphs",
+    "polynomials"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1B": {
+   "topics": [
+    "algebra"
+   ],
+   "score": 3,
+   "confidence": "reviewed"
+  },
+  "Q1C": {
+   "topics": [
+    "sequences",
+    "logic"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1D": {
+   "topics": [
+    "trigonometry",
+    "algebra"
+   ],
+   "score": 18,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 55,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 27,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "graphs",
+    "integration"
+   ],
+   "score": 15,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "logexp"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1I": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "sequences",
+    "numbertheory"
+   ],
+   "score": 5,
+   "confidence": "reviewed"
+  },
+  "Q2": {
+   "topics": [
+    "polynomials",
+    "sequences"
+   ],
+   "score": 8,
+   "confidence": "reviewed"
+  },
+  "Q3": {
+   "topics": [
+    "polynomials",
+    "integration",
+    "coordgeom"
+   ],
+   "score": 15,
+   "confidence": "medium"
+  },
+  "Q4": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 28,
+   "confidence": "medium"
+  },
+  "Q5": {
+   "topics": [
+    "algorithms"
+   ],
+   "score": 46,
+   "confidence": "high"
+  },
+  "Q6": {
+   "topics": [
+    "logic"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q7": {
+   "topics": [
+    "algorithms"
+   ],
+   "score": 62,
+   "confidence": "high"
+  }
+ },
+ "2010": {
+  "Q1A": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 5,
+   "confidence": "reviewed"
+  },
+  "Q1B": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 17,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "graphs",
+    "numbertheory"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1E": {
+   "topics": [
+    "logexp"
+   ],
+   "score": 0,
+   "confidence": "reviewed"
+  },
+  "Q1F": {
+   "topics": [
+    "integration",
+    "numbertheory"
+   ],
+   "score": 22,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "numbertheory",
+    "algorithms"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1H": {
+   "topics": [
+    "numbertheory",
+    "polynomials",
+    "algebra"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1I": {
+   "topics": [
+    "integration"
+   ],
+   "score": 8,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "algebra",
+    "logexp"
+   ],
+   "score": 15,
+   "confidence": "high"
+  },
+  "Q2": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 22,
+   "confidence": "medium"
+  },
+  "Q3": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 72,
+   "confidence": "high"
+  },
+  "Q4": {
+   "topics": [
+    "circles",
+    "trigonometry"
+   ],
+   "score": 34,
+   "confidence": "medium"
+  },
+  "Q5": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 24,
+   "confidence": "medium"
+  },
+  "Q6": {
+   "topics": [
+    "logic",
+    "combinatorics"
+   ],
+   "score": 18,
+   "confidence": "medium"
+  },
+  "Q7": {
+   "topics": [
+    "algorithms"
+   ],
+   "score": 32,
+   "confidence": "high"
+  }
+ },
+ "2009": {
+  "Q1A": {
+   "topics": [
+    "integration"
+   ],
+   "score": 8,
+   "confidence": "medium"
+  },
+  "Q1B": {
+   "topics": [
+    "circles"
+   ],
+   "score": 20,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 19,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "sequences",
+    "numbertheory"
+   ],
+   "score": 7,
+   "confidence": "medium"
+  },
+  "Q1E": {
+   "topics": [
+    "trigonometry",
+    "logexp"
+   ],
+   "score": 0,
+   "confidence": "reviewed"
+  },
+  "Q1F": {
+   "topics": [
+    "differentiation"
+   ],
+   "score": 8,
+   "confidence": "medium"
+  },
+  "Q1G": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 23,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "integration"
+   ],
+   "score": 21,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 8,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q2": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 3,
+   "confidence": "reviewed"
+  },
+  "Q3": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 43,
+   "confidence": "high"
+  },
+  "Q4": {
+   "topics": [
+    "coordgeom",
+    "differentiation"
+   ],
+   "score": 13,
+   "confidence": "reviewed"
+  },
+  "Q5": {
+   "topics": [
+    "algorithms"
+   ],
+   "score": 52,
+   "confidence": "high"
+  },
+  "Q6": {
+   "topics": [
+    "logic"
+   ],
+   "score": 18,
+   "confidence": "medium"
+  },
+  "Q7": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 29,
+   "confidence": "medium"
+  }
+ },
+ "2008": {
+  "Q1A": {
+   "topics": [
+    "differentiation"
+   ],
+   "score": 18,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "logexp"
+   ],
+   "score": 27,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "numbertheory",
+    "sequences",
+    "polynomials"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1E": {
+   "topics": [
+    "binomial",
+    "polynomials"
+   ],
+   "score": 0,
+   "confidence": "reviewed"
+  },
+  "Q1F": {
+   "topics": [
+    "integration"
+   ],
+   "score": 45,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1H": {
+   "topics": [
+    "logexp",
+    "polynomials"
+   ],
+   "score": 1,
+   "confidence": "reviewed"
+  },
+  "Q1I": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 15,
+   "confidence": "high"
+  },
+  "Q2": {
+   "topics": [
+    "numbertheory",
+    "sequences"
+   ],
+   "score": 14,
+   "confidence": "medium"
+  },
+  "Q3": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 34,
+   "confidence": "high"
+  },
+  "Q4": {
+   "topics": [
+    "circles",
+    "trigonometry"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "numbertheory",
+    "combinatorics"
+   ],
+   "score": 4,
+   "confidence": "reviewed"
+  },
+  "Q6": {
+   "topics": [
+    "logic"
+   ],
+   "score": 18,
+   "confidence": "medium"
+  },
+  "Q7": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 20,
+   "confidence": "medium"
+  }
+ },
+ "2007": {
+  "Q1A": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1B": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 3,
+   "confidence": "reviewed"
+  },
+  "Q1C": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 15,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "circles"
+   ],
+   "score": 31,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "logexp",
+    "polynomials"
+   ],
+   "score": 0,
+   "confidence": "reviewed"
+  },
+  "Q1G": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 11,
+   "confidence": "medium"
+  },
+  "Q1H": {
+   "topics": [
+    "integration"
+   ],
+   "score": 18,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "logexp"
+   ],
+   "score": 21,
+   "confidence": "high"
+  },
+  "Q1J": {
+   "topics": [
+    "algebra"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q2": {
+   "topics": [
+    "polynomials",
+    "numbertheory",
+    "differentiation"
+   ],
+   "score": 16,
+   "confidence": "medium"
+  },
+  "Q3": {
+   "topics": [
+    "integration",
+    "graphs"
+   ],
+   "score": 14,
+   "confidence": "medium"
+  },
+  "Q4": {
+   "topics": [
+    "trigonometry",
+    "circles"
+   ],
+   "score": 49,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 22,
+   "confidence": "medium"
+  },
+  "Q6": {
+   "topics": [
+    "probability"
+   ],
+   "score": 14,
+   "confidence": "medium"
+  },
+  "Q7": {
+   "topics": [
+    "algorithms",
+    "logic"
+   ],
+   "score": 6,
+   "confidence": "reviewed"
+  }
+ },
+ "spec1": {
+  "Q1A": {
+   "topics": [
+    "integration",
+    "graphs"
+   ],
+   "score": 7,
+   "confidence": "medium"
+  },
+  "Q1B": {
+   "topics": [
+    "differentiation"
+   ],
+   "score": 11,
+   "confidence": "medium"
+  },
+  "Q1C": {
+   "topics": [
+    "vectors",
+    "graphs",
+    "differentiation"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1D": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 13,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "numbertheory",
+    "logic"
+   ],
+   "score": 38,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 15,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "algebra"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1H": {
+   "topics": [
+    "numbertheory",
+    "logexp"
+   ],
+   "score": 18,
+   "confidence": "medium"
+  },
+  "Q1I": {
+   "topics": [
+    "binomial",
+    "polynomials"
+   ],
+   "score": 8,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 11,
+   "confidence": "medium"
+  },
+  "Q2": {
+   "topics": [
+    "trigonometry",
+    "polynomials"
+   ],
+   "score": 45,
+   "confidence": "high"
+  },
+  "Q3": {
+   "topics": [
+    "graphs",
+    "differentiation"
+   ],
+   "score": 15,
+   "confidence": "medium"
+  },
+  "Q4": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 48,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 21,
+   "confidence": "medium"
+  },
+  "Q6": {
+   "topics": [
+    "logic"
+   ],
+   "score": 8,
+   "confidence": "reviewed"
+  },
+  "Q7": {
+   "topics": [
+    "algorithms"
+   ],
+   "score": 56,
+   "confidence": "high"
+  }
+ },
+ "spec2": {
+  "Q1A": {
+   "topics": [
+    "coordgeom",
+    "vectors"
+   ],
+   "score": 4,
+   "confidence": "reviewed"
+  },
+  "Q1B": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 25,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 21,
+   "confidence": "high"
+  },
+  "Q1D": {
+   "topics": [
+    "algebra",
+    "graphs"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1E": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 27,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "differentiation"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1G": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 22,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "polynomials",
+    "graphs"
+   ],
+   "score": 3,
+   "confidence": "reviewed"
+  },
+  "Q1I": {
+   "topics": [
+    "logexp"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 4,
+   "confidence": "reviewed"
+  },
+  "Q2": {
+   "topics": [
+    "polynomials"
+   ],
+   "score": 8,
+   "confidence": "reviewed"
+  },
+  "Q3": {
+   "topics": [
+    "differentiation",
+    "graphs",
+    "integration"
+   ],
+   "score": 17,
+   "confidence": "medium"
+  },
+  "Q4": {
+   "topics": [
+    "coordgeom"
+   ],
+   "score": 30,
+   "confidence": "high"
+  },
+  "Q5": {
+   "topics": [
+    "algorithms",
+    "combinatorics"
+   ],
+   "score": 6,
+   "confidence": "reviewed"
+  },
+  "Q6": {
+   "topics": [
+    "logic"
+   ],
+   "score": 18,
+   "confidence": "medium"
+  },
+  "Q7": {
+   "topics": [
+    "combinatorics"
+   ],
+   "score": 14,
+   "confidence": "medium"
+  }
+ },
+ "2023b": {
+  "Q1A": {
+   "topics": [
+    "differentiation"
+   ],
+   "score": 23,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "trigonometry",
+    "logexp"
+   ],
+   "score": 12,
+   "confidence": "medium"
+  },
+  "Q1C": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 5,
+   "confidence": "reviewed"
+  },
+  "Q1D": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 36,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "numbertheory",
+    "sequences"
+   ],
+   "score": 14,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "vectors",
+    "numbertheory"
+   ],
+   "score": 12,
+   "confidence": "medium"
+  },
+  "Q1G": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 45,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "polynomials",
+    "coordgeom"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1I": {
+   "topics": [
+    "algorithms"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  }
+ },
+ "2022b": {
+  "Q1A": {
+   "topics": [
+    "probability"
+   ],
+   "score": 35,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "graphs",
+    "polynomials"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1C": {
+   "topics": [
+    "algebra",
+    "polynomials"
+   ],
+   "score": 3,
+   "confidence": "reviewed"
+  },
+  "Q1D": {
+   "topics": [
+    "algebra",
+    "circles"
+   ],
+   "score": 18,
+   "confidence": "high"
+  },
+  "Q1E": {
+   "topics": [
+    "circles"
+   ],
+   "score": 24,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "logic",
+    "sequences"
+   ],
+   "score": 18,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "integration",
+    "differentiation"
+   ],
+   "score": 12,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 15,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "logexp",
+    "algebra"
+   ],
+   "score": 2,
+   "confidence": "reviewed"
+  },
+  "Q1J": {
+   "topics": [
+    "integration"
+   ],
+   "score": 18,
+   "confidence": "high"
+  }
+ },
+ "2021b": {
+  "Q1A": {
+   "topics": [
+    "trigonometry"
+   ],
+   "score": 46,
+   "confidence": "high"
+  },
+  "Q1B": {
+   "topics": [
+    "binomial"
+   ],
+   "score": 22,
+   "confidence": "high"
+  },
+  "Q1C": {
+   "topics": [
+    "circles"
+   ],
+   "score": 9,
+   "confidence": "medium"
+  },
+  "Q1D": {
+   "topics": [
+    "sequences",
+    "numbertheory",
+    "algorithms"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1E": {
+   "topics": [
+    "polynomials",
+    "logic"
+   ],
+   "score": 15,
+   "confidence": "medium"
+  },
+  "Q1F": {
+   "topics": [
+    "coordgeom",
+    "circles"
+   ],
+   "score": 23,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "numbertheory"
+   ],
+   "score": 12,
+   "confidence": "high"
+  },
+  "Q1H": {
+   "topics": [
+    "logexp",
+    "algebra"
+   ],
+   "score": 3,
+   "confidence": "reviewed"
+  },
+  "Q1I": {
+   "topics": [
+    "integration"
+   ],
+   "score": 19,
+   "confidence": "high"
+  },
+  "Q1J": {
+   "topics": [
+    "differentiation",
+    "polynomials",
+    "logic"
+   ],
+   "score": 14,
+   "confidence": "medium"
+  }
+ },
+ "2020b": {
+  "Q1A": {
+   "topics": [
+    "coordgeom",
+    "integration"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1B": {
+   "topics": [
+    "logexp",
+    "sequences"
+   ],
+   "score": 2,
+   "confidence": "reviewed"
+  },
+  "Q1C": {
+   "topics": [
+    "trigonometry",
+    "polynomials"
+   ],
+   "score": 10,
+   "confidence": "medium"
+  },
+  "Q1D": {
+   "topics": [
+    "numbertheory",
+    "differentiation",
+    "binomial"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1E": {
+   "topics": [
+    "graphs"
+   ],
+   "score": 12,
+   "confidence": "high"
+  },
+  "Q1F": {
+   "topics": [
+    "logic"
+   ],
+   "score": 18,
+   "confidence": "high"
+  },
+  "Q1G": {
+   "topics": [
+    "sequences",
+    "numbertheory"
+   ],
+   "score": 6,
+   "confidence": "medium"
+  },
+  "Q1H": {
+   "topics": [
+    "sequences"
+   ],
+   "score": 36,
+   "confidence": "high"
+  },
+  "Q1I": {
+   "topics": [
+    "trigonometry",
+    "numbertheory"
+   ],
+   "score": 7,
+   "confidence": "medium"
+  },
+  "Q1J": {
+   "topics": [
+    "algebra",
+    "integration"
+   ],
+   "score": 12,
+   "confidence": "medium"
+  }
+ }
+}
