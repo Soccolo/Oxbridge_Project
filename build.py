@@ -18,6 +18,7 @@ PAGES = [
     ("statistics.html",     "12", "Statistics (STEP)",            "Statistics"),
     ("exam-papers.html",    None, "TMUA Exam Papers",             "TMUA Exam Papers and Resources"),
     ("mat-database.html",   None, "MAT Database",                 "MAT Questions Database"),
+    ("tmua-database.html",  None, "TMUA Database",                "TMUA Questions Database"),
     ("practice.html",       None, "Practice Arena",               "Practice Arena — Random TMUA-style Problems"),
 ]
 
@@ -68,6 +69,7 @@ function toggleNav() {{
   <ul class="nav">
     <li><a href="exam-papers.html"{ap_active}><span class="n">▸</span> TMUA Exam Papers</a></li>
     <li><a href="mat-database.html"{mat_active}><span class="n">▸</span> MAT Database</a></li>
+    <li><a href="tmua-database.html"{tmua_active}><span class="n">▸</span> TMUA Database</a></li>
     <li><a href="practice.html"{pr_active}><span class="n">▸</span> Practice Arena</a></li>
     <li><a href="index.html#syllabus"><span class="n">▸</span> Syllabus coverage map</a></li>
   </ul>
@@ -104,8 +106,9 @@ for i, (f, n, t, title) in enumerate(PAGES):
     ap = ' class="active"' if f == "exam-papers.html" else ""
     pr = ' class="active"' if f == "practice.html" else ""
     mat = ' class="active"' if f == "mat-database.html" else ""
+    tmua = ' class="active"' if f == "tmua-database.html" else ""
     html = HEAD.format(title=title, nav=navhtml(f), ap_active=ap, pr_active=pr,
-                       mat_active=mat) + body + FOOT
+                       mat_active=mat, tmua_active=tmua) + body + FOOT
     with open(os.path.join("dist", f), "w", encoding="utf-8") as out:
         out.write(html)
     print("built", f)
