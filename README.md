@@ -21,6 +21,7 @@ HTML + one shared stylesheet; mathematics renders in the browser via KaTeX
 - statistics.html       — Extension, STEP (NEW chapter)
 - exam-papers.html      — past-paper links and study method
 - mat-database.html     — searchable Oxford MAT question database (see below)
+- tmua-database.html    — separate searchable TMUA question database (see below)
 - mock-paper-1.html     — original mock, TMUA Paper 1 (applications), 20 Q + solutions
 - mock-paper-2.html     — original mock, TMUA Paper 2 (reasoning), 20 Q + solutions
 - styles.css
@@ -91,6 +92,72 @@ the updated file for you to commit by hand.
 The MAT papers, solutions and examiner reports remain the copyright of the
 University of Oxford and are mirrored here for educational use, with every entry
 linking back to the official source.
+
+## TMUA questions database
+
+`tmua-database.html` contains **360 questions and 360 official worked solutions**
+from every PDF paper on the [UAT-UK preparation archive](https://esat-tmua.ac.uk/tmua-preparation-materials/):
+Paper 1 and Paper 2 for 2016–2023, plus both early specimen papers. The 2016
+papers are practice papers. No unreleased computer-based papers are implied.
+
+Each entry has a question crop, a hidden correct answer and worked-solution crop,
+and page links to both the local PDFs and their official sources. Search indexes
+the question and solution text. Filters cover paper number, series, year and
+topic; questions sort numerically (Q1, Q2, …, Q20). Share a filtered URL or an
+individual link such as `tmua-database.html#2023-p1-Q13`.
+
+All initial topic assignments were reviewed against the questions and their
+worked solutions, including separate tags for statistics, functions and plane/solid
+geometry. Topic links lead to the corresponding teaching chapters.
+
+The **Editor** uses the same password and workflow as MAT, with independent
+`tmua-tag-edits` / `tmua-gh-token` browser storage and `tmua/data/overrides.json`.
+Publishing or downloading TMUA tag edits never changes the MAT overrides.
+As with MAT, the password only reveals local controls; GitHub write access is
+required to publish. A token is requested at publish time, with optional local
+storage. The static database works from disk with its baked tags; fetching live
+overrides requires an HTTP server.
+
+    tmua/papers/    45 official PDFs: 18 papers, 18 worked answers, 9 answer keys
+    tmua/img/       720 question and solution PNGs, including stitched continuations
+    tmua/data/      questions.json / questions.js, overrides.json, segments.json,
+                    sources.json (source URLs, PDF page counts and SHA-256 hashes)
+    tools/tmua/     manifest.json, glyph_map.json and the regeneration/check scripts
+
+**Regenerating** (Python 3.10+ and PyMuPDF, `pip install pymupdf`), from the repo root:
+
+```sh
+python tools/tmua/fetch.py
+python tools/tmua/segment.py
+python tools/tmua/build_db.py
+python tools/tmua/make_page.py
+python tools/tmua/validate.py
+```
+
+For topic edits only, change `tmua/data/overrides.json` and run
+`python tools/tmua/build_db.py --skip-render`. Browser publishing loads overrides
+directly, so no rebuild is needed for a deployed tag correction.
+
+The importer fails if a paper lacks its expected 20 question/solution markers or
+answer keys. It excludes covers, blank pages and publisher contact pages, repairs
+missing font Unicode mappings in older PDFs for text search, and renders the
+original PDF artwork for faithful notation and diagrams. Extracted text is a search
+index, not a mathematical transcription. The crop renderer and core topic vocabulary
+are reused from `tools/mat`; TMUA source files and generated data stay separate.
+
+`validate.py` checks the complete inventory, PDF checksums, every image and page
+link, topic IDs, and explicit worked-answer conclusions against the answer keys.
+To run the browser regression checks, install Playwright (`npm install --no-save
+playwright`) and Chrome, serve the repo with `python -m http.server 8765`, then run
+`node tools/tmua/test_browser.cjs`. These exercise desktop/mobile search, filters,
+permalinks, solutions and tag editing; GitHub publishing is mocked and sends no
+real writes. Set `TMUA_BASE_URL` to use another local server.
+
+To add newly released materials, extend `tools/tmua/manifest.json` with verified
+official URLs, inspect the source layout and update the inventory assertions in
+`validate.py`. `glyph_map.json` stores only character mappings for the older
+Cambria Math/Arial glyph IDs; no font software is distributed. The papers and
+worked answers retain their original copyright notices and attribution.
 
 ## Deploying (pick one — all free)
 **Vercel** (you already use it for Placing Jade News): `vercel deploy` from this

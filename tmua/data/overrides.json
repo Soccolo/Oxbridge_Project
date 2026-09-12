@@ -1,0 +1,1394 @@
+{
+  "2023-p1-Q1": [
+    "integration",
+    "algebra"
+  ],
+  "2023-p1-Q2": [
+    "polynomials",
+    "graphs",
+    "algebra"
+  ],
+  "2023-p1-Q3": [
+    "integration"
+  ],
+  "2023-p1-Q4": [
+    "trigonometry",
+    "sequences"
+  ],
+  "2023-p1-Q5": [
+    "geometry",
+    "polynomials"
+  ],
+  "2023-p1-Q6": [
+    "binomial",
+    "numbertheory"
+  ],
+  "2023-p1-Q7": [
+    "logexp",
+    "polynomials"
+  ],
+  "2023-p1-Q8": [
+    "trigonometry"
+  ],
+  "2023-p1-Q9": [
+    "trigonometry"
+  ],
+  "2023-p1-Q10": [
+    "integration",
+    "circles"
+  ],
+  "2023-p1-Q11": [
+    "graphs",
+    "polynomials",
+    "differentiation"
+  ],
+  "2023-p1-Q12": [
+    "trigonometry"
+  ],
+  "2023-p1-Q13": [
+    "circles",
+    "coordgeom"
+  ],
+  "2023-p1-Q14": [
+    "differentiation",
+    "polynomials"
+  ],
+  "2023-p1-Q15": [
+    "logexp",
+    "trigonometry"
+  ],
+  "2023-p1-Q16": [
+    "coordgeom",
+    "geometry"
+  ],
+  "2023-p1-Q17": [
+    "circles",
+    "sequences"
+  ],
+  "2023-p1-Q18": [
+    "sequences",
+    "probability"
+  ],
+  "2023-p1-Q19": [
+    "integration",
+    "algebra"
+  ],
+  "2023-p1-Q20": [
+    "functions",
+    "polynomials",
+    "graphs"
+  ],
+  "2023-p2-Q1": [
+    "algebra"
+  ],
+  "2023-p2-Q2": [
+    "integration"
+  ],
+  "2023-p2-Q3": [
+    "logic",
+    "algebra"
+  ],
+  "2023-p2-Q4": [
+    "logic",
+    "numbertheory"
+  ],
+  "2023-p2-Q5": [
+    "logic",
+    "integration",
+    "trigonometry"
+  ],
+  "2023-p2-Q6": [
+    "logexp",
+    "functions"
+  ],
+  "2023-p2-Q7": [
+    "logic",
+    "coordgeom"
+  ],
+  "2023-p2-Q8": [
+    "geometry",
+    "logic"
+  ],
+  "2023-p2-Q9": [
+    "logic",
+    "sequences",
+    "geometry"
+  ],
+  "2023-p2-Q10": [
+    "logic",
+    "algebra",
+    "polynomials"
+  ],
+  "2023-p2-Q11": [
+    "logic",
+    "numbertheory"
+  ],
+  "2023-p2-Q12": [
+    "trigonometry",
+    "logic"
+  ],
+  "2023-p2-Q13": [
+    "logic"
+  ],
+  "2023-p2-Q14": [
+    "coordgeom"
+  ],
+  "2023-p2-Q15": [
+    "sequences",
+    "numbertheory"
+  ],
+  "2023-p2-Q16": [
+    "numbertheory",
+    "sequences"
+  ],
+  "2023-p2-Q17": [
+    "integration",
+    "sequences"
+  ],
+  "2023-p2-Q18": [
+    "logic",
+    "polynomials",
+    "algebra"
+  ],
+  "2023-p2-Q19": [
+    "differentiation",
+    "polynomials"
+  ],
+  "2023-p2-Q20": [
+    "integration",
+    "logic"
+  ],
+  "2022-p1-Q1": [
+    "trigonometry",
+    "polynomials"
+  ],
+  "2022-p1-Q2": [
+    "circles",
+    "algebra"
+  ],
+  "2022-p1-Q3": [
+    "integration"
+  ],
+  "2022-p1-Q4": [
+    "circles",
+    "trigonometry"
+  ],
+  "2022-p1-Q5": [
+    "sequences",
+    "algebra"
+  ],
+  "2022-p1-Q6": [
+    "logexp",
+    "integration"
+  ],
+  "2022-p1-Q7": [
+    "integration",
+    "graphs"
+  ],
+  "2022-p1-Q8": [
+    "sequences"
+  ],
+  "2022-p1-Q9": [
+    "trigonometry",
+    "functions"
+  ],
+  "2022-p1-Q10": [
+    "graphs",
+    "polynomials"
+  ],
+  "2022-p1-Q11": [
+    "logexp",
+    "sequences"
+  ],
+  "2022-p1-Q12": [
+    "polynomials",
+    "graphs"
+  ],
+  "2022-p1-Q13": [
+    "polynomials",
+    "algebra"
+  ],
+  "2022-p1-Q14": [
+    "circles",
+    "trigonometry"
+  ],
+  "2022-p1-Q15": [
+    "differentiation",
+    "graphs"
+  ],
+  "2022-p1-Q16": [
+    "polynomials",
+    "trigonometry"
+  ],
+  "2022-p1-Q17": [
+    "trigonometry",
+    "algebra"
+  ],
+  "2022-p1-Q18": [
+    "graphs",
+    "polynomials"
+  ],
+  "2022-p1-Q19": [
+    "circles",
+    "probability"
+  ],
+  "2022-p1-Q20": [
+    "graphs",
+    "polynomials",
+    "algebra"
+  ],
+  "2022-p2-Q1": [
+    "differentiation",
+    "polynomials"
+  ],
+  "2022-p2-Q2": [
+    "binomial",
+    "sequences"
+  ],
+  "2022-p2-Q3": [
+    "logic",
+    "numbertheory"
+  ],
+  "2022-p2-Q4": [
+    "circles",
+    "coordgeom"
+  ],
+  "2022-p2-Q5": [
+    "logic",
+    "coordgeom"
+  ],
+  "2022-p2-Q6": [
+    "logic",
+    "statistics"
+  ],
+  "2022-p2-Q7": [
+    "logic",
+    "numbertheory"
+  ],
+  "2022-p2-Q8": [
+    "sequences",
+    "combinatorics"
+  ],
+  "2022-p2-Q9": [
+    "logic",
+    "algebra"
+  ],
+  "2022-p2-Q10": [
+    "logic",
+    "numbertheory"
+  ],
+  "2022-p2-Q11": [
+    "logic",
+    "geometry"
+  ],
+  "2022-p2-Q12": [
+    "integration",
+    "algebra"
+  ],
+  "2022-p2-Q13": [
+    "logic",
+    "algebra"
+  ],
+  "2022-p2-Q14": [
+    "algebra"
+  ],
+  "2022-p2-Q15": [
+    "logexp"
+  ],
+  "2022-p2-Q16": [
+    "logic",
+    "algebra",
+    "sequences"
+  ],
+  "2022-p2-Q17": [
+    "logic",
+    "differentiation",
+    "polynomials"
+  ],
+  "2022-p2-Q18": [
+    "trigonometry",
+    "graphs"
+  ],
+  "2022-p2-Q19": [
+    "circles",
+    "trigonometry",
+    "geometry"
+  ],
+  "2022-p2-Q20": [
+    "trigonometry",
+    "functions"
+  ],
+  "2021-p1-Q1": [
+    "circles",
+    "coordgeom"
+  ],
+  "2021-p1-Q2": [
+    "differentiation",
+    "integration"
+  ],
+  "2021-p1-Q3": [
+    "sequences"
+  ],
+  "2021-p1-Q4": [
+    "logexp",
+    "polynomials"
+  ],
+  "2021-p1-Q5": [
+    "functions",
+    "numbertheory"
+  ],
+  "2021-p1-Q6": [
+    "trigonometry",
+    "functions"
+  ],
+  "2021-p1-Q7": [
+    "integration",
+    "algebra"
+  ],
+  "2021-p1-Q8": [
+    "polynomials",
+    "coordgeom"
+  ],
+  "2021-p1-Q9": [
+    "graphs",
+    "algebra",
+    "geometry"
+  ],
+  "2021-p1-Q10": [
+    "integration",
+    "logexp"
+  ],
+  "2021-p1-Q11": [
+    "differentiation",
+    "algebra"
+  ],
+  "2021-p1-Q12": [
+    "polynomials"
+  ],
+  "2021-p1-Q13": [
+    "integration",
+    "sequences"
+  ],
+  "2021-p1-Q14": [
+    "trigonometry",
+    "graphs"
+  ],
+  "2021-p1-Q15": [
+    "integration",
+    "graphs"
+  ],
+  "2021-p1-Q16": [
+    "binomial"
+  ],
+  "2021-p1-Q17": [
+    "circles",
+    "trigonometry",
+    "graphs"
+  ],
+  "2021-p1-Q18": [
+    "graphs",
+    "coordgeom"
+  ],
+  "2021-p1-Q19": [
+    "trigonometry"
+  ],
+  "2021-p1-Q20": [
+    "logexp",
+    "circles"
+  ],
+  "2021-p2-Q1": [
+    "integration"
+  ],
+  "2021-p2-Q2": [
+    "coordgeom"
+  ],
+  "2021-p2-Q3": [
+    "logic",
+    "probability"
+  ],
+  "2021-p2-Q4": [
+    "logic",
+    "numbertheory"
+  ],
+  "2021-p2-Q5": [
+    "logic",
+    "trigonometry"
+  ],
+  "2021-p2-Q6": [
+    "logic",
+    "differentiation",
+    "polynomials"
+  ],
+  "2021-p2-Q7": [
+    "circles",
+    "coordgeom"
+  ],
+  "2021-p2-Q8": [
+    "logic",
+    "differentiation",
+    "polynomials"
+  ],
+  "2021-p2-Q9": [
+    "logic",
+    "polynomials"
+  ],
+  "2021-p2-Q10": [
+    "logic",
+    "numbertheory",
+    "sequences"
+  ],
+  "2021-p2-Q11": [
+    "logic",
+    "algebra",
+    "polynomials"
+  ],
+  "2021-p2-Q12": [
+    "logic",
+    "integration",
+    "differentiation"
+  ],
+  "2021-p2-Q13": [
+    "logic",
+    "algebra",
+    "graphs"
+  ],
+  "2021-p2-Q14": [
+    "algebra",
+    "logexp"
+  ],
+  "2021-p2-Q15": [
+    "circles",
+    "logic"
+  ],
+  "2021-p2-Q16": [
+    "graphs",
+    "algebra",
+    "polynomials"
+  ],
+  "2021-p2-Q17": [
+    "logexp",
+    "algebra"
+  ],
+  "2021-p2-Q18": [
+    "logic",
+    "trigonometry"
+  ],
+  "2021-p2-Q19": [
+    "trigonometry",
+    "algebra"
+  ],
+  "2021-p2-Q20": [
+    "integration",
+    "sequences",
+    "graphs"
+  ],
+  "2020-p1-Q1": [
+    "differentiation"
+  ],
+  "2020-p1-Q2": [
+    "polynomials",
+    "algebra"
+  ],
+  "2020-p1-Q3": [
+    "algebra"
+  ],
+  "2020-p1-Q4": [
+    "sequences"
+  ],
+  "2020-p1-Q5": [
+    "polynomials",
+    "graphs"
+  ],
+  "2020-p1-Q6": [
+    "polynomials",
+    "logexp"
+  ],
+  "2020-p1-Q7": [
+    "logexp",
+    "algebra"
+  ],
+  "2020-p1-Q8": [
+    "polynomials"
+  ],
+  "2020-p1-Q9": [
+    "polynomials",
+    "algebra"
+  ],
+  "2020-p1-Q10": [
+    "graphs"
+  ],
+  "2020-p1-Q11": [
+    "integration",
+    "polynomials"
+  ],
+  "2020-p1-Q12": [
+    "trigonometry",
+    "graphs"
+  ],
+  "2020-p1-Q13": [
+    "binomial"
+  ],
+  "2020-p1-Q14": [
+    "integration",
+    "graphs"
+  ],
+  "2020-p1-Q15": [
+    "logexp",
+    "polynomials"
+  ],
+  "2020-p1-Q16": [
+    "circles",
+    "coordgeom",
+    "trigonometry"
+  ],
+  "2020-p1-Q17": [
+    "graphs",
+    "polynomials",
+    "algebra"
+  ],
+  "2020-p1-Q18": [
+    "trigonometry",
+    "algebra"
+  ],
+  "2020-p1-Q19": [
+    "polynomials",
+    "numbertheory"
+  ],
+  "2020-p1-Q20": [
+    "polynomials"
+  ],
+  "2020-p2-Q1": [
+    "polynomials",
+    "algebra"
+  ],
+  "2020-p2-Q2": [
+    "trigonometry"
+  ],
+  "2020-p2-Q3": [
+    "logic",
+    "numbertheory",
+    "algebra"
+  ],
+  "2020-p2-Q4": [
+    "logic",
+    "numbertheory"
+  ],
+  "2020-p2-Q5": [
+    "graphs",
+    "logexp"
+  ],
+  "2020-p2-Q6": [
+    "logic",
+    "integration"
+  ],
+  "2020-p2-Q7": [
+    "logic",
+    "geometry"
+  ],
+  "2020-p2-Q8": [
+    "logic",
+    "algebra"
+  ],
+  "2020-p2-Q9": [
+    "trigonometry"
+  ],
+  "2020-p2-Q10": [
+    "algebra"
+  ],
+  "2020-p2-Q11": [
+    "coordgeom",
+    "numbertheory"
+  ],
+  "2020-p2-Q12": [
+    "logic",
+    "integration",
+    "differentiation"
+  ],
+  "2020-p2-Q13": [
+    "logic",
+    "integration",
+    "algebra"
+  ],
+  "2020-p2-Q14": [
+    "sequences",
+    "numbertheory"
+  ],
+  "2020-p2-Q15": [
+    "logic",
+    "sequences",
+    "trigonometry"
+  ],
+  "2020-p2-Q16": [
+    "logic",
+    "integration",
+    "differentiation"
+  ],
+  "2020-p2-Q17": [
+    "statistics",
+    "numbertheory"
+  ],
+  "2020-p2-Q18": [
+    "logic",
+    "polynomials"
+  ],
+  "2020-p2-Q19": [
+    "logic",
+    "combinatorics"
+  ],
+  "2020-p2-Q20": [
+    "logic"
+  ],
+  "2019-p1-Q1": [
+    "polynomials",
+    "graphs"
+  ],
+  "2019-p1-Q2": [
+    "polynomials",
+    "algebra"
+  ],
+  "2019-p1-Q3": [
+    "binomial",
+    "sequences"
+  ],
+  "2019-p1-Q4": [
+    "sequences",
+    "logexp"
+  ],
+  "2019-p1-Q5": [
+    "sequences"
+  ],
+  "2019-p1-Q6": [
+    "circles",
+    "coordgeom"
+  ],
+  "2019-p1-Q7": [
+    "differentiation",
+    "polynomials"
+  ],
+  "2019-p1-Q8": [
+    "integration",
+    "graphs"
+  ],
+  "2019-p1-Q9": [
+    "integration",
+    "graphs"
+  ],
+  "2019-p1-Q10": [
+    "integration",
+    "algebra"
+  ],
+  "2019-p1-Q11": [
+    "logexp",
+    "algebra"
+  ],
+  "2019-p1-Q12": [
+    "integration"
+  ],
+  "2019-p1-Q13": [
+    "trigonometry",
+    "logexp",
+    "polynomials"
+  ],
+  "2019-p1-Q14": [
+    "trigonometry",
+    "algebra"
+  ],
+  "2019-p1-Q15": [
+    "logexp",
+    "polynomials"
+  ],
+  "2019-p1-Q16": [
+    "integration",
+    "algebra"
+  ],
+  "2019-p1-Q17": [
+    "trigonometry",
+    "algebra"
+  ],
+  "2019-p1-Q18": [
+    "differentiation",
+    "coordgeom"
+  ],
+  "2019-p1-Q19": [
+    "trigonometry",
+    "sequences"
+  ],
+  "2019-p1-Q20": [
+    "polynomials",
+    "differentiation",
+    "graphs"
+  ],
+  "2019-p2-Q1": [
+    "binomial"
+  ],
+  "2019-p2-Q2": [
+    "polynomials",
+    "algebra"
+  ],
+  "2019-p2-Q3": [
+    "logic",
+    "algebra"
+  ],
+  "2019-p2-Q4": [
+    "logic",
+    "numbertheory"
+  ],
+  "2019-p2-Q5": [
+    "logic",
+    "numbertheory"
+  ],
+  "2019-p2-Q6": [
+    "logic",
+    "trigonometry"
+  ],
+  "2019-p2-Q7": [
+    "logic",
+    "numbertheory"
+  ],
+  "2019-p2-Q8": [
+    "logic",
+    "algebra"
+  ],
+  "2019-p2-Q9": [
+    "combinatorics"
+  ],
+  "2019-p2-Q10": [
+    "logic",
+    "geometry"
+  ],
+  "2019-p2-Q11": [
+    "sequences",
+    "numbertheory"
+  ],
+  "2019-p2-Q12": [
+    "probability"
+  ],
+  "2019-p2-Q13": [
+    "logic",
+    "integration",
+    "trigonometry"
+  ],
+  "2019-p2-Q14": [
+    "logic",
+    "differentiation"
+  ],
+  "2019-p2-Q15": [
+    "logexp",
+    "algebra"
+  ],
+  "2019-p2-Q16": [
+    "polynomials",
+    "algebra",
+    "graphs"
+  ],
+  "2019-p2-Q17": [
+    "logic"
+  ],
+  "2019-p2-Q18": [
+    "algebra",
+    "graphs"
+  ],
+  "2019-p2-Q19": [
+    "algebra"
+  ],
+  "2019-p2-Q20": [
+    "functions",
+    "graphs"
+  ],
+  "2018-p1-Q1": [
+    "integration"
+  ],
+  "2018-p1-Q2": [
+    "sequences"
+  ],
+  "2018-p1-Q3": [
+    "circles",
+    "coordgeom"
+  ],
+  "2018-p1-Q4": [
+    "polynomials",
+    "algebra"
+  ],
+  "2018-p1-Q5": [
+    "polynomials"
+  ],
+  "2018-p1-Q6": [
+    "trigonometry",
+    "graphs"
+  ],
+  "2018-p1-Q7": [
+    "binomial"
+  ],
+  "2018-p1-Q8": [
+    "sequences"
+  ],
+  "2018-p1-Q9": [
+    "differentiation",
+    "polynomials"
+  ],
+  "2018-p1-Q10": [
+    "algebra"
+  ],
+  "2018-p1-Q11": [
+    "differentiation",
+    "coordgeom"
+  ],
+  "2018-p1-Q12": [
+    "integration",
+    "graphs"
+  ],
+  "2018-p1-Q13": [
+    "differentiation",
+    "graphs"
+  ],
+  "2018-p1-Q14": [
+    "coordgeom",
+    "logexp"
+  ],
+  "2018-p1-Q15": [
+    "logexp",
+    "polynomials"
+  ],
+  "2018-p1-Q16": [
+    "differentiation",
+    "polynomials",
+    "coordgeom"
+  ],
+  "2018-p1-Q17": [
+    "statistics",
+    "algebra"
+  ],
+  "2018-p1-Q18": [
+    "trigonometry",
+    "graphs"
+  ],
+  "2018-p1-Q19": [
+    "trigonometry"
+  ],
+  "2018-p1-Q20": [
+    "trigonometry",
+    "sequences"
+  ],
+  "2018-p2-Q1": [
+    "differentiation"
+  ],
+  "2018-p2-Q2": [
+    "binomial"
+  ],
+  "2018-p2-Q3": [
+    "logic",
+    "algebra"
+  ],
+  "2018-p2-Q4": [
+    "trigonometry",
+    "graphs"
+  ],
+  "2018-p2-Q5": [
+    "logic",
+    "geometry"
+  ],
+  "2018-p2-Q6": [
+    "logic",
+    "differentiation"
+  ],
+  "2018-p2-Q7": [
+    "sequences",
+    "numbertheory"
+  ],
+  "2018-p2-Q8": [
+    "logic",
+    "combinatorics"
+  ],
+  "2018-p2-Q9": [
+    "logic",
+    "algebra"
+  ],
+  "2018-p2-Q10": [
+    "logic",
+    "functions",
+    "graphs"
+  ],
+  "2018-p2-Q11": [
+    "logic",
+    "logexp",
+    "graphs"
+  ],
+  "2018-p2-Q12": [
+    "logic",
+    "numbertheory"
+  ],
+  "2018-p2-Q13": [
+    "logic",
+    "trigonometry"
+  ],
+  "2018-p2-Q14": [
+    "trigonometry"
+  ],
+  "2018-p2-Q15": [
+    "logic",
+    "graphs"
+  ],
+  "2018-p2-Q16": [
+    "sequences",
+    "statistics"
+  ],
+  "2018-p2-Q17": [
+    "logic",
+    "numbertheory"
+  ],
+  "2018-p2-Q18": [
+    "logic",
+    "differentiation",
+    "algebra"
+  ],
+  "2018-p2-Q19": [
+    "logexp",
+    "algebra"
+  ],
+  "2018-p2-Q20": [
+    "algebra",
+    "graphs"
+  ],
+  "2017-p1-Q1": [
+    "integration"
+  ],
+  "2017-p1-Q2": [
+    "differentiation"
+  ],
+  "2017-p1-Q3": [
+    "coordgeom",
+    "geometry"
+  ],
+  "2017-p1-Q4": [
+    "polynomials"
+  ],
+  "2017-p1-Q5": [
+    "algebra"
+  ],
+  "2017-p1-Q6": [
+    "circles",
+    "coordgeom"
+  ],
+  "2017-p1-Q7": [
+    "sequences"
+  ],
+  "2017-p1-Q8": [
+    "trigonometry",
+    "algebra"
+  ],
+  "2017-p1-Q9": [
+    "circles",
+    "geometry"
+  ],
+  "2017-p1-Q10": [
+    "differentiation"
+  ],
+  "2017-p1-Q11": [
+    "sequences"
+  ],
+  "2017-p1-Q12": [
+    "integration"
+  ],
+  "2017-p1-Q13": [
+    "binomial",
+    "numbertheory"
+  ],
+  "2017-p1-Q14": [
+    "logexp",
+    "algebra"
+  ],
+  "2017-p1-Q15": [
+    "integration",
+    "graphs"
+  ],
+  "2017-p1-Q16": [
+    "differentiation",
+    "algebra"
+  ],
+  "2017-p1-Q17": [
+    "integration",
+    "sequences"
+  ],
+  "2017-p1-Q18": [
+    "graphs",
+    "logexp"
+  ],
+  "2017-p1-Q19": [
+    "polynomials",
+    "algebra"
+  ],
+  "2017-p1-Q20": [
+    "trigonometry"
+  ],
+  "2017-p2-Q1": [
+    "differentiation"
+  ],
+  "2017-p2-Q2": [
+    "coordgeom",
+    "geometry"
+  ],
+  "2017-p2-Q3": [
+    "sequences"
+  ],
+  "2017-p2-Q4": [
+    "logic",
+    "trigonometry"
+  ],
+  "2017-p2-Q5": [
+    "logic",
+    "numbertheory"
+  ],
+  "2017-p2-Q6": [
+    "integration",
+    "sequences"
+  ],
+  "2017-p2-Q7": [
+    "graphs",
+    "logexp"
+  ],
+  "2017-p2-Q8": [
+    "algebra",
+    "logexp",
+    "trigonometry"
+  ],
+  "2017-p2-Q9": [
+    "logic",
+    "numbertheory"
+  ],
+  "2017-p2-Q10": [
+    "logic",
+    "integration"
+  ],
+  "2017-p2-Q11": [
+    "integration",
+    "graphs"
+  ],
+  "2017-p2-Q12": [
+    "trigonometry",
+    "graphs"
+  ],
+  "2017-p2-Q13": [
+    "algebra"
+  ],
+  "2017-p2-Q14": [
+    "graphs",
+    "polynomials"
+  ],
+  "2017-p2-Q15": [
+    "sequences",
+    "numbertheory"
+  ],
+  "2017-p2-Q16": [
+    "logic",
+    "differentiation",
+    "numbertheory"
+  ],
+  "2017-p2-Q17": [
+    "logic",
+    "numbertheory"
+  ],
+  "2017-p2-Q18": [
+    "logic",
+    "logexp",
+    "algebra"
+  ],
+  "2017-p2-Q19": [
+    "logic",
+    "polynomials",
+    "differentiation"
+  ],
+  "2017-p2-Q20": [
+    "combinatorics",
+    "logic"
+  ],
+  "2016-p1-Q1": [
+    "binomial"
+  ],
+  "2016-p1-Q2": [
+    "polynomials"
+  ],
+  "2016-p1-Q3": [
+    "differentiation",
+    "coordgeom"
+  ],
+  "2016-p1-Q4": [
+    "sequences"
+  ],
+  "2016-p1-Q5": [
+    "integration"
+  ],
+  "2016-p1-Q6": [
+    "algebra"
+  ],
+  "2016-p1-Q7": [
+    "probability"
+  ],
+  "2016-p1-Q8": [
+    "trigonometry"
+  ],
+  "2016-p1-Q9": [
+    "circles",
+    "graphs",
+    "coordgeom"
+  ],
+  "2016-p1-Q10": [
+    "trigonometry",
+    "graphs"
+  ],
+  "2016-p1-Q11": [
+    "logexp",
+    "polynomials"
+  ],
+  "2016-p1-Q12": [
+    "geometry"
+  ],
+  "2016-p1-Q13": [
+    "polynomials",
+    "differentiation"
+  ],
+  "2016-p1-Q14": [
+    "sequences"
+  ],
+  "2016-p1-Q15": [
+    "differentiation",
+    "polynomials"
+  ],
+  "2016-p1-Q16": [
+    "logexp",
+    "algebra"
+  ],
+  "2016-p1-Q17": [
+    "trigonometry",
+    "algebra"
+  ],
+  "2016-p1-Q18": [
+    "differentiation",
+    "algebra"
+  ],
+  "2016-p1-Q19": [
+    "binomial"
+  ],
+  "2016-p1-Q20": [
+    "geometry",
+    "trigonometry"
+  ],
+  "2016-p2-Q1": [
+    "integration"
+  ],
+  "2016-p2-Q2": [
+    "differentiation"
+  ],
+  "2016-p2-Q3": [
+    "trigonometry"
+  ],
+  "2016-p2-Q4": [
+    "logic"
+  ],
+  "2016-p2-Q5": [
+    "logic",
+    "numbertheory"
+  ],
+  "2016-p2-Q6": [
+    "differentiation",
+    "sequences"
+  ],
+  "2016-p2-Q7": [
+    "logic",
+    "logexp"
+  ],
+  "2016-p2-Q8": [
+    "algebra",
+    "graphs"
+  ],
+  "2016-p2-Q9": [
+    "logic",
+    "geometry"
+  ],
+  "2016-p2-Q10": [
+    "logic",
+    "algebra"
+  ],
+  "2016-p2-Q11": [
+    "logic",
+    "differentiation",
+    "integration"
+  ],
+  "2016-p2-Q12": [
+    "sequences",
+    "algebra"
+  ],
+  "2016-p2-Q13": [
+    "logic",
+    "numbertheory"
+  ],
+  "2016-p2-Q14": [
+    "polynomials",
+    "graphs"
+  ],
+  "2016-p2-Q15": [
+    "polynomials",
+    "logic",
+    "algebra"
+  ],
+  "2016-p2-Q16": [
+    "geometry"
+  ],
+  "2016-p2-Q17": [
+    "logic",
+    "trigonometry",
+    "graphs"
+  ],
+  "2016-p2-Q18": [
+    "logic",
+    "integration"
+  ],
+  "2016-p2-Q19": [
+    "geometry",
+    "combinatorics"
+  ],
+  "2016-p2-Q20": [
+    "geometry",
+    "numbertheory"
+  ],
+  "specimen-p1-Q1": [
+    "algebra",
+    "polynomials"
+  ],
+  "specimen-p1-Q2": [
+    "trigonometry"
+  ],
+  "specimen-p1-Q3": [
+    "coordgeom"
+  ],
+  "specimen-p1-Q4": [
+    "algebra"
+  ],
+  "specimen-p1-Q5": [
+    "logexp"
+  ],
+  "specimen-p1-Q6": [
+    "polynomials"
+  ],
+  "specimen-p1-Q7": [
+    "probability"
+  ],
+  "specimen-p1-Q8": [
+    "logexp"
+  ],
+  "specimen-p1-Q9": [
+    "polynomials"
+  ],
+  "specimen-p1-Q10": [
+    "graphs",
+    "trigonometry"
+  ],
+  "specimen-p1-Q11": [
+    "logexp",
+    "polynomials"
+  ],
+  "specimen-p1-Q12": [
+    "geometry",
+    "trigonometry"
+  ],
+  "specimen-p1-Q13": [
+    "polynomials",
+    "differentiation"
+  ],
+  "specimen-p1-Q14": [
+    "logexp",
+    "graphs"
+  ],
+  "specimen-p1-Q15": [
+    "integration",
+    "polynomials"
+  ],
+  "specimen-p1-Q16": [
+    "numbertheory",
+    "logexp"
+  ],
+  "specimen-p1-Q17": [
+    "polynomials"
+  ],
+  "specimen-p1-Q18": [
+    "trigonometry",
+    "algebra"
+  ],
+  "specimen-p1-Q19": [
+    "sequences"
+  ],
+  "specimen-p1-Q20": [
+    "binomial"
+  ],
+  "specimen-p2-Q1": [
+    "circles"
+  ],
+  "specimen-p2-Q2": [
+    "differentiation"
+  ],
+  "specimen-p2-Q3": [
+    "logic",
+    "algebra"
+  ],
+  "specimen-p2-Q4": [
+    "logic"
+  ],
+  "specimen-p2-Q5": [
+    "logexp"
+  ],
+  "specimen-p2-Q6": [
+    "algebra",
+    "geometry"
+  ],
+  "specimen-p2-Q7": [
+    "graphs",
+    "polynomials"
+  ],
+  "specimen-p2-Q8": [
+    "logic",
+    "numbertheory"
+  ],
+  "specimen-p2-Q9": [
+    "logic"
+  ],
+  "specimen-p2-Q10": [
+    "logexp",
+    "graphs"
+  ],
+  "specimen-p2-Q11": [
+    "trigonometry",
+    "logexp",
+    "algebra"
+  ],
+  "specimen-p2-Q12": [
+    "polynomials"
+  ],
+  "specimen-p2-Q13": [
+    "combinatorics"
+  ],
+  "specimen-p2-Q14": [
+    "polynomials",
+    "differentiation",
+    "graphs"
+  ],
+  "specimen-p2-Q15": [
+    "logic",
+    "algebra"
+  ],
+  "specimen-p2-Q16": [
+    "sequences"
+  ],
+  "specimen-p2-Q17": [
+    "logic",
+    "numbertheory"
+  ],
+  "specimen-p2-Q18": [
+    "statistics"
+  ],
+  "specimen-p2-Q19": [
+    "polynomials",
+    "graphs"
+  ],
+  "specimen-p2-Q20": [
+    "logic"
+  ]
+}
