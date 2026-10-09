@@ -1,0 +1,422 @@
+<style>
+.assess fieldset{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;margin:0 0 1rem;min-width:0}
+.assess legend{font-family:var(--display);font-weight:600;padding:0 .4rem}
+.assess label{display:block;font-size:.85rem;color:var(--ink-soft);margin:.6rem 0 .2rem}
+.assess input,.assess textarea{font:inherit;font-size:.95rem;width:100%;padding:.45rem .6rem;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.assess input[type=radio]{width:auto;margin:0}
+.assess textarea{min-height:5rem;resize:vertical}
+.assess .btn{cursor:pointer;border:1.5px solid var(--ink);margin:0 .4rem .5rem 0}
+.assess td .btn{padding:.3rem .65rem;font-size:.78rem}
+.assess :focus-visible{outline:3px solid var(--accent-line);outline-offset:1px}
+.assess .pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.assess .preview{background:var(--accent-soft);border-radius:8px;padding:.5rem .75rem;margin-top:.4rem;min-height:1.6em}
+.assess .qimg{display:block;max-width:100%;height:auto;margin:.4rem 0;border:1px solid var(--line);border-radius:8px;background:#fff;padding:6px}
+.assess .opts.inline{flex-direction:row;flex-wrap:wrap}
+.assess .muted{color:var(--ink-soft);font-size:.9rem}
+.assess .good{color:var(--ok)} .assess .bad{color:var(--bad)}
+.assess .row{display:flex;gap:.6rem;flex-wrap:wrap} .assess .row>*{flex:1;min-width:9rem}
+.assess .table-wrap{overflow-x:auto}
+.assess table{width:100%;margin:1rem 0}
+.assess th,.assess td{text-align:left;vertical-align:top}
+#timer:empty{display:none}
+#timer{position:fixed;top:.7rem;right:.8rem;z-index:5;background:var(--ink);color:#fff;font-family:var(--mono);font-weight:600;padding:.35rem .8rem;border-radius:8px}
+#timer.low{background:var(--bad)}
+@media print{.sidebar,.assess .btn,#timer{display:none}.shell{display:block}.assess fieldset{break-inside:avoid}}
+</style>
+
+<div class="page assess">
+<p class="crumb"><b>Assess</b> · Tests and mock papers</p>
+<div id="app"></div>
+<span id="timer"></span>
+</div>
+
+<script>
+'use strict';
+// Tutor data (assessments, answer keys, marks) lives in this browser's localStorage.
+// Students get the questions only, packed into the link; they send back a code with their answers.
+const app = document.getElementById('app'), timerEl = document.getElementById('timer');
+let tick = null, warned = false;
+
+const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+const save = (k, v) => {
+  try { localStorage.setItem(k, JSON.stringify(v)); }
+  catch (e) { if (!warned) { warned = true; alert('This browser would not save your work (' + e.message + '). Download a backup / copy your answers now.'); } }
+};
+
+// JSON <-> URL-safe base64 (UTF-8 safe, so LaTeX and accents survive)
+function enc(o) {
+  let b = '';
+  for (const c of new TextEncoder().encode(JSON.stringify(o))) b += String.fromCharCode(c);
+  return btoa(b).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+function dec(s) {
+  const b = atob(s.replace(/\s/g, '').replace(/-/g, '+').replace(/_/g, '/'));
+  return JSON.parse(new TextDecoder().decode(Uint8Array.from(b, c => c.charCodeAt(0))));
+}
+
+// ---- DOM helpers: all user text goes in via textContent, so links/codes can't inject HTML ----
+function h(tag, props = {}, ...kids) {
+  const e = Object.assign(document.createElement(tag), props);
+  e.append(...kids.flat(2).filter(k => k != null && k !== false && k !== ''));
+  return e;
+}
+const btn = (text, onclick, primary) => h('button', { type: 'button', textContent: text, onclick, className: 'btn ' + (primary ? 'primary' : 'ghost') });
+const DELIMS = [{ left: '$$', right: '$$', display: true }, { left: '\\[', right: '\\]', display: true },
+                { left: '\\(', right: '\\)', display: false }, { left: '$', right: '$', display: false }];
+function setMath(el, text) {
+  el.textContent = text ?? '';
+  if (window.renderMathInElement) renderMathInElement(el, { delimiters: DELIMS, throwOnError: false });
+  return el;
+}
+const math = (tag, text, cls = '') => setMath(h(tag, { className: 'pre ' + cls }), text);
+// question images come from the site's own TMUA/MAT databases; anything else in a link is ignored
+const qImg = (src, alt) => /^(tmua|mat)\/img\/[\w-]+\/[\w-]+\.png$/.test(src || '') ? h('img', { src, alt, className: 'qimg', loading: 'lazy' }) : null;
+let uid = 0;
+function field(text, el) { el.id = 'f' + ++uid; return h('div', {}, h('label', { htmlFor: el.id, textContent: text }), el); }
+const input = (value, on, type = 'text') => h('input', { type, value: value ?? '', oninput: e => on(e.target.value) });
+const area = (value, on) => h('textarea', { value: value ?? '', oninput: e => on(e.target.value) });
+const letter = i => String.fromCharCode(65 + i);
+// image questions carry their own option labels (A–H for TMUA, (a)–(e) for MAT)
+const optLabel = (q, j) => q.img ? q.options[j] : letter(j) + '. ' + (q.options[j] ?? '');
+const fmt = ts => ts ? new Date(ts).toLocaleString() : '?';
+const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+function download(name, text, type = 'text/plain') {
+  const a = h('a', { href: URL.createObjectURL(new Blob([text], { type })), download: name });
+  a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+function page(title, ...kids) {
+  clearInterval(tick); timerEl.textContent = '';
+  document.title = title + ' · Assess';
+  app.replaceChildren(h('h1', { textContent: title }), ...kids.flat(2).filter(k => k != null && k !== false && k !== ''));
+  scrollTo(0, 0);
+}
+
+// ---- model ----
+const total = t => t.qs.reduce((n, q) => n + (+q.marks || 0), 0);
+const studentCopy = t => ({ id: t.id, title: t.title, mins: t.mins,
+  qs: t.qs.map(q => ({ type: q.type, text: q.text, img: q.img, marks: q.marks, options: q.type === 'mcq' ? q.options : undefined })) });
+const autoScore = (q, a) => q.type === 'mcq' ? (a === q.answer ? +q.marks : 0) : null;
+const subKey = s => s.name + '|' + s.submitted;
+function scoreText(t, s) {
+  const got = t.qs.reduce((n, q, i) => n + (+s.scores[i] || 0), 0), out = total(t);
+  const todo = t.qs.filter((q, i) => s.scores[i] == null).length;
+  return `${got} / ${out}` + (out ? ` (${Math.round(100 * got / out)}%)` : '') + (todo ? ` · ${todo} to mark` : '');
+}
+
+// ---- mock papers, drawn from the TMUA and MAT databases on this site ----
+const DBS = { tmua: ['tmua/data/questions.js', 'TMUA_DB'], mat: ['mat/data/questions.js', 'MAT_DB'] };
+function loadDB(kind) {
+  const [src, name] = DBS[kind];
+  return window[name] ? Promise.resolve(window[name]) : new Promise((ok, fail) =>
+    document.head.append(h('script', { src, onload: () => ok(window[name]), onerror: () => fail(new Error('Could not load ' + src)) })));
+}
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const LET = 'ABCDEFGH';
+// Each slot Qn comes from a random past paper's Qn, so the mock keeps the real difficulty curve.
+function tmuaMock(db, paper) {
+  const pool = db.questions.filter(q => q.paper.endsWith('-p' + paper));
+  return { title: `TMUA mock · Paper ${paper}`, mins: 75, qs: Array.from({ length: 20 }, (_, i) => {
+    const q = pick(pool.filter(x => x.number === i + 1)), a = LET.indexOf(q.answer), toks = new Set(q.text.split(/\s+/));
+    let n = 0;
+    while (n < 8 && toks.has(LET[n])) n++;
+    if (n < 4 || n <= a) n = 8; // options are only in the image; offer A–H when the extracted text is unclear
+    return { type: 'mcq', text: '', img: q.img, sol: q.sol, src: q.id, options: [...LET.slice(0, n)], answer: a, marks: 1 };
+  }) };
+}
+const matAnswer = q => q.stext.match(/answer is\s*\(?([a-e])\)/i)?.[1].toLowerCase(); // 222 of 230 official solutions say so
+function matMock(db) {
+  const classic = db.questions.filter(q => db.papers[q.paper]?.format !== 'modern');
+  const slot = code => pick(classic.filter(q => q.code === code && (q.kind === 'long' || matAnswer(q))));
+  // Q1 (a)–(j) at 4 marks each, then the Maths-stream long questions Q2–Q5 at 15 marks each
+  const mc = [...'ABCDEFGHIJ'].map(p => slot('Q1' + p)).filter(Boolean).map(q => ({ type: 'mcq', text: '', img: q.img, sol: q.sol, src: q.id,
+    options: ['(a)', '(b)', '(c)', '(d)', '(e)'], answer: 'abcde'.indexOf(matAnswer(q)), marks: 4 }));
+  const long = ['Q2', 'Q3', 'Q4', 'Q5'].map(slot).filter(Boolean).map(q => ({ type: 'text', text: '', img: q.img, sol: q.sol, src: q.id, marks: 15, model: '' }));
+  return { title: 'MAT mock (Maths stream)', mins: 150, qs: [...mc, ...long] };
+}
+async function newMock(kind, paper) {
+  let db;
+  try { db = await loadDB(kind); } catch (e) { return alert(e.message); }
+  edit({ id: newId(), ...(kind === 'tmua' ? tmuaMock(db, paper) : matMock(db)) });
+}
+
+// ---- routing: #t=<code> is a student taking a test, anything else is the tutor dashboard ----
+function route() {
+  const m = location.hash.match(/^#t=(.+)$/);
+  if (!m) return dashboard();
+  let t;
+  try { t = dec(m[1]); if (typeof t.id !== 'string' || !Array.isArray(t.qs)) throw 0; }
+  catch { return page('Link not valid', h('p', { textContent: 'This assessment link is broken or incomplete. Ask your tutor to send it again.' })); }
+  take(t);
+}
+
+// ---- tutor ----
+function dashboard() {
+  const tests = load('ap.tests', []), results = load('ap.results', {});
+  page('Assessments',
+    h('p', {}, 'Build your own test, or generate a mock paper from the ', h('a', { href: 'tmua-database.html', textContent: 'TMUA' }),
+      ' and ', h('a', { href: 'mat-database.html', textContent: 'MAT' }),
+      ' archives. Send the student link; your student sends back a code, which you paste in to mark.'),
+    h('p', {},
+      btn('New assessment', () => edit({ id: newId(), title: 'Untitled assessment', mins: 60, qs: [] }), true),
+      btn('TMUA mock · Paper 1', () => newMock('tmua', 1)), btn('TMUA mock · Paper 2', () => newMock('tmua', 2)),
+      btn('MAT mock', () => newMock('mat'))),
+    h('p', {}, btn('Mark a submission', markPaste, true), btn('Download backup', backup), btn('Restore backup', restore)),
+    tests.length
+      ? h('div', { className: 'table-wrap' }, h('table', {},
+          h('tr', {}, ['Title', 'Questions', 'Marks', 'Submissions', ''].map(x => h('th', { textContent: x }))),
+          tests.map(t => h('tr', {},
+            h('td', { textContent: t.title }), h('td', { textContent: t.qs.length }), h('td', { textContent: total(t) }),
+            h('td', { textContent: (results[t.id] || []).length }),
+            h('td', {}, btn('Edit', () => edit(t)), btn('Student link', () => share(t)), btn('Results', () => resultsView(t)),
+              btn('Delete', () => {
+                if (!confirm(`Delete "${t.title}" and all its results? This cannot be undone.`)) return;
+                save('ap.tests', tests.filter(x => x !== t)); delete results[t.id]; save('ap.results', results); dashboard();
+              }))))))
+      : null,
+    h('p', { className: 'muted', textContent: 'Assessments and marks are stored in this browser only. Download a backup regularly.' }));
+}
+
+function edit(t) {
+  const persist = () => {
+    const tests = load('ap.tests', []), i = tests.findIndex(x => x.id === t.id);
+    if (i < 0) tests.push(t); else tests[i] = t;
+    save('ap.tests', tests);
+  };
+  const list = h('div');
+  const draw = () => { list.replaceChildren(...t.qs.map(qEditor)); persist(); };
+  const move = (i, d) => { const j = i + d; if (j < 0 || j >= t.qs.length) return; [t.qs[i], t.qs[j]] = [t.qs[j], t.qs[i]]; draw(); };
+
+  function qEditor(q, i) {
+    const prev = h('div', { className: 'preview' });
+    const show = () => {
+      const keyOk = q.answer >= 0 && q.answer < q.options?.length;
+      prev.replaceChildren(q.src ? h('p', { className: 'muted', textContent: 'Source: ' + q.src + ' (not shown to students)' }) : null,
+        qImg(q.img, `Question ${i + 1}`), q.text || !q.img ? math('div', q.text || '(question preview)') : null,
+        q.type === 'mcq' ? h('p', {}, 'Correct: ', keyOk ? math('b', optLabel(q, q.answer), 'good') : h('b', { className: 'bad', textContent: 'set a correct option that exists' })) : null);
+      persist();
+    };
+    show();
+    return h('fieldset', {},
+      h('legend', { textContent: `Question ${i + 1} · ${q.type === 'mcq' ? 'multiple choice' : 'written'}` }),
+      field(q.img ? 'Extra instructions (optional; maths between \\( … \\) or $ … $)' : 'Question (maths between \\( … \\) or $ … $)', area(q.text, v => { q.text = v; show(); })),
+      q.type === 'mcq'
+        ? [field('Options, one per line', area(q.options.join('\n'), v => { q.options = v.split('\n').filter(s => s.trim()); show(); })),
+           h('div', { className: 'row' },
+             field('Correct option (letter: first option = A)', Object.assign(input(letter(q.answer), v => { q.answer = v.trim().toUpperCase().charCodeAt(0) - 65; show(); }), { maxLength: 1 })),
+             field('Marks', input(q.marks, v => { q.marks = Math.max(0, +v || 0); persist(); }, 'number')))]
+        : [field('Marks', input(q.marks, v => { q.marks = Math.max(0, +v || 0); persist(); }, 'number')),
+           field('Model answer / mark scheme (never sent to students)', area(q.model, v => { q.model = v; persist(); }))],
+      prev,
+      h('p', { style: 'margin:.8rem 0 0' }, btn('Move up', () => move(i, -1)), btn('Move down', () => move(i, 1)),
+        btn('Remove', () => confirm(`Remove question ${i + 1}?`) && (t.qs.splice(i, 1), draw()))));
+  }
+
+  page('Edit assessment',
+    h('p', { className: 'muted', textContent: 'Changes save automatically. If you change questions after sending the link, send the new link: submissions are always marked against the current questions.' }),
+    field('Title', input(t.title, v => { t.title = v; persist(); })),
+    field('Time limit in minutes (0 = untimed)', input(t.mins, v => { t.mins = Math.max(0, +v || 0); persist(); }, 'number')),
+    list,
+    h('p', {},
+      btn('+ Multiple choice', () => { t.qs.push({ type: 'mcq', text: '', options: [], answer: 0, marks: 1 }); draw(); }),
+      btn('+ Written answer', () => { t.qs.push({ type: 'text', text: '', marks: 4, model: '' }); draw(); })),
+    h('p', {}, btn('Done', dashboard, true), btn('Student link', () => share(t))));
+  draw();
+}
+
+function share(t) {
+  if (!t.qs.length) return alert('Add at least one question first.');
+  const bad = t.qs.findIndex(q => q.type === 'mcq' && !(q.answer >= 0 && q.answer < q.options.length));
+  if (bad >= 0) return alert(`Question ${bad + 1}: set a correct option that exists.`);
+  const link = location.href.split('#')[0] + '#t=' + enc(studentCopy(t));
+  showCode('Student link: ' + t.title,
+    'Send this link to your student. It contains the questions but not the answers or mark scheme.' +
+    (location.protocol === 'file:' ? ' ⚠ This page is open from your own computer, so the link only works on this computer. Use the live website.' : ''),
+    link, null, dashboard);
+}
+
+function showCode(title, note, text, filename, back) {
+  const ta = h('textarea', { value: text, readOnly: true, rows: 6, onfocus: e => e.target.select() });
+  page(title, h('p', { textContent: note }), field('Code', ta),
+    h('p', {},
+      btn('Copy', () => {
+        ta.select();
+        (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
+          .then(() => alert('Copied.'), () => alert(document.execCommand('copy') ? 'Copied.' : 'Select the text and copy it manually.'));
+      }, true),
+      filename ? btn('Download as file', () => download(filename, text)) : null,
+      back ? btn('Back', back) : null));
+}
+
+function markPaste() {
+  const ta = h('textarea', { rows: 6 });
+  const file = h('input', { type: 'file', accept: '.txt', onchange: async e => { ta.value = (await e.target.files[0]?.text()) ?? ''; } });
+  page('Mark a submission',
+    field('Paste the code your student sent', ta), field('…or open the file they sent', file),
+    h('p', {}, btn('Open', () => openSub(ta.value), true), btn('Back', dashboard)));
+}
+
+function openSub(code) {
+  let s;
+  try { s = dec(code); if (typeof s.id !== 'string' || typeof s.name !== 'string' || !Array.isArray(s.answers)) throw 0; }
+  catch { return alert('That code is not valid. Check it was copied completely.'); }
+  const t = load('ap.tests', []).find(x => x.id === s.id);
+  if (!t) return alert('This submission is for an assessment that is not in this browser. Restore your backup first.');
+  const results = load('ap.results', {}), list = (results[t.id] ||= []);
+  const old = list.find(x => subKey(x) === subKey(s));
+  if (!old) {
+    s.scores = t.qs.map((q, i) => autoScore(q, s.answers[i]));
+    s.comments = [];
+    list.push(s); save('ap.results', results);
+  }
+  mark(t, old || s);
+}
+
+function mark(t, s) {
+  const totalEl = h('p', { className: 'muted' });
+  const persist = () => {
+    const results = load('ap.results', {}), list = results[t.id] || [], i = list.findIndex(x => subKey(x) === subKey(s));
+    if (i < 0) list.push(s); else list[i] = s;
+    results[t.id] = list; save('ap.results', results);
+    totalEl.textContent = 'Score: ' + scoreText(t, s);
+  };
+  totalEl.textContent = 'Score: ' + scoreText(t, s);
+  page(`${s.name}: ${t.title}`,
+    h('p', { className: 'muted', textContent: `Started ${fmt(s.started)} · submitted ${fmt(s.submitted)} (${Math.round((s.submitted - s.started) / 60000)} min` + (t.mins ? ` of ${t.mins} allowed)` : ')') }),
+    totalEl,
+    t.qs.map((q, i) => {
+      const a = s.answers[i];
+      const answer = q.type === 'mcq'
+        ? h('p', {}, 'Answer: ',
+            typeof a === 'number' && q.options[a] != null
+              ? h('span', { className: a === q.answer ? 'good' : 'bad' }, math('span', optLabel(q, a)), a === q.answer ? ' ✓' : ' ✗')
+              : h('em', { textContent: 'no answer' }),
+            a === q.answer ? null : h('span', {}, ' · correct: ', math('span', optLabel(q, q.answer))))
+        : [h('div', { className: 'muted', textContent: 'Answer:' }), math('div', a || '(no answer)', 'preview'),
+           q.model ? [h('div', { className: 'muted', textContent: 'Model answer:' }), math('div', q.model)] : null];
+      return h('fieldset', {},
+        h('legend', { textContent: `Question ${i + 1} · ${q.marks} mark${q.marks == 1 ? '' : 's'}` + (q.src ? ` · ${q.src}` : '') }),
+        qImg(q.img, `Question ${i + 1}`), q.text ? math('div', q.text) : null, answer,
+        q.sol ? h('details', {}, h('summary', { textContent: 'Official solution' }), qImg(q.sol, `Official solution to question ${i + 1}`)) : null,
+        h('div', { className: 'row' },
+          field(`Marks (out of ${q.marks})`, input(s.scores[i] ?? '', v => { s.scores[i] = v === '' ? null : Math.min(+q.marks, Math.max(0, +v || 0)); persist(); }, 'number')),
+          field('Comment', input(s.comments[i], v => { s.comments[i] = v; persist(); }))));
+    }),
+    h('p', {}, btn('Print / save as PDF', () => print(), true), btn('All results', () => resultsView(t)), btn('Dashboard', dashboard)));
+}
+
+function resultsView(t) {
+  const results = load('ap.results', {}), list = results[t.id] || [];
+  page('Results: ' + t.title,
+    list.length
+      ? h('div', { className: 'table-wrap' }, h('table', {},
+          h('tr', {}, ['Student', 'Submitted', 'Score', ''].map(x => h('th', { textContent: x }))),
+          list.map(s => h('tr', {},
+            h('td', { textContent: s.name }), h('td', { textContent: fmt(s.submitted) }), h('td', { textContent: scoreText(t, s) }),
+            h('td', {}, btn('Open', () => mark(t, s)), btn('Delete', () => {
+              if (!confirm(`Delete ${s.name}'s submission?`)) return;
+              results[t.id] = list.filter(x => x !== s); save('ap.results', results); resultsView(t);
+            }))))))
+      : h('p', { className: 'muted', textContent: 'No submissions yet. Use "Mark a submission" on the dashboard to add one.' }),
+    btn('Back', dashboard));
+}
+
+function backup() {
+  download(`assess-backup-${new Date().toISOString().slice(0, 10)}.json`,
+    JSON.stringify({ tests: load('ap.tests', []), results: load('ap.results', {}) }), 'application/json');
+}
+function restore() {
+  const f = h('input', { type: 'file', accept: '.json', onchange: async () => {
+    let b;
+    try { b = JSON.parse(await f.files[0].text()); if (!Array.isArray(b.tests) || !b.results || typeof b.results !== 'object') throw 0; }
+    catch { return alert('That is not an Assess backup file.'); }
+    // merge, never overwrite: an old backup must not clobber newer edits or marks
+    const tests = load('ap.tests', []), results = load('ap.results', {});
+    let added = 0;
+    for (const t of b.tests) if (!tests.some(x => x.id === t.id)) { tests.push(t); added++; }
+    for (const [id, list] of Object.entries(b.results)) {
+      const mine = (results[id] ||= []);
+      for (const s of list) if (!mine.some(x => subKey(x) === subKey(s))) { mine.push(s); added++; }
+    }
+    save('ap.tests', tests); save('ap.results', results);
+    alert(`Restored ${added} new item(s).`); dashboard();
+  } });
+  f.click();
+}
+
+// ---- student ----
+function take(t) {
+  const key = 'ap.draft.' + t.id, d = load(key, null);
+  if (d?.code) return submitted(t, d.code);
+  if (!d) {
+    const name = input('', () => {});
+    return page(t.title,
+      h('p', { textContent: `${t.qs.length} question${t.qs.length == 1 ? '' : 's'} · ${total(t)} marks · ` +
+        (t.mins ? `${t.mins} minutes. The timer starts when you press Start and keeps running if you close the page.` : 'untimed.') }),
+      field('Your full name', name),
+      h('p', {}, btn('Start', () => {
+        if (!name.value.trim()) return name.focus();
+        save(key, { name: name.value.trim(), started: Date.now(), answers: [] });
+        take(t);
+      }, true)));
+  }
+  const keep = () => save(key, d);
+  const finish = () => {
+    clearInterval(tick);
+    d.submitted = Date.now();
+    d.code = enc({ id: t.id, name: d.name, started: d.started, submitted: d.submitted, answers: d.answers });
+    keep(); submitted(t, d.code);
+  };
+  const written = i => {
+    const prev = math('div', d.answers[i] || '', 'preview');
+    return [field('Your answer (maths between \\( … \\) or $ … $)', area(d.answers[i], v => { d.answers[i] = v; keep(); setMath(prev, v); })), prev];
+  };
+  page(t.title,
+    h('p', { className: 'muted', textContent: `${d.name} · answers save automatically on this device.` }),
+    t.qs.map((q, i) => h('fieldset', {},
+      h('legend', { textContent: `Question ${i + 1} · ${q.marks} mark${q.marks == 1 ? '' : 's'}` }),
+      qImg(q.img, `Question ${i + 1}`), q.text ? math('div', q.text) : null,
+      q.type === 'mcq'
+        ? h('div', { className: 'opts' + (q.img ? ' inline' : '') }, q.options.map((o, j) => h('label', { className: 'opt' },
+            h('input', { type: 'radio', name: 'q' + i, checked: d.answers[i] === j, onchange: () => { d.answers[i] = j; keep(); } }),
+            math('span', optLabel(q, j)))))
+        : written(i))),
+    h('p', {}, btn('Submit', () => confirm('Submit now? You cannot change your answers afterwards.') && finish(), true)));
+  if (t.mins) {
+    // shortcut: times come from the student's own clock, so a determined student can fake them; fine for tutoring, not for real exams
+    const end = d.started + t.mins * 60000;
+    const upd = () => {
+      const s = Math.max(0, Math.round((end - Date.now()) / 1000));
+      timerEl.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')} left`;
+      timerEl.classList.toggle('low', s < 300);
+      if (!s) { finish(); alert('Time is up. Your answers have been submitted.'); }
+    };
+    upd();
+    if (!d.code) tick = setInterval(upd, 1000);
+  }
+}
+
+function submitted(t, code) {
+  showCode('Submitted ✓',
+    'Send this code to your tutor: paste it into a message, or download the file and attach it.',
+    code, t.title.replace(/[\\/:*?"<>|]/g, '').trim() + ' - answers.txt', null);
+}
+
+// self-check: codes round-trip unicode + LaTeX, student links never carry the key, marking, mock option detection
+{
+  const t = { id: 'x', title: 'Ünïcode — \\(\\frac12\\) €', mins: 1, qs: [
+    { type: 'mcq', text: '\\(x^2\\)', options: ['a', 'b'], answer: 1, marks: 2 },
+    { type: 'text', text: 'Prove it', marks: 3, model: 'secret', sol: 'tmua/img/x/sol-Q1.png', src: '2019-p1-Q1' }] };
+  console.assert(JSON.stringify(dec(enc(t))) === JSON.stringify(t), 'enc/dec round-trip');
+  const sc = JSON.stringify(studentCopy(t));
+  console.assert(!/"answer"|secret|sol-Q1|2019-p1/.test(sc), 'student copy leaks the key');
+  console.assert(autoScore(t.qs[0], 1) === 2 && autoScore(t.qs[0], 0) === 0 && autoScore(t.qs[1], 'x') === null, 'autoScore');
+  const fake = { questions: Array.from({ length: 20 }, (_, i) => ({ paper: '2019-p1', number: i + 1, text: 'Find x. A 1 B 2 C 3 D 4 E 5', answer: 'C', img: 'i', sol: 's', id: 'q' })) };
+  const m = tmuaMock(fake, 1).qs;
+  console.assert(m.length === 20 && m[0].options.join('') === 'ABCDE' && m[0].answer === 2, 'tmuaMock options');
+  console.assert(matAnswer({ stext: 'blah. The answer is (c).' }) === 'c', 'matAnswer');
+  console.assert(!qImg('https://evil.example/x.png') && !qImg('tmua/img/../x.png') && qImg('mat/img/2019/Q1A.png'), 'qImg whitelist');
+}
+
+addEventListener('hashchange', route);
+document.addEventListener('DOMContentLoaded', route);
+</script>
