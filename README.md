@@ -166,6 +166,8 @@ worked answers retain their original copyright notices and attribution.
 
 - **TMUA mock, Paper 1 or 2**: 20 questions, 75 minutes. Slot Qn is a random
   past paper's Qn, so the real difficulty curve is kept. Keys come from `tmua/data`.
+  Each slot also has a 50% chance of being a MAT Q1 multiple-choice part at the matching
+  position (TMUA Q1–2 take MAT (a), …, Q19–20 take (j)), worth 1 mark and never repeated.
 - **MAT mock (Maths stream)**: Q1 (a)–(j) plus long Q2–Q5 from the classic-format
   papers, 150 minutes. The Q1 keys are read from each official solution ("The answer
   is (c)"), which works for 222 of 230 questions. The 8 without one are never picked.

@@ -113,9 +113,13 @@ function loadDB(kind) {
 const pick = a => a[Math.floor(Math.random() * a.length)];
 const LET = 'ABCDEFGH';
 // Each slot Qn comes from a random past paper's Qn, so the mock keeps the real difficulty curve.
-function tmuaMock(db, paper) {
+// Each slot is a coin flip with a MAT Q1 part at the matching position: TMUA Q1–2 ↔ MAT (a), …, Q19–20 ↔ (j).
+function tmuaMock(db, paper, mat) {
   const pool = db.questions.filter(q => q.paper.endsWith('-p' + paper));
+  const matMc = mat ? matClassic(mat).filter(q => q.kind === 'mc' && matAnswer(q)) : [], used = new Set(); // two slots share each MAT part
   return { title: `TMUA mock · Paper ${paper}`, mins: 75, qs: Array.from({ length: 20 }, (_, i) => {
+    const m = Math.random() < .5 && pick(matMc.filter(q => q.code === 'Q1' + 'ABCDEFGHIJ'[i >> 1] && !used.has(q.id)));
+    if (m) { used.add(m.id); return matMcq(m, 1); }
     const q = pick(pool.filter(x => x.number === i + 1)), a = LET.indexOf(q.answer), toks = new Set(q.text.split(/\s+/));
     let n = 0;
     while (n < 8 && toks.has(LET[n])) n++;
@@ -124,19 +128,21 @@ function tmuaMock(db, paper) {
   }) };
 }
 const matAnswer = q => q.stext.match(/answer is\s*\(?([a-e])\)/i)?.[1].toLowerCase(); // 222 of 230 official solutions say so
+const matClassic = db => db.questions.filter(q => db.papers[q.paper]?.format !== 'modern');
+const matMcq = (q, marks) => ({ type: 'mcq', text: '', img: q.img, sol: q.sol, src: q.id,
+  options: ['(a)', '(b)', '(c)', '(d)', '(e)'], answer: 'abcde'.indexOf(matAnswer(q)), marks });
 function matMock(db) {
-  const classic = db.questions.filter(q => db.papers[q.paper]?.format !== 'modern');
+  const classic = matClassic(db);
   const slot = code => pick(classic.filter(q => q.code === code && (q.kind === 'long' || matAnswer(q))));
   // Q1 (a)–(j) at 4 marks each, then the Maths-stream long questions Q2–Q5 at 15 marks each
-  const mc = [...'ABCDEFGHIJ'].map(p => slot('Q1' + p)).filter(Boolean).map(q => ({ type: 'mcq', text: '', img: q.img, sol: q.sol, src: q.id,
-    options: ['(a)', '(b)', '(c)', '(d)', '(e)'], answer: 'abcde'.indexOf(matAnswer(q)), marks: 4 }));
+  const mc = [...'ABCDEFGHIJ'].map(p => slot('Q1' + p)).filter(Boolean).map(q => matMcq(q, 4));
   const long = ['Q2', 'Q3', 'Q4', 'Q5'].map(slot).filter(Boolean).map(q => ({ type: 'text', text: '', img: q.img, sol: q.sol, src: q.id, marks: 15, model: '' }));
   return { title: 'MAT mock (Maths stream)', mins: 150, qs: [...mc, ...long] };
 }
 async function newMock(kind, paper) {
-  let db;
-  try { db = await loadDB(kind); } catch (e) { return alert(e.message); }
-  edit({ id: newId(), ...(kind === 'tmua' ? tmuaMock(db, paper) : matMock(db)) });
+  let db, mat;
+  try { [mat, db] = await Promise.all([loadDB('mat'), kind === 'tmua' && loadDB('tmua')]); } catch (e) { return alert(e.message); }
+  edit({ id: newId(), ...(kind === 'tmua' ? tmuaMock(db, paper, mat) : matMock(mat)) });
 }
 
 // ---- routing: #t=<code> is a student taking a test, anything else is the tutor dashboard ----
@@ -414,6 +420,10 @@ function submitted(t, code) {
   const m = tmuaMock(fake, 1).qs;
   console.assert(m.length === 20 && m[0].options.join('') === 'ABCDE' && m[0].answer === 2, 'tmuaMock options');
   console.assert(matAnswer({ stext: 'blah. The answer is (c).' }) === 'c', 'matAnswer');
+  const fakeMat = { papers: { 2019: { format: 'classic' } }, questions: [{ paper: '2019', code: 'Q1A', kind: 'mc', stext: 'The answer is (b)', img: 'i', sol: 's', id: '2019-Q1A' }] };
+  const mixed = tmuaMock(fake, 1, fakeMat).qs;
+  console.assert(mixed.length === 20 && mixed.every((q, i) => q.src === 'q' || (i < 2 && q.answer === 1 && q.marks === 1)), 'MAT (a) only fills TMUA Q1–2');
+  console.assert(Array.from({ length: 30 }, () => tmuaMock(fake, 1, fakeMat).qs.filter(q => q.src !== 'q').length).every(n => n <= 1), 'no repeated MAT question');
   console.assert(!qImg('https://evil.example/x.png') && !qImg('tmua/img/../x.png') && qImg('mat/img/2019/Q1A.png'), 'qImg whitelist');
 }
 
