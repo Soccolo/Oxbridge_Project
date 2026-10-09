@@ -22,6 +22,7 @@ HTML + one shared stylesheet; mathematics renders in the browser via KaTeX
 - exam-papers.html      — past-paper links and study method
 - mat-database.html     — searchable Oxford MAT question database (see below)
 - tmua-database.html    — separate searchable TMUA question database (see below)
+- assess.html          — Assess: tutor tests and TMUA/MAT mock papers (see below)
 - mock-paper-1.html     — original mock, TMUA Paper 1 (applications), 20 Q + solutions
 - mock-paper-2.html     — original mock, TMUA Paper 2 (reasoning), 20 Q + solutions
 - styles.css
@@ -158,6 +159,31 @@ official URLs, inspect the source layout and update the inventory assertions in
 `validate.py`. `glyph_map.json` stores only character mappings for the older
 Cambria Math/Arial glyph IDs; no font software is distributed. The papers and
 worked answers retain their original copyright notices and attribution.
+
+## Assess: tests and mock papers
+`assess.html` is a small AssessPrep-style tool for tutors. The tutor builds a test
+(multiple choice and written answers, LaTeX supported) or generates a mock:
+
+- **TMUA mock, Paper 1 or 2**: 20 questions, 75 minutes. Slot Qn is a random
+  past paper's Qn, so the real difficulty curve is kept. Keys come from `tmua/data`.
+- **MAT mock (Maths stream)**: Q1 (a)–(j) plus long Q2–Q5 from the classic-format
+  papers, 150 minutes. The Q1 keys are read from each official solution ("The answer
+  is (c)"), which works for 222 of 230 questions. The 8 without one are never picked.
+
+The tutor sends a **student link** that carries the questions (image paths, not
+images) but no answers or solutions. The student works against a timer, and answers
+autosave on their device. On submission the student gets a code to send back. The
+tutor pastes the code in: multiple choice marks itself, and written answers are
+marked by hand next to the official solution.
+
+There is no backend. Tests, keys and marks live in the tutor's browser
+(`localStorage`), so **Download backup** regularly. Timings come from the student's
+own clock, so this suits tutoring, not high-stakes exams. Students who browse the
+TMUA/MAT databases on this site can find the same questions there.
+
+Edit `bodies/assess.html`, then run `python tools/assess/make_page.py` to rebuild
+`assess.html` and the nav link on every page. The page runs self-checks in the
+console on load.
 
 ## Deploying (pick one — all free)
 **Vercel** (you already use it for Placing Jade News): `vercel deploy` from this
